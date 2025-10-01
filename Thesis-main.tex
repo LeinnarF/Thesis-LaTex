@@ -1,0 +1,59 @@
+\documentclass[12pt,letterpaper]{report}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath, amssymb}
+\usepackage{bulsuthesis}  
+\usepackage{setspace}
+\usepackage{enumitem} 
+\usepackage{booktabs,longtable,threeparttable,siunitx,tabularx,makecell}
+
+\usepackage{pdfpages} 
+\usepackage{pdflscape,rotating} 
+\usepackage{adjustbox}
+
+\usepackage[style=apa,backend=biber]{biblatex}
+\usepackage{csquotes}
+\addbibresource{reference.bib}  
+\usepackage[hidelinks]{hyperref}
+\usepackage{url}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows}
+
+\tikzstyle{block} = [rectangle, draw, text width=5cm, text centered, rounded corners, minimum height=2cm]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+
+\fronttitle{%
+    LAKAD: A Personalized Mobile Itinerary Creator with Focus in Bulacan Tourism
+} 
+
+
+\author{%<-Name of the research proponents, in alphabetical order 
+    Bryan Declaro 
+    
+    Franniel Luigi Hilario 
+    
+    Brian Gabriel Magbanua
+    
+    Richard Manansala 
+}
+
+\adviser{Aaron Paul Dela Rosa}	%<-full name of thesis adviser
+\advisertitle{Mr. }	
+
+
+% -------------------------------------- START -------------------------------------------------------
+\begin{document}
+
+\doublespacing
+
+\maketitle
+
+\input{main-chapter-1.tex}
+
+\input{main-chapter-2.tex}
+
+
+\printbibliography[heading=bibintoc,title={REFERENCES}] %<-start the bibliography
+\end{document}
