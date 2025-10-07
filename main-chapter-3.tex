@@ -1,0 +1,53 @@
+\chapter{Research Methodology}
+
+In this chapter, the researchers will discuss the research design, model adoption, process of developing the system, system evaluation, population and sample, data collection, data processing, and ethical considerations.
+
+\section{Research Design}
+
+This study will employ a quantitative applied research design which uses quantitative methods to provide a structured framework for the development and evaluation of the proposed mobile personalized itinerary generator for tourists and alike. 
+
+\subsection{Applied Research}
+The applied research aspect of the study will focus on developing and implementing a system for generating personalized itineraries and optimizing existing itineraries for the interests of the user. The primary objective of this study is to create a mobile application that optimizes itineraries using the ABO algorithm and generates personalized itineraries with travel budget using AGAM algorithm. Through an applied research approach, the features to be implemented in the system will be important for the needs of its intended users which are the tourists and their itinerary needs.
+
+\subsection{Quantitative Research}
+The quantitative research aspect of this study will seek to measure and analyze the quality, standards, and acceptability of the system using quantitative methods by collecting user and professional feedback. The researchers will assess the quality and standards using the ISO/IEC 25010 standard by seeking professionals to assess the system. While the acceptability of the system for tourists will be analyzed using the TAM. The survey will gauge the user’s satisfaction with the system using a 10-point rating scale, providing insights to the system’s ease of use and usefulness. Incorporating quantitative approach for the study ensures an empirical and evidence-based support for the quality and acceptability of the proposed system.
+
+\section{Model Adoption}
+The models adopted for the system are the traveling salesman problem for the optimization of the itineraries and orienteering problem for the generation of personalized itineraries with allocation of travel distance budget. 
+
+\subsection{African Buffalo Optimization}
+The African Buffalo Optimization (ABO) algorithm is a meta-heuristic method inspired by the cooperative behavior of African buffaloes in their search for food. It models how buffalo herds communicate, explore, and exploit their environment to find optimal grazing areas. In optimization problems such as the Traveling Salesman Problem (TSP), ABO can be used to determine the shortest possible route that visits all cities exactly once while minimizing travel cost or distance.
+
+According to \textcite{Odili2022Method}, the algorithm begins by initializing a population of buffaloes, where each buffalo is randomly placed within the solution space. Next, the fitness value of each buffalo is calculated based on the total travel cost of its route. The buffaloes then update their positions using the ABO update rules, which are derived from the buffaloes’ communication signals. These signals guide the herd collectively toward better solutions by balancing exploration (searching new areas) and exploitation (refining known good areas). During this process, buffaloes construct new tours by adding unvisited cities based on their attractiveness and the herd’s accumulated experience. This cycle continues until the stopping criteria, such as a maximum number of iterations or convergence, are met. Finally, the best solution found by the herd is output as the optimized route.
+
+Formally, the algorithm can be expressed using two main update equations. The first is for buffalo’s memory or exploitation behavior:
+\[
+m _{k}' = m _{k} + lp1 ( bg - w _{k} ) + lp2 ( bp _{k} - w _{k} )
+\]
+
+Where $ m _{k} $ represents the buffalo’s previous movement (exploitation term), $ bg $ is the global best fitness representing the herd’s best solution, and $bp _{k}$ is the individual buffalo’s best-known position. The parameters $lp1$ and $lp2$ are learning coefficients that control the influence of herd communication and personal experience, respectively. This equation enables each buffalo to adjust its movement based on both the global herd direction and its own previous success, allowing it to return to a more rewarding position if it strays into less optimal regions. 
+
+The second equation controls the buffalo’s exploration within the search space:
+\[
+w _{k} ' = \frac{ ( w _{k} + m _{k} ) }{\lambda}
+\]
+
+Where $w_k$ represents the buffalo’s exploratory move, $ m _{k} $ represents the exploitation or memory component, and $\lambda \in (0,1]$ is the exploration driver that regulates how strongly the buffalo explores new areas. After updating both memory and position, the algorithm checks if the global best $bg$ has improved. If so, it proceeds to the next iteration; otherwise, it continues refining current solutions. The process repeats until the stopping condition is met (e.g., maximum iteration count or convergence). Once completed, the herd’s best-known position $bg$ is returned as the optimal solution, representing the most efficient tour or path discovered by the algorithm. 
+
+
+\subsection{Adaptive Genetic Algorithm}
+
+The researchers also chose to adopt a modified variant of the genetic algorithm developed by \textcite{Yochum2020} called Adaptive Genetic Algorithm with Dynamic Mutation and Crossover Probabilities or AGAM for the optimization of recommended itineraries defined in terms of TSP. AGAM addresses itinerary planning as a Multi-Objective Optimization Problem, an optimization technique rooting from orienteering problems. As discussed in their work, \textcite{Yochum2020} developed AGAM to generate optimal and personalized travel itineraries by balancing several objectives such as POI rating, and distance of POIs between the next one. Rooting from GA, AGAM simulates the process of natural evolution and utilizes genetic operators such as selection, crossover, and mutation to iteratively improve the quality of itineraries which, unlike traditional GA that use fixed mutation rates, also employs dynamic adjustments in parameters during the evolutionary process in a way that can maintain population diversity and therefore generate efficient and adaptive solutions.
+
+
+\section{Process of Developing the System}
+
+\section{System Evaluation}
+
+\section{Population and Sample}
+
+\section{Data Collection}
+
+\section{Data Processing}
+
+\section{Ethical Consideration}
