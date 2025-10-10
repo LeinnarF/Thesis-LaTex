@@ -1,0 +1,6 @@
+\noaddvspace 
+\noindent \makebox [0.75in][l]{\textbf {Figure}}\makebox [\linewidth -0.75in]{\textbf {Title}\hfill \textbf {Page}}\par 
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1}{\ignorespaces Gantt Chart}}{10}{figure.caption.14}%
+\contentsline {figure}{\numberline {2}{\ignorespaces System Architecture}}{12}{figure.caption.16}%
+\contentsline {figure}{\numberline {3}{\ignorespaces 10-point Scale}}{18}{figure.caption.26}%

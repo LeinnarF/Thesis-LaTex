@@ -1,4 +1,5 @@
 \chapter{Research Methodology}
+\thispagestyle{empty}
 
 In this chapter, the researchers will discuss the research design, model adoption, process of developing the system, system evaluation, population and sample, data collection, data processing, and ethical considerations.
 
@@ -86,11 +87,14 @@ where, $pm_1$ and $pm_2$ are also predefined bounds to limit mutations, and prev
 
 \section{Process of Developing the System}
 
-The development of the system will follow a structured approach that is divided into distinct phases to ensure a systematic and efficient creation of the mobile application. These phases include analysis, planning, development, testing, and review, each contributing to the overall quality and functionality of the final product.
+The development of the system will follow a structured approach that is divided into distinct phases to ensure a systematic and efficient creation of the mobile application. These phases include analysis, planning, design, development, testing, and review, each contributing to the overall quality and functionality of the final product.
 
-\[
-\text{ SDLC Picture here }
-\]
+
+\begin{figure}[H]
+    \centering
+    \caption{System Development Life Cycle}
+    \includegraphics[width=0.5\textwidth]{sdlc.jpeg}
+\end{figure}
 
 \subsection{Analysis}
 The analysis phase of the development involves outlining the system’s scope, objectives, and requirements. This is done by reviewing the existing literature in itinerary recommendation and local tourism in the province of Bulacan. This phase establishes the key features of the proposed system, LAKAD, that will integrate five major features designed to provide optimized, personalized, and efficient itinerary planning for tourists exploring Bulacan. Each feature combines techniques, verified local data, and user-centric design principles.
@@ -140,9 +144,12 @@ These requirements ensure that the application runs efficiently on most modern m
 \subsection{Planning}
 The Gantt chart provides a visual timeline of the schedule of the research activity that will be conducted in the process of developing LAKAD. It outlines the sequence of tasks relating to Thesis I and Thesis II, including the flow of each phase of the research from documentation and planning until system development, evaluation, and final defense.
 
-\[
-\text{Gantt Chart Here}
-\]
+
+\begin{figure}[H]
+    \centering
+    \caption{Gantt Chart}
+    \includegraphics[angle=0, width=1\linewidth]{GanttChart.png}
+\end{figure}
 
 The \textbf{Thesis I} output focuses on the research documentation and planning for development of LAKAD. This process begins with the Review of Related Studies (Chapter 2), in which local and foreign studies are gathered, evaluated, and organized to develop the theoretical and conceptual framework. By gathering information in Chapter 2, determining the best algorithm for the system, and the appropriate approach to execute the idea, the researchers were able to establish a solid foundation that would be the basis of the succeeding phases. After completing Chapter 1: Problem and its Background and Chapter 2, the researchers finalize the concepts, models, and methods that will be utilized in Chapter 3: Methodology preparation. Chapter 3 defines the research design, the selected development model, and the desired process on creating the system, as well as the foundation on system evaluation and data gathering that will be conducted on Thesis II.
 
@@ -153,6 +160,17 @@ For \textbf{Thesis II}, the researcher will proceed to the implementation and co
 \textbf{System Testing and Evaluation}. This phase is aimed at testing the reliability, usability, and general quality of the system. Various testing procedures will be conducted to ensure that every function works as planned and meets user needs. Feedback will be collected from users and a system analyst to identify areas that need improvement.
 
 \textbf{Data Analysis and Interpretation}. This stage will include data processing and data analysis that are conducted from the system evaluation. Responses collected will be organized, encoded, and statistically analyzed to determine user perceptions as well as the general performance of the system.
+
+\subsection{Design}
+
+\begin{figure}[H]
+    \centering
+    \caption{System Architecture}
+    \label{SysArch}
+    \includegraphics[width=\textwidth]{SysArch.png}
+\end{figure}
+
+Figure \ref{SysArch} illustrates the system architecture of LAKAD: A Personalized Mobile Itinerary Creator and how the different components of the application interact to provide personalized and optimized travel itineraries for users. At the core of the system is the mobile frontend, which serves as the main interface where users can search for tourist destinations, generate itineraries, and manage their travel plans. When a user interacts with the application, the frontend communicates with the Mapbox API to send requests for map data, location coordinates, and optimized routes. The API processes these requests and returns the corresponding responses, which are then displayed on the user interface in the form of maps and travel routes. In addition, the application stores user-generated itineraries and relevant information in a local database, allowing users to access and manage their itineraries even without an internet connection. Overall, the architecture demonstrates a client-based design where most operations occur locally on the mobile device, ensuring efficiency, data accessibility, and a seamless user experience while minimizing reliance on external servers.
 
 \subsection{Development}
 
@@ -186,6 +204,7 @@ For the testing phase, LAKAD will undergo rigorous evaluation to ensure the over
 The review phase will focus on evaluating the overall functionality and usability of the system after development is completed. The researchers will gather views and opinions of users, including a system analyst to determine whether the system runs efficiently and serves its desired purposes. Guided by their observation, necessary adjustments and enhancements will be designed to refine the system.
 
 \section{System Evaluation}
+This section outlines the methods and criteria used to evaluate LAKAD, the proposed mobile itinerary generator system. It details the instruments and standards for assessment, describes the target population and sampling approach, and explains the procedures for data collection and analysis. The goal is to ensure that the system meets user needs and quality benchmarks through structured evaluation using both user and expert feedback.
 
 \subsection{Evaluation Instrument}
 The proposed system will be evaluated using the Technology Acceptance Model (TAM), as it provides a theoretical framework for understanding the process by which users accept and adopt new technologies. TAM is widely applied in system development studies for calculating the level of user acceptance based on their perceptions and intentions for using a system. To evaluate the effectiveness and acceptance of the proposed system, the following key constructs will be evaluated:
@@ -210,10 +229,69 @@ The proposed system will also be evaluated by IT professionals using the ISO / I
 \end{enumerate}
 
 \subsection{Population and Sample}
+This study will involve two respondent groups: (1) end users (tourists or residents who plan to visit points of interest in Bulacan) to assess acceptance using TAM, and (2) IT professionals/system analysts to evaluate product quality using ISO/IEC 25010.
+
+\textbf{End users (TAM).} Target respondents are adults (18+) who own an Android device and have visited or intend to visit tourist attractions in Bulacan within the next 12 months. Inclusion criteria: consent provided, Android 9.0+ device, ability to complete the task script. Exclusion criteria: incomplete responses, inability to install or run the app. A non-probability convenience sampling approach will be used at tourist spots, universities, and through online recruitment, supplemented by purposive sampling to ensure variation in age and travel frequency.
+
+\textbf{IT professionals (ISO/IEC 25010).} Target respondents are IT practitioners with at least 3 years of professional experience in software engineering, QA, or UX, preferably with mobile app experience. Purposive sampling will be used to recruit system analysts and developers from local institutions and industry contacts.
+
+\textbf{Sample size.} For end users, the minimum sample can be estimated using Cochran’s formula for large populations:
+\[
+n_0 = \frac{Z^2 p (1-p)}{e^2}
+\]
+with $Z = 1.96$ (95 percent confidence), $p = 0.5$, and $e = 0.05$ giving $n_0 \approx 384$. Where resources limit collection, a precision of $e = 0.10$ yields $n_0 \approx 96$; thus, the study will target at least 100 complete TAM responses to achieve acceptable precision for an applied study. For ISO/IEC 25010, 10–15 qualified professionals will be targeted, which is acceptable for expert judgment studies. A 10 percent buffer will be collected to mitigate attrition and unusable responses.
 
 \subsection{Data Collection}
+\textbf{Instruments.} The study will use the following instruments: a demographic sheet capturing age, gender (optional), travel frequency, familiarity with Bulacan, and device specifications; a TAM questionnaire consisting of 10-point Likert items (1 = strongly disagree, 10 = strongly agree) covering Perceived Usefulness, Perceived Ease of Use, Attitude Toward Use, and Intent to Use (3–5 items per construct); an ISO/IEC 25010 checklist for professionals with 10-point ratings per characteristic (Functional Suitability, Performance Efficiency, Compatibility, Usability/Interaction Capability, Reliability, Security, Maintainability, Flexibility) plus open-ended comments; and a task script in which users perform core flows (generate a personalized itinerary, optimize an itinerary, manage items, and start navigation) before answering the TAM.
 
-\subsection{Data Processing}
+\textbf{Procedure.} Data collection will begin with orientation and informed consent, after which an anonymous respondent code will be assigned. The app will then be installed on the participant’s device and a brief training on basic controls will be provided. Participants will execute the task script while non-identifying usage metrics (e.g., task completion and errors) may be logged. End users will complete the TAM, while professionals will complete the ISO/IEC 25010 instrument and provide qualitative feedback. Responses will be submitted via a secured online form and exported to CSV for analysis. No personally identifying data will be collected other than optional contact for follow-ups, and all data will be stored on encrypted drives accessible only to the research team.
+
+\subsection{Data Processing and Analysis}
+% Includes:
+%   Descriptive statistics
+%   10 point scale (see sample )
+%   Mean and SD for each category
+%   Verbal interpretation
+
+The collected data will be interpreted in a 10-point scale, aligning with ISO/IEC 25010 standards and TAM criteria. These standards will evaluate system quality and user acceptance across multiple dimensions. Where 1 is equivalent to completely disagree, and 10 is equivalent to completely agree. 
+
+\begin{figure}[H]
+    \centering
+    \caption{10-point Scale}
+    \label{pointScale}
+    \includegraphics[width=0.8\linewidth]{PointScale.png}
+\end{figure}
+
+Descriptive statistics will be utilized to summarize and interpret the collected data. For each evaluation category (e.g., TAM constructs, ISO/IEC 25010 criteria), the mean and standard deviation will be calculated to provide a quantitative overview of user and expert responses. These results will be presented in tables and figures, accompanied by verbal interpretations based on the defined scale. Open-ended responses will be analyzed thematically to highlight key insights and suggestions for system improvement.
+
+For each category, the mean score ($\bar{x}$) and standard deviation ($s$) will be computed as follows:
+\[
+\bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i
+\]
+\[
+s = \sqrt{\frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2}
+\]
+where $x_i$ is the score given by respondent $i$, and $n$ is the total number of valid responses.
+
+\begin{table}[H]
+	\centering
+	\caption{Interpretation of Acceptability Ratings}
+	\label{verbalInterpretation} \renewcommand{\arraystretch}{1.0}
+	\begin{tabularx}{\linewidth}{llX}
+		\toprule
+		\textbf{Range} & \textbf{Descriptive Rating} & \textbf{Interpretation}\\
+		\midrule
+		8.50 – 10.00 & 	Highly Acceptable & 	The system fully meets or exceeds requirements; very useful and effective.\\
+		6.50 – 8.49	& Acceptable & 	The system meets requirements and is generally useful, with minor issues.\\
+		4.50 – 6.49	& Moderately Acceptable	& The system is somewhat adequate but still needs refinements to be fully useful.\\
+		2.50 – 4.49	& Slightly Acceptable & 	The system shows minimal adequacy but requires major improvements.\\
+		1.00 – 2.49	& Not Acceptable & 	The system fails to meet requirements; not useful or practical.\\
+		\bottomrule
+	\end{tabularx}
+\end{table}
+
+Table \ref{verbalInterpretation} shows the interpretation of computed mean scores for system acceptability and quality. This mapping provides a clear verbal description for each range, helping readers understand the practical implications of the quantitative results. 
+
 
 \section{Ethical Consideration}
 Ethical considerations will play a crucial role in the conduct of this study, especially since it will involve the participation of real people, and government institutions and offices. The researchers will strictly follow ethical guidelines in compliance with the Data Privacy Act of 2012 (Republic Act No. 10173), to uphold integrity of the research and to ensure the privacy and security of all collected data. Obtaining informed consent, implementing data encryption, and enforcing strict access controls will be observed to safeguard the rights, and confidentiality of all individuals and institutions involved in the evaluation and development of the system.

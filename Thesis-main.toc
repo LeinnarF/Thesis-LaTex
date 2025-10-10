@@ -1,25 +1,28 @@
-\contentsline {chapter}{\numberline {III}Research Methodology}{3}{chapter.3}%
-\contentsline {section}{Research Design}{3}{section*.2}%
-\contentsline {subsection}{Applied Research}{3}{subsection*.3}%
-\contentsline {subsection}{Quantitative Research}{3}{subsection*.4}%
-\contentsline {section}{Model Adoption}{4}{section*.5}%
-\contentsline {subsection}{African Buffalo Optimization}{4}{subsection*.6}%
-\contentsline {subsection}{Adaptive Genetic Algorithm}{5}{subsection*.7}%
-\contentsline {section}{Process of Developing the System}{9}{section*.8}%
-\contentsline {subsection}{Analysis}{9}{subsection*.9}%
-\contentsline {subsection}{Planning}{11}{subsection*.11}%
-\contentsline {subsection}{Development}{12}{subsection*.12}%
-\contentsline {subsection}{Testing}{13}{subsection*.14}%
-\contentsline {subsection}{Review}{14}{subsection*.15}%
-\contentsline {section}{System Evaluation}{14}{section*.16}%
-\contentsline {subsection}{Evaluation Instrument}{14}{subsection*.17}%
-\contentsline {subsection}{Population and Sample}{16}{subsection*.18}%
-\contentsline {subsection}{Data Collection}{16}{subsection*.19}%
-\contentsline {subsection}{Data Processing}{16}{subsection*.20}%
-\contentsline {section}{Ethical Consideration}{16}{section*.21}%
-\contentsline {subsection}{Informed Consent}{16}{subsection*.22}%
-\contentsline {subsection}{Confidentiality and Privacy}{17}{subsection*.23}%
-\contentsline {subsection}{Data Protection}{17}{subsection*.24}%
-\contentsline {subsection}{Ethical Data Collection}{18}{subsection*.25}%
-\contentsline {subsection}{Transparency and Integrity}{18}{subsection*.26}%
-\contentsline {chapter}{REFERENCES}{19}{chapter*.27}%
+\contentsline {chapter}{LIST OF TABLES}{iii}{chapter*.2}%
+\contentsline {chapter}{LIST OF FIGURES}{iv}{chapter*.3}%
+\contentsline {chapter}{\numberline {III}Research Methodology}{1}{chapter.3}%
+\contentsline {section}{Research Design}{1}{section*.4}%
+\contentsline {subsection}{Applied Research}{1}{subsection*.5}%
+\contentsline {subsection}{Quantitative Research}{1}{subsection*.6}%
+\contentsline {section}{Model Adoption}{2}{section*.7}%
+\contentsline {subsection}{African Buffalo Optimization}{2}{subsection*.8}%
+\contentsline {subsection}{Adaptive Genetic Algorithm}{3}{subsection*.9}%
+\contentsline {section}{Process of Developing the System}{7}{section*.10}%
+\contentsline {subsection}{Analysis}{7}{subsection*.11}%
+\contentsline {subsection}{Planning}{9}{subsection*.13}%
+\contentsline {subsection}{Design}{12}{subsection*.15}%
+\contentsline {subsection}{Development}{12}{subsection*.17}%
+\contentsline {subsection}{Testing}{13}{subsection*.19}%
+\contentsline {subsection}{Review}{14}{subsection*.20}%
+\contentsline {section}{System Evaluation}{14}{section*.21}%
+\contentsline {subsection}{Evaluation Instrument}{14}{subsection*.22}%
+\contentsline {subsection}{Population and Sample}{16}{subsection*.23}%
+\contentsline {subsection}{Data Collection}{17}{subsection*.24}%
+\contentsline {subsection}{Data Processing and Analysis}{18}{subsection*.25}%
+\contentsline {section}{Ethical Consideration}{19}{section*.28}%
+\contentsline {subsection}{Informed Consent}{20}{subsection*.29}%
+\contentsline {subsection}{Confidentiality and Privacy}{20}{subsection*.30}%
+\contentsline {subsection}{Data Protection}{21}{subsection*.31}%
+\contentsline {subsection}{Ethical Data Collection}{21}{subsection*.32}%
+\contentsline {subsection}{Transparency and Integrity}{21}{subsection*.33}%
+\contentsline {chapter}{REFERENCES}{23}{chapter*.34}%

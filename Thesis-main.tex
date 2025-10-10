@@ -22,6 +22,8 @@
 
 \usepackage{float}
 
+\graphicspath{{Figures/}}
+
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric, arrows}
 
@@ -50,11 +52,29 @@
 
 % -------------------------------------- START -------------------------------------------------------
 \begin{document}
+\emergencystretch 3em 
+\sloppy			
+\doublespacing 	
+\setlength{\cftbeforechapskip}{3pt}
+\renewcommand{\contentsname}{TABLE OF CONTENTS}
+\renewcommand{\listtablename}{LIST OF TABLES}
+\renewcommand{\listfigurename}{LIST OF FIGURES}
 
-\doublespacing
+\begin{preliminary}
+    \maketitle
+    % \tableofcontents\cleardoublepage
 
-\maketitle
-\tableofcontents
+	% \listoftables			
+	% 	\addcontentsline{toc}{chapter}{LIST OF TABLES}
+	% 	\addtocontents{lot}{\noindent\makebox[0.75in][l]{\textbf{Table}}\makebox[\linewidth-0.75in]{\textbf{Title}\hfill\textbf{Page}}\par}
+	% 	\cleardoublepage
+
+	% \listoffigures			
+	% 	\addcontentsline{toc}{chapter}{LIST OF FIGURES}
+	% 	\addtocontents{lof}{\noindent\makebox[0.75in][l]{\textbf{Figure}}\makebox[\linewidth-0.75in]{\textbf{Title}\hfill\textbf{Page}}\par}
+	% 	\cleardoublepage
+
+\end{preliminary}
 
 \setcounter{chapter}{2} % Chapter Start at x
 
@@ -64,5 +84,8 @@
 
 \input{main-chapter-3.tex}
 
-\printbibliography[heading=bibintoc,title={REFERENCES}] %<-start the bibliography
+\printbibliography[heading=bibintoc,title={REFERENCES}] 
+
+\input{appendix.tex}
+
 \end{document} 
