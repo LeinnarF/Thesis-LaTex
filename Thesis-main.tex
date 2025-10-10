@@ -8,7 +8,10 @@
 \usepackage{booktabs,longtable,threeparttable,siunitx,tabularx,makecell}
 
 % \usepackage{TimeNewRoman}
-\usepackage{newtxtext,newtxmath}
+% \usepackage{newtxtext,newtxmath}
+% \renewcommand{\rmdefault}{ptm}
+% \renewcommand{\sfdefault}{phv}
+% \renewcommand{\ttdefault}{pcr}
 
 \usepackage{pdfpages} 
 \usepackage{pdflscape,rotating} 
@@ -23,6 +26,8 @@
 \usepackage{float}
 
 \graphicspath{{Figures/}}
+
+
 
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric, arrows}
@@ -62,17 +67,17 @@
 
 \begin{preliminary}
     \maketitle
-    % \tableofcontents\cleardoublepage
+    \tableofcontents\cleardoublepage
 
-	% \listoftables			
-	% 	\addcontentsline{toc}{chapter}{LIST OF TABLES}
-	% 	\addtocontents{lot}{\noindent\makebox[0.75in][l]{\textbf{Table}}\makebox[\linewidth-0.75in]{\textbf{Title}\hfill\textbf{Page}}\par}
-	% 	\cleardoublepage
+	\listoftables			
+		\addcontentsline{toc}{chapter}{LIST OF TABLES}
+		\addtocontents{lot}{\noindent\makebox[0.75in][l]{\textbf{Table}}\makebox[\linewidth-0.75in]{\textbf{Title}\hfill\textbf{Page}}\par}
+		\cleardoublepage
 
-	% \listoffigures			
-	% 	\addcontentsline{toc}{chapter}{LIST OF FIGURES}
-	% 	\addtocontents{lof}{\noindent\makebox[0.75in][l]{\textbf{Figure}}\makebox[\linewidth-0.75in]{\textbf{Title}\hfill\textbf{Page}}\par}
-	% 	\cleardoublepage
+	\listoffigures			
+		\addcontentsline{toc}{chapter}{LIST OF FIGURES}
+		\addtocontents{lof}{\noindent\makebox[0.75in][l]{\textbf{Figure}}\makebox[\linewidth-0.75in]{\textbf{Title}\hfill\textbf{Page}}\par}
+		\cleardoublepage
 
 \end{preliminary}
 

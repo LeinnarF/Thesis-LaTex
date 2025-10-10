@@ -10,19 +10,20 @@
 \contentsline {section}{Process of Developing the System}{7}{section*.10}%
 \contentsline {subsection}{Analysis}{7}{subsection*.11}%
 \contentsline {subsection}{Planning}{9}{subsection*.13}%
-\contentsline {subsection}{Design}{12}{subsection*.15}%
+\contentsline {subsection}{Design}{11}{subsection*.15}%
 \contentsline {subsection}{Development}{12}{subsection*.17}%
 \contentsline {subsection}{Testing}{13}{subsection*.19}%
-\contentsline {subsection}{Review}{14}{subsection*.20}%
-\contentsline {section}{System Evaluation}{14}{section*.21}%
-\contentsline {subsection}{Evaluation Instrument}{14}{subsection*.22}%
-\contentsline {subsection}{Population and Sample}{16}{subsection*.23}%
-\contentsline {subsection}{Data Collection}{17}{subsection*.24}%
-\contentsline {subsection}{Data Processing and Analysis}{18}{subsection*.25}%
+\contentsline {subsection}{Review}{13}{subsection*.20}%
+\contentsline {section}{System Evaluation}{13}{section*.21}%
+\contentsline {subsection}{Evaluation Instrument}{13}{subsection*.22}%
+\contentsline {subsection}{Population and Sample}{15}{subsection*.23}%
+\contentsline {subsection}{Data Collection}{16}{subsection*.24}%
+\contentsline {subsection}{Data Processing and Analysis}{17}{subsection*.25}%
 \contentsline {section}{Ethical Consideration}{19}{section*.28}%
-\contentsline {subsection}{Informed Consent}{20}{subsection*.29}%
+\contentsline {subsection}{Informed Consent}{19}{subsection*.29}%
 \contentsline {subsection}{Confidentiality and Privacy}{20}{subsection*.30}%
-\contentsline {subsection}{Data Protection}{21}{subsection*.31}%
-\contentsline {subsection}{Ethical Data Collection}{21}{subsection*.32}%
+\contentsline {subsection}{Data Protection}{20}{subsection*.31}%
+\contentsline {subsection}{Ethical Data Collection}{20}{subsection*.32}%
 \contentsline {subsection}{Transparency and Integrity}{21}{subsection*.33}%
-\contentsline {chapter}{REFERENCES}{23}{chapter*.34}%
+\contentsline {chapter}{REFERENCES}{22}{chapter*.34}%
+\contentsline {chapter}{APPENDICES}{23}{section*.35}%

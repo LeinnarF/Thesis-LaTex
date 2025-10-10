@@ -32,6 +32,13 @@
 \label{core_packages}
 \RequirePackage[T1]{fontenc}
 \RequirePackage{microtype} % font spacing
+
+% Use Times New Roman globally
+\RequirePackage{newtxtext,newtxmath}  % Times New Roman text + math
+\renewcommand{\rmdefault}{ptm}        % Force main font family
+\renewcommand{\sfdefault}{phv}        % Helvetica (for sans-serif cases)
+\renewcommand{\ttdefault}{pcr}        % Courier for monospaced
+
 % \RequirePackage{libertine} % Main Serif font (Linux Libertine)
 % \RequirePackage[cmintegrals,cmbraces,vvarbb]{newtxmath} % Math font
 \RequirePackage[scaled=0.95]{zi4} % Monospaced font (Inconsolata for MiKTeX)
@@ -118,7 +125,7 @@
 	\centering\onehalfspacing % Set the line spacing to 1 for the title page.
 	
 	\begin{minipage}[c][3\baselineskip][c]{0.9\linewidth}
-		\centering\sffamily\bfseries\large\MakeUppercase{\@fronttitle}
+		\centering\bfseries\large\MakeUppercase{\@fronttitle}
 	\end{minipage}
 	
 	\vspace{1in}
@@ -165,7 +172,7 @@
 	\vspace{1em}
 	
 	{\singlespacing 
-		\hfill \pbox{5in}{\relax\ifvmode\centering\fi {\sffamily\bfseries\@adviser\@advisersuffix} \\ {\sffamily Adviser}}
+		\hfill \pbox{5in}{\relax\ifvmode\centering\fi {\bfseries\@adviser\@advisersuffix} \\ {Adviser}}
 	}
 	
 	\vspace{\stretch{1}}
@@ -191,7 +198,7 @@
 	
 	{\singlespacing
 		\hfill \pbox{5in}{\relax\ifvmode\centering\fi%
-			{\sffamily\bfseries \@csdean} \\ {\sffamily Dean, College of Science}
+			{\bfseries \@csdean} \\ {Dean, College of Science}
 		}
 	}
 	
@@ -234,7 +241,7 @@
 %===================%
 % Header and Footer %
 %===================%
-\fancyhfinit{\sffamily}
+\fancyhfinit{}
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[L]{\small\leftmark}
@@ -433,7 +440,7 @@
 
 %Table caption iin APA 7
 \captionsetup[table]{
-	font=sf,
+	font=rm,
 	labelfont=bf,
 	textfont=it, 
 	format=plain,
@@ -443,7 +450,7 @@
 }
 %Figure caption in APA 7
 \captionsetup[figure]{
-	font=sf,
+	font=rm,
 	labelfont=bf,
 	textfont=it, 
 	format=plain,
@@ -452,7 +459,7 @@
 	labelsep=spaced,skip=12pt
 }
 \captionsetup[sidewaysfigure]{
-	font=sf,
+	font=rm,
 	labelfont=bf,
 	textfont=it, 
 	format=plain,
@@ -486,9 +493,9 @@
 \counterwithout{equation}{chapter} % continuous numbering of equation
 
 % Patch tabular environments to use sans-serif font
-\AtBeginEnvironment{tabular}{\sffamily}
-\AtBeginEnvironment{tabularx}{\sffamily}
-\AtBeginEnvironment{longtable}{\sffamily} % If using longtable
+\AtBeginEnvironment{tabular}{}
+\AtBeginEnvironment{tabularx}{}
+\AtBeginEnvironment{longtable}{} % If using longtable
 
 %%%%%%%%%%%%%%%%%%%%%%%
 %% TABLE OF CONTENTS %%
