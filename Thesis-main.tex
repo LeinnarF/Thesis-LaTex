@@ -20,6 +20,8 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage{url}
 
+\usepackage{float}
+
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric, arrows}
 
@@ -52,10 +54,15 @@
 \doublespacing
 
 \maketitle
+\tableofcontents
 
-\input{main-chapter-1.tex}
+\setcounter{chapter}{2} % Chapter Start at x
 
-\input{main-chapter-2.tex}
+% \input{main-chapter-1.tex}
+
+% \input{main-chapter-2.tex}
+
+\input{main-chapter-3.tex}
 
 \printbibliography[heading=bibintoc,title={REFERENCES}] %<-start the bibliography
 \end{document} 
