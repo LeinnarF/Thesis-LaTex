@@ -9,6 +9,9 @@
     "**/*.log": true,
     "**/*.out": true,
     "**/*.run.xml": true,
-    "**/*.synctex.gz": true
+    "**/*.synctex.gz": true,
+    "**/*.toc": true,
+    "**/*.lof": true,
+    "**/*.lot": true
   }
 }
