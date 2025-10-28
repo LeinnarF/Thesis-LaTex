@@ -1,4 +1,5 @@
 \chapter{Theoretical Framework}
+\thispagestyle{empty}
 This chapter combines significant findings from various literature and studies from tourism, exploration of the traveling salesman problem in itinerary planning, and methods for recommendation for itinerary generation. This comprehensive review will serve as the basis for the development of the LAKAD application by identifying relevant factors optimization algorithms for TSP in itinerary planning and factors to consider when creating personalized recommendation features of the system.
 
 \section{Relevant Theories}
@@ -37,7 +38,7 @@ The study of \textcite{Canet2024P} found that tourism development in Bulacan is 
 
 This uneven promotion aligns with the findings of \textcite{Canet2024P} that one of the issues is the weak promotion. Fortunately, Canet and Sunpongco examined the promotional strategies used by tourism offices and found that online promotions, social media campaigns, and partnership with bloggers and vloggers were the most effective methods of engaging younger audiences. While traditional approaches such as brochures, festivals and community-driven activities still play a role, digital strategies are better suited for Gen Z and millennial demographic.  They emphasized the importance of collaboration among local government units, schools, communities, and tourism stakeholders to ensure consistent promotion and sustainable tourism development.  
 
-The local government of Bulacan has also recognized the importance of tourism in the province. In 2023, the Provincial Government of Bulacan launched the Bulacan Heritage Pass a tourism initiative that focuses on local culture, heritage conservation, and community engagement. The Pass consists of twenty historical and cultural landmarks in the province. The landmarks include Barasoain Church, Casa Real de Malolos, the Malolos Cathedral, and the historic train stations in Guiguinto and Meycauayan, offering a structured route and incentives for completion \textcite{Velasco2023}. While the Heritage Pass strengthens heritage preservation and promotional efforts, it does not provide optimized travel sequencing for visitors, leaving tourists to plan routes on their own. This gap underscores the need for systems that not only identify attractions but also generate efficient itineraries tailored to tourists’ time and travel constraints.
+The local government of Bulacan has also recognized the importance of tourism in the province. In 2023, the Provincial Government of Bulacan launched the Bulacan Heritage Pass a tourism initiative that focuses on local culture, heritage conservation, and community engagement. The Pass consists of twenty historical and cultural landmarks in the province. The landmarks include Barasoain Church, Casa Real de Malolos, the Malolos Cathedral, and the historic train stations in Guiguinto and Meycauayan, offering a structured route and incentives for completion \parencite{Velasco2023}. While the Heritage Pass strengthens heritage preservation and promotional efforts, it does not provide optimized travel sequencing for visitors, leaving tourists to plan routes on their own. This gap underscores the need for systems that not only identify attractions but also generate efficient itineraries tailored to tourists’ time and travel constraints.
 
 Digital strategies also play a critical role in Bulacan’s tourism promotion, \textcite{Santos2023}, studied how social media content is disseminated to the users. They surveyed a total of 100 respondents (50 working staff + 50 tourists) in San Rafael, Bulacan and found that 57 percent agreed that social media helped them determine their next choice of destination and 61 percent agreed that social media is a good strategy to make more tourist locations known to people. In line with this, \textcite{DelaCruz2022} also surveyed 100 tourists that visited Dona Remedios Trinidad, Bulacan to determine the effectiveness of using social media in promoting a tourist destination and asked questions ranging from how social media influences traveler’s decisions to the problems faced by tourists when using social media as a guide for tourism. They found that most travelers agreed that social media does influence the choice of  destination of travelers. While problems reported by tourists is the spread of false or misleading information, different expectations, and inaccurate photos / videos to different tourist destinations. Clearly, the importance and role of social media in making tourist locations well-known is irreplaceable but is also prone to misleading information, highlighting the need for verified and curated information of tourist attractions in Bulacan.
 
@@ -102,7 +103,7 @@ This section presents different related systems that feature such as: itinerary 
 
 \subsection{Trippit: An Optimal Itinerary Generator}
 
-Trippit by \textcite{Nguyen2020} addresses a fundamental problem in itinerary planning which is the optimization of the itinerary itself which is a fundamental limitation of Google Maps. Although Google Maps supports multiple stops, it leaves the sequencing to the user and often resulting in inefficient trip planning. Manual planning takes time and significant effort to optimize in terms of total distance traveled and how long each location to visit for. The study also stressed the fact that most travelers would often switch between Google Maps and Yelp for planning itinerary. The system eliminates the difficulty in travel planning which makes vacation trips more time efficient and enjoyable to travelers. 
+Trippit by \textcite{Nguyen2019} addresses a fundamental problem in itinerary planning which is the optimization of the itinerary itself which is a fundamental limitation of Google Maps. Although Google Maps supports multiple stops, it leaves the sequencing to the user and often resulting in inefficient trip planning. Manual planning takes time and significant effort to optimize in terms of total distance traveled and how long each location to visit for. The study also stressed the fact that most travelers would often switch between Google Maps and Yelp for planning itinerary. The system eliminates the difficulty in travel planning which makes vacation trips more time efficient and enjoyable to travelers. 
 	
 The system was developed using the Waterfall method where each design phase is completed first before beginning the next. An android application was developed using React Native library and called network APIs such as the Google Places API and Foursquare Places API to calculate the optimized itinerary provided by the user. Users can input point of interests (POI) in which the application then retrieves the information from the respective APIs and calculates and outputs the optimized tour based on a greedy algorithm. Their system also calculates the best time to visit each input.
 	
@@ -148,50 +149,11 @@ Taken together, these findings underscore the need for a system that not only pr
 \section{Conceptual Framework}
 This section explains the key inputs, processes, and outcomes in development of the study using an Input-Process-Output (IPO) model.
 
-\begin{figure}[ht]
-\centering
-\caption{Input-Process-Output Model of the Study}
-\label{IPO}
-\begin{tikzpicture}[node distance=1cm]
-
-% Nodes
-\node (input) [block, anchor=north] at (0,0) {
-    \textbf{Input} \\[3pt]
-    \begin{itemize}
-        \item Review of Related Literature
-        \item Tourist spots gathering
-        \item Development Tools
-    \end{itemize}
-};
-
-\node (process) [block, anchor=north] at ([yshift=-1cm]input.south) {
-    \textbf{Process} \\[3pt]
-    Software Development Life Cycle
-    \begin{itemize}
-        \item Planning Phase
-        \item Design Phase
-        \item Building Phase
-        \item Testing and Debugging
-        \item Evaluation
-    \end{itemize}
-};
-
-\node (output) [block, anchor=north] at ([yshift=-1cm]process.south) {
-    \textbf{Output} \\[3pt]
-    Mobile Optimized and Personalized Itinerary Generator
-    \begin{itemize}
-        \item Fully functional mobile itinerary generator
-        \item User friendly interface for personalized itinerary generation
-        \item Real time location tracking and itinerary management
-    \end{itemize}
-};
-
-
-% Arrows
-\draw [arrow] (input) -- (process);
-\draw [arrow] (process) -- (output);
-
-\end{tikzpicture}
+\begin{figure}[H]
+    \centering
+    \caption{Conceptual Framework using Input-Process-Output (IPO) Model}
+    \includegraphics[width=\textwidth]{IPO.png}
+    \label{fig:conceptualframework}
 \end{figure}
 
 \subsection{Input}
@@ -202,3 +164,18 @@ The AGILE methodology will be used in the software development of LAKAD, specifi
 
 \subsection{Output}
 The expected output of this study is a fully functional mobile itinerary recommendation and optimization system in the scope of Bulacan. LAKAD application will be able to optimize the route to be taken for the user's itinerary as well as recommend personalized itineraries that may interest the user.
+
+\section{Definition of Terms}
+This section provides the operational definitions of terms used in the study.
+
+\begin{description}
+    \item[Itinerary.] A planned route produced by LAKAD that lists selected points of interest (POIs) with their visitation sequence and scheduled timing, optimized under user constraints (time, distance, budget).
+    \item[Point of Interest (POI).] A geolocated attraction record (coordinates, category, opening hours, visit duration, rating) used as a candidate node in routing and recommendation algorithms.
+    \item[Traveling Salesman Problem (TSP).] The combinatorial optimization problem of sequencing a set of POIs to minimize total travel cost (distance or time), modeled here for route sequencing in itinerary generation.
+    \item[Orienteering Problem (OP).] A routing variant where a subset of POIs is selected and sequenced to maximize collected reward (e.g., popularity score) subject to a travel budget (time/distance) and other constraints.
+    \item[African Buffalo Optimization (ABO).] A swarm‑based metaheuristic inspired by buffalo social behavior, employed to obtain fast, near‑optimal TSP/OP solutions suitable for resource‑constrained (mobile) execution.
+    \item[Adaptive Genetic Algorithm with dynamic crossover and mutation probabilities (AGAM).] A GA variant that adjusts crossover and mutation rates during evolution to maintain diversity and improve solution quality for personalized itinerary construction.
+    \item[Technology Acceptance Model (TAM).] A behavioral model using perceived usefulness and perceived ease of use to evaluate and predict user acceptance of the LAKAD application.
+    \item[ISO/IEC 25010:2023.] The international software‑product quality model defining characteristics and subcharacteristics used to evaluate LAKAD’s functional suitability, performance, usability, reliability, security, and maintainability.
+\end{description}
+

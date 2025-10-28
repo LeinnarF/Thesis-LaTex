@@ -229,57 +229,67 @@ The proposed system will also be evaluated by IT professionals using the ISO / I
 \end{enumerate}
 
 \subsection{Population and Sample}
-This study will involve two respondent groups: (1) end users (tourists or residents who plan to visit points of interest in Bulacan) to assess acceptance using TAM, and (2) IT professionals/system analysts to evaluate product quality using ISO/IEC 25010.
+% This study will involve two respondent groups: (1) end users (tourists or residents who plan to visit points of interest in Bulacan) to assess acceptance using TAM, and (2) IT professionals/system analysts to evaluate product quality using ISO/IEC 25010.
 
-\textbf{End users (TAM).} Target respondents are adults (18+) who own an Android device and have visited or intend to visit tourist attractions in Bulacan within the next 12 months. Inclusion criteria: consent provided, Android 9.0+ device, ability to complete the task script. Exclusion criteria: incomplete responses, inability to install or run the app. A non-probability convenience sampling approach will be used at tourist spots, universities, and through online recruitment, supplemented by purposive sampling to ensure variation in age and travel frequency.
+% \textbf{End users (TAM).} Target respondents are adults (18+) who own an Android device and have visited or intend to visit tourist attractions in Bulacan within the next 12 months. Inclusion criteria: consent provided, Android 9.0+ device, ability to complete the task script. Exclusion criteria: incomplete responses, inability to install or run the app. A non-probability convenience sampling approach will be used at tourist spots, universities, and through online recruitment, supplemented by purposive sampling to ensure variation in age and travel frequency.
 
-\textbf{IT professionals (ISO/IEC 25010).} Target respondents are IT practitioners with at least 3 years of professional experience in software engineering, QA, or UX, preferably with mobile app experience. Purposive sampling will be used to recruit system analysts and developers from local institutions and industry contacts.
+% \textbf{IT professionals (ISO/IEC 25010).} Target respondents are IT practitioners with at least 3 years of professional experience in software engineering, QA, or UX, preferably with mobile app experience. Purposive sampling will be used to recruit system analysts and developers from local institutions and industry contacts.
 
-\textbf{Sample size.} For end users, the minimum sample can be estimated using Cochran’s formula for large populations:
-\[
-n_0 = \frac{Z^2 p (1-p)}{e^2}
-\]
-with $Z = 1.96$ (95 percent confidence), $p = 0.5$, and $e = 0.05$ giving $n_0 \approx 384$. Where resources limit collection, a precision of $e = 0.10$ yields $n_0 \approx 96$; thus, the study will target at least 100 complete TAM responses to achieve acceptable precision for an applied study. For ISO/IEC 25010, 10–15 qualified professionals will be targeted, which is acceptable for expert judgment studies. A 10 percent buffer will be collected to mitigate attrition and unusable responses.
+% \textbf{Sample size.} For end users, the minimum sample can be estimated using Cochran’s formula for large populations:
+% \[
+% n_0 = \frac{Z^2 p (1-p)}{e^2}
+% \]
+% with $Z = 1.96$ (95 percent confidence), $p = 0.5$, and $e = 0.05$ giving $n_0 \approx 384$. Where resources limit collection, a precision of $e = 0.10$ yields $n_0 \approx 96$; thus, the study will target at least 100 complete TAM responses to achieve acceptable precision for an applied study. For ISO/IEC 25010, 10–15 qualified professionals will be targeted, which is acceptable for expert judgment studies. A 10 percent buffer will be collected to mitigate attrition and unusable responses.
+
+% ------------------- Revised Section ---------------------------------
+
+The respondents for this study will consist of two distinct groups: end-users (tourists) for the Technology Acceptance Model (TAM) evaluation and IT professionals for assessing the proposed applications’ quality with ISO/IEC 25210:2023. 
+
+A total of 20 IT professionals with experience in software engineering, quality assurance, or user experience, preferable with mobile application experience, will be selected through purposive sampling. 
+
+For the end-users, the sample size will be estimated using Cochran's formula (\ref{cochran}), due to the large and unknown tourist population. 
+\begin{equation}
+    \label{cochran}
+    n _{0} = \frac{Z^2 p (1-p)}{e^2}
+\end{equation}
+To achieve a sample of at least 100, the margin of error $ e $ is set at most $0.098$, assuming $p = 0.5$ and a Z-score of $1.96$ for a 95 percent confidence level. Tourists aged 18 above will be purposively selected from major tourist hotspots in Bulacan, such as Barasoain Church, Philippine Arena, and other prominent resorts and historical landmarks to represent the top 5-10 most visited destination in the province.
+
+% -----------------------------------------------------------------------
 
 \subsection{Data Collection}
-\textbf{Instruments.} The study will use the following instruments: a demographic sheet capturing age, gender (optional), travel frequency, familiarity with Bulacan, and device specifications; a TAM questionnaire consisting of 10-point Likert items (1 = strongly disagree, 10 = strongly agree) covering Perceived Usefulness, Perceived Ease of Use, Attitude Toward Use, and Intent to Use (3–5 items per construct); an ISO/IEC 25010 checklist for professionals with 10-point ratings per characteristic (Functional Suitability, Performance Efficiency, Compatibility, Usability/Interaction Capability, Reliability, Security, Maintainability, Flexibility) plus open-ended comments; and a task script in which users perform core flows (generate a personalized itinerary, optimize an itinerary, manage items, and start navigation) before answering the TAM.
 
-\textbf{Procedure.} Data collection will begin with orientation and informed consent, after which an anonymous respondent code will be assigned. The app will then be installed on the participant’s device and a brief training on basic controls will be provided. Participants will execute the task script while non-identifying usage metrics (e.g., task completion and errors) may be logged. End users will complete the TAM, while professionals will complete the ISO/IEC 25010 instrument and provide qualitative feedback. Responses will be submitted via a secured online form and exported to CSV for analysis. No personally identifying data will be collected other than optional contact for follow-ups, and all data will be stored on encrypted drives accessible only to the research team.
+The data collection for this study will involve two primary instruments: a Technology Acceptance Model (TAM) questionnaire for end-users and an ISO/IEC 25010:2023 evaluation for IT professionals.
+
+The TAM will utilize a 5-point Likert scale (1=Strongly Disagree, 5=Strongly Agree) to assess user responses across constructs such as Perceived Usefulness, Perceived Ease of Use, Intent to Use, and Actual Use, with 3–5 items in each construct. The use of 5-point scale is justified by its balance between simplicity and reliability in measuring users’ perceptions, it also reduces cognitive load on the side of end-users. This format also aligns with established TAM-based studies, e.g., Davis, 1989; Aburbeian et al., 2022, showing comparability with prior research on user acceptance.
+
+For IT professionals, the ISO/IEC 25010:2023 evaluation will use a 10-point Likert scale (1=Strongly Disagree, 10=Strongly Agree) to achieve greater precision and granularity in professional assessments. This broader scale will allow technical evaluators to make finer distinctions for the following software attributes: Functional Suitability, Performance Efficiency, Compatibility, Interaction Capability, Reliability, Security, Maintainability, and Flexibility, with 3–5 items per construct. Each of these attributes will be measured with 3-5 distinct survey items.  
+
+The data collection process will start with an orientation and the acquisition of informed consent. Subsequently, participants will be given a brief explanation of the application before being allowed to explore it independently. Following this, end-users will complete the TAM, while IT professionals will complete the ISO/IEC 25010:2023 and provide qualitative feedback. All responses will be transferred to a CSV file for analysis, with no personal data collected beyond optional contact information for follow-ups. Furthermore, all data will be stored on an encrypted drive, with access strictly limited to the researchers.
+
+
 
 \subsection{Data Processing and Analysis}
-% Includes:
-%   Descriptive statistics
-%   10 point scale (see sample )
-%   Mean and SD for each category
-%   Verbal interpretation
 
-The collected data will be interpreted in a 10-point scale, aligning with ISO/IEC 25010 standards and TAM criteria. These standards will evaluate system quality and user acceptance across multiple dimensions. Where 1 is equivalent to completely disagree, and 10 is equivalent to completely agree. 
+The collected data will go through preprocessing and analysis to ensure accuracy in interpretation. Descriptive statistical methods will be used to summarize and interpret the collected data. The mean (Equation \ref{mean}) and standard deviation (Equation \ref{stddev}) will be computed to provide an overview of respondents’ perceptions and evaluations. These measures will help to determine how well the system meets the user expectations and software quality standards. The results will be presented in tables and figures, with verbal interpretation according to the defined scales for TAM and ISO/IEC 25010:2023.
 
-\begin{figure}[H]
-    \centering
-    \caption{10-point Scale}
-    \label{pointScale}
-    \includegraphics[width=0.8\linewidth]{PointScale.png}
-\end{figure}
+\begin{equation}
+    \label{mean}
+    \bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i
+\end{equation}
 
-Descriptive statistics will be utilized to summarize and interpret the collected data. For each evaluation category (e.g., TAM constructs, ISO/IEC 25010 criteria), the mean and standard deviation will be calculated to provide a quantitative overview of user and expert responses. These results will be presented in tables and figures, accompanied by verbal interpretations based on the defined scale. Open-ended responses will be analyzed thematically to highlight key insights and suggestions for system improvement.
-
-For each category, the mean score ($\bar{x}$) and standard deviation ($s$) will be computed as follows:
-\[
-\bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i
-\]
-\[
-s = \sqrt{\frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2}
-\]
+\begin{equation}
+    \label{stddev}
+    \sigma = \sqrt{\frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2}
+\end{equation}
 where $x_i$ is the score given by respondent $i$, and $n$ is the total number of valid responses.
 
 \begin{table}[H]
 	\centering
-	\caption{Interpretation of Acceptability Ratings}
-	\label{verbalInterpretation} \renewcommand{\arraystretch}{1.0}
+	\caption{Verbal Interpretation Scale for ISO/IEC 25010.2023 (10-point Likert Scale)}
+	\label{iso_interpret} \renewcommand{\arraystretch}{0.9}
 	\begin{tabularx}{\linewidth}{llX}
 		\toprule
-		\textbf{Range} & \textbf{Descriptive Rating} & \textbf{Interpretation}\\
+		\textbf{Range} & \textbf{Descriptive Rating} & \textbf{Verbal Interpretation}\\
 		\midrule
 		8.50 – 10.00 & 	Highly Acceptable & 	The system fully meets or exceeds requirements; very useful and effective.\\
 		6.50 – 8.49	& Acceptable & 	The system meets requirements and is generally useful, with minor issues.\\
@@ -290,7 +300,26 @@ where $x_i$ is the score given by respondent $i$, and $n$ is the total number of
 	\end{tabularx}
 \end{table}
 
-Table \ref{verbalInterpretation} shows the interpretation of computed mean scores for system acceptability and quality. This mapping provides a clear verbal description for each range, helping readers understand the practical implications of the quantitative results. 
+
+
+\begin{table}[H]
+    \centering
+    \caption{Verbal interpretation Scale for TAM (5-point Likert Scale)}
+    \label{tam_interpret} \renewcommand{\arraystretch}{0.9}
+    \begin{tabularx}{\linewidth}{llX}
+        \toprule
+        \textbf{Range} & \textbf{Descriptive Rating} & \textbf{Verbal Interpretation}\\
+        \midrule
+        4.50 – 5.00 & Highly Acceptable & 	The user strongly perceives the system as useful, easy to use, and intends to use it.\\
+        3.50 – 4.49	& Acceptable & 	The user generally perceives the system as useful and easy to use, with a positive intention to use it.\\
+        2.50 – 3.49	& Fairly Acceptable & The user has mixed feelings about the system's usefulness and ease of use, with uncertain intention to use it.\\
+        1.50 – 2.49	& Slightly Acceptable & 	The user generally perceives the system as not useful or difficult to use, with a negative intention to use it.\\
+        1.00 – 1.49	& Not Acceptable & 	The user strongly perceives the system as not useful, very difficult to use, and has no intention to use it.\\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+The analysis will help to identify both the strengths and areas for improvement within LAKAD mobile application. By integrating end-user acceptance data with expert quality evaluations, the study ensures a comprehensive understanding of the application's usability, efficiency, and overall software quality.
 
 
 \section{Ethical Consideration}

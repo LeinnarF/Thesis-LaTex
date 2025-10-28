@@ -1,15 +1,17 @@
-\chapter{Problem And Its Background}
-	Itinerary planning is an important process that can enhance the experience of tourists in their travel such as how well the places interest the user and the flow in which the places are traversed. In the case of the province of Bulacan, this study seeks to propose a mobile personalized itinerary generator as a possible solution to optimizing existing itineraries and providing rich and personalized itineraries of Bulacan tourism, based on the interests of the user. This chapter introduces the background, objectives, significance, and scope of the study.
+\chapter{The Problem And Its Background}
+\thispagestyle{empty}
+Itinerary planning is an important process that can enhance the experience of tourists in their travel such as how well the places interest the user and the flow in which the places are traversed. In the case of the province of Bulacan, this study seeks to propose a mobile personalized itinerary generator as a possible solution to optimizing existing itineraries and providing rich and personalized itineraries of Bulacan tourism, based on the interests of the user. This chapter introduces the background, objectives, significance, and scope of the study.
 
+% TODO: Overhaul this section 
 \section{Background of the Study}
 
-	In the midst of global advancement in technology and sciences, culture remains a vital part of many people’s lives around the world, and so are the habits they have in connection to it. Tourism, being a significant contributor to economic progress, preservation of culture, and local development, relies heavily on how well travel experiences are organized and delivered. One of the most crucial aspects of this process is itinerary planning, a practice which ensures that tourists can maximize their time while visiting multiple points of interest efficiently, and enjoy the variability of a place without unnecessary inconvenience. The ability to create a structured travel plan does not only influence convenience but also impacts tourist satisfaction and chance of returning or recommending the destination to others.
+In the midst of global advancement in technology and sciences, culture remains a vital part of many people’s lives around the world, and so are the habits they have in connection to it. Tourism, being a significant contributor to economic progress, preservation of culture, and local development, relies heavily on how well travel experiences are organized and delivered. One of the most crucial aspects of this process is itinerary planning, a practice which ensures that tourists can maximize their time while visiting multiple points of interest efficiently, and enjoy the variability of a place without unnecessary inconvenience. The ability to create a structured travel plan does not only influence convenience but also impacts tourist satisfaction and chance of returning or recommending the destination to others.
 
 Some historical and cultural destinations in Bulacan remain neglected despite the province’s rich heritage, proven by how some cultural heritage sites like Barasoain Church and the Basilica Minore de Immaculada Conception, attract and often have more visitors than others like the Meyto Shrine of Calumpit, respectively these destinations had 78, 30, and 10 visitors, collected among 100 respondents  \parencite{Canet2025S}. Thus, promotion of tourism, and by extension, the development of tools that can improve it is a vital aspect to the continued revival of the province’s tourism sector. In this regard, itinerary planners and POI recommendation systems are such of the many utilities that can improve this.
 
-Itinerary planning is a process where someone thoughtfully organizes a set of destinations into a detailed schedule in order to maximize their time while taking into account specific constraints that can affect their experience. Nowadays, creating itineraries has become increasingly automated through recommendation systems, which can even generate schedules based on these constraints \parencite{Liu2024, Jewpanya2025}. Some of the modern-day recommender systems are often a mix of both optimization algorithms and content selection processes. This method resolves not only the scheduling aspect of itinerary recommendation but also the relevance of the destination suggested to users. However, such itinerary recommendation systems are limited to specific regions, often bound by the capabilities of the model or lack of data that can be used to identify which destinations are to be included. \parencite{Yulfihani2024, papadakis2024, Cui2025}. The development of these itinerary recommendation systems are driven by the need to simplify the complicated problems of traditional and manual itinerary planning. Although there are many systems that are already developed to cater to this problem, a common weakness they have lies in the overcomplexity of their systems \parencite{Postnikova2024}. These weaknesses expose the need for a simple, localized itinerary recommendation system, particularly in areas with uneven destination popularity like Bulacan, where tourism potential remains underdeveloped despite its rich cultural and historical offerings.
+Itinerary planning is a process where someone thoughtfully organizes a set of destinations into a detailed schedule in order to maximize their time while taking into account specific constraints that can affect their experience. Nowadays, creating itineraries has become increasingly automated through recommendation systems, which can even generate schedules based on these constraints \parencite{Liu2024, Jewpanya2025}. Some of the modern-day recommendation systems are often a mix of both optimization algorithms and content selection processes. This method resolves not only the scheduling aspect of itinerary recommendation but also the relevance of the destination suggested to users. However, such itinerary recommendation systems are limited to specific regions, often bound by the capabilities of the model or lack of data that can be used to identify which destinations are to be included. \parencite{Yulfihani2024, papadakis2024, Cui2025}. The development of these itinerary recommendation systems are driven by the need to simplify the complicated problems of traditional and manual itinerary planning. Although there are many systems that are already developed to cater to this problem, a common weakness they have lies in the overcomplexity of their systems \parencite{Postnikova2024}. These weaknesses expose the need for a simple, localized itinerary recommendation system, particularly in areas with uneven destination popularity like Bulacan, where tourism potential remains underdeveloped despite its rich cultural and historical offerings.
 
-Planning a travel itinerary manually is a demanding task, as many tourists must differentiate attractions to fit their interest while at the same time meeting limitations in terms of time, budget, and location accessibility. The process becomes even more complex if visits last for multiple days, requiring careful distribution of destinations across schedules while considering opening hours and travel durations. \parencite{Hendrawan2024} state that an increase in points of interest (POIs) in combination with limited resources makes it difficult to create itineraries, and while travel agents offer assistance, such services are high cost and inaccessible to many tourists. Additionally, it is often difficult to split a one-day plan into days without computational support and still obtain optimal plans that meet travelers’ expectations. \parencite{Porras2022} also argued that planning itineraries is fundamentally difficult, for it not only involves choosing POIs themselves but also finding an optimal visiting order under numerous constraints, such as personal interests, transportation, and time constraints. These problems demonstrate that classic ways of planning itineraries tend to lead to incomplete or unsatisfactory schedules, which there is value in creating automated systems to plan itineraries more efficiently. From a computational perspective, this problem is closely related to the model of Traveling Salesman Problem (TSP), which is known to be NP-hard, meaning solutions become exponentially more complex as the number of destinations or POIs increases \parencite{Wu2020}. At the same time, localized recommender systems such as the Batang Regency highlight the difficulty of delivering meaningful personalization when only content-based similarity measures are applied \parencite{Yulfihani2024}. And even when functional apps are deployed, itinerary generation has to carefully consider constraints within user satisfaction metrics, which remains a significant task despite advanced recommendation and optimization methods \parencite{papadakis2024,Yulfihani2024}. These limitations point to the need for a practical, user-centered, and localized solution.
+Planning a travel itinerary manually is a demanding task, as many tourists must differentiate attractions to fit their interest while at the same time meeting limitations in terms of time, budget, and location accessibility. The process becomes even more complex if visits last for multiple days, requiring careful distribution of destinations across schedules while considering opening hours and travel durations. \parencite{Hendrawan2024} state that an increase in points of interest (POIs) in combination with limited resources makes it difficult to create itineraries, and while travel agents offer assistance, such services are high cost and inaccessible to many tourists. Additionally, it is often difficult to split a one-day plan into days without computational support and still obtain optimal plans that meet travelers’ expectations. \textcite{Porras2022} also argued that planning itineraries is fundamentally difficult, for it not only involves choosing POIs themselves but also finding an optimal visiting order under numerous constraints, such as personal interests, transportation, and time constraints. These problems demonstate that classic ways of planning itineraries tend to lead to incomplete or unsatisfactory schedules, which there is value in creating automated systems to plan itineraries more efficiently. From a computational perspective, this problem is closely related to the model of Traveling Salesman Problem (TSP), which is known to be NP-hard, meaning solutions become exponentially more complex as the number of destinations or POIs increases \parencite{Wu2020}. At the same time, localized recommendation systems such as the Batang Regency highlight the difficulty of delivering meaningful personalization when only content-based similarity measures are applied \parencite{Yulfihani2024}. And even when functional apps are deployed, itinerary generation has to carefully consider constraints within user satisfaction metrics, which remains a significant task despite advanced recommendation and optimization methods \parencite{papadakis2024,Yulfihani2024}. These limitations point to the need for a practical, user-centered, and localized solution.
 
 With this, a proposed itinerary recommendation system, LAKAD, aims to navigate these problems and offer a tourist utility app for exploring destinations in the province of Bulacan. The system will be developed to feature core utilities that can enhance travel experience of tourists, among these features is an itinerary optimization where the system ensures that travel routes are arranged in the most efficient way possible, minimizing time and cost while still maximizing convenience. The system also aims to provide a personalized itinerary generation for users to tailor travel plans according to their own preferences. Additionally, a tourist spot searching function will be implemented to allow users to freely and easily browse Bulacan’s offered attractions and destinations, this include heritage sites to natural sceneries. An itinerary navigation feature will help users arrange their trip destinations into a structured schedule according to their desired length of the travel, in addition to features that can guide tourists during their trip like providing directions and other similar functions. And to help users stay organized, an itinerary management feature will let users arrange and keep track of their chosen destinations.
 
@@ -18,14 +20,12 @@ With this, a proposed itinerary recommendation system, LAKAD, aims to navigate t
 The lack of systems and applications for itinerary generation  in Bulacan makes it much harder for tourists to traverse the wonders the province has to offer. As such, the main objective of this study is to develop a mobile personalized itinerary generator for promoting tourist locations in Bulacan as well as providing optimized paths in the itinerary, allowing the tourist to further enjoy their trip. Specifically, this study aims to answer the following questions: 
 
 \begin{enumerate}
-    \item In what ways can the system contribute to promoting tourism in Bulacan?
-    \item What tourist spots/locations can the system recommend to tourists?
     \item How can the proposed system be developed with the following functionalities:
     \begin{enumerate} [label*=\arabic*.] 
-        \item  Itinerary Optimization
-        \item  Personalized Itinerary Generation
-        \item  Tourist Spot Searching
-        \item  Itinerary Navigation
+        \item  Itinerary Optimization,
+        \item  Personalized Itinerary Generation,
+        \item  Tourist Spot Searching,
+        \item  Itinerary Navigation, and
         \item  Itinerary Management?
     \end{enumerate}
     \item How acceptable is the proposed system based on the criteria defined in the Technology Acceptance Model?
@@ -35,20 +35,17 @@ The lack of systems and applications for itinerary generation  in Bulacan makes 
         \item Attitude towards using, and
         \item Behavioral intention?
     \end{enumerate}
-
-
-\item How well does the proposed system meet the ISO / EIC 25010 requirements?
-\begin{enumerate} [label*=\arabic*.]
-    \item Functional Suitability,
-    \item Performance Efficiency,
-    \item Compatibility,
-    \item Interaction Capability,
-    \item Reliability,
-    \item Security,
-    \item Maintainability, and
-    \item Flexibility?
-
-\end{enumerate}
+    \item How well does the proposed system meet the ISO / EIC 25010 requirements?
+    \begin{enumerate} [label*=\arabic*.]
+        \item Functional Suitability,
+        \item Performance Efficiency,
+        \item Compatibility,
+        \item Interaction Capability,
+        \item Reliability,
+        \item Security,
+        \item Maintainability, and
+        \item Flexibility?
+    \end{enumerate}
 \end{enumerate}
 
 \section{Significance of the Study}
@@ -56,7 +53,7 @@ This study developed an optimized mobile itinerary planner designed to promote t
 
 \textbf{Tourists and travelers}. The system offers personalized and optimized itineraries based on their interest and time availability. This way, it ensures that their time is maximally optimized as they enjoy major destinations alongside lesser-known examples of Bulacan’s cultural, historical, and natural heritage.
 
-Business owners and local establishments. The system offers opportunities for greater exposure, as their products and attractions may be featured in itineraries. This kind of promotion leads to greater customer engagement and supports the growth of local enterprises.
+\textbf{Business owners and local establishments}. The system offers opportunities for greater exposure, as their products and attractions may be featured in itineraries. This kind of promotion leads to greater customer engagement and supports the growth of local enterprises.
 
 \textbf{Local tourism sector, government units, and communities}. The system provides a modern tool to promote sustainable tourism. Through the distribution of visitors across various attractions and offering organized travel options, it helps in stimulating local economies, sustaining community livelihoods, and improving Bulacan’s reputation as a prominent travel destination.
 
