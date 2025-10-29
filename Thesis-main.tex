@@ -29,12 +29,20 @@
 \usepackage{algpseudocode}
 % \usepackage[ruled,vlined,linesnumbered,longend]{algorithm2e}
 
+% Custom colors and styles
+\usepackage{xcolor}
+\definecolor{darkblue}{RGB}{0,0,139}
+\usepackage{sectsty}
+\usepackage[font=small,labelfont={color=darkblue},textfont={color=darkblue}]{caption}
+\AtBeginDocument{\color{darkblue}}
+
+
 \graphicspath{{Figures/}}
 
-
-
 \fronttitle{%
-    LAKAD: A Personalized Mobile Itinerary Creator with Focus in Bulacan Tourism
+    LAKAD: A Personalized Mobile Itinerary 
+	Generator with Focus in \\
+	Bulacan Tourism
 } 
 
 
@@ -90,4 +98,4 @@
 
 \input{appendix.tex}
 
-\end{document} 
+\end{document}
