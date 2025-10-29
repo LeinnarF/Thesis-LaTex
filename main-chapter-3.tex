@@ -8,10 +8,10 @@ In this chapter, the researchers will discuss the research design, model adoptio
 This study will employ a quantitative applied research design which uses quantitative methods to provide a structured framework for the development and evaluation of the proposed mobile personalized itinerary generator for tourists and alike. 
 
 \subsection{Applied Research}
-The applied research aspect of the study will focus on developing and implementing a system for generating personalized itineraries and optimizing existing itineraries for the interests of the user. The primary objective of this study is to create a mobile application that optimizes itineraries using the ABO algorithm and generates personalized itineraries with travel budget using AGAM algorithm. Through an applied research approach, the features to be implemented in the system will be important for the needs of its intended users which are the tourists and their itinerary needs.
+The applied research aspect of the study will focus on developing and implementing a system for generating personalized itineraries and optimizing existing itineraries for the interests of the user. The primary objective of this study is to create a mobile application that optimizes itineraries using the African Buffalo Optimization (ABO) algorithm and generates personalized itineraries with travel budget using Adaptive Genetic Algorithm with Dynamic Mutation and Crossover Probabilities (AGAM) algorithm. Through an applied research approach, the features to be implemented in the system will be important for the needs of its intended users which are the tourists and their itinerary needs.
 
 \subsection{Quantitative Research}
-The quantitative research aspect of this study will seek to measure and analyze the quality, standards, and acceptability of the system using quantitative methods by collecting user and professional feedback. The researchers will assess the quality and standards using the ISO/IEC 25010 standard by seeking professionals to assess the system. While the acceptability of the system for tourists will be analyzed using the TAM. The survey will gauge the user’s satisfaction with the system using a 10-point rating scale, providing insights to the system’s ease of use and usefulness. Incorporating quantitative approach for the study ensures an empirical and evidence-based support for the quality and acceptability of the proposed system.
+The quantitative research aspect of this study will seek to measure and analyze the quality, standards, and acceptability of the system using quantitative methods by collecting user and professional feedback. The researchers will assess the quality and standards using the ISO/IEC 25010:2023 standard by seeking professionals to assess the system. While the acceptability of the system for tourists will be analyzed using the Technology Acceptance Model (TAM). The survey will gauge the user’s satisfaction with the system using a 10-point rating scale for ISO/IEC 25010:2023 and 5-point rating scale for TAM, providing insights to the system’s ease of use and usefulness. Incorporating quantitative approach for the study ensures an empirical and evidence-based support for the quality and acceptability of the proposed system.
 
 \section{Model Adoption}
 The models adopted for the system are the traveling salesman problem for the optimization of the itineraries and orienteering problem for the generation of personalized itineraries with allocation of travel distance budget. 
@@ -33,12 +33,12 @@ The second equation controls the buffalo’s exploration within the search space
     w _{k} ' = \frac{ ( w _{k} + m _{k} ) }{\lambda}
 \end{equation}
 
-Where $w_k$ represents the buffalo’s exploratory move, $ m _{k} $ represents the exploitation or memory component, and $\lambda \in (0,1]$ is the exploration driver that regulates how strongly the buffalo explores new areas. After updating both memory and position, the algorithm checks if the global best $bg$ has improved. If so, it proceeds to the next iteration; otherwise, it continues refining current solutions. The process repeats until the stopping condition is met (e.g., maximum iteration count or convergence). Once completed, the herd’s best-known position $bg$ is returned as the optimal solution, representing the most efficient tour or path discovered by the algorithm. 
+Where $w_k$ represents the buffalo’s exploratory move, $ m _{k} $ represents the exploitation or memory component, and $\lambda \in (0,1]$ is the exploration driver that regulates how strongly the buffalo explores new areas. After updating both memory and position, the algorithm checks if the global best $bg$ has improved. If so, it proceeds to the next iteration; otherwise, it continues refining current solutions. The process repeats until the stopping condition is met, e.g., maximum iteration count or convergence. Once completed, the herd’s best-known position $bg$ is returned as the optimal solution, representing the most efficient tour or path discovered by the algorithm. 
 
 
-\subsection{Adaptive Genetic Algorithm with Dynamic Mutation and Crossover Probabilities (AGAM)}
+\subsection{Adaptive Genetic Algorithm with Dynamic Mutation and Crossover Probabilities}
 
-The study also chose to adopt a modified variant of the genetic algorithm developed by \textcite{Yochum2020} called Adaptive Genetic Algorithm with Dynamic Mutation and Crossover Probabilities or AGAM for the optimization of recommended itineraries defined in terms of TSP. AGAM addresses itinerary planning as a Multi-Objective Optimization Problem, an optimization technique rooting from orienteering problems. As discussed in their work, \textcite{Yochum2020} developed AGAM to generate optimal and personalized travel itineraries by balancing several objectives such as point of interest (POI) rating, and distance of POIs between the next one. Rooting from GA, AGAM simulates the process of natural evolution and utilizes genetic operators such as selection, crossover, and mutation to iteratively improve the quality of itineraries which, unlike traditional GA that use fixed mutation rates, also employs dynamic adjustments in parameters during the evolutionary process in a way that can maintain population diversity and therefore generate efficient and adaptive solutions.
+The study also chose to adopt a modified variant of the genetic algorithm developed by \textcite{Yochum2020} called Adaptive Genetic Algorithm with Dynamic Mutation and Crossover Probabilities (AGAM) for the optimization of recommended itineraries defined in terms of TSP. AGAM addresses itinerary planning as a Multi-Objective Optimization Problem, an optimization technique rooting from orienteering problems. As discussed in their work, \textcite{Yochum2020} developed AGAM to generate optimal and personalized travel itineraries by balancing several objectives such as point of interest (POI) rating, and distance of POIs between the next one. Rooting from Genetic Algorithm (GA), AGAM simulates the process of natural evolution and utilizes genetic operators such as selection, crossover, and mutation to iteratively improve the quality of itineraries which, unlike traditional GA that use fixed mutation rates, also employs dynamic adjustments in parameters during the evolutionary process in a way that can maintain population diversity and therefore generate efficient and adaptive solutions.
 
 AGAM works by taking specific factors that can affect the results of a solution. In this paper, the goal is to generate an optimal solution of a recommended itinerary, which lets the model take into account factors similar to the ones proposed by \textcite{Yochum2020}. The factor referring to mandatory POIs will from hereon refer to the interest of the user. In addition to these factors, AGAM also requires a certain probability that determines the chances of mutation and crossover to happen.
 
@@ -94,19 +94,19 @@ The development of the system will follow a structured approach that is divided 
 The analysis phase of the development involves outlining the system’s scope, objectives, and requirements. This is done by reviewing the existing literature in itinerary recommendation and local tourism in the province of Bulacan. This phase establishes the key features of the proposed system, LAKAD, that will integrate five major features designed to provide optimized, personalized, and efficient itinerary planning for tourists exploring Bulacan. Each feature combines techniques, verified local data, and user-centric design principles.
 
 \begin{enumerate}
-    \item \textbf{Personalized Itinerary Generation}
+    \item \textbf{Personalized Itinerary Generation.}
     The main feature of the proposed application will be a personalized itinerary generator focusing on the diverse cultural, historical and heritage tourist destinations located across the province of Bulacan. The system will be developed to adapt to user-specific factors that can affect the personalization aspect of an itinerary. This feature aims to cater the personal preferences that a user has while still promoting the exploration of the rich tourism culture of the region.
-
-    \item \textbf{Itinerary Optimization}
+    
+    \item \textbf{Itinerary Optimization.}
     The optimization feature of the system will work in arrangement with the personalized itinerary generator by employing the ABO algorithm. The optimization will further help the maximization of travel distance and constraints to visit every possible destination within the generated itinerary.
     
-    \item \textbf{Tourist Spot Searching}
+    \item \textbf{Tourist Spot Searching.}
     A tourist spot search feature will allow users to explore Bulacan’s tourist attractions specifically through an interface where they can search through a catalog of  tourist destinations that will be verified by the Provincial History, Arts, Culture, and Tourism Office (PHACTO) of Bulacan. Furthermore, the system will display important and relevant information such as location and short description about the tourist spot.
     
-    \item \textbf{Itinerary Management}
+    \item \textbf{Itinerary Management.}
     An Itinerary Management feature of the system will allow users to manage and organize itineraries. The users may add, edit, or remove destinations from their itinerary. It will also allow the tracking of visited and unvisited locations so that users are informed of the status of their progress in the itinerary. Users will also be able to save and reload itineraries for future use.
-    
-    \item \textbf{Itinerary Navigation}
+
+    \item \textbf{Itinerary Navigation.}
     This feature will assist the user during travel by providing real-time navigation support. Users will be able to track their current location and visualize routes similar to Google Maps. It will displace direction, travel duration, and distances between tourist spots and support live GPS tracking to help users follow their itinerary accurately.
 
 \end{enumerate}
@@ -157,6 +157,7 @@ For \textbf{Thesis II}, the researcher will proceed to the implementation and co
 \textbf{Data Analysis and Interpretation}. This stage will include data processing and data analysis that are conducted from the system evaluation. Responses collected will be organized, encoded, and statistically analyzed to determine user perceptions as well as the general performance of the system.
 
 \subsection{Design}
+The design phase will focus on creating the overall architecture and structure of the system. This includes defining the system components, their interactions, and the data flow within the application. The system architecture will be designed to ensure scalability, maintainability, and efficiency. The researchers will create diagrams and models to visualize the system’s structure and functionality.
 
 \begin{figure}[H]
     \centering
@@ -175,7 +176,7 @@ Figure \ref{SysArch} illustrates the system architecture of LAKAD: A Personalize
 
 \subsection{Development}
 
-This development phase pertains to the actual coding and implementation of the system’s features  inside an android application. The researchers’ will utilize the AGILE methodology, particularly the kanban method for the software development life cycle. This will include weekly meetings and development checks by the researchers to ensure the system is properly developed to its intended uses.
+This development phase pertains to the actual coding and implementation of the system’s features  inside an android application. The researchers’ will utilize the AGILE methodology, particularly the Kanban method for the software development life cycle. This will include weekly meetings and development checks by the researchers to ensure the system is properly developed to its intended uses.
 
 The application will be written in Kotlin programming language which allows fast android development.  The system will also utilize the Jetpack Compose framework for implementing graphical user interfaces and Android Studio IDE for developing the application as shown in table \ref{listtools}. 
 
@@ -212,8 +213,9 @@ The proposed system will be evaluated using the Technology Acceptance Model (TAM
 \begin{enumerate}
     \item \textbf{Perceived Usefulness}. This construct measures how much users would believe that system usage would improve their task performance. It looks at whether system functionalities like itinerary recommendation, generation, and optimal route provide concrete value and efficiency to the user.
     \item \textbf{Perceived Ease of Use}. This measures the degree of which users find the system easy to learn and operate. It singles out features including interface design, feature clarity, and the convenience of performing tasks.
-    \item \textbf{Behavioral Intention to Use}. This criterion measures the tendency and likelihood of the user to continue using the system in the future. It measures the intentions of the people to recommend or repeatedly use the system as their preferred tool.
-    \item \textbf{Attitude Toward Use}. This assesses the sentiment, satisfaction, and positive impression towards using the system. It measures how much the user enjoys interaction with the system and whether they find it useful and interesting.
+    \item \textbf{Attitude Towards Technology Use}. This assesses the sentiment, satisfaction, and positive impression towards using the system. It measures how much the user enjoys interaction with the system and whether they find it useful and interesting.
+    \item \textbf{Behavioral Intention (to Use)}. This criterion measures the tendency and likelihood of the user to continue using the system in the future. It measures the intentions of the people to recommend or repeatedly use the system as their preferred tool.
+
 \end{enumerate}
 
 The proposed system will also be evaluated by IT professionals using the ISO / IEC 25010 questionnaire which evaluates the system’s quality and user satisfaction. The following criteria will be used in the questionnaire and are based on the ISO / IEC 25010 standards:
@@ -277,9 +279,9 @@ To achieve a sample of at least 100, the margin of error $ e $ is set at most $0
 
 The data collection for this study will involve two primary instruments: a Technology Acceptance Model (TAM) questionnaire for end-users and an ISO/IEC 25010:2023 evaluation for IT professionals.
 
-The TAM will utilize a 5-point Likert scale (1=Strongly Disagree, 5=Strongly Agree) to assess user responses across constructs such as Perceived Usefulness, Perceived Ease of Use, Intent to Use, and Actual Use, with 3–5 items in each construct. The use of 5-point scale is justified by its balance between simplicity and reliability in measuring users’ perceptions, it also reduces cognitive load on the side of end-users. 
+The TAM will utilize a 5-point Likert scale (1=Strongly Disagree, 5=Strongly Agree) to assess user responses across constructs such as Perceived Usefulness, Perceived Ease of Use, Attitude Towards Technology Use, and Behavioral Intention (to Use), with 3–5 items in each construct. The use of 5-point scale is justified by its balance between simplicity and reliability in measuring users’ perceptions, it also reduces cognitive load on the side of end-users.
 
-For IT professionals, the ISO/IEC 25010:2023 evaluation will use a 10-point Likert scale (1=Strongly Disagree, 10=Strongly Agree) to achieve greater precision and granularity in professional assessments. This broader scale will allow technical evaluators to make finer distinctions for the following software attributes: Functional Suitability, Performance Efficiency, Compatibility, Interaction Capability, Reliability, Security, Maintainability, and Flexibility, with 3–5 items per construct. Each of these attributes will be measured with 3-5 distinct survey items.  
+For IT professionals, the ISO/IEC 25010:2023 evaluation will use a 10-point Likert scale (1=Strongly Disagree, 10=Strongly Agree) to achieve greater precision and granularity in professional assessments. This broader scale will allow technical evaluators to make finer distinctions for the following software attributes: Functional Suitability, Performance Efficiency, Compatibility, Interaction Capability, Reliability, Security, Maintainability, Flexibility, and Safety, with 3–5 items per construct. Each of these attributes will be measured with 3-5 distinct survey items.
 
 The data collection process will start with an orientation and the acquisition of informed consent. Subsequently, participants will be given a brief explanation of the application before being allowed to explore it independently. Following this, end-users will complete the TAM, while IT professionals will complete the ISO/IEC 25010:2023 and provide qualitative feedback. All responses will be transferred to a CSV file for analysis, with no personal data collected beyond optional contact information for follow-ups. Furthermore, all data will be stored on an encrypted drive, with access strictly limited to the researchers.
 
