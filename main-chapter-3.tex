@@ -247,16 +247,16 @@ The proposed system will also be evaluated by IT professionals using the ISO / I
 
 % ------------------- Revised Section ---------------------------------
 
-The respondents for this study will consist of two distinct groups: end-users (tourists) for the Technology Acceptance Model (TAM) evaluation and IT professionals for assessing the proposed applications’ quality with ISO/IEC 25210:2023. 
+The respondents for the study will consist of the end-users or the tourists and IT professionals for evaluating the proposed application. The end-users will use the TAM for evaluation, while the IT professionals will use ISO/IEC 25010:2023 to assess the quality of the developed application.
 
-A total of 20 IT professionals with experience in software engineering, quality assurance, or user experience, preferable with mobile application experience, will be selected through purposive sampling. 
-
-For the end-users, the sample size will be estimated using Cochran's formula (\ref{cochran}), due to the large and unknown tourist population. 
+The number of samples for the end-users will be estimated using Cochran's formula \ref{cochran}, due to large and unknown population of tourists. The target sample size for the end-users is at least 100 to sufficient responses for TAM. 
 \begin{equation}
     \label{cochran}
     n _{0} = \frac{Z^2 p (1-p)}{e^2}
 \end{equation}
 To achieve a sample of at least 100, the margin of error $ e $ is set at most $0.098$, assuming $p = 0.5$ and a Z-score of $1.96$ for a 95 percent confidence level. Tourists aged 18 above will be purposively selected from major tourist hotspots in Bulacan, such as Barasoain Church, Philippine Arena, and other prominent resorts and historical landmarks to represent the top 5-10 most visited destination in the province.
+
+Purposive sampling will be used to choose 20 IT experts with backgrounds in software engineering, quality assurance, or user experience, ideally with experience with mobile applications. Their assessments will be essential to the quality of the proposed application.
 
 \begin{table}[H]
     \centering
@@ -277,20 +277,20 @@ To achieve a sample of at least 100, the margin of error $ e $ is set at most $0
 
 \subsection{Data Collection}
 
-The data collection for this study will involve two primary instruments: a Technology Acceptance Model (TAM) questionnaire for end-users and an ISO/IEC 25010:2023 evaluation for IT professionals.
-
-The TAM will utilize a 5-point Likert scale (1=Strongly Disagree, 5=Strongly Agree) to assess user responses across constructs such as Perceived Usefulness, Perceived Ease of Use, Attitude Towards Technology Use, and Behavioral Intention (to Use), with 3–5 items in each construct. The use of 5-point scale is justified by its balance between simplicity and reliability in measuring users’ perceptions, it also reduces cognitive load on the side of end-users.
-
-For IT professionals, the ISO/IEC 25010:2023 evaluation will use a 10-point Likert scale (1=Strongly Disagree, 10=Strongly Agree) to achieve greater precision and granularity in professional assessments. This broader scale will allow technical evaluators to make finer distinctions for the following software attributes: Functional Suitability, Performance Efficiency, Compatibility, Interaction Capability, Reliability, Security, Maintainability, Flexibility, and Safety, with 3–5 items per construct. Each of these attributes will be measured with 3-5 distinct survey items.
-
-The data collection process will start with an orientation and the acquisition of informed consent. Subsequently, participants will be given a brief explanation of the application before being allowed to explore it independently. Following this, end-users will complete the TAM, while IT professionals will complete the ISO/IEC 25010:2023 and provide qualitative feedback. All responses will be transferred to a CSV file for analysis, with no personal data collected beyond optional contact information for follow-ups. Furthermore, all data will be stored on an encrypted drive, with access strictly limited to the researchers.
-
+The data collection for this study will involve two primary instruments. First is the Technology Acceptance Model (TAM) questionnaire for end-users. The other instrument is the ISO/IEC 25010:2023 evaluation for IT professionals.  
+  
+The TAM will employ a 5-point Likert scale (1=Strongly Disagree, 5=Strongly Agree) to evaluate users' responses across constructs such as Perceived Usefulness, Perceived Ease of Use, Attitude Towards Technology Use, and Behavioral Intention (to Use), with 3–5 items for each construct. The use of 5-point scale is justified by its balance between simplicity and reliability in measuring users’ perceptions, it also reduces cognitive load on the side of end-users.  
+  
+For IT professionals, the ISO/IEC 25010:2023 evaluation will use a 10-point Likert scale (1=Strongly Disagree, 10=Strongly Agree) to achieve greater precision and granularity in professional assessments. This broader scale will allow technical evaluators to make finer distinctions for the following software attributes: Functional Suitability, Performance Efficiency, Compatibility, Interaction Capability, Reliability, Security, Maintainability, Flexibility, and Safety, with 3–5 items per construct. Each of these attributes will be measured with 3-5 distinct survey items.  
+  
+The data collection process will begin with an orientation and the acquisition of informed consent for the respondents. Subsequently, participants will be given a brief explanation of the application before being allowed to explore it independently. Following this, the end-users will complete the TAM, while IT professionals will complete the ISO/IEC 25010:2023 and provide qualitative feedback. All responses will be transferred to a CSV file for analysis, with no personal data collected beyond optional contact information for follow-ups. Furthermore, all data will be stored on an encrypted drive, with access strictly limited to the researchers.
 
 
 \subsection{Data Processing and Analysis}
 
 The collected data will go through preprocessing and analysis to ensure accuracy in interpretation. Descriptive statistical methods will be used to summarize and interpret the collected data. The mean (Equation \ref{mean}) and standard deviation (Equation \ref{stddev}) will be computed to provide an overview of respondents’ perceptions and evaluations. These measures will help to determine how well the system meets the user expectations and software quality standards. The results will be presented in tables and figures, with verbal interpretation according to the defined scales for TAM and ISO/IEC 25010:2023.
 
+The collected data will go through preprocessing and analysis to ensure accuracy in interpretation. The interpretation of data will be done with the help of descriptive statistics by computing the mean (Equation \ref{mean}) and standard deviation (Equation \ref{stddev}).
 \begin{equation}
     \label{mean}
     \bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i
@@ -302,24 +302,7 @@ The collected data will go through preprocessing and analysis to ensure accuracy
 \end{equation}
 where $x_i$ is the score given by respondent $i$, and $n$ is the total number of valid responses.
 
-\begin{table}[H]
-	\centering
-	\caption{Verbal Interpretation Scale for ISO/IEC 25010.2023 (10-point Likert Scale)}
-	\label{iso_interpret} \renewcommand{\arraystretch}{0.9}
-	\begin{tabularx}{\linewidth}{llX}
-		\toprule
-		\textbf{Range} & \textbf{Descriptive Rating} & \textbf{Verbal Interpretation}\\
-		\midrule
-		8.50 – 10.00 & 	Highly Acceptable & 	The system fully meets or exceeds requirements; very useful and effective.\\
-		6.50 – 8.49	& Acceptable & 	The system meets requirements and is generally useful, with minor issues.\\
-		4.50 – 6.49	& Moderately Acceptable	& The system is somewhat adequate but still needs refinements to be fully useful.\\
-		2.50 – 4.49	& Slightly Acceptable & 	The system shows minimal adequacy but requires major improvements.\\
-		1.00 – 2.49	& Not Acceptable & 	The system fails to meet requirements; not useful or practical.\\
-		\bottomrule
-	\end{tabularx}
-\end{table}
-
-
+With these, the respondents' perceptions will be interpreted based on the scales defined for TAM and ISO/IEC 25010:2023, with corresponding verbal interpretation for each score. The verbal interpretation is shown in Table \ref{tam_interpret} and Table \ref{iso_interpret} for TAM and ISO 25010:2023, respectively. After that, the results will be presented in tables and figure to summarize and make the interpretation more comprehensible.  
 
 \begin{table}[H]
     \centering
@@ -338,8 +321,23 @@ where $x_i$ is the score given by respondent $i$, and $n$ is the total number of
     \end{tabularx}
 \end{table}
 
-The analysis will help to identify both the strengths and areas for improvement within LAKAD mobile application. By integrating end-user acceptance data with expert quality evaluations, the study ensures a comprehensive understanding of the application's usability, efficiency, and overall software quality.
 
+\begin{table}[H]
+	\centering
+	\caption{Verbal Interpretation Scale for ISO/IEC 25010.2023 (10-point Likert Scale)}
+	\label{iso_interpret} \renewcommand{\arraystretch}{0.9}
+	\begin{tabularx}{\linewidth}{llX}
+		\toprule
+		\textbf{Range} & \textbf{Descriptive Rating} & \textbf{Verbal Interpretation}\\
+		\midrule
+		8.50 – 10.00 & 	Highly Acceptable & 	The system fully meets or exceeds requirements; very useful and effective.\\
+		6.50 – 8.49	& Acceptable & 	The system meets requirements and is generally useful, with minor issues.\\
+		4.50 – 6.49	& Moderately Acceptable	& The system is somewhat adequate but still needs refinements to be fully useful.\\
+		2.50 – 4.49	& Slightly Acceptable & 	The system shows minimal adequacy but requires major improvements.\\
+		1.00 – 2.49	& Not Acceptable & 	The system fails to meet requirements; not useful or practical.\\
+		\bottomrule
+	\end{tabularx}
+\end{table}
 
 \section{Ethical Consideration}
 Ethical considerations will play a crucial role in the conduct of this study, especially since it will involve the participation of real people, and government institutions and offices. The ethical guidelines will strictly be followed in compliance with the Data Privacy Act of 2012 (Republic Act No. 10173), to uphold the integrity of the research and to ensure the privacy and security of all collected data. Obtaining informed consent, implementing data encryption, and enforcing strict access controls will be observed to safeguard the rights, and confidentiality of all individuals and institutions involved in the evaluation and development of the system.
