@@ -117,7 +117,7 @@ To ensure consistent implementation of the mobile application, the following sys
     \centering
     \caption{Minimum System Requirements for Mobile Devices}
     \label{minsysreq}
-    \renewcommand{\arraystretch}{1.0}
+    \renewcommand{\arraystretch}{0.6}
     \begin{tabularx}{\linewidth}{XX}
         \toprule 
         \textbf{Category} & \textbf{Requirements} \\
@@ -186,7 +186,7 @@ The application will be written in Kotlin programming language which allows fast
     \centering
     \caption{List of Tools for Development}
     \label{listtools}
-    \renewcommand{\arraystretch}{1.0}
+    \renewcommand{\arraystretch}{0.6}
     \begin{tabularx}{\linewidth}{XX}
         \toprule 
         \textbf{Name} & \textbf{Description} \\
@@ -235,42 +235,37 @@ The proposed system will also be evaluated by IT professionals using the ISO / I
 \end{enumerate}
 
 \subsection{Population and Sample}
-% This study will involve two respondent groups: (1) end users (tourists or residents who plan to visit points of interest in Bulacan) to assess acceptance using TAM, and (2) IT professionals/system analysts to evaluate product quality using ISO/IEC 25010.
-
-% \textbf{End users (TAM).} Target respondents are adults (18+) who own an Android device and have visited or intend to visit tourist attractions in Bulacan within the next 12 months. Inclusion criteria: consent provided, Android 9.0+ device, ability to complete the task script. Exclusion criteria: incomplete responses, inability to install or run the app. A non-probability convenience sampling approach will be used at tourist spots, universities, and through online recruitment, supplemented by purposive sampling to ensure variation in age and travel frequency.
-
-% \textbf{IT professionals (ISO/IEC 25010).} Target respondents are IT practitioners with at least 3 years of professional experience in software engineering, QA, or UX, preferably with mobile app experience. Purposive sampling will be used to recruit system analysts and developers from local institutions and industry contacts.
-
-% \textbf{Sample size.} For end users, the minimum sample can be estimated using Cochran’s formula for large populations:
-% \[
-% n_0 = \frac{Z^2 p (1-p)}{e^2}
-% \]
-% with $Z = 1.96$ (95 percent confidence), $p = 0.5$, and $e = 0.05$ giving $n_0 \approx 384$. Where resources limit collection, a precision of $e = 0.10$ yields $n_0 \approx 96$; thus, the study will target at least 100 complete TAM responses to achieve acceptable precision for an applied study. For ISO/IEC 25010, 10–15 qualified professionals will be targeted, which is acceptable for expert judgment studies. A 10 percent buffer will be collected to mitigate attrition and unusable responses.
-
-% ------------------- Revised Section ---------------------------------
-
 The respondents for the study will consist of the end-users or the tourists and IT professionals for evaluating the proposed application. The end-users will use the TAM for evaluation, while the IT professionals will use ISO/IEC 25010:2023 to assess the quality of the developed application.
 
-The number of samples for the end-users will be estimated using Cochran’s formula \ref{cochran}, due to large and unknown population of tourists. The target sample size for the end-users is at least 100 to sufficient responses for TAM. 
+The number of samples for the end-users will be estimated using Cochran’s formula \ref{cochran}, due to large and unknown population of tourists. 
 \begin{equation}
     \label{cochran}
     n _{0} = \frac{Z^2 p (1-p)}{e^2}
 \end{equation}
-To achieve a sample of at least 100, the margin of error $ e $ is set at most $0.098$, assuming $p = 0.5$ and a Z-score of $1.96$ for a 95 percent confidence level. Tourists aged 18 above will be purposively selected from major tourist hotspots in Bulacan, such as Barasoain Church, Philippine Arena, and other prominent resorts and historical landmarks to represent the top 5-10 most visited destination in the province.
+Where $ n _{0} $ is the sample size, $ Z $ is the Z-score corresponding to the desired confidence level, $ p $ is the estimated proportion of an attribute present in the population, and $ e $ is the desired margin of error. The sample size is calculated with the following parameters: a 95 percent confidence level ($Z = 1.96$), an estimated proportion of 0.5, and a margin of error of 0.05. 
+\begin{equation}
+    \label{cochranSolution}
+    \frac{(1.96)^2 (0.5)(1-0.5)}{(0.05)^2} = 384.16
+\end{equation}
+
+The calculated sample size is shown in Equation \ref{cochranSolution}, which results to 384.16. The sample size will be rounded up to 385 respondents to ensure a whole number sample size. Tourists aged 18 above will be purposively selected from major tourist hotspots in Bulacan, such as Barasoain Church, Philippine Arena, and other prominent resorts and historical landmarks to represent the top 5-10 most visited destination in the province.
 
 Purposive sampling will be used to choose 20 IT experts with backgrounds in software engineering, quality assurance, or user experience, ideally with experience with mobile applications. Their assessments will be essential to the quality of the proposed application.
+
+To summarize, the total sample size for the study will consist of 405 respondents, with 385 end-users and 20 IT professionals as shown in Table \ref{pop_sample}.
 
 \begin{table}[H]
     \centering
     \caption{Summary of Population and Sample}
     \label{pop_sample}
-    \renewcommand{\arraystretch}{1.0}
+    \renewcommand{\arraystretch}{0.6}
     \begin{tabularx}{\linewidth}{XXX}
         \toprule 
         \textbf{Respondent Group} & \textbf{Population} & \textbf{Sample Size} \\
         \midrule
-        End-users (Tourists) & Tourists visiting Bulacan attractions & 100 \\
+        End-users (Tourists) & Tourists visiting Bulacan attractions & 385 \\
         IT Professionals & Software engineers, QA, UX professionals & 20 \\
+        Total & -- & 405 \\
         \bottomrule
     \end{tabularx}
 \end{table}
@@ -306,10 +301,11 @@ where $x_i$ is the score given by respondent $i$, and $n$ is the total number of
 
 With these, the respondents’ perceptions will be interpreted based on the scales defined for TAM and ISO/IEC 25010:2023, with corresponding verbal interpretation for each score. The verbal interpretation is shown in Table \ref{tam_interpret} and Table \ref{iso_interpret} for TAM and ISO 25010:2023, respectively. After that, the results will be presented in tables and figure to summarize and make the interpretation more comprehensible.  
 
+% \newpage
 \begin{table}[H]
     \centering
     \caption{Verbal interpretation Scale for TAM (5-point Likert Scale)}
-    \label{tam_interpret} \renewcommand{\arraystretch}{0.9}
+    \label{tam_interpret} \renewcommand{\arraystretch}{0.6}
     \begin{tabularx}{\linewidth}{llX}
         \toprule
         \textbf{Range} & \textbf{Descriptive Rating} & \textbf{Verbal Interpretation}\\
@@ -327,7 +323,7 @@ With these, the respondents’ perceptions will be interpreted based on the scal
 \begin{table}[H]
 	\centering
 	\caption{Verbal Interpretation Scale for ISO/IEC 25010.2023 (10-point Likert Scale)}
-	\label{iso_interpret} \renewcommand{\arraystretch}{0.9}
+	\label{iso_interpret} \renewcommand{\arraystretch}{0.6}
 	\begin{tabularx}{\linewidth}{llX}
 		\toprule
 		\textbf{Range} & \textbf{Descriptive Rating} & \textbf{Verbal Interpretation}\\
@@ -341,8 +337,9 @@ With these, the respondents’ perceptions will be interpreted based on the scal
 	\end{tabularx}
 \end{table}
 
-\section{Ethical Consideration}
+\section{Ethical Considerations}
 Ethical considerations will play a crucial role in the conduct of this study, especially since it will involve the participation of real people, and government institutions and offices. The ethical guidelines will strictly be followed in compliance with the Data Privacy Act of 2012 (Republic Act No. 10173), to uphold the integrity of the research and to ensure the privacy and security of all collected data. Obtaining informed consent, implementing data encryption, and enforcing strict access controls will be observed to safeguard the rights, and confidentiality of all individuals and institutions involved in the evaluation and development of the system.
+
 \subsection{Informed Consent}
 Participants of the study will be required to give an informed consent before responding to any personally identifying data or opinions that will be collected for the study, usability testing, and system evaluation. Consent materials will inform respondents about the study purpose, what data will be collected, how the data will be used, risks and benefits, and contact details for further questions regarding the study. The project will follow recognized Philippine guidance on ethical review and informed consent processes such as the Data Privacy Act of 2012 (Republic Act No. 10173). Participants will also be given the freedom to withdraw their responses at will, at which point the collected data from them will be discarded and deleted.
 In addition to individual respondents, the study will also involve data collection from government offices, particularly from Bulacan Provincial History, Arts, Culture, and Tourism Office (PHACTO) and other related agencies that maintain official records on local attractions, and tourism statistics. As per the request of the PHACTO, a letter required to be sent will formally address the Provincial Governor and the Head of the Provincial Tourism Department to request permission to access relevant datasets or documents. These data will include, but will not be limited to, lists of Points of Interest (POIs), and visitor statistics of tourism establishments.
