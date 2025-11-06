@@ -24,16 +24,17 @@ According to \textcite{Odili2022Method}, the algorithm begins by initializing a 
 
 Formally, the algorithm can be expressed using two main update equations. The first is for buffalo’s memory or exploitation behavior:
 \begin{equation}
+    \label{maaa}
     m _{k}' = m _{k} + lp1 ( bg - w _{k} ) + lp2 ( bp _{k} - w _{k} )
 \end{equation}
 
-Where $ m _{k} $ represents the buffalo’s previous movement (exploitation term), $ bg $ is the global best fitness representing the herd’s best solution, and $bp _{k}$ is the individual buffalo’s best-known position. The parameters $lp1$ and $lp2$ are learning coefficients that control the influence of herd communication and personal experience, respectively. This equation enables each buffalo to adjust its movement based on both the global herd direction and its own previous success, allowing it to return to a more rewarding position if it strays into less optimal regions. 
+In Equation \ref{maaa}, $ m _{k} $ represents the buffalo’s previous movement (exploitation term), $ bg $ is the global best fitness representing the herd’s best solution, and $bp _{k}$ is the individual buffalo’s best-known position. The parameters $lp1$ and $lp2$ are learning coefficients that control the influence of herd communication and personal experience, respectively. This equation enables each buffalo to adjust its movement based on both the global herd direction and its own previous success, allowing it to return to a more rewarding position if it strays into less optimal regions. 
 
-The second equation controls the buffalo’s exploration within the search space:
+The Equation \ref{waaa} controls the buffalo’s exploration within the search space:
 \begin{equation}
+    \label{waaa}
     w _{k} ' = \frac{ ( w _{k} + m _{k} ) }{\lambda}
 \end{equation}
-
 Where $w_k$ represents the buffalo’s exploratory move, $ m _{k} $ represents the exploitation or memory component, and $\lambda \in (0,1]$ is the exploration driver that regulates how strongly the buffalo explores new areas. After updating both memory and position, the algorithm checks if the global best $bg$ has improved. If so, it proceeds to the next iteration; otherwise, it continues refining current solutions. The process repeats until the stopping condition is met, e.g., maximum iteration count or convergence. Once completed, the herd’s best-known position $bg$ is returned as the optimal solution, representing the most efficient tour or path discovered by the algorithm. 
 
 
@@ -43,42 +44,49 @@ The study also chose to adopt a modified variant of the genetic algorithm develo
 
 AGAM works by taking specific factors that can affect the results of a solution. In this paper, the goal is to generate an optimal solution of a recommended itinerary, which lets the model take into account factors similar to the ones proposed by \textcite{Yochum2020}. The factor referring to mandatory POIs will from hereon refer to the interest of the user. In addition to these factors, AGAM also requires a certain probability that determines the chances of mutation and crossover to happen.
 
-To better understand the factors taken into account in this study, it is defined as follows;
-The popularity of a POI $q_i$ is given by the visit count of the POI’s governing municipality.
+To better understand the factors taken into account in this study, Equation \ref{agam1} is defined as follows; The popularity of a POI $q_i$ is given by the visit count of the POI’s governing municipality.
 The rating of a POI $q_i$ is given by taking the average rating of all visitors for $q_i$.
 \begin{equation}
+    \label{agam1}
     R(q_i) = \frac{1}{x} \sum_{j=1}^{x} r_{q_i}(u_j)
 \end{equation}
 
-AGAM considers the population set $P = {p_1,\dots, p_n}$ where each individual $p_i = {q_1, q_2, q_3,\dots, q_n}$ is a sequence where each $q_i$ is a POI. This means that AGAM treats each POI sequence $p_i$ as an individual gene, hence $P$ as a sequence of itineraries. \textcite{Yochum2020} noted that measuring different factors involves variables with inconsistent units and scales, and that each gene sequence may vary in length depending on the number of POIs selected. They addressed this by applying a normalization method that converts all variable values into a uniform range between 0 and 1, so that the algorithm can fairly compare and combine the factors within a fitness function. This fitness function normalizes the evaluation of the quality of each $p_i$ by integrating the input factors defined earlier. In this way, every itinerary $p_i$ in $P$ obtains different weights given by the function:
-
+AGAM considers the population set $P = {p_1,\dots, p_n}$ where each individual $p_i = {q_1, q_2, q_3,\dots, q_n}$ is a sequence where each $q_i$ is a POI. This means that AGAM treats each POI sequence $p_i$ as an individual gene, hence $P$ as a sequence of itineraries. \textcite{Yochum2020} noted that measuring different factors involves variables with inconsistent units and scales, and that each gene sequence may vary in length depending on the number of POIs selected. They addressed this by applying a normalization method that converts all variable values into a uniform range between 0 and 1, so that the algorithm can fairly compare and combine the factors within a fitness function. This fitness function normalizes the evaluation of the quality of each $p_i$ by integrating the input factors defined earlier. In this way, every itinerary $p_i$ in $P$ obtains different weights given by Equation \ref{agamFitness}.
 \begin{equation}
+    \label{agamFitness}
     f(p_i) = w_{1}Ti(p_i) + w_{2}Tn(p_i) + w_{3}Tr(p_i) + w_{4}Tp(p_i)
 \end{equation}
-Where, $f(p_i)$ is the fitness function score of each itinerary $p_i$. $w_{j}$ is an adjustable weight of each factor which depends on the user’s preference. $Ti(p_i)$ is the sum of all interest values of each POI in the itinerary $p_i$. Each POI contains an interest value which quantifies how interested the user is in that specific POI category. $Tn(p_i)$ is the total number of POIs included in the itinerary relative to the maximum number of POIs that can be visited within the user’s \textit{MAXD}. It is obtained by dividing the number of POIs in the itinerary $p_i$ by the maximum possible number of POIs. $Tr(p_i)$ is the total rating of $p_i$ given by taking the sum of all $q_i$ rating $R(q_i)$ in $p_i$ and dividing it by the best possible rating of all POIs in consideration combined $MAXR = \text{Number of POIs} * \text{Maximum Rating}$.
+
+Where in Equation \ref{agamFitness}, $f(p_i)$ is the fitness function score of each itinerary $p_i$. $w_{j}$ is an adjustable weight of each factor which depends on the user’s preference. $Ti(p_i)$ is the sum of all interest values of each POI in the itinerary $p_i$. Each POI contains an interest value which quantifies how interested the user is in that specific POI category. $Tn(p_i)$ is the total number of POIs included in the itinerary relative to the maximum number of POIs that can be visited within the user’s \textit{MAXD}. It is obtained by dividing the number of POIs in the itinerary $p_i$ by the maximum possible number of POIs. $Tr(p_i)$ is the total rating of $p_i$ given by Equation \ref{agam2}, taking the sum of all $q_i$ rating $R(q_i)$ in $p_i$ and dividing it by the best possible rating of all POIs in consideration combined $MAXR = \text{Number of POIs} * \text{Maximum Rating}$.
 \begin{equation}
+    \label{agam2}
     \dfrac{\sum_{j=1}^{n} R(q_j) \in p_i}{MAXR},\text{ such that } n = \text{last POI}
 \end{equation}
-$Tp(p_i)$ is the total popularity of $p_i$ given by the sum of all $q_i$ popularity $P(q_i)$ in $p_i$ and dividing it by the total popularity count of the all POI $MAXP$.
+
+$Tp(p_i)$ is the total popularity of $p_i$ given by Equation \ref{agam3} the sum of all $q_i$ popularity $P(q_i)$ in $p_i$ and dividing it by the total popularity count of the all POI $MAXP$.
 \begin{equation}
+    \label{agam3}
     \dfrac{\sum_{n}^{i=1}P(q_i) \in p_i}{MAXP}, \text{ such that } n = \text{last POI}
 \end{equation}
 
-Moreover, AGAM’s most important part is the dynamic crossover and mutation probabilities that it uses. This property of AGAM serves as a guide and is helpful in finding the best solution  since it prevents the system from repeatedly computing in a local optima, a region of solutions that  can be optimal but lacks diversity, a kind of deadlock where the system ignores every other possible optimal solution outside the current locality. \textcite{Yochum2020} defined these probabilities as:
+Moreover, AGAM’s most important part is the dynamic crossover and mutation probabilities that it uses. This property of AGAM serves as a guide and is helpful in finding the best solution  since it prevents the system from repeatedly computing in a local optima, a region of solutions that  can be optimal but lacks diversity, a kind of deadlock where the system ignores every other possible optimal solution outside the current locality. \textcite{Yochum2020} defined these probabilities in Equations \ref{crossover} and \ref{mutation}.
 \begin{equation}
+    \label{crossover}
     PC = \begin{cases}
             pc_1 - \dfrac{(pc_1 - pc_2)(f' - f_{avg})}{f_{max} - f_{avg}}, & f' \ge f_{avg} \\
             pc_1, & f' < f_{avg}
         \end{cases}
 \end{equation}
-In this case, $PC$ is the probability of crossover. $pc_1$ and $pc_2$ are the input bounds that will limit the crossover. These values are often defined where $pc_1 \geq pc_2$, $f'$ then corresponds to the larger valued fitness score of two selected parents, $f_{max}$ is the largest valued fitness score among the set of populations $P$, and $f_{avg}$ refers to the average fitness score of the population $P$. The next one is for the probability of mutation.
+
+In this case, Equation \ref{crossover} is the probability of crossover. $pc_1$ and $pc_2$ are the input bounds that will limit the crossover. These values are often defined where $pc_1 \geq pc_2$, $f'$ then corresponds to the larger valued fitness score of two selected parents, $f_{max}$ is the largest valued fitness score among the set of populations $P$, and $f_{avg}$ refers to the average fitness score of the population $P$. The next one is Equation \ref{mutation} for the probability of mutation.
 \begin{equation}
+    \label{mutation}
     PM = \begin{cases}
             pm_1 - \dfrac{(pm_1 - pm_2)(f' - f_{avg})}{f_{max} - f_{avg}}, & f \ge f_{avg} \\
             pm_1, & f < f_{avg}
         \end{cases}
 \end{equation}
-where, $pm_1$ and $pm_2$ are also predefined bounds to limit mutations, and prevent oversaturation, and $f$ is the fitness score of a parent that has to mutate. Furthermore, the parameters $pc_1$, $pc_2$, $pm_1$, and $pm_2$ are all predefined input bounds selected through parameter tuning, which controls the range of possible crossover and mutation probabilities during the evolution process.
+Where, $pm_1$ and $pm_2$ are also predefined bounds to limit mutations, and prevent oversaturation, and $f$ is the fitness score of a parent that has to mutate. Furthermore, the parameters $pc_1$, $pc_2$, $pm_1$, and $pm_2$ are all predefined input bounds selected through parameter tuning, which controls the range of possible crossover and mutation probabilities during the evolution process.
 
 \section{Process of Developing the System}
 
