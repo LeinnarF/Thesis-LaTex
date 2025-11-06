@@ -126,30 +126,6 @@ The analysis phase of the development involves outlining the system’s scope, o
 
 \end{enumerate}
 
-To ensure consistent implementation of the mobile application, the following system requirements for mobile devices will be recommended as shown in Table \ref{minsysreq}
-
-\begin{table}[H]
-    \centering
-    \caption{Minimum System Requirements for Mobile Devices}
-    \label{minsysreq}
-    \renewcommand{\arraystretch}{0.6}
-    \begin{tabularx}{\linewidth}{XX}
-        \toprule 
-        \textbf{Category} & \textbf{Requirements} \\
-        \midrule
-        Operating System & Android 7.0 (Nougat) or higher. \\
-        Processor (CPU) & Quad-core 1.4 GHz or equivalent. \\
-        Memory (RAM) & Minimum 2 GB \\
-        Storage & At least 150 MB free space \\
-        Display & 600 x 1024p or higher. \\
-        Network Access & Wi-Fi or mobile data for fetching map data and API requests. \\
-        Location Services & GPS for location tracking and navigation. \\
-        \bottomrule
-    \end{tabularx}
-\end{table}
-
-
-These requirements ensure that the application runs efficiently on most modern mid-range Android smartphones. Devices with higher specifications are expected to experience smoother performance, especially when generating optimized itineraries or handling large datasets of tourist locations.
 
 \subsection{Planning}
 The Gantt chart provides a visual timeline of the schedule of the research activity that will be conducted in the process of developing LAKAD. It outlines the sequence of tasks relating to Thesis I and Thesis II, including the flow of each phase of the research from documentation and planning until system development, evaluation, and final defense.
@@ -193,27 +169,31 @@ The Entity Relationship Diagram (ERD) of the proposed system, as shown in Figure
 
 \subsection{Development}
 
-This development phase pertains to the actual coding and implementation of the system’s features  inside an android application. The researchers’ will utilize the AGILE methodology, particularly the Kanban method for the software development life cycle. This will include weekly meetings and development checks by the researchers to ensure the system is properly developed to its intended uses.
+This development phase pertains to the actual coding and implementation of the system’s features inside an android application. The researchers’ will utilize the AGILE methodology, particularly the Kanban method for the software development life cycle. This will include weekly meetings and development checks by the researchers to ensure the system is properly developed to its intended uses.This application will be developed using the React Native main development framework, which uses fast and cost-efficient cross-platform mobile development, allowing a single codebase to function on both iOS and Android devices. The system will utilize the JavaScript programming language for implementing the application’s user interface and core functionalities due to its flexibility and compatibility with React Native framework. The main development environment for writing, editing, and debugging the program was Visual Studio Code, which provided lightweight performance and had a large selection of extensions appropriate for React Native development. Throughout the development process, Git and GitHub will be use to ensure structured collaboration and version control. The list of tools used in the development is presented in Table \ref{listtools}.
 
-The application will be written in Kotlin programming language which allows fast android development.  The system will also utilize the Jetpack Compose framework for implementing graphical user interfaces and Android Studio IDE for developing the application as shown in Table \ref{listtools}. 
+Additionally, React Native extends the "Learn once, write anywhere" paradigm to mobile development, leveraging recent advancements like its new architecture and the JavaScript Interface (JSI). The framework's structure, represented by Fabric, aims to boost compatibility with modern React features such as concurrent rendering and synchronous data fetching. While JSI’s main element allows for direct calls between JavaScript and native code. This change features a smoother interaction with the host platform and significantly reduces performance bottlenecks. JSI also allows Fabric to create UI components on the native side more efficiently. The combined adoption of JSI and Fabric offers a significant enhancement in React Native's performance, making it a good choice for developers who desire the agility of mobile development and native platform functionalities \parencite{Zhou2024}.
+
+This framework will allow the researchers to develop the mobile application, LAKAD, as React Native’s cross-platform capabilities also allow for android development.
 
 \begin{table}[H]
     \centering
+    \singlespacing
     \caption{List of Tools for Development}
     \label{listtools}
-    \renewcommand{\arraystretch}{0.6}
+    \renewcommand{\arraystretch}{1}
     \begin{tabularx}{\linewidth}{XX}
         \toprule 
         \textbf{Name} & \textbf{Description} \\
         \midrule
-        Android Studio  & A robust IDE for developing and debugging android applications. \\
-        Kotlin          & A powerful programming language for developing android applications as replacement for java. \\
-        Jetpack Compose & A library for developing reactive graphical user interfaces in android.\\
-        Git             & A software for versioning and managing software projects. \\
-        GitHub          & Host for git repositories that allows online collaboration. \\
+        Visual Studio Code  & A lightweight and powerful source code developed by Microsoft. It supports multiple programming languages and offers built-in debugging, version control integration, and extensions suitable for React Native development. \\
+        React Native        & An open-source framework developed by Meta for building cross-platform mobile applications using JavaScript and React. \\
+        JavaScript     & An Interpreted, high-level programming language for building user interfaces, interaction and application logic.\\
+        Git                 & A software for versioning and managing software projects. \\
+        GitHub              & Host for git repositories that allows online collaboration. \\
         \bottomrule
     \end{tabularx}
 \end{table}
+
 
 \subsection{Testing}
 For the testing phase, LAKAD will undergo rigorous evaluation to ensure the overall functionality and quality. The process will include system integration and user acceptance testing. System testing will focus on validating each module of the system by using test cases that will evaluate the logic of the system which will identify and resolve potential issues affecting itinerary generation and recommendation features. Integration testing will be conducted to ensure that all components of the system, such as itinerary generation and optimization, management, and user interface, operates cohesively to provide a seamless user experience.
