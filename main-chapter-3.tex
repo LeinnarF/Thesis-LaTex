@@ -11,53 +11,400 @@ This study will employ a quantitative applied research design which uses quantit
 The quantitative research, specifically, descriptive research design will be one of the designs in the study. This aspect of the study will seek to measure, analyze, and describe the quality, standards, and acceptability of the system using quantitative methods by collecting user and professional feedback. The researchers will assess the quality and standards using the ISO/IEC 25010 standard by seeking professionals to assess the system. While the acceptability of the system for tourists will be analyzed using the Technology Acceptable Model (TAM). The survey will gauge the user’s satisfaction with the system using a 10-point rating scale for ISO/IEC 25010:2023 and 5-point rating scale for TAM, providing insights to the system’s ease of use and usefulness. Incorporating quantitative approach for the study ensures an empirical and evidence-based support for the quality and acceptability of the proposed system.
 
 \subsection{Applied Research}
-The applied research aspect of the study will focus on developing and implementing a system for generating personalized itineraries and optimizing existing itineraries for the interests of the user. The primary objective of this study is to create a mobile application that optimizes itineraries using the African Buffalo Optimization (ABO) algorithm and generates personalized itineraries with travel budget using Adaptive Genetic Algorithm with Dynamic Mutation and Crossover Probabilities (AGAM) algorithm. Through an applied research approach, the features to be implemented in the system will be important for the needs of its intended users which are the tourists and their itinerary needs.
+The applied research aspect of the study will focus on developing and implementing a system for generating personalized itineraries and optimizing existing itineraries for the interests of the user. The primary objective of this study is to create a mobile application that optimizes itineraries using the best Metaheuristic algorithm and generates personalized itineraries with travel budget using Adaptive Genetic Algorithm with Dynamic Mutation and Crossover Probabilities (AGAM) algorithm. Through an applied research approach, the features to be implemented in the system will be important for the needs of its intended users which are the tourists and their itinerary needs.
 
 
 \section{Model Adoption}
-The models adopted for the system are the traveling salesman problem for the optimization of the itineraries and orienteering problem for the generation of personalized itineraries with allocation of travel distance budget. 
+This section discusses the optimization problems such as route optimization and itinerary generation and the steps in modeling each mathematically. Specifically, the mathematical models used in the study are the traveling salesman problem (TSP) and the orienteering problem (OP).
 
-\subsection{African Buffalo Optimization}
-The African Buffalo Optimization (ABO) algorithm is a meta-heuristic method inspired by the cooperative behavior of African buffaloes in their search for food. It models how buffalo herds communicate, explore, and exploit their environment to find optimal grazing areas. In optimization problems such as the Traveling Salesman Problem (TSP), ABO can be used to determine the shortest possible route that visits all cities exactly once while minimizing travel cost or distance.
+\subsection{Modeling Route Optimization using TSP}
+Route optimization refers to the process of finding the optimal order in visiting a set of places. This is also another definition of the TSP, where the salesman must minimize the travel cost between traveling a set of cities. In the study, the POI will be represented as nodes and the edges connecting each node as the distance between the shortest route given by the Mapbox API where a sample graph is shown in Figure \ref{tspgraph}. 
 
-According to \textcite{Odili2022Method}, the algorithm begins by initializing a population of buffaloes, where each buffalo is randomly placed within the solution space. Next, the fitness value of each buffalo is calculated based on the total travel cost of its route. The buffaloes then update their positions using the ABO update rules, which are derived from the buffaloes’ communication signals. These signals guide the herd collectively toward better solutions by balancing exploration (searching new areas) and exploitation (refining known good areas). During this process, buffaloes construct new tours by adding unvisited cities based on their attractiveness and the herd’s accumulated experience. This cycle continues until the stopping criteria, such as a maximum number of iterations or convergence, are met. Finally, the best solution found by the herd is output as the optimized route.
+\begin{figure}[H]
+    \centering
+    \caption{Sample Graph}
+    \label{tspgraph}
+    \includegraphics[width=0.8\textwidth]{TSP.jpeg}
+\end{figure}
 
-Formally, the algorithm can be expressed using two main update equations. The first is for buffalo’s memory or exploitation behavior:
+The objective is to minimize the total travel distance by finding the best order to travel each POI from an itinerary. Using integer programming and given a graph $G$ = $(V, E)$ where V is the set of vertices (POI) and E is the set of edges (road distance), the objective function is as shown in Equation \ref{eq:tsp}:
 \begin{equation}
-    \label{maaa}
-    m _{k}' = m _{k} + lp1 ( bg - w _{k} ) + lp2 ( bp _{k} - w _{k} )
+    \label{eq:tsp}
+    \text{Minimize } \sum_{i = 1}^{n} \sum_{j = 1, j \neq i} c_{ij} x_{ij}
+\end{equation}
+where $n$ is the total number of vertices, $c_{ij}$ refers to the cost of traveling from vertex $i$ to vertex $j$ and $x_{ij}$ refers to a binary value if an edge directly connecting vertex $i$ to $j$ exists. The function is also constrained to the following:
+\begin{enumerate}
+    \item Every city is entered and exited exactly once.
+    \item The solution does not contain any sub-tours.
+\end{enumerate}
+
+\subsection{TSP Algorithm Selection}
+Using the exact approaches such as bruteforce or integer programming, the TSP can be calculated with utmost confidence as the most optimized result. However, this is only feasible for small graphs with small vertices as the computation cost scales with the factorial. But the user can’t be expected to wait hours or days for an optimization of a 10-day itinerary so the only option is through heuristic algorithms. 
+
+The expected runtime for the algorithm should be fast but also accurate. There are many optimization algorithms that have been used in the field of TSP optimization. However, due to the constraints of the processing power of a mobile device, the lightweight metaheuristic algorithms will be tested and analyzed for the algorithm’s runtime, specifically the algorithms:
+\begin{enumerate}
+    \item \textbf{Genetic Algorithm (GA).} Inspired by genetics and evolution, the Genetic Algorithm is an optimization technique that works by analyzing potential solutions and generating new ones through the processes of selection, crossover, and mutation. This iterative process continues until a predefined termination requirement is met. GA is widely used across various domains because of its ability to navigate complex search spaces and identify optimal or near-optimal solutions. Algorithm \ref{GA} illustrates the step-by-step GA approach for solving the TSP \parencite{Hossain2024}.
+
+    \item \textbf{Ant Colony Optimization (ACO).} The Ant Colony Optimization (ACO) is an optimization algorithm that mimics the foraging behavior of ants. It utilizes artificial pheromone trails to guide the search for optimal solutions. Ants in the algorithm employ probabilistic pheromones and heuristic information to address problems. The quality of the solutions determines how the pheromone trails are updated. This mechanism encourages exploration and prevents premature convergence. ACO has proven effective for various optimization difficulties. Algorithm \ref{ACO} outlines the stepwise ACO approach for solving TSP \parencite{Hossain2024}.
+
+    \item \textbf{Simulated Annealing (SA).} The Simulated Annealing (SA) algorithm is a metaheuristic technique influenced by the annealing process in metallurgy. It begins with an initial solution and incorporates a mechanism that allows for the occasional acceptance of a "worse" solution based on a probability distribution. This stochastic element helps the algorithm escape local optima and more thoroughly explore the solution space. The probability of accepting a worse solution is gradually reduced over time, simulating the cooling process. SA is applicable to a wide range of optimization problems. Algorithm \ref{SA} illustrates the stepwise SA algorithm for solving TSP \parencite{Hossain2024}.
+
+    \item \textbf{Particle Swarm Optimization (PSO).} The Particle Swarm Optimization (PSO) algorithm is inspired by the social behavior of bird flocks and fish schools. In PSO, the population is made up of numerous particles, each representing a potential solution within the search space. Every particle is characterized by a velocity and a fitness value. Conceptually, PSO is very straightforward, as it relies solely on elementary mathematical operations and does not require any derived information about the optimization function \parencite{Wadi2025}. Algorithm \ref{PSO} provides a step-by-step description of the PSO algorithm as applied to solving TSP.
+
+    \item \textbf{Elephant Herding Optimization (EHO).} The Elephant Herding Optimization (EHO) algorithm is a swarm-based metaheuristic search approach for addressing optimization problems that mimics the real herding behavior of elephants, which involves organizing elephant swarms into smaller clans, each led by a matriarch and consisting of multiple female elephants and their calves, while adult male calves are expelled from the clan \parencite{Wadi2025}. Algorithm \ref{EHO} provides a step-by-step description of the EHO algorithm as applied to solving TSP.
+
+    \item \textbf{Grey Wolf Optimizer (GWO).} The Grey Wolf Optimization (GWO) algorithm is a metaheuristic technique inspired by grey wolves, simulating their leadership and cooperative hunting behaviors to locate optimal solutions. The hierarchical structure of a wolf pack (Alpha, Beta, Delta, and Omega wolves) is shown in the algorithm's design. Wolves' positions are updated based on the Alpha's location and the calculated hunting distance. GWO leverages a balance of exploration and exploitation to discover the best possible solutions. This approach has been successfully applied to various optimization challenges. Algorithm \ref{GWO} provides a step-by-step description of the GWO algorithm as applied to solving the Traveling Salesperson Problem (TSP) \parencite{Hossain2024}. 
+
+    % \item \textbf{Hovering Scouts and Foraging Flocks Pied Kingfisher Optimizer (HSFFPKO).}
+\end{enumerate}
+
+
+
+\begin{algorithm}[H]
+    \singlespacing
+    \footnotesize
+    \caption{Genetic Algorithm}
+    \label{GA}
+    \begin{algorithmic}[1]
+    \State Initialize population $p$ using the \Call{initialize\_population}{} method.
+    \State Calculate the fitness for each individual in $p$ using the \Call{evaluate\_fitness}{} method.
+    \State Set the iteration counter $T = 0$.
+    \State Set $\text{max\_iterations} = 1000$.
+    \While {$T < \text{max\_iterations}$}
+        \State Select parents from the population $p$ using the \Call{selection}{} method.
+        \State Perform crossover on the selected parents with a probability of $0.8$ using the \Call{crossover}{} method to generate offspring.
+        \State Perform a mutation on the offspring with a probability of $0.2$ using the \Call{mutation}{} method.
+        \State Calculate fitness for each offspring using the \Call{evaluate\_fitness}{} method.
+        \State Replace the worst individuals in the population $p$ with the best offspring.
+        \State Update the best solution found so far.
+        \State Increment iteration counter $T = T + 1$.
+    \EndWhile
+    \State \textbf{Return} the best solution found ($\text{best\_individual}$).
+    \end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+    \singlespacing
+    \footnotesize
+    \caption{Ant Colony Optimization}
+    \label{ACO}
+    \begin{algorithmic}[1]
+    \State Initialize the pheromone matrix $\tau$ with $\text{initial\_pheromone}$.
+    \State Set $\text{best\_tour} = \text{none}$ and $\text{best\_distance} = \infty$.
+    \State Start timer $\text{start\_time}$.
+    \For {$i = 1$ to $\text{num\_iterations}$}
+        \State Generate $\text{num\_ants}$ tours using the \Call{construct\_tour}{} method.
+        \For {each generated tour $k$}
+            \State Calculate $\text{tour\_distance}_k$.
+            \If {$\text{tour\_distance}_k < \text{best\_distance}$}
+                \State Update $\text{best\_tour} = \text{tour}_k$
+                \State Update $\text{best\_distance} = \text{tour\_distance}_k$
+            \EndIf
+        \EndFor
+        \State Update pheromone matrix $\tau$ using the \Call{update\_pheromone\_matrix}{} method.
+    \EndFor
+    \State Stop timer $\text{end\_time}$.
+    \State Calculate $\text{computation\_time} = \text{end\_time} - \text{start\_time}$.
+    \State \textbf{Return} $\text{best\_tour}$, $\text{best\_distance}$, and $\text{computation\_time}$.
+    \end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+    \singlespacing
+    \footnotesize
+    \caption{Simulated Annealing}
+    \label{SA}
+    
+    \begin{algorithmic}[1]
+\Function{SimulatedAnnealing}{$\text{cities}$, $\text{initial\_temperature}$, $\text{cooling\_rate}$, $\text{num\_iterations}$}
+    \State Initialize the distances matrix by calculating the distances between cities.
+    \State Define $\text{calculate\_tour\_distance}(\text{tour})$.
+    \State Define $\text{generate\_neighbor}(\text{tour})$ (e.g., swapping two cities).
+    \State Define $\text{acceptance\_probability}(\Delta E, T) = e^{-\Delta E / T}$.
+    \State Initialize $\text{current\_tour}$ with a random tour.
+    \State $\text{current\_distance} \gets \text{calculate\_tour\_distance}(\text{current\_tour})$.
+    \State $\text{best\_tour} \gets \text{current\_tour}$.
+    \State $\text{best\_distance} \gets \text{current\_distance}$.
+    \State $T \gets \text{initial\_temperature}$.
+    \State $\text{start\_time} \gets \text{Timer.start}()$.
+    \For {$i = 1$ to $\text{num\_iterations}$}
+        \State $\text{new\_tour} \gets \text{generate\_neighbor}(\text{current\_tour})$.
+        \State $\text{new\_distance} \gets \text{calculate\_tour\_distance}(\text{new\_tour})$.
+        \State $\Delta E \gets \text{new\_distance} - \text{current\_distance}$.
+        \If {$\Delta E < 0$}
+            \State $\text{accept} \gets \text{True}$
+        \Else
+            \State $\text{prob} \gets \text{acceptance\_probability}(\Delta E, T)$
+            \State $\text{accept} \gets \text{prob} > \text{random}(0, 1)$
+        \EndIf
+        
+        \If {$\text{accept}$}
+            \State $\text{current\_tour} \gets \text{new\_tour}$
+            \State $\text{current\_distance} \gets \text{new\_distance}$
+            \If {$\text{current\_distance} < \text{best\_distance}$}
+                \State $\text{best\_tour} \gets \text{current\_tour}$
+                \State $\text{best\_distance} \gets \text{current\_distance}$
+            \EndIf
+        \EndIf
+        
+        \State $T \gets T \cdot \text{cooling\_rate}$
+    \EndFor
+    \State $\text{end\_time} \gets \text{Timer.stop}()$.
+    \State $\text{computation\_time} \gets \text{end\_time} - \text{start\_time}$.
+    \State \textbf{Return} $\text{best\_tour}$, $\text{best\_distance}$, $\text{computation\_time}$.
+\EndFunction
+\end{algorithmic}    
+\end{algorithm}
+
+
+\begin{algorithm}[H]
+\singlespacing
+\footnotesize
+\caption{Particle Swarm Optimization}
+\label{PSO}
+\begin{algorithmic}[1]
+\State \textbf{Initialize parameters:}
+\State \hspace{1em} num\_particles = Number of particles
+\State \hspace{1em} num\_iterations = Maximum number of iterations
+\State \hspace{1em} cities = List of city coordinates
+\State \hspace{1em} $w$ = Inertia weight, $c_1$ = Cognitive coefficient, $c_2$ = Social coefficient
+\State
+\State \textbf{Initialize particles:}
+\For{$i = 1$ to num\_particles}
+    \State Initialize position $X[i]$ randomly (random tour)
+    \State Initialize velocity $V[i]$ randomly
+    \State $pBest[i] \gets X[i]$
+    \State $pBestFitness[i] \gets fitness(pBest[i])$
+\EndFor
+
+\State $gBest \gets$ Best particle position among all $pBest$
+\State $gBestFitness \gets$ Best fitness among all particles
+
+\State
+
+\For{$t = 1$ to num\_iterations}
+    \For{$i = 1$ to num\_particles}
+        \State // Update velocity
+        \State Generate random numbers $r_1, r_2$
+        \State $V[i] \gets w \cdot V[i] + c_1 \cdot r_1 \cdot (pBest[i] - X[i]) + c_2 \cdot r_2 \cdot (gBest - X[i])$
+        
+        \State // Update position
+        \State $X[i] \gets UpdatePosition(X[i], V[i])$
+        \State fitnessVal $\gets fitness(X[i])$
+
+        \State // Update personal best
+        \If{fitnessVal $<$ pBestFitness[i]}
+            \State $pBest[i] \gets X[i]$
+            \State $pBestFitness[i] \gets$ fitnessVal
+        \EndIf
+
+        \State // Update global best
+        \If{fitnessVal $<$ gBestFitness}
+            \State $gBest \gets X[i]$
+            \State $gBestFitness \gets$ fitnessVal
+        \EndIf
+    \EndFor
+\EndFor
+
+\State \Return $gBest$ as the best tour found
+
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+\singlespacing
+\footnotesize
+\caption{Elephant Herding Optimization}
+\label{EHO}
+\begin{algorithmic}[1]
+\State \textbf{Initialize parameters:}
+\State Initialize elephants with random tours
+\State Set number of clans, elephants per clan, and max iterations
+\State Initialize global best ($gBest$)
+\State
+\State \textbf{Main loop:}
+\For{$t = 1$ to max\_iterations}
+    \For{each clan}
+        \State Compute clan center $E_{center}$
+        \For{each elephant $j$ in the clan}
+            \State // Update position
+            \State $X_j \gets X_{best} + \alpha \cdot (X_j - E_{center}) \cdot random\_factor$
+            \State Ensure valid tour
+            \State Update personal best $pBest_j$
+        \EndFor
+        \State Update clan’s best ($gBest$ candidate)
+    \EndFor
+    \State
+    \State \textbf{Migration step:}
+    \State Replace worst elephant with a new random tour
+    \State Update $gBest$ if a better solution is found
+\EndFor
+\State
+\State \textbf{Termination:}
+\State \Return $gBest$ as the best tour found
+\end{algorithmic}
+\end{algorithm}
+
+
+\begin{algorithm}[H]
+\singlespacing
+\footnotesize
+\caption{Grey Wolf Optimizer}
+\label{GWO}
+\begin{algorithmic}[1]
+\State Initialize wolves
+\State Set iteration counter
+\State Set maximum number of iterations
+\While{iteration\_counter $<$ max\_iterations}
+    \State Evaluate fitness for each wolf
+    \State Update the best wolf found so far
+    \State Determine $\alpha$, $\beta$, and $\delta$ wolves 
+    \Statex \hspace{2em} // best, second-best, and third-best solutions
+    \For{each wolf}
+        \State Update the wolf's position based on $\alpha$, $\beta$, and $\delta$
+    \EndFor
+    \State Increment iteration\_counter
+\EndWhile
+\State \Return best wolf found (best\_solution)
+\end{algorithmic}
+\end{algorithm}
+
+Each algorithm will be given 10 iterations each for solving 20 TSP instances from the TSPLIB. The average runtime and accuracy will be recorded. Afterwards, the whole process can be visualized in Figure \ref{algoprocess}. There are three phases, the recording of runtime for each algorithm, performing Friedman test, and performing Nemenyi test if allowed by the Friedman test. The recording and analysis will be performed through the Python language and its respective packages.
+
+\begin{figure}
+    \centering
+    \caption{Algorithm Runtime Analysis Process}
+    \label{algoprocess}
+    \includegraphics[width=0.5\textwidth]{friedman.jpeg}
+\end{figure}
+
+After recording the average runtime for each problem, the Friedman test will be conducted to determine if each algorithm’s runtime results differ from one another. The Friedman test is ideal for this experiment where the distribution of runtime results across diverse TSPLIB instances may not strictly follow a normal distribution.
+
+The steps involve ranking the algorithms for each TSP instance independently. The algorithm with the fastest runtime is assigned a rank of $1$, the second fastest a rank of $2$, and so on. In cases of ties, average ranks are assigned. The test then evaluates the Null Hypothesis ($H_0$), which states that all algorithms are statistically equivalent and any differences in average runtime are only present due to the randomness in the algorithms’ implementations.
+
+The formulation for the Friedman test is shown in Equation \ref{Friedman}, where $n$ is the number of subjects, $k$ is the number of treatments and, $\sum{R^2}$ is the squared sum of the total ranks.
+
+\begin{equation}
+    \label{Friedman}
+    FM = \frac{12}{nk ( k + 1 )} \sum{R^2} - 3n ( k + 1 )
+\end{equation}
+where $n$ is number of the subjects, $k$ is number of treatments, and $\sum{R^2}$ is the squared sum of the total ranks.
+
+If the calculated p-value for the Friedman test is less than the significance level $\alpha$, the null hypothesis will be rejected. Rejection of the null hypothesis will confirm that there is a statistical significant difference in the runtime of at least two algorithms. Unfortunately, the Friedman test does not identify which among the algorithms differ. Therefore, a post-hoc analysis is required.
+
+Only if the null hypothesis is rejected, only then will the Nemenyi post-hoc test will be applied to perform pairwise comparisons. This test uses the Critical Difference (CD) value to determine if the runtime gap between any two specific algorithms is significant. If the difference in the average ranks of two algorithms exceeds the CD, their performance is considered significantly distinct.
+
+The formula for the Nemenyi test is shown in Equation \ref{critD} where $q_\alpha$: The critical value based on the Studentized range statistic (specifically for infinite degrees of freedom). You look this up in a standard Nemenyi critical value table (e.g., for 20$\alpha=0.05$).21$k$: Number of algorithms.$N$: Number of datasets.
+
+\begin{equation}
+    \label{critD}
+    CD = q_\alpha \sqrt{\frac{k ( k + 1 )}{6N}}
 \end{equation}
 
-In Equation \ref{maaa}, $ m _{k} $ represents the buffalo’s previous movement (exploitation term), $ bg $ is the global best fitness representing the herd’s best solution, and $bp _{k}$ is the individual buffalo’s best-known position. The parameters $lp1$ and $lp2$ are learning coefficients that control the influence of herd communication and personal experience, respectively. This equation enables each buffalo to adjust its movement based on both the global herd direction and its own previous success, allowing it to return to a more rewarding position if it strays into less optimal regions. 
+\subsection{Modeling Itinerary Generation as Orienteering Problem}
 
-The Equation \ref{waaa} controls the buffalo’s exploration within the search space:
+In the context of the study, an itinerary refers to a plan of the user to go to two or more places. An itinerary can be modeled mathematically using graph theory similar to TSP. This would involve setting the vertices of a graph as the places and the edges as the road distance between the connected edges. A big difference of OP from TSP is the fact that it takes the whole graph or all the possible POI and outputs a subgraph instead, where TSP would use the entire graph given. An example is shown in Figure \ref{opgraph} where 5 POI are given as input and only three were used to generate an itinerary.
+
+\begin{figure}[H]
+    \centering
+    \caption{Subgraph result from OP}
+    \label{opgraph}
+    \includegraphics[width=0.8\textwidth]{subgraph.png}
+\end{figure}
+
+The objective of the OP is to maximize the available profit, in the case of the study: travel distance, to generate an itinerary for the user alongside other factors. Mathematically, the OP can be formulated as follows in Equation \ref{eq:op}.
+
 \begin{equation}
-    \label{waaa}
-    w _{k} ' = \frac{ ( w _{k} + m _{k} ) }{\lambda}
+    \label{eq:op}
+   \text{Maximize } Z = \sum_{i = 2}^{n - 1} \sum_{j = 2}^{n}S _{i} x _{ij}  
 \end{equation}
-Where $w_k$ represents the buffalo’s exploratory move, $ m _{k} $ represents the exploitation or memory component, and $\lambda \in (0,1]$ is the exploration driver that regulates how strongly the buffalo explores new areas. After updating both memory and position, the algorithm checks if the global best $bg$ has improved. If so, it proceeds to the next iteration; otherwise, it continues refining current solutions. The process repeats until the stopping condition is met, e.g., maximum iteration count or convergence. Once completed, the herd’s best-known position $bg$ is returned as the optimal solution, representing the most efficient tour or path discovered by the algorithm. 
-
+where $Z$ is the total travel distance; $S_i$ is the total score of a vertex at index i such as the travel distance, user preferability score, and popularity rating; $x_i$ is the decision variable whether the vertex $i$ to vertex $j$ is included in the output. The function is also constrained to the following:
+\begin{enumerate}
+    \item Each vertex must only be visited once.
+    \item The total score must not exceed the given budget.
+    \item The generated path must be connected.
+\end{enumerate}
 
 \subsection{Adaptive Genetic Algorithm with Dynamic Mutation and Crossover Probabilities}
 
 The study also chose to adopt a modified variant of the genetic algorithm developed by \textcite{Yochum2020} called Adaptive Genetic Algorithm with Dynamic Mutation and Crossover Probabilities (AGAM) for the optimization of recommended itineraries defined in terms of TSP. AGAM addresses itinerary planning as a Multi-Objective Optimization Problem, an optimization technique rooting from orienteering problems. As discussed in their work, \textcite{Yochum2020} developed AGAM to generate optimal and personalized travel itineraries by balancing several objectives such as point of interest (POI) rating, and distance of POIs between the next one. Rooting from Genetic Algorithm (GA), AGAM simulates the process of natural evolution and utilizes genetic operators such as selection, crossover, and mutation to iteratively improve the quality of itineraries which, unlike traditional GA that use fixed mutation rates, also employs dynamic adjustments in parameters during the evolutionary process in a way that can maintain population diversity and therefore generate efficient and adaptive solutions.
 
-AGAM works by taking specific factors that can affect the results of a solution. In this paper, the goal is to generate an optimal solution of a recommended itinerary, which lets the model take into account factors similar to the ones proposed by \textcite{Yochum2020}. The factor referring to mandatory POIs will from hereon refer to the interest of the user. In addition to these factors, AGAM also requires a certain probability that determines the chances of mutation and crossover to happen.
-
-To better understand the factors taken into account in this study, Equation \ref{agam1} is defined as follows; The popularity of a POI $q_i$ is given by the visit count of the POI’s governing municipality.
-The rating of a POI $q_i$ is given by taking the average rating of all visitors for $q_i$.
+\textbf{Adaptive Crossover. }AGAM’s most important part is the dynamic crossover and mutation probabilities that it uses. This property of AGAM serves as a guide and is helpful in finding the best solution  since it prevents the system from repeatedly computing in a local optima, a region of solutions that  can be optimal but lacks diversity, a kind of deadlock where the system ignores every other possible optimal solution outside the current locality. \textcite{Yochum2020} defined these probabilities in Equations \ref{crossover} and \ref{mutation}.
 \begin{equation}
-    \label{agam1}
-    R(q_i) = \frac{1}{x} \sum_{j=1}^{x} r_{q_i}(u_j)
+    \label{crossover}
+    PC = \begin{cases}
+            pc_1 - \dfrac{(pc_1 - pc_2)(f' - f_{avg})}{f_{max} - f_{avg}}, & f' \ge f_{avg} \\
+            pc_1, & f' < f_{avg}
+        \end{cases}
 \end{equation}
 
-AGAM considers the population set $P = {p_1,\dots, p_n}$ where each individual $p_i = {q_1, q_2, q_3,\dots, q_n}$ is a sequence where each $q_i$ is a POI. This means that AGAM treats each POI sequence $p_i$ as an individual gene, hence $P$ as a sequence of itineraries. \textcite{Yochum2020} noted that measuring different factors involves variables with inconsistent units and scales, and that each gene sequence may vary in length depending on the number of POIs selected. They addressed this by applying a normalization method that converts all variable values into a uniform range between 0 and 1, so that the algorithm can fairly compare and combine the factors within a fitness function. This fitness function normalizes the evaluation of the quality of each $p_i$ by integrating the input factors defined earlier. In this way, every itinerary $p_i$ in $P$ obtains different weights given by Equation \ref{agamFitness}.
+In this case, Equation \ref{crossover} is the probability of crossover. $pc_1$ and $pc_2$ are the input bounds that will limit the crossover. These values are often defined where $pc_1 \geq pc_2$, $f'$ then corresponds to the larger valued fitness score of two selected parents, $f_{max}$ is the largest valued fitness score among the set of populations $P$, and $f_{avg}$ refers to the average fitness score of the population $P$. 
+
+\textbf{Adaptive Mutation. }The next one is Equation \ref{mutation} for the probability of mutation.
+\begin{equation}
+    \label{mutation}
+    PM = \begin{cases}
+            pm_1 - \dfrac{(pm_1 - pm_2)(f' - f_{avg})}{f_{max} - f_{avg}}, & f \ge f_{avg} \\
+            pm_1, & f < f_{avg}
+        \end{cases}
+\end{equation}
+Where, $pm_1$ and $pm_2$ are also predefined bounds to limit mutations, and prevent oversaturation, and $f$ is the fitness score of a parent that has to mutate. Furthermore, the parameters $pc_1$, $pc_2$, $pm_1$, and $pm_2$ are all predefined input bounds selected through parameter tuning, which controls the range of possible crossover and mutation probabilities during the evolution process.
+
+\textbf{Study Adoption. }AGAM works by taking specific factors that can affect the results of a solution. In this paper, the goal is to generate an optimal solution of a recommended itinerary, which lets the model take into account factors similar to the ones proposed by \textcite{Yochum2020}. The factor referring to mandatory POIs will from hereon refer to the interest of the user. In addition to these factors, AGAM also requires a certain probability that determines the chances of mutation and crossover to happen.
+AGAM considers the population set $P = {p_1,\dots, p_n}$ where each individual $p_i = {q_1, q_2, q_3,\dots, q_n}$ is a sequence where each $q_i$ is a POI. This means that AGAM treats each POI sequence $p_i$ as an individual gene, hence $P$ as a sequence of itineraries. 
+
+\textbf{Normalization Procedure. }\textcite{Yochum2020} noted that measuring different factors involves variables with inconsistent units and scales, and that each gene sequence may vary in length depending on the number of POIs selected. They addressed this by applying a normalization method that converts all variable values into a uniform range between 0 and 1, so that the algorithm can fairly compare and combine the factors within a fitness function.
+
+\textbf{Fitness Function. }This fitness function normalizes the evaluation of the quality of each $p_i$ by integrating the input factors defined earlier. In this way, every itinerary $p_i$ in $P$ obtains different weights given by Equation \ref{agamFitness}.
 \begin{equation}
     \label{agamFitness}
     f(p_i) = w_{1}Ti(p_i) + w_{2}Tn(p_i) + w_{3}Tr(p_i) + w_{4}Tp(p_i)
 \end{equation}
+Where in Equation \ref{agamFitness}, $f(p_i)$ is the fitness function score of each itinerary $p_i$. 
+$w_{j}$ is the weight of each factor.
+$Ti(p_i)$ is the sum of all interest values of each POI in the itinerary $p_i$. Each POI contains an interest value which quantifies how interested the user is in that specific POI category. 
 
-Where in Equation \ref{agamFitness}, $f(p_i)$ is the fitness function score of each itinerary $p_i$. $w_{j}$ is an adjustable weight of each factor which depends on the user’s preference. $Ti(p_i)$ is the sum of all interest values of each POI in the itinerary $p_i$. Each POI contains an interest value which quantifies how interested the user is in that specific POI category. $Tn(p_i)$ is the total number of POIs included in the itinerary relative to the maximum number of POIs that can be visited within the user’s \textit{MAXD}. It is obtained by dividing the number of POIs in the itinerary $p_i$ by the maximum possible number of POIs. $Tr(p_i)$ is the total rating of $p_i$ given by Equation \ref{agam2}, taking the sum of all $q_i$ rating $R(q_i)$ in $p_i$ and dividing it by the best possible rating of all POIs in consideration combined $MAXR = \text{Number of POIs} * \text{Maximum Rating}$.
+In order to determine the level of interests of the user in a specific POI, the cosine similarity will be used. According to Singh et al. (2023), cosine similarity measures the angle of cosine between two vectors. This essentially provides a number for how two vectors relate to each other.  The formula for cosine similarity is in eq \ref{cosim} where $v$, $w$ are vectors and the output of the function ranges from -1 being not related to 1 essentially the same vectors. 
+
+\begin{equation}
+    \label{cosim}
+    \text{cosine\_similarity}(v, w) = \frac{v \cdot w}{\|v\| \|w\|} = \frac{\sum_{i=1}^{n} v_i w_i}{\sqrt{\sum_{i=1}^{n} v_i^2} \sqrt{\sum_{i=1}^{n} w_i^2}}
+\end{equation}
+In the context of the application, each POI has categories which are appropriately assigned by the researchers. Then, a category matrix (\ref{matrix}) will be generated for each POI for each available category where 1 will mean POI is in that category and 0 as not.
+
+\begin{equation}
+    \label{matrix}
+        \begin{bmatrix}
+            1 & 0 \\
+            0 & 0 \\
+            1 & 0
+        \end{bmatrix}
+\end{equation}
+The column of the matrix represents the POI and the row represents the category. 
+
+Another vector (\ref{uservector}) that represents the user’s preferences in the categories will be created. This is a binary vector where 1 represents that the user wants to see this and 0 as not wanting to see this type of category. For instance, if the user has chosen all categories to be in their preferences, in which case, all the values are one.
+
+\begin{equation}
+    \label{uservector}
+    \begin{bmatrix}
+        1 \\
+        1 \\
+        1
+    \end{bmatrix}
+\end{equation}
+
+Then, the cosine similarity of each POI category matrix to the user preference will be calculated. This value from the cosine similarity now represents the user’s interest to that POI based on the preference matrix. 
+
+$Tn(p_i)$ will be obtained by dividing the number of POIs in $p_i$, by the total number of possible POIs denoted by NOP. Also note that the selected number of POIs in $p_i$ will be limited by a user-defined parameter which will be referred to as $MAXN$, an integer limiting the number of POIs in a $N_op(p_i)$.	
+$N_{op}(p_i) \leq MAXN$.
+\begin{equation}
+    \label{agam1}
+    \dfrac{\sum_{j=1}^{n} (1)}{NOP}
+\end{equation}
+This ensures that AGAM does not prioritize the entirety of all of Bulacan’s POIs considered in the study.
+
+$Tr(p_i)$ is the total rating of $p_i$ given by Equation \ref{agam2}, taking the sum of all $q_i$ rating $R(q_i)$ Equation \ref{agam4} in $p_i$ and dividing it by the best possible rating of all POIs in consideration combined $MAXR = \text{Number of POIs} * \text{Maximum Rating}$.
+
 \begin{equation}
     \label{agam2}
     \dfrac{\sum_{j=1}^{n} R(q_j) \in p_i}{MAXR},\text{ such that } n = \text{last POI}
@@ -67,26 +414,102 @@ $Tp(p_i)$ is the total popularity of $p_i$ given by Equation \ref{agam3} the sum
 \begin{equation}
     \label{agam3}
     \dfrac{\sum_{n}^{i=1}P(q_i) \in p_i}{MAXP}, \text{ such that } n = \text{last POI}
+\end{equation} 
+
+The popularity of a POI $q_i$ is given by the visit count of the POI’s governing municipality.
+The rating of a POI $q_i$ is given by taking the average rating of all visitors for $q_i$.
+\begin{equation}
+    \label{agam4}
+    R(q_i) = \frac{1}{x} \sum_{j=1}^{x} r_{q_i}(u_j)
 \end{equation}
 
-Moreover, AGAM’s most important part is the dynamic crossover and mutation probabilities that it uses. This property of AGAM serves as a guide and is helpful in finding the best solution  since it prevents the system from repeatedly computing in a local optima, a region of solutions that  can be optimal but lacks diversity, a kind of deadlock where the system ignores every other possible optimal solution outside the current locality. \textcite{Yochum2020} defined these probabilities in Equations \ref{crossover} and \ref{mutation}.
-\begin{equation}
-    \label{crossover}
-    PC = \begin{cases}
-            pc_1 - \dfrac{(pc_1 - pc_2)(f' - f_{avg})}{f_{max} - f_{avg}}, & f' \ge f_{avg} \\
-            pc_1, & f' < f_{avg}
-        \end{cases}
-\end{equation}
+Algorithm \ref{alg:agam} is a modified pseudocode of AGAM, adjusted to fit the changes mentioned above. In this way, the utilized algorithm is better suited to cater given data, obtained from sources available to the researchers.
 
-In this case, Equation \ref{crossover} is the probability of crossover. $pc_1$ and $pc_2$ are the input bounds that will limit the crossover. These values are often defined where $pc_1 \geq pc_2$, $f'$ then corresponds to the larger valued fitness score of two selected parents, $f_{max}$ is the largest valued fitness score among the set of populations $P$, and $f_{avg}$ refers to the average fitness score of the population $P$. The next one is Equation \ref{mutation} for the probability of mutation.
-\begin{equation}
-    \label{mutation}
-    PM = \begin{cases}
-            pm_1 - \dfrac{(pm_1 - pm_2)(f' - f_{avg})}{f_{max} - f_{avg}}, & f \ge f_{avg} \\
-            pm_1, & f < f_{avg}
-        \end{cases}
-\end{equation}
-Where, $pm_1$ and $pm_2$ are also predefined bounds to limit mutations, and prevent oversaturation, and $f$ is the fitness score of a parent that has to mutate. Furthermore, the parameters $pc_1$, $pc_2$, $pm_1$, and $pm_2$ are all predefined input bounds selected through parameter tuning, which controls the range of possible crossover and mutation probabilities during the evolution process.
+
+\begin{algorithm}[H]
+\singlespacing
+\footnotesize
+\caption{Adaptive Genetic Algorithm for Itinerary Optimization (AGAM)}
+\label{alg:agam}
+\begin{algorithmic}[1]
+
+\Require $MAXD$ (maximum travel distance), $MAXN$ (maximum number of POIs), $N$ (population size)
+\Require $pc_1, pc_2$ (crossover control parameters), $pm_1, pm_2$ (mutation control parameters)
+\Require $w_1, w_2, w_3, w_4$ (fitness weights), $\delta$ (number of generations)
+\Ensure Optimal itinerary $p_{opt}$
+
+\State Initialize population $P$ with $N$ randomly generated itineraries
+\For{each $p_i \in P$}
+    \State Ensure $TotalDistanceCost(p_i) \le MAXD$
+\EndFor
+
+\For{iteration = 1 to $\delta$}
+
+    \State Evaluate fitness $F(p_i)$ for each itinerary using:
+    \[
+        F = w_1 f_{\text{interest}} + w_2 f_{\text{totalPOI}} + w_3 f_{\text{rating}} + w_4 f_{\text{popularity}}
+    \]
+
+    \State Compute $f_{\max} = \max(F(p_i))$, $f_{\text{avg}} = average(F(p_i))$
+
+    \State Initialize new population $P_i = \emptyset$
+
+    \While{$|P_i| < N$}
+        \State $(parent_1, parent_2) = TournamentSelection(P, k=2)$
+        \State $PC = calculateCrossoverProbability(F(parent_1), F(parent_2), f_{\text{avg}}, f_{\max})$
+
+        \If{$random(0,1) < PC$}
+            \State $(child_1, child_2) = OnePointCrossover(parent_1, parent_2)$
+
+            \If{$TotalDistanceCost(child_1) > MAXD$ \textbf{and} $NUMPOI(child_1) > MAXN$}
+                \State Regenerate($child_1$)
+            \EndIf
+            \If{$TotalDistanceCost(child_2) > MAXD$ \textbf{and} $NUMPOI(child_2) > MAXN$}
+                \State Regenerate($child_2$)
+            \EndIf
+
+            \If{$TotalDistanceCost(child_1) < MAXD$ \textbf{and} $NUMPOI(child_1) < MAXN$}
+                \State InsertUnvisitedPOIs($child_1$)
+            \EndIf
+            \If{$TotalDistanceCost(child_2) < MAXD$ \textbf{and} $NUMPOI(child_2) < MAXN$}
+                \State InsertUnvisitedPOIs($child_2$)
+            \EndIf
+
+            \State Add $child_1$ and $child_2$ to $P_i$
+
+        \Else
+            \State Add $parent_1$ and $parent_2$ to $P_i$
+        \EndIf
+    \EndWhile
+
+    \For{each itinerary $p_i \in P_i$}
+        \State $PM = calculateMutationProbability(F(p_i), f_{\text{avg}}, f_{\max})$
+
+        \If{$random(0,1) < PM$}
+            \State $Mutated\_p_i = ApplyMutation(p_i)$
+
+            \If{$TotalDistanceCost(Mutated\_p_i) > MAXD$ \textbf{or} $NUMPOI(Mutated\_p_i) > MAXN$}
+                \State Regenerate($Mutated\_p_i$)
+            \EndIf
+
+            \If{$TotalDistanceCost(Mutated\_p_i) < MAXD$ \textbf{and} $NUMPOI(Mutated\_p_i) < MAXN$}
+                \State InsertUnvisitedPOIs($Mutated\_p_i$)
+            \EndIf
+
+            \State $p_i \gets Mutated\_p_i$
+        \EndIf
+    \EndFor
+
+    \State Recalculate fitness of all itineraries in $P_i$
+    \State $P \gets P_i$
+
+\EndFor
+
+\State \Return $p_{opt}$ = itinerary with highest fitness in $P$
+
+\end{algorithmic}
+\end{algorithm}
+
 
 \section{Process of Developing the System}
 
@@ -165,6 +588,21 @@ Figure \ref{SysArch} illustrates the system architecture of LAKAD: A Personalize
 \end{figure}
 
 The Entity Relationship Diagram (ERD) of the proposed system, as shown in Figure \ref{erd}, consists of seven entities; User, Itinerary, Itinerary\_POI, Verified\_POI, Custom\_POI, Category, Preferences, each connected in a circular way with the exception of the Custom\_POI entity connected only from outside. A User entity can generate many itineraries of the entity Itinerary. An Itinerary entity can contain as many Itinerary\_POI, an entity that acts as a buffer entity for a POI before being added inside an Itinerary, this lets the system properly assign a POI inside an itinerary. Itinerary\_POI entities reference either a Verified\_POI or Custom\_POI, which differs as Verified\_POI entities are locations that are specifically confirmed by PHACTO to be a tourist destination in Bulacan, whereas a Custom\_POI is not necessarily one. By consequence, each Verified\_POI has at least one dedicated Category they belong to. A User entity may also have their own Preferences which are then classified by Category.
+
+\begin{figure}
+    \centering
+    \caption{Data Flow Diagram}
+    \label{dfd}
+    \includegraphics[width=0.8\textwidth]{datFlow.png}
+\end{figure}
+
+Only one user exists for the whole system which is the tourist as illustrated in Figure \ref{dfd}. There are two main flows for the user actions: preferences flow and itinerary flow. The preferences flow is straightforward, the user submits the preferences per category and then is saved in the app to be used later. The itinerary flow starts from the user generating an itinerary through the AGAM process in which is saved to the database and is sent to the itinerary management process for the visualization through graphical user interface.
+
+From itinerary management, there are two other flows: optimization and navigation flow. The optimization flow would use the best TSP algorithm selected from the analysis to optimize the itinerary visitation where the changes would be saved and flow back to the management. Navigation flow would start the navigation process, showing the tourist the directions and steps to go to the POI in the itinerary.
+
+
+
+
 
 \subsection{Development}
 
