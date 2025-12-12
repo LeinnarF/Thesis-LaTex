@@ -39,28 +39,14 @@ where $n$ is the total number of vertices, $c_{ij}$ refers to the cost of travel
 \end{enumerate}
 
 \subsection{TSP Algorithm Selection}
-Using the exact approaches such as bruteforce or integer programming, the TSP can be calculated with utmost confidence as the most optimized result. However, this is only feasible for small graphs with small vertices as the computation cost scales with the factorial. But the user can’t be expected to wait hours or days for an optimization of a 10-day itinerary so the only option is through heuristic algorithms. 
+
+To determine the most suitable algorithm for route optimization in the mobile application, a comparative analysis will be conducted on several metaheuristic algorithms commonly used for solving the TSP. The evaluation will be conducted using benchmark datasets from TSPLIB, a well-known library of sample instances for the TSP and related problems. The analysis will focus on descriptive performance metrics, specifically the solution quality and runtime efficiency of each algorithm.
 
 The expected runtime for the algorithm should be fast but also accurate. There are many optimization algorithms that have been used in the field of TSP optimization. However, due to the constraints of the processing power of a mobile device, the lightweight metaheuristic algorithms will be tested and analyzed for the algorithm’s runtime, specifically the algorithms:
-\begin{enumerate}
-    \item \textbf{Genetic Algorithm (GA).} Inspired by genetics and evolution, the Genetic Algorithm is an optimization technique that works by analyzing potential solutions and generating new ones through the processes of selection, crossover, and mutation. This iterative process continues until a predefined termination requirement is met. GA is widely used across various domains because of its ability to navigate complex search spaces and identify optimal or near-optimal solutions. Algorithm \ref{GA} illustrates the step-by-step GA approach for solving the TSP \parencite{Hossain2024}.
 
-    \item \textbf{Ant Colony Optimization (ACO).} The Ant Colony Optimization (ACO) is an optimization algorithm that mimics the foraging behavior of ants. It utilizes artificial pheromone trails to guide the search for optimal solutions. Ants in the algorithm employ probabilistic pheromones and heuristic information to address problems. The quality of the solutions determines how the pheromone trails are updated. This mechanism encourages exploration and prevents premature convergence. ACO has proven effective for various optimization difficulties. Algorithm \ref{ACO} outlines the stepwise ACO approach for solving TSP \parencite{Hossain2024}.
+    \textbf{Genetic Algorithm (GA).} Inspired by genetics and evolution, the Genetic Algorithm is an optimization technique that works by analyzing potential solutions and generating new ones through the processes of selection, crossover, and mutation. This iterative process continues until a predefined termination requirement is met. GA is widely used across various domains because of its ability to navigate complex search spaces and identify optimal or near-optimal solutions. Algorithm \ref{GA} illustrates the step-by-step GA approach for solving the TSP \parencite{Hossain2024}.
 
-    \item \textbf{Simulated Annealing (SA).} The Simulated Annealing (SA) algorithm is a metaheuristic technique influenced by the annealing process in metallurgy. It begins with an initial solution and incorporates a mechanism that allows for the occasional acceptance of a "worse" solution based on a probability distribution. This stochastic element helps the algorithm escape local optima and more thoroughly explore the solution space. The probability of accepting a worse solution is gradually reduced over time, simulating the cooling process. SA is applicable to a wide range of optimization problems. Algorithm \ref{SA} illustrates the stepwise SA algorithm for solving TSP \parencite{Hossain2024}.
-
-    \item \textbf{Particle Swarm Optimization (PSO).} The Particle Swarm Optimization (PSO) algorithm is inspired by the social behavior of bird flocks and fish schools. In PSO, the population is made up of numerous particles, each representing a potential solution within the search space. Every particle is characterized by a velocity and a fitness value. Conceptually, PSO is very straightforward, as it relies solely on elementary mathematical operations and does not require any derived information about the optimization function \parencite{Wadi2025}. Algorithm \ref{PSO} provides a step-by-step description of the PSO algorithm as applied to solving TSP.
-
-    \item \textbf{Elephant Herding Optimization (EHO).} The Elephant Herding Optimization (EHO) algorithm is a swarm-based metaheuristic search approach for addressing optimization problems that mimics the real herding behavior of elephants, which involves organizing elephant swarms into smaller clans, each led by a matriarch and consisting of multiple female elephants and their calves, while adult male calves are expelled from the clan \parencite{Wadi2025}. Algorithm \ref{EHO} provides a step-by-step description of the EHO algorithm as applied to solving TSP.
-
-    \item \textbf{Grey Wolf Optimizer (GWO).} The Grey Wolf Optimization (GWO) algorithm is a metaheuristic technique inspired by grey wolves, simulating their leadership and cooperative hunting behaviors to locate optimal solutions. The hierarchical structure of a wolf pack (Alpha, Beta, Delta, and Omega wolves) is shown in the algorithm's design. Wolves' positions are updated based on the Alpha's location and the calculated hunting distance. GWO leverages a balance of exploration and exploitation to discover the best possible solutions. This approach has been successfully applied to various optimization challenges. Algorithm \ref{GWO} provides a step-by-step description of the GWO algorithm as applied to solving the Traveling Salesperson Problem (TSP) \parencite{Hossain2024}. 
-
-    % \item \textbf{Hovering Scouts and Foraging Flocks Pied Kingfisher Optimizer (HSFFPKO).}
-\end{enumerate}
-
-
-
-\begin{algorithm}[H]
+    \begin{algorithm}[H]
     \singlespacing
     \footnotesize
     \caption{Genetic Algorithm}
@@ -81,9 +67,11 @@ The expected runtime for the algorithm should be fast but also accurate. There a
     \EndWhile
     \State \textbf{Return} the best solution found ($\text{best\_individual}$).
     \end{algorithmic}
-\end{algorithm}
+    \end{algorithm}
 
-\begin{algorithm}[H]
+    \textbf{Ant Colony Optimization (ACO).} The Ant Colony Optimization (ACO) is an optimization algorithm that mimics the foraging behavior of ants. It utilizes artificial pheromone trails to guide the search for optimal solutions. Ants in the algorithm employ probabilistic pheromones and heuristic information to address problems. The quality of the solutions determines how the pheromone trails are updated. This mechanism encourages exploration and prevents premature convergence. ACO has proven effective for various optimization difficulties. Algorithm \ref{ACO} outlines the stepwise ACO approach for solving TSP \parencite{Hossain2024}.
+
+    \begin{algorithm}[H]
     \singlespacing
     \footnotesize
     \caption{Ant Colony Optimization}
@@ -107,199 +95,184 @@ The expected runtime for the algorithm should be fast but also accurate. There a
     \State Calculate $\text{computation\_time} = \text{end\_time} - \text{start\_time}$.
     \State \textbf{Return} $\text{best\_tour}$, $\text{best\_distance}$, and $\text{computation\_time}$.
     \end{algorithmic}
-\end{algorithm}
+    \end{algorithm}
 
-\begin{algorithm}[H]
+    \textbf{Simulated Annealing (SA).} The Simulated Annealing (SA) algorithm is a metaheuristic technique influenced by the annealing process in metallurgy. It begins with an initial solution and incorporates a mechanism that allows for the occasional acceptance of a "worse" solution based on a probability distribution. This stochastic element helps the algorithm escape local optima and more thoroughly explore the solution space. The probability of accepting a worse solution is gradually reduced over time, simulating the cooling process. SA is applicable to a wide range of optimization problems. Algorithm \ref{SA} illustrates the stepwise SA algorithm for solving TSP \parencite{Hossain2024}.
+
+    \begin{algorithm}[H]
     \singlespacing
     \footnotesize
     \caption{Simulated Annealing}
     \label{SA}
     
     \begin{algorithmic}[1]
-\Function{SimulatedAnnealing}{$\text{cities}$, $\text{initial\_temperature}$, $\text{cooling\_rate}$, $\text{num\_iterations}$}
-    \State Initialize the distances matrix by calculating the distances between cities.
-    \State Define $\text{calculate\_tour\_distance}(\text{tour})$.
-    \State Define $\text{generate\_neighbor}(\text{tour})$ (e.g., swapping two cities).
-    \State Define $\text{acceptance\_probability}(\Delta E, T) = e^{-\Delta E / T}$.
-    \State Initialize $\text{current\_tour}$ with a random tour.
-    \State $\text{current\_distance} \gets \text{calculate\_tour\_distance}(\text{current\_tour})$.
-    \State $\text{best\_tour} \gets \text{current\_tour}$.
-    \State $\text{best\_distance} \gets \text{current\_distance}$.
-    \State $T \gets \text{initial\_temperature}$.
-    \State $\text{start\_time} \gets \text{Timer.start}()$.
-    \For {$i = 1$ to $\text{num\_iterations}$}
-        \State $\text{new\_tour} \gets \text{generate\_neighbor}(\text{current\_tour})$.
-        \State $\text{new\_distance} \gets \text{calculate\_tour\_distance}(\text{new\_tour})$.
-        \State $\Delta E \gets \text{new\_distance} - \text{current\_distance}$.
-        \If {$\Delta E < 0$}
-            \State $\text{accept} \gets \text{True}$
-        \Else
-            \State $\text{prob} \gets \text{acceptance\_probability}(\Delta E, T)$
-            \State $\text{accept} \gets \text{prob} > \text{random}(0, 1)$
-        \EndIf
-        
-        \If {$\text{accept}$}
-            \State $\text{current\_tour} \gets \text{new\_tour}$
-            \State $\text{current\_distance} \gets \text{new\_distance}$
-            \If {$\text{current\_distance} < \text{best\_distance}$}
-                \State $\text{best\_tour} \gets \text{current\_tour}$
-                \State $\text{best\_distance} \gets \text{current\_distance}$
+    \Function{SimulatedAnnealing}{$\text{cities}$, $\text{initial\_temperature}$, $\text{cooling\_rate}$, $\text{num\_iterations}$}
+        \State Initialize the distances matrix by calculating the distances between cities.
+        \State Define $\text{calculate\_tour\_distance}(\text{tour})$.
+        \State Define $\text{generate\_neighbor}(\text{tour})$ (e.g., swapping two cities).
+        \State Define $\text{acceptance\_probability}(\Delta E, T) = e^{-\Delta E / T}$.
+        \State Initialize $\text{current\_tour}$ with a random tour.
+        \State $\text{current\_distance} \gets \text{calculate\_tour\_distance}(\text{current\_tour})$.
+        \State $\text{best\_tour} \gets \text{current\_tour}$.
+        \State $\text{best\_distance} \gets \text{current\_distance}$.
+        \State $T \gets \text{initial\_temperature}$.
+        \State $\text{start\_time} \gets \text{Timer.start}()$.
+        \For {$i = 1$ to $\text{num\_iterations}$}
+            \State $\text{new\_tour} \gets \text{generate\_neighbor}(\text{current\_tour})$.
+            \State $\text{new\_distance} \gets \text{calculate\_tour\_distance}(\text{new\_tour})$.
+            \State $\Delta E \gets \text{new\_distance} - \text{current\_distance}$.
+            \If {$\Delta E < 0$}
+                \State $\text{accept} \gets \text{True}$
+            \Else
+                \State $\text{prob} \gets \text{acceptance\_probability}(\Delta E, T)$
+                \State $\text{accept} \gets \text{prob} > \text{random}(0, 1)$
             \EndIf
-        \EndIf
-        
-        \State $T \gets T \cdot \text{cooling\_rate}$
-    \EndFor
-    \State $\text{end\_time} \gets \text{Timer.stop}()$.
-    \State $\text{computation\_time} \gets \text{end\_time} - \text{start\_time}$.
-    \State \textbf{Return} $\text{best\_tour}$, $\text{best\_distance}$, $\text{computation\_time}$.
-\EndFunction
-\end{algorithmic}    
-\end{algorithm}
-
-
-\begin{algorithm}[H]
-\singlespacing
-\footnotesize
-\caption{Particle Swarm Optimization}
-\label{PSO}
-\begin{algorithmic}[1]
-\State \textbf{Initialize parameters:}
-\State \hspace{1em} num\_particles = Number of particles
-\State \hspace{1em} num\_iterations = Maximum number of iterations
-\State \hspace{1em} cities = List of city coordinates
-\State \hspace{1em} $w$ = Inertia weight, $c_1$ = Cognitive coefficient, $c_2$ = Social coefficient
-\State
-\State \textbf{Initialize particles:}
-\For{$i = 1$ to num\_particles}
-    \State Initialize position $X[i]$ randomly (random tour)
-    \State Initialize velocity $V[i]$ randomly
-    \State $pBest[i] \gets X[i]$
-    \State $pBestFitness[i] \gets fitness(pBest[i])$
-\EndFor
-
-\State $gBest \gets$ Best particle position among all $pBest$
-\State $gBestFitness \gets$ Best fitness among all particles
-
-\State
-
-\For{$t = 1$ to num\_iterations}
-    \For{$i = 1$ to num\_particles}
-        \State // Update velocity
-        \State Generate random numbers $r_1, r_2$
-        \State $V[i] \gets w \cdot V[i] + c_1 \cdot r_1 \cdot (pBest[i] - X[i]) + c_2 \cdot r_2 \cdot (gBest - X[i])$
-        
-        \State // Update position
-        \State $X[i] \gets UpdatePosition(X[i], V[i])$
-        \State fitnessVal $\gets fitness(X[i])$
-
-        \State // Update personal best
-        \If{fitnessVal $<$ pBestFitness[i]}
-            \State $pBest[i] \gets X[i]$
-            \State $pBestFitness[i] \gets$ fitnessVal
-        \EndIf
-
-        \State // Update global best
-        \If{fitnessVal $<$ gBestFitness}
-            \State $gBest \gets X[i]$
-            \State $gBestFitness \gets$ fitnessVal
-        \EndIf
-    \EndFor
-\EndFor
-
-\State \Return $gBest$ as the best tour found
-
-\end{algorithmic}
-\end{algorithm}
-
-\begin{algorithm}[H]
-\singlespacing
-\footnotesize
-\caption{Elephant Herding Optimization}
-\label{EHO}
-\begin{algorithmic}[1]
-\State \textbf{Initialize parameters:}
-\State Initialize elephants with random tours
-\State Set number of clans, elephants per clan, and max iterations
-\State Initialize global best ($gBest$)
-\State
-\State \textbf{Main loop:}
-\For{$t = 1$ to max\_iterations}
-    \For{each clan}
-        \State Compute clan center $E_{center}$
-        \For{each elephant $j$ in the clan}
-            \State // Update position
-            \State $X_j \gets X_{best} + \alpha \cdot (X_j - E_{center}) \cdot random\_factor$
-            \State Ensure valid tour
-            \State Update personal best $pBest_j$
+            
+            \If {$\text{accept}$}
+                \State $\text{current\_tour} \gets \text{new\_tour}$
+                \State $\text{current\_distance} \gets \text{new\_distance}$
+                \If {$\text{current\_distance} < \text{best\_distance}$}
+                    \State $\text{best\_tour} \gets \text{current\_tour}$
+                    \State $\text{best\_distance} \gets \text{current\_distance}$
+                \EndIf
+            \EndIf
+            
+            \State $T \gets T \cdot \text{cooling\_rate}$
         \EndFor
-        \State Update clan’s best ($gBest$ candidate)
+        \State $\text{end\_time} \gets \text{Timer.stop}()$.
+        \State $\text{computation\_time} \gets \text{end\_time} - \text{start\_time}$.
+        \State \textbf{Return} $\text{best\_tour}$, $\text{best\_distance}$, $\text{computation\_time}$.
+    \EndFunction
+    \end{algorithmic}    
+    \end{algorithm}
+
+    \textbf{Particle Swarm Optimization (PSO).} The Particle Swarm Optimization (PSO) algorithm is inspired by the social behavior of bird flocks and fish schools. In PSO, the population is made up of numerous particles, each representing a potential solution within the search space. Every particle is characterized by a velocity and a fitness value. Conceptually, PSO is very straightforward, as it relies solely on elementary mathematical operations and does not require any derived information about the optimization function \parencite{Wadi2025}. Algorithm \ref{PSO} provides a step-by-step description of the PSO algorithm as applied to solving TSP.
+
+    \begin{algorithm}[H]
+    \singlespacing
+    \footnotesize
+    \caption{Particle Swarm Optimization}
+    \label{PSO}
+    \begin{algorithmic}[1]
+    \State \textbf{Initialize parameters:}
+    \State \hspace{1em} num\_particles = Number of particles
+    \State \hspace{1em} num\_iterations = Maximum number of iterations
+    \State \hspace{1em} cities = List of city coordinates
+    \State \hspace{1em} $w$ = Inertia weight, $c_1$ = Cognitive coefficient, $c_2$ = Social coefficient
+    \State
+    \State \textbf{Initialize particles:}
+    \For{$i = 1$ to num\_particles}
+        \State Initialize position $X[i]$ randomly (random tour)
+        \State Initialize velocity $V[i]$ randomly
+        \State $pBest[i] \gets X[i]$
+        \State $pBestFitness[i] \gets fitness(pBest[i])$
+    \EndFor
+
+    \State $gBest \gets$ Best particle position among all $pBest$
+    \State $gBestFitness \gets$ Best fitness among all particles
+
+    \State
+
+    \For{$t = 1$ to num\_iterations}
+        \For{$i = 1$ to num\_particles}
+            \State // Update velocity
+            \State Generate random numbers $r_1, r_2$
+            \State $V[i] \gets w \cdot V[i] + c_1 \cdot r_1 \cdot (pBest[i] - X[i]) + c_2 \cdot r_2 \cdot (gBest - X[i])$
+            
+            \State // Update position
+            \State $X[i] \gets UpdatePosition(X[i], V[i])$
+            \State fitnessVal $\gets fitness(X[i])$
+
+            \State // Update personal best
+            \If{fitnessVal $<$ pBestFitness[i]}
+                \State $pBest[i] \gets X[i]$
+                \State $pBestFitness[i] \gets$ fitnessVal
+            \EndIf
+
+            \State // Update global best
+            \If{fitnessVal $<$ gBestFitness}
+                \State $gBest \gets X[i]$
+                \State $gBestFitness \gets$ fitnessVal
+            \EndIf
+        \EndFor
+    \EndFor
+
+    \State \Return $gBest$ as the best tour found
+
+    \end{algorithmic}
+    \end{algorithm}
+
+    \textbf{Elephant Herding Optimization (EHO).} The Elephant Herding Optimization (EHO) algorithm is a swarm-based metaheuristic search approach for addressing optimization problems that mimics the real herding behavior of elephants, which involves organizing elephant swarms into smaller clans, each led by a matriarch and consisting of multiple female elephants and their calves, while adult male calves are expelled from the clan \parencite{Wadi2025}. Algorithm \ref{EHO} provides a step-by-step description of the EHO algorithm as applied to solving TSP.
+
+    \begin{algorithm}[H]
+    \singlespacing
+    \footnotesize
+    \caption{Elephant Herding Optimization}
+    \label{EHO}
+    \begin{algorithmic}[1]
+    \State \textbf{Initialize parameters:}
+    \State Initialize elephants with random tours
+    \State Set number of clans, elephants per clan, and max iterations
+    \State Initialize global best ($gBest$)
+    \State
+    \State \textbf{Main loop:}
+    \For{$t = 1$ to max\_iterations}
+        \For{each clan}
+            \State Compute clan center $E_{center}$
+            \For{each elephant $j$ in the clan}
+                \State // Update position
+                \State $X_j \gets X_{best} + \alpha \cdot (X_j - E_{center}) \cdot random\_factor$
+                \State Ensure valid tour
+                \State Update personal best $pBest_j$
+            \EndFor
+            \State Update clan’s best ($gBest$ candidate)
+        \EndFor
+        \State
+        \State \textbf{Migration step:}
+        \State Replace worst elephant with a new random tour
+        \State Update $gBest$ if a better solution is found
     \EndFor
     \State
-    \State \textbf{Migration step:}
-    \State Replace worst elephant with a new random tour
-    \State Update $gBest$ if a better solution is found
-\EndFor
-\State
-\State \textbf{Termination:}
-\State \Return $gBest$ as the best tour found
-\end{algorithmic}
-\end{algorithm}
+    \State \textbf{Termination:}
+    \State \Return $gBest$ as the best tour found
+    \end{algorithmic}
+    \end{algorithm}
 
+    \textbf{Grey Wolf Optimizer (GWO).} The Grey Wolf Optimization (GWO) algorithm is a metaheuristic technique inspired by grey wolves, simulating their leadership and cooperative hunting behaviors to locate optimal solutions. The hierarchical structure of a wolf pack (Alpha, Beta, Delta, and Omega wolves) is shown in the algorithm's design. Wolves' positions are updated based on the Alpha's location and the calculated hunting distance. GWO leverages a balance of exploration and exploitation to discover the best possible solutions. This approach has been successfully applied to various optimization challenges. Algorithm \ref{GWO} provides a step-by-step description of the GWO algorithm as applied to solving the Traveling Salesperson Problem (TSP) \parencite{Hossain2024}. 
 
-\begin{algorithm}[H]
-\singlespacing
-\footnotesize
-\caption{Grey Wolf Optimizer}
-\label{GWO}
-\begin{algorithmic}[1]
-\State Initialize wolves
-\State Set iteration counter
-\State Set maximum number of iterations
-\While{iteration\_counter $<$ max\_iterations}
-    \State Evaluate fitness for each wolf
-    \State Update the best wolf found so far
-    \State Determine $\alpha$, $\beta$, and $\delta$ wolves 
-    \Statex \hspace{2em} // best, second-best, and third-best solutions
-    \For{each wolf}
-        \State Update the wolf's position based on $\alpha$, $\beta$, and $\delta$
-    \EndFor
-    \State Increment iteration\_counter
-\EndWhile
-\State \Return best wolf found (best\_solution)
-\end{algorithmic}
-\end{algorithm}
+    \begin{algorithm}[H]
+    \singlespacing
+    \footnotesize
+    \caption{Grey Wolf Optimizer}
+    \label{GWO}
+    \begin{algorithmic}[1]
+    \State Initialize wolves
+    \State Set iteration counter
+    \State Set maximum number of iterations
+    \While{iteration\_counter $<$ max\_iterations}
+        \State Evaluate fitness for each wolf
+        \State Update the best wolf found so far
+        \State Determine $\alpha$, $\beta$, and $\delta$ wolves 
+        \Statex \hspace{2em} // best, second-best, and third-best solutions
+        \For{each wolf}
+            \State Update the wolf's position based on $\alpha$, $\beta$, and $\delta$
+        \EndFor
+        \State Increment iteration\_counter
+    \EndWhile
+    \State \Return best wolf found (best\_solution)
+    \end{algorithmic}
+    \end{algorithm}
 
-Each algorithm will be given 10 iterations each for solving 20 TSP instances from the TSPLIB. The average runtime and accuracy will be recorded. Afterwards, the whole process can be visualized in Figure \ref{algoprocess}. There are three phases, the recording of runtime for each algorithm, performing Friedman test, and performing Nemenyi test if allowed by the Friedman test. The recording and analysis will be performed through the Python language and its respective packages.
+All algorithm will be executed on the same hardware and software environment to ensure consistency in the results. Since the algorithms are metaheuristic, they will be run multiple times on each dataset to account for variability in performance. The average results will be used for comparison. 
 
-\begin{figure}
-    \centering
-    \caption{Algorithm Runtime Analysis Process}
-    \label{algoprocess}
-    \includegraphics[width=0.5\textwidth]{friedman.jpeg}
-\end{figure}
+\noindent For every run, the following metrics will be recorded:
+\begin{itemize}
+    \item The average solution quality (total travel distance).
+    \item The best solution found in each run.
+    \item The average computation time taken to reach the solution.
+\end{itemize}
+The algorithm that performs best in terms of solution quality and runtime efficiency will be selected for implementation in the itinerary optimization feature of the mobile application.
 
-After recording the average runtime for each problem, the Friedman test will be conducted to determine if each algorithm’s runtime results differ from one another. The Friedman test is ideal for this experiment where the distribution of runtime results across diverse TSPLIB instances may not strictly follow a normal distribution.
-
-The steps involve ranking the algorithms for each TSP instance independently. The algorithm with the fastest runtime is assigned a rank of $1$, the second fastest a rank of $2$, and so on. In cases of ties, average ranks are assigned. The test then evaluates the Null Hypothesis ($H_0$), which states that all algorithms are statistically equivalent and any differences in average runtime are only present due to the randomness in the algorithms’ implementations.
-
-The formulation for the Friedman test is shown in Equation \ref{Friedman}, where $n$ is the number of subjects, $k$ is the number of treatments and, $\sum{R^2}$ is the squared sum of the total ranks.
-
-\begin{equation}
-    \label{Friedman}
-    FM = \frac{12}{nk ( k + 1 )} \sum{R^2} - 3n ( k + 1 )
-\end{equation}
-where $n$ is number of the subjects, $k$ is number of treatments, and $\sum{R^2}$ is the squared sum of the total ranks.
-
-If the calculated p-value for the Friedman test is less than the significance level $\alpha$, the null hypothesis will be rejected. Rejection of the null hypothesis will confirm that there is a statistical significant difference in the runtime of at least two algorithms. Unfortunately, the Friedman test does not identify which among the algorithms differ. Therefore, a post-hoc analysis is required.
-
-Only if the null hypothesis is rejected, only then will the Nemenyi post-hoc test will be applied to perform pairwise comparisons. This test uses the Critical Difference (CD) value to determine if the runtime gap between any two specific algorithms is significant. If the difference in the average ranks of two algorithms exceeds the CD, their performance is considered significantly distinct.
-
-The formula for the Nemenyi test is shown in Equation \ref{critD} where $q_\alpha$: The critical value based on the Studentized range statistic (specifically for infinite degrees of freedom). You look this up in a standard Nemenyi critical value table (e.g., for 20$\alpha=0.05$).21$k$: Number of algorithms.$N$: Number of datasets.
-
-\begin{equation}
-    \label{critD}
-    CD = q_\alpha \sqrt{\frac{k ( k + 1 )}{6N}}
-\end{equation}
 
 \subsection{Modeling Itinerary Generation as Orienteering Problem}
 
