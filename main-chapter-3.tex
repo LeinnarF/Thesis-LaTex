@@ -482,37 +482,6 @@ Where in Equation \ref{agamFitness}, $f(p_i)$ is the fitness function score of e
 $w_{j}$ is the weight of each factor.
 $Ti(p_i)$ is the sum of all interest values of each POI in the itinerary $p_i$. Each POI contains an interest value which quantifies how interested the user is in that specific POI category. 
 
-In order to determine the level of interests of the user in a specific POI, the cosine similarity will be used. According to Singh et al. (2023), cosine similarity measures the angle of cosine between two vectors. This essentially provides a number for how two vectors relate to each other.  The formula for cosine similarity is in eq \ref{cosim} where $v$, $w$ are vectors and the output of the function ranges from -1 being not related to 1 essentially the same vectors. 
-
-\begin{equation}
-	\label{cosim}
-	\text{cosine\_similarity}(v, w) = \frac{v \cdot w}{\|v\| \|w\|} = \frac{\sum_{i=1}^{n} v_i w_i}{\sqrt{\sum_{i=1}^{n} v_i^2} \sqrt{\sum_{i=1}^{n} w_i^2}}
-\end{equation}
-In the context of the application, each POI has categories which are appropriately assigned by the researchers. Then, a category matrix (\ref{matrix}) will be generated for each POI for each available category where 1 will mean POI is in that category and 0 as not.
-
-\begin{equation}
-	\label{matrix}
-	\begin{bmatrix}
-		1 & 0 \\
-		0 & 0 \\
-		1 & 0
-	\end{bmatrix}
-\end{equation}
-The column of the matrix represents the POI and the row represents the category. 
-
-Another vector (\ref{uservector}) that represents the user’s preferences in the categories will be created. This is a binary vector where 1 represents that the user wants to see this and 0 as not wanting to see this type of category. For instance, if the user has chosen all categories to be in their preferences, in which case, all the values are one.
-
-\begin{equation}
-	\label{uservector}
-	\begin{bmatrix}
-		1 \\
-		1 \\
-		1
-	\end{bmatrix}
-\end{equation}
-
-Then, the cosine similarity of each POI category matrix to the user preference will be calculated. This value from the cosine similarity now represents the user’s interest to that POI based on the preference matrix. 
-
 $Tn(p_i)$ will be obtained by dividing the number of POIs in $p_i$, by the total number of possible POIs denoted by NOP. Also note that the selected number of POIs in $p_i$ will be limited by a user-defined parameter which will be referred to as $MAXN$, an integer limiting the number of POIs in a $N_op(p_i)$.	
 $N_{op}(p_i) \leq MAXN$.
 \begin{equation}
