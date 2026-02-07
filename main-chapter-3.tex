@@ -16,333 +16,405 @@ The applied research aspect of the study focuses on developing and implementing 
 \section{Model Adoption}
 This section discusses the optimization problems such as route optimization and itinerary generation and the steps in modeling each mathematically. Specifically, the mathematical models used in the study are the traveling salesman problem (TSP) and the orienteering problem (OP).
 
-\subsection{Modeling Route Optimization using TSP}
-Route optimization refers to the process of finding the optimal order in visiting a set of places. This is also another definition of the TSP, where the salesman must minimize the travel cost between traveling a set of cities. In the study, the POI will be represented as nodes and the edges connecting each node as the distance between the shortest route given by the Mapbox API where a sample graph is shown in Figure \ref{tspgraph}. 
+\subsection{Modeling Route Optimization with TSP}
+Route optimization refers to the process of finding the optimal order in visiting a set of places. This is also another definition of the TSP, where the salesman must minimize the travel cost between traveling a set of cities. In the study, the POI represents the nodes and the edges connecting each node as the distance between the shortest route, a sample graph is shown in Figure \ref{tspgraph}. 
 
 \begin{figure}[H]
-    \centering
-    \caption{Sample Graph}
-    \label{tspgraph}
-    \includegraphics[width=0.8\textwidth]{TSP.jpeg}
+	\centering
+	\caption{Sample Graph}
+	\label{tspgraph}
+	\includegraphics[width=0.8\textwidth]{TSP.jpeg}
 \end{figure}
 
-The objective is to minimize the total travel distance by finding the best order to travel each POI from an itinerary. Using integer programming and given a graph $G$ = $(V, E)$ where V is the set of vertices (POI) and E is the set of edges (road distance), the objective function is as shown in Equation \ref{eq:tsp}:
+The objective is to minimize the total travel distance by finding the best order to travel each POI from an itinerary. Using integer programming and given a graph $G$ = $(V, E)$ where \( V \) is the set of vertices (POI) and \( E \) is the set of edges (road distance), the objective function is as shown in Equation \ref{eq:tsp}:
 \begin{equation}
-    \label{eq:tsp}
-    \text{Minimize } \sum_{i = 1}^{n} \sum_{j = 1, j \neq i} c_{ij} x_{ij}
+	\label{eq:tsp}
+	\text{Minimize } \sum_{i = 1}^{n} \sum_{j = 1, j \neq i} c_{ij} x_{ij}
 \end{equation}
 where $n$ is the total number of vertices, $c_{ij}$ refers to the cost of traveling from vertex $i$ to vertex $j$ and $x_{ij}$ refers to a binary value if an edge directly connecting vertex $i$ to $j$ exists. The function is also constrained to the following:
 \begin{enumerate}
-    \item Every city is entered and exited exactly once.
-    \item The solution does not contain any sub-tours.
+	\item Every city is entered and exited exactly once.
+	\item The solution does not contain any sub-tours.
 \end{enumerate}
+
+\subsection{Candidate Algorithms for TSP}
+To address the computational constraints of mobile devices while maintaining solution quality, the study analyzes specific lightweight metaheuristic algorithms. The following algorithms were selected for comparative analysis:
+
+\textbf{Genetic Algorithm (GA).} Inspired by genetics and evolution, the Genetic Algorithm is an optimization technique that works by analyzing potential solutions and generating new ones through the processes of selection, crossover, and mutation. This iterative process continues until a predefined termination requirement is met. GA is widely used across various domains because of its ability to navigate complex search spaces and identify optimal or near-optimal solutions. Algorithm \ref{GA} illustrates the step-by-step GA approach for solving the TSP \parencite{Hossain2024}.
+
+\begin{algorithm}[H]
+	\singlespacing
+	\footnotesize
+	\caption{Genetic Algorithm}
+	\label{GA}
+	\begin{algorithmic}[1]
+		\State Initialize population $p$ using the \Call{initialize\_population}{} method.
+		\State Calculate the fitness for each individual in $p$ using the \Call{evaluate\_fitness}{} method.
+		\State Set the iteration counter $T = 0$.
+		\State Set $\text{max\_iterations} = 1000$.
+		\While {$T < \text{max\_iterations}$}
+		\State Select parents from the population $p$ using the \Call{selection}{} method.
+		\State Perform crossover on the selected parents with a probability of $0.8$ using the \Call{crossover}{} method to generate offspring.
+		\State Perform a mutation on the offspring with a probability of $0.2$ using the \Call{mutation}{} method.
+		\State Calculate fitness for each offspring using the \Call{evaluate\_fitness}{} method.
+		\State Replace the worst individuals in the population $p$ with the best offspring.
+		\State Update the best solution found so far.
+		\State Increment iteration counter $T = T + 1$.
+		\EndWhile
+		\State \textbf{Return} the best solution found ($\text{best\_individual}$).
+	\end{algorithmic}
+\end{algorithm}
+
+\textbf{Ant Colony Optimization (ACO).} The Ant Colony Optimization (ACO) is an optimization algorithm that mimics the foraging behavior of ants. It utilizes artificial pheromone trails to guide the search for optimal solutions. Ants in the algorithm employ probabilistic pheromones and heuristic information to address problems. The quality of the solutions determines how the pheromone trails are updated. This mechanism encourages exploration and prevents premature convergence. ACO has proven effective for various optimization difficulties. Algorithm \ref{ACO} outlines the stepwise ACO approach for solving TSP \parencite{Hossain2024}.
+
+\begin{algorithm}[H]
+	\singlespacing
+	\footnotesize
+	\caption{Ant Colony Optimization}
+	\label{ACO}
+	\begin{algorithmic}[1]
+		\State Initialize the pheromone matrix $\tau$ with $\text{initial\_pheromone}$.
+		\State Set $\text{best\_tour} = \text{none}$ and $\text{best\_distance} = \infty$.
+		\State Start timer $\text{start\_time}$.
+		\For {$i = 1$ to $\text{num\_iterations}$}
+		\State Generate $\text{num\_ants}$ tours using the \Call{construct\_tour}{} method.
+		\For {each generated tour $k$}
+		\State Calculate $\text{tour\_distance}_k$.
+		\If {$\text{tour\_distance}_k < \text{best\_distance}$}
+		\State Update $\text{best\_tour} = \text{tour}_k$
+		\State Update $\text{best\_distance} = \text{tour\_distance}_k$
+		\EndIf
+		\EndFor
+		\State Update pheromone matrix $\tau$ using the \Call{update\_pheromone\_matrix}{} method.
+		\EndFor
+		\State Stop timer $\text{end\_time}$.
+		\State Calculate $\text{computation\_time} = \text{end\_time} - \text{start\_time}$.
+		\State \textbf{Return} $\text{best\_tour}$, $\text{best\_distance}$, and $\text{computation\_time}$.
+	\end{algorithmic}
+\end{algorithm}
+
+\textbf{Simulated Annealing (SA).} The Simulated Annealing (SA) algorithm is a metaheuristic technique influenced by the annealing process in metallurgy. It begins with an initial solution and incorporates a mechanism that allows for the occasional acceptance of a "worse" solution based on and more thoroughly explore the solution space. The probability of accepting a worse solution is gradually reduced over time, simulating the cooling process. SA is applicable to a wide range of optimization problems. Algorithm \ref{SA} illustrates the stepwise SA algorithm for solving TSP \parencite{Hossain2024}.
+
+\begin{algorithm}[H]
+	\singlespacing
+	\footnotesize
+	\caption{Simulated Annealing}
+	\label{SA}
+
+	\begin{algorithmic}[1]
+		\Function{SimulatedAnnealing}{$\text{cities}$, $\text{initial\_temperature}$, $\text{cooling\_rate}$, $\text{num\_iterations}$}
+		\State Initialize the distances matrix by calculating the distances between cities.
+		\State Define $\text{calculate\_tour\_distance}(\text{tour})$.
+		\State Define $\text{generate\_neighbor}(\text{tour})$ (e.g., swapping two cities).
+		\State Define $\text{acceptance\_probability}(\Delta E, T) = e^{-\Delta E / T}$.
+		\State Initialize $\text{current\_tour}$ with a random tour.
+		\State $\text{current\_distance} \gets \text{calculate\_tour\_distance}(\text{current\_tour})$.
+		\State $\text{best\_tour} \gets \text{current\_tour}$.
+		\State $\text{best\_distance} \gets \text{current\_distance}$.
+		\State $T \gets \text{initial\_temperature}$.
+		\State $\text{start\_time} \gets \text{Timer.start}()$.
+		\For {$i = 1$ to $\text{num\_iterations}$}
+		\State $\text{new\_tour} \gets \text{generate\_neighbor}(\text{current\_tour})$.
+		\State $\text{new\_distance} \gets \text{calculate\_tour\_distance}(\text{new\_tour})$.
+		\State $\Delta E \gets \text{new\_distance} - \text{current\_distance}$.
+		\If {$\Delta E < 0$}
+		\State $\text{accept} \gets \text{True}$
+		\Else
+		\State $\text{prob} \gets \text{acceptance\_probability}(\Delta E, T)$
+		\State $\text{accept} \gets \text{prob} > \text{random}(0, 1)$
+		\EndIf
+
+		\If {$\text{accept}$}
+		\State $\text{current\_tour} \gets \text{new\_tour}$
+		\State $\text{current\_distance} \gets \text{new\_distance}$
+		\If {$\text{current\_distance} < \text{best\_distance}$}
+		\State $\text{best\_tour} \gets \text{current\_tour}$
+		\State $\text{best\_distance} \gets \text{current\_distance}$
+		\EndIf
+		\EndIf
+
+		\State $T \gets T \cdot \text{cooling\_rate}$
+		\EndFor
+		\State $\text{end\_time} \gets \text{Timer.stop}()$.
+		\State $\text{computation\_time} \gets \text{end\_time} - \text{start\_time}$.
+		\State \textbf{Return} $\text{best\_tour}$, $\text{best\_distance}$, $\text{computation\_time}$.
+		\EndFunction
+	\end{algorithmic}    
+\end{algorithm}
+
+\textbf{Particle Swarm Optimization (PSO).} The Particle Swarm Optimization (PSO) algorithm is inspired by the social behavior of bird flocks and fish schools. In PSO, the population is made up of numerous particles, each representing a potential solution within the search space. Every particle is characterized by a velocity and a fitness value. Conceptually, PSO is very straightforward, as it relies solely on elementary mathematical operations and does not require any derived information about the optimization function \parencite{Wadi2025}. Algorithm \ref{PSO} provides a step-by-step description of the PSO algorithm as applied to solving TSP.
+
+\begin{algorithm}[H]
+	\singlespacing
+	\footnotesize
+	\caption{Particle Swarm Optimization}
+	\label{PSO}
+	\begin{algorithmic}[1]
+		\State \textbf{Initialize parameters:}
+		\State \hspace{1em} num\_particles = Number of particles
+		\State \hspace{1em} num\_iterations = Maximum number of iterations
+		\State \hspace{1em} cities = List of city coordinates
+		\State \hspace{1em} $w$ = Inertia weight, $c_1$ = Cognitive coefficient, $c_2$ = Social coefficient
+		\State
+		\State \textbf{Initialize particles:}
+		\For{$i = 1$ to num\_particles}
+		\State Initialize position $X[i]$ randomly (random tour)
+		\State Initialize velocity $V[i]$ randomly
+		\State $pBest[i] \gets X[i]$
+		\State $pBestFitness[i] \gets fitness(pBest[i])$
+		\EndFor
+
+		\State $gBest \gets$ Best particle position among all $pBest$
+		\State $gBestFitness \gets$ Best fitness among all particles
+
+		\State
+
+		\For{$t = 1$ to num\_iterations}
+		\For{$i = 1$ to num\_particles}
+		\State // Update velocity
+		\State Generate random numbers $r_1, r_2$
+		\State $V[i] \gets w \cdot V[i] + c_1 \cdot r_1 \cdot (pBest[i] - X[i]) + c_2 \cdot r_2 \cdot (gBest - X[i])$
+
+		\State // Update position
+		\State $X[i] \gets UpdatePosition(X[i], V[i])$
+		\State fitnessVal $\gets fitness(X[i])$
+
+		\State // Update personal best
+		\If{fitnessVal $<$ pBestFitness[i]}
+		\State $pBest[i] \gets X[i]$
+		\State $pBestFitness[i] \gets$ fitnessVal
+		\EndIf
+
+		\State // Update global best
+		\If{fitnessVal $<$ gBestFitness}
+		\State $gBest \gets X[i]$
+		\State $gBestFitness \gets$ fitnessVal
+		\EndIf
+		\EndFor
+		\EndFor
+
+		\State \Return $gBest$ as the best tour found
+
+	\end{algorithmic}
+\end{algorithm}
+
+\textbf{Elephant Herding Optimization (EHO).} The Elephant Herding Optimization (EHO) algorithm is a swarm-based metaheuristic search approach for addressing optimization problems that mimics the real herding behavior of elephants, which involves organizing elephant swarms into smaller clans, each led by a matriarch and consisting of multiple female elephants and their calves, while adult male calves are expelled from the clan \parencite{Wadi2025}. Algorithm \ref{EHO} provides a step-by-step description of the EHO algorithm as applied to solving TSP.
+
+\begin{algorithm}[H]
+	\singlespacing
+	\footnotesize
+	\caption{Elephant Herding Optimization}
+	\label{EHO}
+	\begin{algorithmic}[1]
+		\State \textbf{Initialize parameters:}
+		\State Initialize elephants with random tours
+		\State Set number of clans, elephants per clan, and max iterations
+		\State Initialize global best ($gBest$)
+		\State
+		\State \textbf{Main loop:}
+		\For{$t = 1$ to max\_iterations}
+		\For{each clan}
+		\State Compute clan center $E_{center}$
+		\For{each elephant $j$ in the clan}
+		\State // Update position
+		\State $X_j \gets X_{best} + \alpha \cdot (X_j - E_{center}) \cdot random\_factor$
+		\State Ensure valid tour
+		\State Update personal best $pBest_j$
+		\EndFor
+		\State Update clan’s best ($gBest$ candidate)
+		\EndFor
+		\State
+		\State \textbf{Migration step:}
+		\State Replace worst elephant with a new random tour
+		\State Update $gBest$ if a better solution is found
+		\EndFor
+		\State
+		\State \textbf{Termination:}
+		\State \Return $gBest$ as the best tour found
+	\end{algorithmic}
+\end{algorithm}
+
+\textbf{Grey Wolf Optimizer (GWO).} The Grey Wolf Optimization (GWO) algorithm is a metaheuristic technique inspired by grey wolves, simulating their leadership and cooperative hunting behaviors to locate optimal solutions. The hierarchical structure of a wolf pack (Alpha, Beta, Delta, and Omega wolves) is shown in the algorithm's design. Wolves' positions are updated based on the Alpha's location and the calculated hunting distance. GWO leverages a balance of exploration and exploitation to discover the best possible solutions. This approach has been successfully applied to various optimization challenges. Algorithm \ref{GWO} provides a step-by-step description of the GWO algorithm as applied to solving the Traveling Salesperson Problem (TSP) \parencite{Hossain2024}. 
+
+\begin{algorithm}[H]
+	\singlespacing
+	\footnotesize
+	\caption{Grey Wolf Optimizer}
+	\label{GWO}
+	\begin{algorithmic}[1]
+		\State Initialize wolves
+		\State Set iteration counter
+		\State Set maximum number of iterations
+		\While{iteration\_counter $<$ max\_iterations}
+		\State Evaluate fitness for each wolf
+		\State Update the best wolf found so far
+		\State Determine $\alpha$, $\beta$, and $\delta$ wolves 
+		\Statex \hspace{2em} // best, second-best, and third-best solutions
+		\For{each wolf}
+		\State Update the wolf's position based on $\alpha$, $\beta$, and $\delta$
+		\EndFor
+		\State Increment iteration\_counter
+		\EndWhile
+		\State \Return best wolf found (best\_solution)
+	\end{algorithmic}
+\end{algorithm}
+
+\textbf{Hovering Scouts and Foraging Flocks Pied Kingfisher Optimizer (HSFFPKO).} HSFFPKO enhances the traditional Pied Kingfisher Optimizer by introducing multi-scale search mechanisms to improve optimization performance. By adding Hovering Scouts for fine-grained local adjustments and Foraging Flocks for parallel group-based exploitation, the algorithm maintains better population diversity than its predecessor. These additions allow HSFFPKO to mitigate local optima entrapment and solve complex, high-dimensional problems more efficiently \parencite{DelaCruz2025HSFFPKO}. Algorithm \ref{HSFFPKO} provides a step-by-step description of the HSFFPKO algorithm.   
+
+\begin{algorithm}[H]
+	\singlespacing
+	\footnotesize
+	\caption{Hovering Scouts and Foraging Flocks Pied Kingfisher Optimizer (HSFFPKO)}
+	\label{HSFFPKO}
+	\begin{algorithmic}[1]
+		\Require Population size $N$, maximum iterations $T$, bounds $LB, UB$, objective function $f$
+		\Ensure Best solution $X^*$
+
+		\State Initialize population $\{X_i\}_{i=1}^N$ uniformly in $[LB, UB]$
+		\State Evaluate fitness $f(X_i)$ and set global best $X^*$
+
+		\For{$t = 1$ to $T$}
+		\State Compute contraction factor $o(t) = \exp(-(t/T)^2)$
+
+		\Comment{Phase 1: PKO exploration and exploitation}
+		\For{each agent $i$}
+		\If{rand $< 0.8$} \Comment{Exploration}
+		\State Select random peer $j \neq i$
+		\If{rand $< 0.5$} \Comment{Hovering}
+		\State $X_i' \gets X_i + \alpha L_{hov}(t)(X_j - X_i)$
+		\Else \Comment{Perching}
+		\State $X_i' \gets X_i + \alpha L_{per}(t)(X_j - X_i)$
+		\EndIf
+		\Else \Comment{Exploitation (Diving)}
+		\State Construct perturbed elite $b_i$
+		\State $X_i' \gets X_i + H_i(t)\, o(t)\,(b_i - X^*)$
+		\EndIf
+		\State Apply bounds and greedy acceptance
+		\EndFor
+
+		\Comment{Phase 2: Commensalism}
+		\For{each agent $i$}
+		\If{rand $> 1 - PE(t)$}
+		\State Select random peers $m,n$
+		\State $X_i' \gets X_m + o(t)\alpha |X_i - X_n|$
+		\State Apply bounds and greedy acceptance
+		\EndIf
+		\EndFor
+
+		\Comment{Phase 3: Hovering Scouts}
+		\If{$t \bmod T_{HS} = 0$}
+		\State Select scout set $S$
+		\For{each scout $i \in S$}
+		\State $X_i' \gets X_i + X_i \odot \mathcal{N}(0,I)$
+		\State $X_i' \gets X_i' + \eta \sigma \odot (X^* - X_i')$
+		\State Apply bounds and greedy acceptance
+		\EndFor
+		\EndIf
+
+		\Comment{Phase 4: Foraging Flocks}
+		\If{$t \bmod T_{FF} = 0$}
+		\State Partition population into flocks $\{F_k\}$
+		\For{each flock $F_k$}
+		\State Compute centroid $C_k$ and leader $L_k$
+		\State $T_k \gets \phi L_k + (1-\phi)C_k$
+		\For{each agent $i \in F_k$}
+		\State $X_i' \gets X_i + \xi (T_k - X_i) + \mathcal{N}(0,\rho(t)^2 I)$
+		\State Apply bounds and greedy acceptance
+		\EndFor
+		\EndFor
+		\EndIf
+
+		\State Update global best $X^*$
+		\EndFor
+
+		\Return $X^*$
+	\end{algorithmic}
+\end{algorithm}
 
 \subsection{TSP Algorithm Selection}
 
-To determine the most suitable algorithm for route optimization in the mobile application, a comparative analysis will be conducted on several metaheuristic algorithms commonly used for solving the TSP. The evaluation will be conducted using benchmark datasets from TSPLIB, a well-known library of sample instances for the TSP and related problems. The analysis will focus on descriptive performance metrics, specifically the solution quality and runtime efficiency of each algorithm.
+To determine the best algorithm to implement for LAKAD, a comparative analysis was conducted on several metaheuristic algorithms used for solving TSP. The analysis focuses on solution quality (accuracy) and runtime speed of each algorithm. The algorithms were tested on selected instances from the TSPLIB library, a standard benchmark for TSP and related problems. Table \ref{tsplib_instace} presents selected instances for benchmarking. 
+
+\begin{table}[H]
+	\centering
+	\caption{TSPLIB Instances for Benchmarking}
+	\label{tsplib_instace} \renewcommand{\arraystretch}{0.6}
+	\begin{tabularx}{\linewidth}{lX}
+		\toprule
+		\textbf{TSPLIB instance} & \textbf{Description} \\
+		\midrule
+		burma14 & Small instance with 14 cities. Optimal solution known: 3323. \\ 
+		bays29 & Medium instance with 29 cities. Optimal solution known: 2020. \\ 
+		eil51 & Large instance with 51 cities. Optimal solution known: 426. \\ 
+		berlin52 & Large instance with 52 cities. Optimal solution known: 7542. \\
+		\bottomrule
+	\end{tabularx}
+\end{table}
+
+\textbf{Experimental Setup.} The experiments were implemented in Python because of its library support for TSPLIB, and for simplicity of the language. To ensure statistical reliability and mitigate the randomness nature of heuristic algorithms, each algorithm was executed for 10 independent iterations on each TSPLIB instance. The results were averaged to get the baseline performance profile. 
+
+\textbf{Performance Metrics.} Two primary metrics were defined to evaluate the algorihms:
+
+\begin{enumerate}
+	\item \textbf{Runtime Speed (\( T_{avg} \)).} It measures the average time it takes to find the solution accross the 10 iterations, measured in seconds. This metric is crucial for assessing the efficiency of the algorithm, and is calculated using the formula shown in equation \ref{eq:runtime}: 
+	\begin{equation}
+		\label{eq:runtime}
+		T_{avg} = \frac{1}{10} \sum_{i=1}^{10} T_i
+	\end{equation}
+	where $T _{i}$ is the runtime for the $i$-th iteration.
+
+
+
+	\item \textbf{Solution Quality (\( Q_{avg} \)).} Since the best solution for each TSPLIB instacs are known, the accuracy is measured by the average relative error of the solution found by the algorithm compared to the optimal solution. The calculation is shown in equation \ref{eq:quality}:
+	\begin{equation}
+		\label{eq:quality}
+		Q_{avg} = \frac{1}{10} \sum_{i=1}^{10} \frac{C_i - C_{opt}}{C_{opt}} \times 100
+	\end{equation}
+	where:
+	\begin{itemize}
+		\item $C_i$ is the cost of the solution found in the $i$-th iteration.
+		\item $C_{opt}$ is the cost of the known optimal solution for the instance.
+	\end{itemize}
+\end{enumerate}
+
+\textbf{Algorithm Ranking.} To select the final algorithm, the trade-off between speed and accuracy was resolved using simple additive weighting (SAW). Since both Runtime speed and Average relative error are “cost” criteria, i.e., lower values represent better performance, it was normalized relative to the maximum (worst) observed value to scale all metrics between 0 and 1. The normalization formula used was:
+\begin{equation}
+	\label{eq:norm}
+	r _{ij} = \frac{x_{ij}}{\max(x_{ij})}
+\end{equation}
+where: 
+\begin{itemize}
+	\item $r _{ij}$ is the normalized value of the $j$-th criteria for the $i$-th algorithm.
+	\item $x_{ij}$ is the original value of the $j$-th criteria for the $i$-th algorithm.
+	\item $\max(x_{ij})$ is the maximum value observed for the $j$-th criteria across all algorithms.
+\end{itemize}
+
+The final score $S _{i}$ for each algorithm $i$ was calulated in equation \ref{eq:saw}: 
+\begin{equation}
+	\label{eq:saw}
+	S _{i} = \sum_{j=1}^{n} w_j \cdot r _{ij}
+\end{equation}
+where:
+\begin{itemize}
+	\item $S _{i}$ is the final score for the $i$-th algorithm.
+	\item $w_j$ is the weight assigned to the $j$-th criteria, such that $\sum_{j=1}^{n} w_j = 1$.
+	\item $r _{ij}$ is the normalized value of the $j$-th criteria for the $i$-th algorithm, which was defined in equation \ref{eq:norm}.
+\end{itemize}
+
+
 
 The expected runtime for the algorithm should be fast but also accurate. There are many optimization algorithms that have been used in the field of TSP optimization. However, due to the constraints of the processing power of a mobile device, the lightweight metaheuristic algorithms will be tested and analyzed for the algorithm’s runtime, specifically the algorithms:
 
-    \textbf{Genetic Algorithm (GA).} Inspired by genetics and evolution, the Genetic Algorithm is an optimization technique that works by analyzing potential solutions and generating new ones through the processes of selection, crossover, and mutation. This iterative process continues until a predefined termination requirement is met. GA is widely used across various domains because of its ability to navigate complex search spaces and identify optimal or near-optimal solutions. Algorithm \ref{GA} illustrates the step-by-step GA approach for solving the TSP \parencite{Hossain2024}.
 
-    \begin{algorithm}[H]
-    \singlespacing
-    \footnotesize
-    \caption{Genetic Algorithm}
-    \label{GA}
-    \begin{algorithmic}[1]
-    \State Initialize population $p$ using the \Call{initialize\_population}{} method.
-    \State Calculate the fitness for each individual in $p$ using the \Call{evaluate\_fitness}{} method.
-    \State Set the iteration counter $T = 0$.
-    \State Set $\text{max\_iterations} = 1000$.
-    \While {$T < \text{max\_iterations}$}
-        \State Select parents from the population $p$ using the \Call{selection}{} method.
-        \State Perform crossover on the selected parents with a probability of $0.8$ using the \Call{crossover}{} method to generate offspring.
-        \State Perform a mutation on the offspring with a probability of $0.2$ using the \Call{mutation}{} method.
-        \State Calculate fitness for each offspring using the \Call{evaluate\_fitness}{} method.
-        \State Replace the worst individuals in the population $p$ with the best offspring.
-        \State Update the best solution found so far.
-        \State Increment iteration counter $T = T + 1$.
-    \EndWhile
-    \State \textbf{Return} the best solution found ($\text{best\_individual}$).
-    \end{algorithmic}
-    \end{algorithm}
 
-    \textbf{Ant Colony Optimization (ACO).} The Ant Colony Optimization (ACO) is an optimization algorithm that mimics the foraging behavior of ants. It utilizes artificial pheromone trails to guide the search for optimal solutions. Ants in the algorithm employ probabilistic pheromones and heuristic information to address problems. The quality of the solutions determines how the pheromone trails are updated. This mechanism encourages exploration and prevents premature convergence. ACO has proven effective for various optimization difficulties. Algorithm \ref{ACO} outlines the stepwise ACO approach for solving TSP \parencite{Hossain2024}.
-
-    \begin{algorithm}[H]
-    \singlespacing
-    \footnotesize
-    \caption{Ant Colony Optimization}
-    \label{ACO}
-    \begin{algorithmic}[1]
-    \State Initialize the pheromone matrix $\tau$ with $\text{initial\_pheromone}$.
-    \State Set $\text{best\_tour} = \text{none}$ and $\text{best\_distance} = \infty$.
-    \State Start timer $\text{start\_time}$.
-    \For {$i = 1$ to $\text{num\_iterations}$}
-        \State Generate $\text{num\_ants}$ tours using the \Call{construct\_tour}{} method.
-        \For {each generated tour $k$}
-            \State Calculate $\text{tour\_distance}_k$.
-            \If {$\text{tour\_distance}_k < \text{best\_distance}$}
-                \State Update $\text{best\_tour} = \text{tour}_k$
-                \State Update $\text{best\_distance} = \text{tour\_distance}_k$
-            \EndIf
-        \EndFor
-        \State Update pheromone matrix $\tau$ using the \Call{update\_pheromone\_matrix}{} method.
-    \EndFor
-    \State Stop timer $\text{end\_time}$.
-    \State Calculate $\text{computation\_time} = \text{end\_time} - \text{start\_time}$.
-    \State \textbf{Return} $\text{best\_tour}$, $\text{best\_distance}$, and $\text{computation\_time}$.
-    \end{algorithmic}
-    \end{algorithm}
-
-    \textbf{Simulated Annealing (SA).} The Simulated Annealing (SA) algorithm is a metaheuristic technique influenced by the annealing process in metallurgy. It begins with an initial solution and incorporates a mechanism that allows for the occasional acceptance of a "worse" solution based on and more thoroughly explore the solution space. The probability of accepting a worse solution is gradually reduced over time, simulating the cooling process. SA is applicable to a wide range of optimization problems. Algorithm \ref{SA} illustrates the stepwise SA algorithm for solving TSP \parencite{Hossain2024}.
-
-    \begin{algorithm}[H]
-    \singlespacing
-    \footnotesize
-    \caption{Simulated Annealing}
-    \label{SA}
-    
-    \begin{algorithmic}[1]
-    \Function{SimulatedAnnealing}{$\text{cities}$, $\text{initial\_temperature}$, $\text{cooling\_rate}$, $\text{num\_iterations}$}
-        \State Initialize the distances matrix by calculating the distances between cities.
-        \State Define $\text{calculate\_tour\_distance}(\text{tour})$.
-        \State Define $\text{generate\_neighbor}(\text{tour})$ (e.g., swapping two cities).
-        \State Define $\text{acceptance\_probability}(\Delta E, T) = e^{-\Delta E / T}$.
-        \State Initialize $\text{current\_tour}$ with a random tour.
-        \State $\text{current\_distance} \gets \text{calculate\_tour\_distance}(\text{current\_tour})$.
-        \State $\text{best\_tour} \gets \text{current\_tour}$.
-        \State $\text{best\_distance} \gets \text{current\_distance}$.
-        \State $T \gets \text{initial\_temperature}$.
-        \State $\text{start\_time} \gets \text{Timer.start}()$.
-        \For {$i = 1$ to $\text{num\_iterations}$}
-            \State $\text{new\_tour} \gets \text{generate\_neighbor}(\text{current\_tour})$.
-            \State $\text{new\_distance} \gets \text{calculate\_tour\_distance}(\text{new\_tour})$.
-            \State $\Delta E \gets \text{new\_distance} - \text{current\_distance}$.
-            \If {$\Delta E < 0$}
-                \State $\text{accept} \gets \text{True}$
-            \Else
-                \State $\text{prob} \gets \text{acceptance\_probability}(\Delta E, T)$
-                \State $\text{accept} \gets \text{prob} > \text{random}(0, 1)$
-            \EndIf
-            
-            \If {$\text{accept}$}
-                \State $\text{current\_tour} \gets \text{new\_tour}$
-                \State $\text{current\_distance} \gets \text{new\_distance}$
-                \If {$\text{current\_distance} < \text{best\_distance}$}
-                    \State $\text{best\_tour} \gets \text{current\_tour}$
-                    \State $\text{best\_distance} \gets \text{current\_distance}$
-                \EndIf
-            \EndIf
-            
-            \State $T \gets T \cdot \text{cooling\_rate}$
-        \EndFor
-        \State $\text{end\_time} \gets \text{Timer.stop}()$.
-        \State $\text{computation\_time} \gets \text{end\_time} - \text{start\_time}$.
-        \State \textbf{Return} $\text{best\_tour}$, $\text{best\_distance}$, $\text{computation\_time}$.
-    \EndFunction
-    \end{algorithmic}    
-    \end{algorithm}
-
-    \textbf{Particle Swarm Optimization (PSO).} The Particle Swarm Optimization (PSO) algorithm is inspired by the social behavior of bird flocks and fish schools. In PSO, the population is made up of numerous particles, each representing a potential solution within the search space. Every particle is characterized by a velocity and a fitness value. Conceptually, PSO is very straightforward, as it relies solely on elementary mathematical operations and does not require any derived information about the optimization function \parencite{Wadi2025}. Algorithm \ref{PSO} provides a step-by-step description of the PSO algorithm as applied to solving TSP.
-
-    \begin{algorithm}[H]
-    \singlespacing
-    \footnotesize
-    \caption{Particle Swarm Optimization}
-    \label{PSO}
-    \begin{algorithmic}[1]
-    \State \textbf{Initialize parameters:}
-    \State \hspace{1em} num\_particles = Number of particles
-    \State \hspace{1em} num\_iterations = Maximum number of iterations
-    \State \hspace{1em} cities = List of city coordinates
-    \State \hspace{1em} $w$ = Inertia weight, $c_1$ = Cognitive coefficient, $c_2$ = Social coefficient
-    \State
-    \State \textbf{Initialize particles:}
-    \For{$i = 1$ to num\_particles}
-        \State Initialize position $X[i]$ randomly (random tour)
-        \State Initialize velocity $V[i]$ randomly
-        \State $pBest[i] \gets X[i]$
-        \State $pBestFitness[i] \gets fitness(pBest[i])$
-    \EndFor
-
-    \State $gBest \gets$ Best particle position among all $pBest$
-    \State $gBestFitness \gets$ Best fitness among all particles
-
-    \State
-
-    \For{$t = 1$ to num\_iterations}
-        \For{$i = 1$ to num\_particles}
-            \State // Update velocity
-            \State Generate random numbers $r_1, r_2$
-            \State $V[i] \gets w \cdot V[i] + c_1 \cdot r_1 \cdot (pBest[i] - X[i]) + c_2 \cdot r_2 \cdot (gBest - X[i])$
-            
-            \State // Update position
-            \State $X[i] \gets UpdatePosition(X[i], V[i])$
-            \State fitnessVal $\gets fitness(X[i])$
-
-            \State // Update personal best
-            \If{fitnessVal $<$ pBestFitness[i]}
-                \State $pBest[i] \gets X[i]$
-                \State $pBestFitness[i] \gets$ fitnessVal
-            \EndIf
-
-            \State // Update global best
-            \If{fitnessVal $<$ gBestFitness}
-                \State $gBest \gets X[i]$
-                \State $gBestFitness \gets$ fitnessVal
-            \EndIf
-        \EndFor
-    \EndFor
-
-    \State \Return $gBest$ as the best tour found
-
-    \end{algorithmic}
-    \end{algorithm}
-
-    \textbf{Elephant Herding Optimization (EHO).} The Elephant Herding Optimization (EHO) algorithm is a swarm-based metaheuristic search approach for addressing optimization problems that mimics the real herding behavior of elephants, which involves organizing elephant swarms into smaller clans, each led by a matriarch and consisting of multiple female elephants and their calves, while adult male calves are expelled from the clan \parencite{Wadi2025}. Algorithm \ref{EHO} provides a step-by-step description of the EHO algorithm as applied to solving TSP.
-
-    \begin{algorithm}[H]
-    \singlespacing
-    \footnotesize
-    \caption{Elephant Herding Optimization}
-    \label{EHO}
-    \begin{algorithmic}[1]
-    \State \textbf{Initialize parameters:}
-    \State Initialize elephants with random tours
-    \State Set number of clans, elephants per clan, and max iterations
-    \State Initialize global best ($gBest$)
-    \State
-    \State \textbf{Main loop:}
-    \For{$t = 1$ to max\_iterations}
-        \For{each clan}
-            \State Compute clan center $E_{center}$
-            \For{each elephant $j$ in the clan}
-                \State // Update position
-                \State $X_j \gets X_{best} + \alpha \cdot (X_j - E_{center}) \cdot random\_factor$
-                \State Ensure valid tour
-                \State Update personal best $pBest_j$
-            \EndFor
-            \State Update clan’s best ($gBest$ candidate)
-        \EndFor
-        \State
-        \State \textbf{Migration step:}
-        \State Replace worst elephant with a new random tour
-        \State Update $gBest$ if a better solution is found
-    \EndFor
-    \State
-    \State \textbf{Termination:}
-    \State \Return $gBest$ as the best tour found
-    \end{algorithmic}
-    \end{algorithm}
-
-    \textbf{Grey Wolf Optimizer (GWO).} The Grey Wolf Optimization (GWO) algorithm is a metaheuristic technique inspired by grey wolves, simulating their leadership and cooperative hunting behaviors to locate optimal solutions. The hierarchical structure of a wolf pack (Alpha, Beta, Delta, and Omega wolves) is shown in the algorithm's design. Wolves' positions are updated based on the Alpha's location and the calculated hunting distance. GWO leverages a balance of exploration and exploitation to discover the best possible solutions. This approach has been successfully applied to various optimization challenges. Algorithm \ref{GWO} provides a step-by-step description of the GWO algorithm as applied to solving the Traveling Salesperson Problem (TSP) \parencite{Hossain2024}. 
-
-    \begin{algorithm}[H]
-    \singlespacing
-    \footnotesize
-    \caption{Grey Wolf Optimizer}
-    \label{GWO}
-    \begin{algorithmic}[1]
-    \State Initialize wolves
-    \State Set iteration counter
-    \State Set maximum number of iterations
-    \While{iteration\_counter $<$ max\_iterations}
-        \State Evaluate fitness for each wolf
-        \State Update the best wolf found so far
-        \State Determine $\alpha$, $\beta$, and $\delta$ wolves 
-        \Statex \hspace{2em} // best, second-best, and third-best solutions
-        \For{each wolf}
-            \State Update the wolf's position based on $\alpha$, $\beta$, and $\delta$
-        \EndFor
-        \State Increment iteration\_counter
-    \EndWhile
-    \State \Return best wolf found (best\_solution)
-    \end{algorithmic}
-    \end{algorithm}
-
-    \textbf{Hovering Scouts and Foraging Flocks Pied Kingfisher Optimizer (HSFFPKO).} HSFFPKO enhances the traditional Pied Kingfisher Optimizer by introducing multi-scale search mechanisms to improve optimization performance. By adding Hovering Scouts for fine-grained local adjustments and Foraging Flocks for parallel group-based exploitation, the algorithm maintains better population diversity than its predecessor. These additions allow HSFFPKO to mitigate local optima entrapment and solve complex, high-dimensional problems more efficiently \parencite{DelaCruz2025HSFFPKO}. Algorithm \ref{HSFFPKO} provides a step-by-step description of the HSFFPKO algorithm.   
-
-    \begin{algorithm}[H]
-    \singlespacing
-    \footnotesize
-    \caption{Hovering Scouts and Foraging Flocks Pied Kingfisher Optimizer (HSFFPKO)}
-    \label{HSFFPKO}
-    \begin{algorithmic}[1]
-    \Require Population size $N$, maximum iterations $T$, bounds $LB, UB$, objective function $f$
-    \Ensure Best solution $X^*$
-
-    \State Initialize population $\{X_i\}_{i=1}^N$ uniformly in $[LB, UB]$
-    \State Evaluate fitness $f(X_i)$ and set global best $X^*$
-
-    \For{$t = 1$ to $T$}
-    \State Compute contraction factor $o(t) = \exp(-(t/T)^2)$
-
-    \Comment{Phase 1: PKO exploration and exploitation}
-    \For{each agent $i$}
-        \If{rand $< 0.8$} \Comment{Exploration}
-            \State Select random peer $j \neq i$
-            \If{rand $< 0.5$} \Comment{Hovering}
-                \State $X_i' \gets X_i + \alpha L_{hov}(t)(X_j - X_i)$
-            \Else \Comment{Perching}
-                \State $X_i' \gets X_i + \alpha L_{per}(t)(X_j - X_i)$
-            \EndIf
-        \Else \Comment{Exploitation (Diving)}
-            \State Construct perturbed elite $b_i$
-            \State $X_i' \gets X_i + H_i(t)\, o(t)\,(b_i - X^*)$
-        \EndIf
-        \State Apply bounds and greedy acceptance
-    \EndFor
-
-    \Comment{Phase 2: Commensalism}
-    \For{each agent $i$}
-        \If{rand $> 1 - PE(t)$}
-            \State Select random peers $m,n$
-            \State $X_i' \gets X_m + o(t)\alpha |X_i - X_n|$
-            \State Apply bounds and greedy acceptance
-        \EndIf
-    \EndFor
-
-    \Comment{Phase 3: Hovering Scouts}
-    \If{$t \bmod T_{HS} = 0$}
-        \State Select scout set $S$
-        \For{each scout $i \in S$}
-            \State $X_i' \gets X_i + X_i \odot \mathcal{N}(0,I)$
-            \State $X_i' \gets X_i' + \eta \sigma \odot (X^* - X_i')$
-            \State Apply bounds and greedy acceptance
-        \EndFor
-    \EndIf
-
-    \Comment{Phase 4: Foraging Flocks}
-    \If{$t \bmod T_{FF} = 0$}
-        \State Partition population into flocks $\{F_k\}$
-        \For{each flock $F_k$}
-            \State Compute centroid $C_k$ and leader $L_k$
-            \State $T_k \gets \phi L_k + (1-\phi)C_k$
-            \For{each agent $i \in F_k$}
-                \State $X_i' \gets X_i + \xi (T_k - X_i) + \mathcal{N}(0,\rho(t)^2 I)$
-                \State Apply bounds and greedy acceptance
-            \EndFor
-        \EndFor
-    \EndIf
-
-    \State Update global best $X^*$
-    \EndFor
-
-    \Return $X^*$
-    \end{algorithmic}
-    \end{algorithm}
-
-    
 
 All algorithm will be executed on the same hardware and software environment to ensure consistency in the results. Since the algorithms are metaheuristic, they will be run multiple times on each dataset to account for variability in performance. The average results will be used for comparison. 
 
 \noindent For every run, the following metrics will be recorded:
 \begin{itemize}
-    \item The average solution quality (total travel distance).
-    \item The best solution found in each run.
-    \item The average computation time taken to reach the solution.
+	\item The average solution quality (total travel distance).
+	\item The best solution found in each run.
+	\item The average computation time taken to reach the solution.
 \end{itemize}
 The algorithm that performs best in terms of solution quality and runtime efficiency will be selected for implementation in the itinerary optimization feature of the mobile application.
 
@@ -352,23 +424,23 @@ The algorithm that performs best in terms of solution quality and runtime effici
 In the context of the study, an itinerary refers to a plan of the user to go to two or more places. An itinerary can be modeled mathematically using graph theory similar to TSP. This would involve setting the vertices of a graph as the places and the edges as the road distance between the connected edges. A big difference of OP from TSP is the fact that it takes the whole graph or all the possible POI and outputs a subgraph instead, where TSP would use the entire graph given. An example is shown in Figure \ref{opgraph} where 5 POI are given as input and only three were used to generate an itinerary.
 
 \begin{figure}[H]
-    \centering
-    \caption{Subgraph result from OP}
-    \label{opgraph}
-    \includegraphics[width=0.8\textwidth]{subgraph.png}
+	\centering
+	\caption{Subgraph result from OP}
+	\label{opgraph}
+	\includegraphics[width=0.8\textwidth]{subgraph.png}
 \end{figure}
 
 The objective of the OP is to maximize the available profit, in the case of the study: travel distance, to generate an itinerary for the user alongside other factors. Mathematically, the OP can be formulated as follows in Equation \ref{eq:op}.
 
 \begin{equation}
-    \label{eq:op}
-   \text{Maximize } Z = \sum_{i = 2}^{n - 1} \sum_{j = 2}^{n}S _{i} x _{ij}  
+	\label{eq:op}
+	\text{Maximize } Z = \sum_{i = 2}^{n - 1} \sum_{j = 2}^{n}S _{i} x _{ij}  
 \end{equation}
 where $Z$ is the total travel distance; $S_i$ is the total score of a vertex at index i such as the travel distance, user preferability score, and popularity rating; $x_i$ is the decision variable whether the vertex $i$ to vertex $j$ is included in the output. The function is also constrained to the following:
 \begin{enumerate}
-    \item Each vertex must only be visited once.
-    \item The total score must not exceed the given budget.
-    \item The generated path must be connected.
+	\item Each vertex must only be visited once.
+	\item The total score must not exceed the given budget.
+	\item The generated path must be connected.
 \end{enumerate}
 
 \subsection{Adaptive Genetic Algorithm with Dynamic Mutation and Crossover Probabilities}
@@ -377,22 +449,22 @@ The study also chose to adopt a modified variant of the genetic algorithm develo
 
 \textbf{Adaptive Crossover. }AGAM’s most important part is the dynamic crossover and mutation probabilities that it uses. This property of AGAM serves as a guide and is helpful in finding the best solution  since it prevents the system from repeatedly computing in a local optima, a region of solutions that  can be optimal but lacks diversity, a kind of deadlock where the system ignores every other possible optimal solution outside the current locality. \textcite{Yochum2020} defined these probabilities in Equations \ref{crossover} and \ref{mutation}.
 \begin{equation}
-    \label{crossover}
-    PC = \begin{cases}
-            pc_1 - \dfrac{(pc_1 - pc_2)(f' - f_{avg})}{f_{max} - f_{avg}}, & f' \ge f_{avg} \\
-            pc_1, & f' < f_{avg}
-        \end{cases}
+	\label{crossover}
+	PC = \begin{cases}
+		pc_1 - \dfrac{(pc_1 - pc_2)(f' - f_{avg})}{f_{max} - f_{avg}}, & f' \ge f_{avg} \\
+		pc_1, & f' < f_{avg}
+	\end{cases}
 \end{equation}
 
 In this case, Equation \ref{crossover} is the probability of crossover. $pc_1$ and $pc_2$ are the input bounds that will limit the crossover. These values are often defined where $pc_1 \geq pc_2$, $f'$ then corresponds to the larger valued fitness score of two selected parents, $f_{max}$ is the largest valued fitness score among the set of populations $P$, and $f_{avg}$ refers to the average fitness score of the population $P$. 
 
 \textbf{Adaptive Mutation. }The next one is Equation \ref{mutation} for the probability of mutation.
 \begin{equation}
-    \label{mutation}
-    PM = \begin{cases}
-            pm_1 - \dfrac{(pm_1 - pm_2)(f' - f_{avg})}{f_{max} - f_{avg}}, & f \ge f_{avg} \\
-            pm_1, & f < f_{avg}
-        \end{cases}
+	\label{mutation}
+	PM = \begin{cases}
+		pm_1 - \dfrac{(pm_1 - pm_2)(f' - f_{avg})}{f_{max} - f_{avg}}, & f \ge f_{avg} \\
+		pm_1, & f < f_{avg}
+	\end{cases}
 \end{equation}
 Where, $pm_1$ and $pm_2$ are also predefined bounds to limit mutations, and prevent oversaturation, and $f$ is the fitness score of a parent that has to mutate. Furthermore, the parameters $pc_1$, $pc_2$, $pm_1$, and $pm_2$ are all predefined input bounds selected through parameter tuning, which controls the range of possible crossover and mutation probabilities during the evolution process.
 
@@ -403,8 +475,8 @@ AGAM considers the population set $P = {p_1,\dots, p_n}$ where each individual $
 
 \textbf{Fitness Function. }This fitness function normalizes the evaluation of the quality of each $p_i$ by integrating the input factors defined earlier. In this way, every itinerary $p_i$ in $P$ obtains different weights given by Equation \ref{agamFitness}.
 \begin{equation}
-    \label{agamFitness}
-    f(p_i) = w_{1}Ti(p_i) + w_{2}Tn(p_i) + w_{3}Tr(p_i) + w_{4}Tp(p_i)
+	\label{agamFitness}
+	f(p_i) = w_{1}Ti(p_i) + w_{2}Tn(p_i) + w_{3}Tr(p_i) + w_{4}Tp(p_i)
 \end{equation}
 Where in Equation \ref{agamFitness}, $f(p_i)$ is the fitness function score of each itinerary $p_i$. 
 $w_{j}$ is the weight of each factor.
@@ -413,30 +485,30 @@ $Ti(p_i)$ is the sum of all interest values of each POI in the itinerary $p_i$. 
 In order to determine the level of interests of the user in a specific POI, the cosine similarity will be used. According to Singh et al. (2023), cosine similarity measures the angle of cosine between two vectors. This essentially provides a number for how two vectors relate to each other.  The formula for cosine similarity is in eq \ref{cosim} where $v$, $w$ are vectors and the output of the function ranges from -1 being not related to 1 essentially the same vectors. 
 
 \begin{equation}
-    \label{cosim}
-    \text{cosine\_similarity}(v, w) = \frac{v \cdot w}{\|v\| \|w\|} = \frac{\sum_{i=1}^{n} v_i w_i}{\sqrt{\sum_{i=1}^{n} v_i^2} \sqrt{\sum_{i=1}^{n} w_i^2}}
+	\label{cosim}
+	\text{cosine\_similarity}(v, w) = \frac{v \cdot w}{\|v\| \|w\|} = \frac{\sum_{i=1}^{n} v_i w_i}{\sqrt{\sum_{i=1}^{n} v_i^2} \sqrt{\sum_{i=1}^{n} w_i^2}}
 \end{equation}
 In the context of the application, each POI has categories which are appropriately assigned by the researchers. Then, a category matrix (\ref{matrix}) will be generated for each POI for each available category where 1 will mean POI is in that category and 0 as not.
 
 \begin{equation}
-    \label{matrix}
-        \begin{bmatrix}
-            1 & 0 \\
-            0 & 0 \\
-            1 & 0
-        \end{bmatrix}
+	\label{matrix}
+	\begin{bmatrix}
+		1 & 0 \\
+		0 & 0 \\
+		1 & 0
+	\end{bmatrix}
 \end{equation}
 The column of the matrix represents the POI and the row represents the category. 
 
 Another vector (\ref{uservector}) that represents the user’s preferences in the categories will be created. This is a binary vector where 1 represents that the user wants to see this and 0 as not wanting to see this type of category. For instance, if the user has chosen all categories to be in their preferences, in which case, all the values are one.
 
 \begin{equation}
-    \label{uservector}
-    \begin{bmatrix}
-        1 \\
-        1 \\
-        1
-    \end{bmatrix}
+	\label{uservector}
+	\begin{bmatrix}
+		1 \\
+		1 \\
+		1
+	\end{bmatrix}
 \end{equation}
 
 Then, the cosine similarity of each POI category matrix to the user preference will be calculated. This value from the cosine similarity now represents the user’s interest to that POI based on the preference matrix. 
@@ -444,152 +516,152 @@ Then, the cosine similarity of each POI category matrix to the user preference w
 $Tn(p_i)$ will be obtained by dividing the number of POIs in $p_i$, by the total number of possible POIs denoted by NOP. Also note that the selected number of POIs in $p_i$ will be limited by a user-defined parameter which will be referred to as $MAXN$, an integer limiting the number of POIs in a $N_op(p_i)$.	
 $N_{op}(p_i) \leq MAXN$.
 \begin{equation}
-    \label{agam1}
-    \dfrac{\sum_{j=1}^{n} (1)}{NOP}
+	\label{agam1}
+	\dfrac{\sum_{j=1}^{n} (1)}{NOP}
 \end{equation}
 This ensures that AGAM does not prioritize the entirety of all of Bulacan’s POIs considered in the study.
 
 $Tr(p_i)$ is the total rating of $p_i$ given by Equation \ref{agam2}, taking the sum of all $q_i$ rating $R(q_i)$ Equation \ref{agam4} in $p_i$ and dividing it by the best possible rating of all POIs in consideration combined $MAXR = \text{Number of POIs} * \text{Maximum Rating}$.
 
 \begin{equation}
-    \label{agam2}
-    \dfrac{\sum_{j=1}^{n} R(q_j) \in p_i}{MAXR},\text{ such that } n = \text{last POI}
+	\label{agam2}
+	\dfrac{\sum_{j=1}^{n} R(q_j) \in p_i}{MAXR},\text{ such that } n = \text{last POI}
 \end{equation}
 
 $Tp(p_i)$ is the total popularity of $p_i$ given by Equation \ref{agam3} the sum of all $q_i$ popularity $P(q_i)$ in $p_i$ and dividing it by the total popularity count of the all POI $MAXP$.
 \begin{equation}
-    \label{agam3}
-    \dfrac{\sum_{n}^{i=1}P(q_i) \in p_i}{MAXP}, \text{ such that } n = \text{last POI}
+	\label{agam3}
+	\dfrac{\sum_{n}^{i=1}P(q_i) \in p_i}{MAXP}, \text{ such that } n = \text{last POI}
 \end{equation} 
 
 The popularity of a POI $q_i$ is given by the visit count of the POI’s governing municipality.
 The rating of a POI $q_i$ is given by taking the average rating of all visitors for $q_i$.
 \begin{equation}
-    \label{agam4}
-    R(q_i) = \frac{1}{x} \sum_{j=1}^{x} r_{q_i}(u_j)
+	\label{agam4}
+	R(q_i) = \frac{1}{x} \sum_{j=1}^{x} r_{q_i}(u_j)
 \end{equation}
 
 Algorithm \ref{alg:agam} is a modified pseudocode of AGAM, adjusted to fit the changes mentioned above. In this way, the utilized algorithm is better suited to cater given data, obtained from sources available to the researchers.
 
 
 \begin{algorithm}[H]
-\singlespacing
-\footnotesize
-\caption{Adaptive Genetic Algorithm for Itinerary Optimization (AGAM)}
-\label{alg:agam}
-\begin{algorithmic}[1]
+	\singlespacing
+	\footnotesize
+	\caption{Adaptive Genetic Algorithm for Itinerary Optimization (AGAM)}
+	\label{alg:agam}
+	\begin{algorithmic}[1]
 
-\Require $MAXD$ (maximum travel distance), $MAXN$ (maximum number of POIs), $N$ (population size)
-\Require $pc_1, pc_2$ (crossover control parameters), $pm_1, pm_2$ (mutation control parameters)
-\Require $w_1, w_2, w_3, w_4$ (fitness weights), $\delta$ (number of generations)
-\Ensure Optimal itinerary $p_{opt}$
+		\Require $MAXD$ (maximum travel distance), $MAXN$ (maximum number of POIs), $N$ (population size)
+		\Require $pc_1, pc_2$ (crossover control parameters), $pm_1, pm_2$ (mutation control parameters)
+		\Require $w_1, w_2, w_3, w_4$ (fitness weights), $\delta$ (number of generations)
+		\Ensure Optimal itinerary $p_{opt}$
 
-\State Initialize population $P$ with $N$ randomly generated itineraries
-\For{each $p_i \in P$}
-    \State Ensure $TotalDistanceCost(p_i) \le MAXD$
-\EndFor
+		\State Initialize population $P$ with $N$ randomly generated itineraries
+		\For{each $p_i \in P$}
+		\State Ensure $TotalDistanceCost(p_i) \le MAXD$
+		\EndFor
 
-\For{iteration = 1 to $\delta$}
+		\For{iteration = 1 to $\delta$}
 
-    \State Evaluate fitness $F(p_i)$ for each itinerary using:
-    \[
-        F = w_1 f_{\text{interest}} + w_2 f_{\text{totalPOI}} + w_3 f_{\text{rating}} + w_4 f_{\text{popularity}}
-    \]
+		\State Evaluate fitness $F(p_i)$ for each itinerary using:
+		\[
+			F = w_1 f_{\text{interest}} + w_2 f_{\text{totalPOI}} + w_3 f_{\text{rating}} + w_4 f_{\text{popularity}}
+		\]
 
-    \State Compute $f_{\max} = \max(F(p_i))$, $f_{\text{avg}} = average(F(p_i))$
+		\State Compute $f_{\max} = \max(F(p_i))$, $f_{\text{avg}} = average(F(p_i))$
 
-    \State Initialize new population $P_i = \emptyset$
+		\State Initialize new population $P_i = \emptyset$
 
-    \While{$|P_i| < N$}
-        \State $(parent_1, parent_2) = TournamentSelection(P, k=2)$
-        \State $PC = calculateCrossoverProbability(F(parent_1), F(parent_2), f_{\text{avg}}, f_{\max})$
+		\While{$|P_i| < N$}
+		\State $(parent_1, parent_2) = TournamentSelection(P, k=2)$
+		\State $PC = calculateCrossoverProbability(F(parent_1), F(parent_2), f_{\text{avg}}, f_{\max})$
 
-        \If{$random(0,1) < PC$}
-            \State $(child_1, child_2) = OnePointCrossover(parent_1, parent_2)$
+		\If{$random(0,1) < PC$}
+		\State $(child_1, child_2) = OnePointCrossover(parent_1, parent_2)$
 
-            \If{$TotalDistanceCost(child_1) > MAXD$ \textbf{and} $NUMPOI(child_1) > MAXN$}
-                \State Regenerate($child_1$)
-            \EndIf
-            \If{$TotalDistanceCost(child_2) > MAXD$ \textbf{and} $NUMPOI(child_2) > MAXN$}
-                \State Regenerate($child_2$)
-            \EndIf
+		\If{$TotalDistanceCost(child_1) > MAXD$ \textbf{and} $NUMPOI(child_1) > MAXN$}
+		\State Regenerate($child_1$)
+		\EndIf
+		\If{$TotalDistanceCost(child_2) > MAXD$ \textbf{and} $NUMPOI(child_2) > MAXN$}
+		\State Regenerate($child_2$)
+		\EndIf
 
-            \If{$TotalDistanceCost(child_1) < MAXD$ \textbf{and} $NUMPOI(child_1) < MAXN$}
-                \State InsertUnvisitedPOIs($child_1$)
-            \EndIf
-            \If{$TotalDistanceCost(child_2) < MAXD$ \textbf{and} $NUMPOI(child_2) < MAXN$}
-                \State InsertUnvisitedPOIs($child_2$)
-            \EndIf
+		\If{$TotalDistanceCost(child_1) < MAXD$ \textbf{and} $NUMPOI(child_1) < MAXN$}
+		\State InsertUnvisitedPOIs($child_1$)
+		\EndIf
+		\If{$TotalDistanceCost(child_2) < MAXD$ \textbf{and} $NUMPOI(child_2) < MAXN$}
+		\State InsertUnvisitedPOIs($child_2$)
+		\EndIf
 
-            \State Add $child_1$ and $child_2$ to $P_i$
+		\State Add $child_1$ and $child_2$ to $P_i$
 
-        \Else
-            \State Add $parent_1$ and $parent_2$ to $P_i$
-        \EndIf
-    \EndWhile
+		\Else
+		\State Add $parent_1$ and $parent_2$ to $P_i$
+		\EndIf
+		\EndWhile
 
-    \For{each itinerary $p_i \in P_i$}
-        \State $PM = calculateMutationProbability(F(p_i), f_{\text{avg}}, f_{\max})$
+		\For{each itinerary $p_i \in P_i$}
+		\State $PM = calculateMutationProbability(F(p_i), f_{\text{avg}}, f_{\max})$
 
-        \If{$random(0,1) < PM$}
-            \State $Mutated\_p_i = ApplyMutation(p_i)$
+		\If{$random(0,1) < PM$}
+		\State $Mutated\_p_i = ApplyMutation(p_i)$
 
-            \If{$TotalDistanceCost(Mutated\_p_i) > MAXD$ \textbf{or} $NUMPOI(Mutated\_p_i) > MAXN$}
-                \State Regenerate($Mutated\_p_i$)
-            \EndIf
+		\If{$TotalDistanceCost(Mutated\_p_i) > MAXD$ \textbf{or} $NUMPOI(Mutated\_p_i) > MAXN$}
+		\State Regenerate($Mutated\_p_i$)
+		\EndIf
 
-            \If{$TotalDistanceCost(Mutated\_p_i) < MAXD$ \textbf{and} $NUMPOI(Mutated\_p_i) < MAXN$}
-                \State InsertUnvisitedPOIs($Mutated\_p_i$)
-            \EndIf
+		\If{$TotalDistanceCost(Mutated\_p_i) < MAXD$ \textbf{and} $NUMPOI(Mutated\_p_i) < MAXN$}
+		\State InsertUnvisitedPOIs($Mutated\_p_i$)
+		\EndIf
 
-            \State $p_i \gets Mutated\_p_i$
-        \EndIf
-    \EndFor
+		\State $p_i \gets Mutated\_p_i$
+		\EndIf
+		\EndFor
 
-    \State Recalculate fitness of all itineraries in $P_i$
-    \State $P \gets P_i$
+		\State Recalculate fitness of all itineraries in $P_i$
+		\State $P \gets P_i$
 
-\EndFor
+		\EndFor
 
-\State \Return $p_{opt}$ = itinerary with highest fitness in $P$
+		\State \Return $p_{opt}$ = itinerary with highest fitness in $P$
 
-\end{algorithmic}
+	\end{algorithmic}
 \end{algorithm}
 
 
 \section{Process of Developing the System}
 
 The development of the LAKAD mobile application will leverage the AGILE methodology, with a specific focus on the Kanban method. This approach integrates all key software development phases. These phase include analysis, planning, design, development, testing, and review each of the phases will contribute to the overall quality and functionality of the final product.
-    
+
 Kanban is a highly effective visual process management system designed to optimize the flow of work. It operates on the principle of Just In Time (JIT) delivery, as highlighted by \textcite{Alaidaros2021}, ensuring the tasks are completed and delivered precisely when needed to maximize efficiency. 
 
 This methodology offers significant advantages for the LAKAD development team. It provides a clear, visual representation of the entire workflow, allowing all team members to easily track progress from start to finish. This transparency is crucial for quickly identifying potential bottlenecks, gaps in the process, or any mishaps that might arise. By making the workflow visible, the team can proactively address issues, rather than reacting to them after they have escalated. Kanban, being a type of Agile-based methodology, is an approach that promotes flexibility which can help in an environment of software development where problems and unforeseen challenges are inevitable. Kanban's adaptability allows the team to adjust priorities and reallocate resources as needed, ensuring that progress remains steady even when obstacles are encountered. This flexibility is key to maintaining momentum and delivering a high-quality software output \parencite{Risener2022}. The continuous flow and iterative nature of Kanban will support the team in delivering a robust and reliable system that meets user needs effectively. Figure \ref{kanban} shows a graphical representation of a Kanban workflow model.
 
 \begin{figure}[H]
-    \centering
-    \caption{Kanban Software Development Life Cycle}
-    \label{kanban}
-    \framebox{    \includegraphics[width=0.8\textwidth]{kanban.png}}
+	\centering
+	\caption{Kanban Software Development Life Cycle}
+	\label{kanban}
+	\framebox{    \includegraphics[width=0.8\textwidth]{kanban.png}}
 \end{figure}
 
 \subsection{Analysis}
 The analysis phase of the development involves outlining the system’s scope, objectives, and requirements. This is done by reviewing the existing literature in itinerary recommendation and local tourism in the province of Bulacan. This phase establishes the key features of the proposed system, LAKAD, that will integrate five major features designed to provide optimized, personalized, and efficient itinerary planning for tourists exploring Bulacan. Each feature combines techniques, verified local data, and user-centric design principles.
 
 \begin{enumerate}
-    \item \textbf{Personalized Itinerary Generation.}
-    The main feature of the proposed application will be a personalized itinerary generator focusing on the diverse cultural, historical and heritage tourist destinations located across the province of Bulacan. The system will be developed to adapt to user-specific factors that can affect the personalization aspect of an itinerary. This feature aims to cater the personal preferences that a user has while still promoting the exploration of the rich tourism culture of the region.
-    
-    \item \textbf{Itinerary Optimization.}
-    The optimization feature of the system will work in arrangement with the personalized itinerary generator by employing the ABO algorithm. The optimization will further help the maximization of travel distance and constraints to visit every possible destination within the generated itinerary.
-    
-    \item \textbf{Tourist Spot Searching.}
-    A tourist spot search feature will allow users to explore Bulacan’s tourist attractions specifically through an interface where they can search through a catalog of  tourist destinations that will be verified by the Provincial History, Arts, Culture, and Tourism Office (PHACTO) of Bulacan. Furthermore, the system will display important and relevant information such as location and short description about the tourist spot.
-    
-    \item \textbf{Itinerary Management.}
-    An Itinerary Management feature of the system will allow users to manage and organize itineraries. The users may add, edit, or remove destinations from their itinerary. It will also allow the tracking of visited and unvisited locations so that users are informed of the status of their progress in the itinerary. Users will also be able to save and reload itineraries for future use.
+	\item \textbf{Personalized Itinerary Generation.}
+		The main feature of the proposed application will be a personalized itinerary generator focusing on the diverse cultural, historical and heritage tourist destinations located across the province of Bulacan. The system will be developed to adapt to user-specific factors that can affect the personalization aspect of an itinerary. This feature aims to cater the personal preferences that a user has while still promoting the exploration of the rich tourism culture of the region.
 
-    \item \textbf{Itinerary Navigation.}
-    This feature will assist the user during travel by providing real-time navigation support. Users will be able to track their current location and visualize routes similar to Google Maps. It will displace direction, travel duration, and distances between tourist spots and support live GPS tracking to help users follow their itinerary accurately.
+	\item \textbf{Itinerary Optimization.}
+		The optimization feature of the system will work in arrangement with the personalized itinerary generator by employing the ABO algorithm. The optimization will further help the maximization of travel distance and constraints to visit every possible destination within the generated itinerary.
+
+	\item \textbf{Tourist Spot Searching.}
+		A tourist spot search feature will allow users to explore Bulacan’s tourist attractions specifically through an interface where they can search through a catalog of  tourist destinations that will be verified by the Provincial History, Arts, Culture, and Tourism Office (PHACTO) of Bulacan. Furthermore, the system will display important and relevant information such as location and short description about the tourist spot.
+
+	\item \textbf{Itinerary Management.}
+		An Itinerary Management feature of the system will allow users to manage and organize itineraries. The users may add, edit, or remove destinations from their itinerary. It will also allow the tracking of visited and unvisited locations so that users are informed of the status of their progress in the itinerary. Users will also be able to save and reload itineraries for future use.
+
+	\item \textbf{Itinerary Navigation.}
+		This feature will assist the user during travel by providing real-time navigation support. Users will be able to track their current location and visualize routes similar to Google Maps. It will displace direction, travel duration, and distances between tourist spots and support live GPS tracking to help users follow their itinerary accurately.
 
 \end{enumerate}
 Furthermore, a questionnaire will be provided to be answered by the user when they first open the app. The questionnaire requires the user to select what categories of POI they prefer. This approach will address the “cold start” problem of the system which ensures that AGAM will have the necessary input like user interest, which cannot be obtained from outsourced-data.
@@ -600,9 +672,9 @@ The Gantt chart provides a visual timeline of the schedule of the research activ
 
 
 \begin{figure}[H]
-    \centering
-    \caption{Gantt Chart}
-    \includegraphics[angle=0, width=1\linewidth]{GanttChart.png}
+	\centering
+	\caption{Gantt Chart}
+	\includegraphics[angle=0, width=1\linewidth]{GanttChart.png}
 \end{figure}
 
 The \textbf{Thesis I} output focuses on the research documentation and planning for development of LAKAD. This process begins with the Review of Related Studies (Chapter 2), in which local and foreign studies are gathered, evaluated, and organized to develop the theoretical and conceptual framework. By gathering information in Chapter 2, determining the best algorithm for the system, and the appropriate approach to execute the idea, the researchers were able to establish a solid foundation that would be the basis of the succeeding phases. After completing Chapter 1: Problem and its Background and Chapter 2, the researchers finalize the concepts, models, and methods that will be utilized in Chapter 3: Methodology preparation. Chapter 3 defines the research design, the selected development model, and the desired process on creating the system, as well as the foundation on system evaluation and data gathering that will be conducted on Thesis II.
@@ -619,27 +691,27 @@ For \textbf{Thesis II}, the researcher will proceed to the implementation and co
 The design phase will focus on creating the overall architecture and structure of the system. This includes defining the system components, their interactions, and the data flow within the application. The system architecture will be designed to ensure scalability, maintainability, and efficiency. The researchers will create diagrams and models to visualize the system’s structure and functionality.
 
 \begin{figure}[H]
-    \centering
-    \caption{System Architecture}
-    \label{SysArch}
-    \includegraphics[width=\textwidth]{SysArch.png}
+	\centering
+	\caption{System Architecture}
+	\label{SysArch}
+	\includegraphics[width=\textwidth]{SysArch.png}
 \end{figure}
 
 Figure \ref{SysArch} illustrates the system architecture of LAKAD: A Personalized Mobile Itinerary Creator and how the different components of the application interact to provide personalized and optimized travel itineraries for users. At the core of the system is the mobile frontend, which serves as the main interface where users can search for tourist destinations, generate itineraries, and manage their travel plans. When a user interacts with the application, the frontend communicates with the Mapbox API to send requests for map data, location coordinates, and optimized routes. The API processes these requests and returns the corresponding responses, which are then displayed on the user interface in the form of maps and travel routes. In addition, the application stores user-generated itineraries and relevant information in a local database, allowing users to access and manage their itineraries even without an internet connection. Overall, the architecture demonstrates a client-based design where most operations occur locally on the mobile device, ensuring efficiency, data accessibility, and a seamless user experience while minimizing reliance on external servers. 
 \begin{figure}[H]
-    \centering
-    \caption{Entity Relationship Diagram}
-    \label{erd}
-    \includegraphics[width=0.8\textwidth]{erd.png}
+	\centering
+	\caption{Entity Relationship Diagram}
+	\label{erd}
+	\includegraphics[width=0.8\textwidth]{erd.png}
 \end{figure}
 
 The Entity Relationship Diagram (ERD) of the proposed system, as shown in Figure \ref{erd}, consists of seven entities; User, Itinerary, Itinerary\_POI, Verified\_POI, Custom\_POI, Category, Preferences, each connected in a circular way with the exception of the Custom\_POI entity connected only from outside. A User entity can generate many itineraries of the entity Itinerary. An Itinerary entity can contain as many Itinerary\_POI, an entity that acts as a buffer entity for a POI before being added inside an Itinerary, this lets the system properly assign a POI inside an itinerary. Itinerary\_POI entities reference either a Verified\_POI or Custom\_POI, which differs as Verified\_POI entities are locations that are specifically confirmed by PHACTO to be a tourist destination in Bulacan, whereas a Custom\_POI is not necessarily one. By consequence, each Verified\_POI has at least one dedicated Category they belong to. A User entity may also have their own Preferences which are then classified by Category.
 
 \begin{figure}
-    \centering
-    \caption{Data Flow Diagram}
-    \label{dfd}
-    \includegraphics[width=0.8\textwidth]{datFlow.png}
+	\centering
+	\caption{Data Flow Diagram}
+	\label{dfd}
+	\includegraphics[width=0.8\textwidth]{datFlow.png}
 \end{figure}
 
 Only one user exists for the whole system which is the tourist as illustrated in Figure \ref{dfd}. There are two main flows for the user actions: preferences flow and itinerary flow. The preferences flow is straightforward, the user submits the preferences per category and then is saved in the app to be used later. The itinerary flow starts from the user generating an itinerary through the AGAM process in which is saved to the database and is sent to the itinerary management process for the visualization through graphical user interface.
@@ -659,22 +731,22 @@ Additionally, React Native extends the "Learn once, write anywhere" paradigm to 
 This framework will allow the researchers to develop the mobile application, LAKAD, as React Native’s cross-platform capabilities also allow for android development.
 
 \begin{table}[H]
-    \centering
-    \singlespacing
-    \caption{List of Tools for Development}
-    \label{listtools}
-    \renewcommand{\arraystretch}{1}
-    \begin{tabularx}{\linewidth}{XX}
-        \toprule 
-        \textbf{Name} & \textbf{Description} \\
-        \midrule
-        Visual Studio Code  & A lightweight and powerful source code developed by Microsoft. It supports multiple programming languages and offers built-in debugging, version control integration, and extensions suitable for React Native development. \\
-        React Native        & An open-source framework developed by Meta for building cross-platform mobile applications using JavaScript and React. \\
-        JavaScript     & An Interpreted, high-level programming language for building user interfaces, interaction and application logic.\\
-        Git                 & A software for versioning and managing software projects. \\
-        GitHub              & Host for git repositories that allows online collaboration. \\
-        \bottomrule
-    \end{tabularx}
+	\centering
+	\singlespacing
+	\caption{List of Tools for Development}
+	\label{listtools}
+	\renewcommand{\arraystretch}{1}
+	\begin{tabularx}{\linewidth}{XX}
+		\toprule 
+		\textbf{Name} & \textbf{Description} \\
+		\midrule
+		Visual Studio Code  & A lightweight and powerful source code developed by Microsoft. It supports multiple programming languages and offers built-in debugging, version control integration, and extensions suitable for React Native development. \\
+		React Native        & An open-source framework developed by Meta for building cross-platform mobile applications using JavaScript and React. \\
+		JavaScript     & An Interpreted, high-level programming language for building user interfaces, interaction and application logic.\\
+		Git                 & A software for versioning and managing software projects. \\
+		GitHub              & Host for git repositories that allows online collaboration. \\
+		\bottomrule
+	\end{tabularx}
 \end{table}
 
 
@@ -691,25 +763,25 @@ This section outlines the methods and criteria used to evaluate LAKAD, the propo
 \subsection{Evaluation Instrument}
 The proposed system will be evaluated using the Technology Acceptance Model (TAM), as it provides a theoretical framework for understanding the process by which users accept and adopt new technologies. TAM is widely applied in system development studies for calculating the level of user acceptance based on their perceptions and intentions for using a system. To evaluate the effectiveness and acceptance of the proposed system, the following key constructs will be evaluated:
 \begin{enumerate}
-    \item \textbf{Perceived Usefulness}. This construct measures how much users would believe that system usage would improve their task performance. It looks at whether system functionalities like itinerary recommendation, generation, and optimal route provide concrete value and efficiency to the user.
-    \item \textbf{Perceived Ease of Use}. This measures the degree of which users find the system easy to learn and operate. It singles out features including interface design, feature clarity, and the convenience of performing tasks.
-    \item \textbf{Attitude Towards Technology Use}. This assesses the sentiment, satisfaction, and positive impression towards using the system. It measures how much the user enjoys interaction with the system and whether they find it useful and interesting.
-    \item \textbf{Behavioral Intention (to Use)}. This criterion measures the tendency and likelihood of the user to continue using the system in the future. It measures the intentions of the people to recommend or repeatedly use the system as their preferred tool.
+	\item \textbf{Perceived Usefulness}. This construct measures how much users would believe that system usage would improve their task performance. It looks at whether system functionalities like itinerary recommendation, generation, and optimal route provide concrete value and efficiency to the user.
+	\item \textbf{Perceived Ease of Use}. This measures the degree of which users find the system easy to learn and operate. It singles out features including interface design, feature clarity, and the convenience of performing tasks.
+	\item \textbf{Attitude Towards Technology Use}. This assesses the sentiment, satisfaction, and positive impression towards using the system. It measures how much the user enjoys interaction with the system and whether they find it useful and interesting.
+	\item \textbf{Behavioral Intention (to Use)}. This criterion measures the tendency and likelihood of the user to continue using the system in the future. It measures the intentions of the people to recommend or repeatedly use the system as their preferred tool.
 
 \end{enumerate}
 
 The proposed system will also be evaluated by IT professionals using the ISO / IEC 25010 questionnaire which evaluates the system’s quality and user satisfaction. The following criteria will be used in the questionnaire and are based on the ISO / IEC 25010 standards:
 
 \begin{enumerate}
-    \item \textbf{Functional Suitability}. This will focus on how well the proposed system meets the user’s needs. The questions will focus on the system’s main features such as itinerary optimization, personalized itinerary generation, and itinerary management.
-    \item \textbf{Performance Efficiency}. This will assess the system’s ability to provide fast and efficient processing and its capability to handle large amounts of tasks.  The questions will assess the system’s response time when it comes to itinerary optimization and generation as well as managing the itineraries of the user.
-    \item \textbf{Compatibility}. This will evaluate the system’s compatibility with other external systems that the users might use. The questionnaire will verify how well the proposed system integrates and works alongside other mapping applications and systems.
-    \item \textbf{Interaction Capability}. This will focus on the system’s usability, accessibility, and user satisfaction. Through this, the system will be assessed on how easy the system is to navigate, how intuitive and simple the user interface is for itinerary planning, and how effectively it guides the users. 
-    \item \textbf{Reliability}. This will assess the system’s dependability and consistency in performing its intended functions. The criterion will assess how well the system can operate without failure, maintain stability, and recover from unexpected errors or interruptions. 
-    \item \textbf{Security}.  This criterion will ensure that all collected data remains confidential, secure, and protected. Access to the data will only be available to the researchers and authorized users. No information will be shared with third parties without proper consent.
-    \item \textbf{Maintainability}. This will assess the ability of the system to be updated, debugged, and improved. This criterion will focus on the ability of the system to adapt to changes and its efficiency during system updates. It will ensure that new features or fixes can be integrated without disrupting existing functionalities of the system.
-    \item \textbf{Flexibility}. This will evaluate the system’s ability to adapt to changing user needs, technological changes, and requirement changes. The criterion will assess how easily the system can support new itinerary features, and integrate additional modules or tools. 
-    \item \textbf{Safety}. This will focus on ensuring that the system does not cause any harm to its users. The criterion will assess how well the system protects users from potential risks, errors, or negative consequences that may arise from using the system.
+	\item \textbf{Functional Suitability}. This will focus on how well the proposed system meets the user’s needs. The questions will focus on the system’s main features such as itinerary optimization, personalized itinerary generation, and itinerary management.
+	\item \textbf{Performance Efficiency}. This will assess the system’s ability to provide fast and efficient processing and its capability to handle large amounts of tasks.  The questions will assess the system’s response time when it comes to itinerary optimization and generation as well as managing the itineraries of the user.
+	\item \textbf{Compatibility}. This will evaluate the system’s compatibility with other external systems that the users might use. The questionnaire will verify how well the proposed system integrates and works alongside other mapping applications and systems.
+	\item \textbf{Interaction Capability}. This will focus on the system’s usability, accessibility, and user satisfaction. Through this, the system will be assessed on how easy the system is to navigate, how intuitive and simple the user interface is for itinerary planning, and how effectively it guides the users. 
+	\item \textbf{Reliability}. This will assess the system’s dependability and consistency in performing its intended functions. The criterion will assess how well the system can operate without failure, maintain stability, and recover from unexpected errors or interruptions. 
+	\item \textbf{Security}.  This criterion will ensure that all collected data remains confidential, secure, and protected. Access to the data will only be available to the researchers and authorized users. No information will be shared with third parties without proper consent.
+	\item \textbf{Maintainability}. This will assess the ability of the system to be updated, debugged, and improved. This criterion will focus on the ability of the system to adapt to changes and its efficiency during system updates. It will ensure that new features or fixes can be integrated without disrupting existing functionalities of the system.
+	\item \textbf{Flexibility}. This will evaluate the system’s ability to adapt to changing user needs, technological changes, and requirement changes. The criterion will assess how easily the system can support new itinerary features, and integrate additional modules or tools. 
+	\item \textbf{Safety}. This will focus on ensuring that the system does not cause any harm to its users. The criterion will assess how well the system protects users from potential risks, errors, or negative consequences that may arise from using the system.
 \end{enumerate}
 
 \subsection{Population and Sample}
@@ -717,13 +789,13 @@ The respondents for the study will consist of the end-users or the tourists and 
 
 The number of samples for the end-users will be estimated using Cochran’s formula \ref{cochran}, due to large and unknown population of tourists. 
 \begin{equation}
-    \label{cochran}
-    n _{0} = \frac{Z^2 p (1-p)}{e^2}
+	\label{cochran}
+	n _{0} = \frac{Z^2 p (1-p)}{e^2}
 \end{equation}
 Where $ n _{0} $ is the sample size, $ Z $ is the Z-score corresponding to the desired confidence level, $ p $ is the estimated proportion of an attribute present in the population, and $ e $ is the desired margin of error. The sample size is calculated with the following parameters: a 95 percent confidence level ($Z = 1.96$), an estimated proportion of 0.5, and a margin of error of 0.05. 
 \begin{equation}
-    \label{cochranSolution}
-    \frac{(1.96)^2 (0.5)(1-0.5)}{(0.05)^2} = 384.16
+	\label{cochranSolution}
+	\frac{(1.96)^2 (0.5)(1-0.5)}{(0.05)^2} = 384.16
 \end{equation}
 
 The calculated sample size is shown in Equation \ref{cochranSolution}, which results to 384.16. The sample size will be rounded up to 385 respondents to ensure a whole number sample size. Tourists aged 18 above will be purposively selected from major tourist hotspots in Bulacan, such as Barasoain Church, Philippine Arena, and other prominent resorts and historical landmarks to represent the top 5-10 most visited destination in the province.
@@ -733,19 +805,19 @@ Purposive sampling will be used to choose 20 IT experts with backgrounds in soft
 To summarize, the total sample size for the study will consist of 405 respondents, with 385 end-users and 20 IT professionals as shown in Table \ref{pop_sample}.
 
 \begin{table}[H]
-    \centering
-    \caption{Summary of Population and Sample}
-    \label{pop_sample}
-    \renewcommand{\arraystretch}{0.6}
-    \begin{tabularx}{\linewidth}{XXX}
-        \toprule 
-        \textbf{Respondent Group} & \textbf{Population} & \textbf{Sample Size} \\
-        \midrule
-        End-users (Tourists) & Tourists visiting Bulacan attractions & 385 \\
-        IT Professionals & Software engineers, QA, UX professionals & 20 \\
-        Total & -- & 405 \\
-        \bottomrule
-    \end{tabularx}
+	\centering
+	\caption{Summary of Population and Sample}
+	\label{pop_sample}
+	\renewcommand{\arraystretch}{0.6}
+	\begin{tabularx}{\linewidth}{XXX}
+		\toprule 
+		\textbf{Respondent Group} & \textbf{Population} & \textbf{Sample Size} \\
+		\midrule
+		End-users (Tourists) & Tourists visiting Bulacan attractions & 385 \\
+		IT Professionals & Software engineers, QA, UX professionals & 20 \\
+		Total & -- & 405 \\
+		\bottomrule
+	\end{tabularx}
 \end{table}
 
 % -----------------------------------------------------------------------
@@ -753,11 +825,11 @@ To summarize, the total sample size for the study will consist of 405 respondent
 \subsection{Data Collection}
 
 The data collection for this study will involve two primary instruments. First is the Technology Acceptance Model (TAM) questionnaire for end-users. The other instrument is the ISO/IEC 25010:2023 evaluation for IT professionals.  
-  
+
 The TAM will employ a 5-point Likert scale (1=Strongly Disagree, 5=Strongly Agree) to evaluate users’ responses across constructs such as Perceived Usefulness, Perceived Ease of Use, Attitude Towards Technology Use, and Behavioral Intention (to Use), with 3–5 items for each construct. The use of 5-point scale is justified by its balance between simplicity and reliability in measuring users’ perceptions, it also reduces cognitive load on the side of end-users.  
-  
+
 For IT professionals, the ISO/IEC 25010:2023 evaluation will use a 10-point Likert scale (1=Strongly Disagree, 10=Strongly Agree) to achieve greater precision and granularity in professional assessments. This broader scale will allow technical evaluators to make finer distinctions for the following software attributes: Functional Suitability, Performance Efficiency, Compatibility, Interaction Capability, Reliability, Security, Maintainability, Flexibility, and Safety, with 3–5 items per construct. Each of these attributes will be measured with 3-5 distinct survey items.  
-  
+
 The data collection process will begin with an orientation and the acquisition of informed consent for the respondents. Subsequently, participants will be given a brief explanation of the application before being allowed to explore it independently. Following this, the end-users will complete the TAM, while IT professionals will complete the ISO/IEC 25010:2023 and provide qualitative feedback. All responses will be transferred to a CSV file for analysis, with no personal data collected beyond optional contact information for follow-ups. Furthermore, all data will be stored on an encrypted drive, with access strictly limited to the researchers.
 
 
@@ -767,13 +839,13 @@ The collected data will go through preprocessing and analysis to ensure accuracy
 
 The collected data will go through preprocessing and analysis to ensure accuracy in interpretation. The interpretation of data will be done with the help of descriptive statistics by computing the mean (Equation \ref{mean}) and standard deviation (Equation \ref{stddev}).
 \begin{equation}
-    \label{mean}
-    \bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i
+	\label{mean}
+	\bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i
 \end{equation}
 
 \begin{equation}
-    \label{stddev}
-    \sigma = \sqrt{\frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2}
+	\label{stddev}
+	\sigma = \sqrt{\frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2}
 \end{equation}
 where $x_i$ is the score given by respondent $i$, and $n$ is the total number of valid responses.
 
@@ -781,20 +853,20 @@ With these, the respondents’ perceptions will be interpreted based on the scal
 
 % \newpage
 \begin{table}[H]
-    \centering
-    \caption{Verbal interpretation Scale for TAM (5-point Likert Scale)}
-    \label{tam_interpret} \renewcommand{\arraystretch}{0.6}
-    \begin{tabularx}{\linewidth}{llX}
-        \toprule
-        \textbf{Range} & \textbf{Descriptive Rating} & \textbf{Verbal Interpretation}\\
-        \midrule
-        4.50 – 5.00 & Highly Acceptable & 	The user strongly perceives the system as useful, easy to use, and intends to use it.\\
-        3.50 – 4.49	& Acceptable & 	The user generally perceives the system as useful and easy to use, with a positive intention to use it.\\
-        2.50 – 3.49	& Fairly Acceptable & The user has mixed feelings about the system’s usefulness and ease of use, with uncertain intention to use it.\\
-        1.50 – 2.49	& Slightly Acceptable & 	The user generally perceives the system as not useful or difficult to use, with a negative intention to use it.\\
-        1.00 – 1.49	& Not Acceptable & 	The user strongly perceives the system as not useful, very difficult to use, and has no intention to use it.\\
-        \bottomrule
-    \end{tabularx}
+	\centering
+	\caption{Verbal interpretation Scale for TAM (5-point Likert Scale)}
+	\label{tam_interpret} \renewcommand{\arraystretch}{0.6}
+	\begin{tabularx}{\linewidth}{llX}
+		\toprule
+		\textbf{Range} & \textbf{Descriptive Rating} & \textbf{Verbal Interpretation}\\
+		\midrule
+		4.50 – 5.00 & Highly Acceptable & 	The user strongly perceives the system as useful, easy to use, and intends to use it.\\
+		3.50 – 4.49	& Acceptable & 	The user generally perceives the system as useful and easy to use, with a positive intention to use it.\\
+		2.50 – 3.49	& Fairly Acceptable & The user has mixed feelings about the system’s usefulness and ease of use, with uncertain intention to use it.\\
+		1.50 – 2.49	& Slightly Acceptable & 	The user generally perceives the system as not useful or difficult to use, with a negative intention to use it.\\
+		1.00 – 1.49	& Not Acceptable & 	The user strongly perceives the system as not useful, very difficult to use, and has no intention to use it.\\
+		\bottomrule
+	\end{tabularx}
 \end{table}
 
 
