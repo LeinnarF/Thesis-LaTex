@@ -132,7 +132,11 @@ where:
 	\item $r _{ij}$ is the normalized value of the $j$-th criteria for the $i$-th algorithm, which was defined in equation \ref{eq:norm}.
 \end{itemize}
 
-For this study, since the weights can be subjectively assigned, 
+For this study, since the weights can be subjectively assigned, equal weights were assigned to both criteria, i.e., $w _{1} = w _{2} = 0.5$. This gives equal importance of runtime speed and solution quality, the final score is shown in equation \ref{eq:finalscore}:
+\begin{equation}
+	\label{eq:finalscore}
+	S _{i} = 0.5 \cdot r _{i1} + 0.5 \cdot r _{i2}
+\end{equation}
 
 \subsection{Modeling Itinerary Generation as Orienteering Problem}
 
