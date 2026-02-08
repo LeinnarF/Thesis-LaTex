@@ -64,7 +64,6 @@ The study considers several metaheuristic algorithms for route optimization for 
 \item \textbf{Hovering Scouts and Foraging Flocks Pied Kingfisher Optimizer (HSFFPKO).} HSFFPKO enhances the traditional Pied Kingfisher Optimizer by introducing multiscale search mechanisms to improve optimization performance. By adding Hovering Scouts for fine-grained local adjustments and Foraging Flocks for parallel group-based exploitation, the algorithm maintains better population diversity than its predecessor. These additions allow HSFFPKO to mitigate local optima entrapment and solve complex, high-dimensional problems more efficiently \parencite{DelaCruz2025HSFFPKO}. Algorithm \ref{HSFFPKO} provides a step-by-step description of the HSFFPKO algorithm.   
 \end{enumerate}
 
-
 \subsection{TSP Algorithm Selection}
 
 To determine the best algorithm to implement for LAKAD, a comparative analysis was conducted on several metaheuristic algorithms used for solving TSP. The analysis focuses on solution quality (accuracy) and runtime speed of each algorithm. The algorithms were tested on selected instances from the TSPLIB library, a standard benchmark for TSP and related problems. Table \ref{tsplib_instace} presents selected instances for benchmarking. 
@@ -138,9 +137,11 @@ For this study, since the weights can be subjectively assigned, equal weights we
 	S _{i} = 0.5 \cdot r _{i1} + 0.5 \cdot r _{i2}
 \end{equation}
 
+The algorithm with the lowest score $S _{i}$ is considered the best choice for implementation for LAKAD. The results of the algorithm selection process are discussed in Chapter 4. 
+
 \subsection{Modeling Itinerary Generation as Orienteering Problem}
 
-In the context of the study, an itinerary refers to a plan of the user to go to two or more places. An itinerary can be modeled mathematically using graph theory similar to TSP. This would involve setting the vertices of a graph as the places and the edges as the road distance between the connected edges. A big difference of OP from TSP is the fact that it takes the whole graph or all the possible POI and outputs a subgraph instead, where TSP would use the entire graph given. An example is shown in Figure \ref{opgraph} where 5 POI are given as input and only three were used to generate an itinerary.
+Another core optimization problem in the study is itinerary generation, which can be modeled as an orienteering problem (OP). In the context of the study, an itinerary refers to a plan of the user to go to two or more places. An itinerary can be modeled mathematically using graph theory similar to TSP. This would involve setting the vertices of a graph as the places and the edges as the road distance between the connected edges. A big difference of OP from TSP is the fact that it takes the whole graph or all the possible POI and outputs a subgraph instead, where TSP would use the entire graph given. An example is shown in Figure \ref{opgraph} where 5 POI are given as input and only three were used to generate an itinerary.
 
 \begin{figure}[H]
 	\centering
@@ -155,7 +156,14 @@ The objective of the OP is to maximize the available profit, in the case of the 
 	\label{eq:op}
 	\text{Maximize } Z = \sum_{i = 2}^{n - 1} \sum_{j = 2}^{n}S _{i} x _{ij}  
 \end{equation}
-where $Z$ is the total travel distance; $S_i$ is the total score of a vertex at index i such as the travel distance, user preferability score, and popularity rating; $x_i$ is the decision variable whether the vertex $i$ to vertex $j$ is included in the output. The function is also constrained to the following:
+where:
+\begin{itemize}
+	\item $n$ is the total number of vertices (POI).
+	\item $S _{i}$ is the score of vertex $i$, which can be a combination of factors such as travel distance, user preferability score, and popularity rating.
+	\item $x _{ij}$ is a binary variable that indicates whether the edge from vertex $i$ to vertex $j$ is included in the itinerary (1 if included, 0 otherwise).
+	\item $Z$ is the total score of the itinerary, which the algorithm aims to maximize.
+\end{itemize}
+The function is also constrained to the following:
 \begin{enumerate}
 	\item Each vertex must only be visited once.
 	\item The total score must not exceed the given budget.
@@ -311,7 +319,7 @@ Algorithm \ref{alg:agam} is a modified pseudocode of AGAM, adjusted to fit the c
 
 		\EndFor
 
-		\State \Return $p_{opt}$ = itinerary with highest fitness in $P$
+		\State \Return $p_{opt}$ = itinerary with the highest fitness in $P$
 
 	\end{algorithmic}
 \end{algorithm}
