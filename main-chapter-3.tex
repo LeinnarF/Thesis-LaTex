@@ -37,7 +37,6 @@ where:
 	\item $c_{ij}$ refers to the cost of traveling from vertex $i$ to vertex $j$, which in this case is the distance between the two POI.
 	\item $x_{ij}$ refers to a binary value that indicates whether an edge directly connecting vertex $i$ to vertex $j$ exists in the solution (1 if it exists, 0 otherwise).
 \end{itemize}
-
 The function is also constrained to the following:
 \begin{enumerate}
 	\item Every city is entered and exited exactly once.
@@ -107,7 +106,7 @@ Two primary metrics were defined to evaluate the algorithms:
 	\end{itemize}
 \end{enumerate}
 
-\textbf{Algorithm Ranking.} To select the final algorithm, the trade-off between speed and accuracy was resolved using Simple Additive Weighting (SAW). Since both $T _{avg}$ and $Q_{avg}$ are “cost” criteria, i.e., lower values represent better performance, it is normalized relative to the maximum (worst) observed value to scale all metrics between 0 and 1. The normalization formula used was shown in equation \ref{eq:norm}:
+\textbf{Algorithm Ranking.} To select the final algorithm, the trade-off between speed and accuracy was resolved using Simple Additive Weighting (SAW).SAW was chosen because of its simplicity and interpretability, allowing for a straightforward comparison of the algorithms based on the defined metrics. Since both $T _{avg}$ and $Q_{avg}$ are “cost” criteria, i.e., lower values represent better performance, it is normalized relative to the maximum (worst) observed value to scale all metrics between 0 and 1. The normalization formula used was shown in equation \ref{eq:norm}:
 \begin{equation}
 	\label{eq:norm}
 	r _{ij} = \frac{x_{ij}}{\max(x_{ij})}
@@ -174,71 +173,60 @@ The function is also constrained to the following:
 
 The study also chose to adopt a modified variant of the genetic algorithm developed by \textcite{Yochum2020} called Adaptive Genetic Algorithm with Dynamic Mutation and Crossover Probabilities (AGAM) for the optimization of recommended itineraries defined in terms of TSP. AGAM addresses itinerary planning as a Multi-Objective Optimization Problem, an optimization technique rooting from orienteering problems. As discussed in their work, \textcite{Yochum2020} developed AGAM to generate optimal and personalized travel itineraries by balancing several objectives such as point of interest (POI) rating, and distance of POIs between the next one. Rooting from Genetic Algorithm (GA), AGAM simulates the process of natural evolution and utilizes genetic operators such as selection, crossover, and mutation to iteratively improve the quality of itineraries which, unlike traditional GA that use fixed mutation rates, also employs dynamic adjustments in parameters during the evolutionary process in a way that can maintain population diversity and therefore generate efficient and adaptive solutions.
 
-\textbf{Adaptive Crossover. }AGAM’s most important part is the dynamic crossover and mutation probabilities that it uses. This property of AGAM serves as a guide and is helpful in finding the best solution  since it prevents the system from repeatedly computing in a local optima, a region of solutions that  can be optimal but lacks diversity, a kind of deadlock where the system ignores every other possible optimal solution outside the current locality. \textcite{Yochum2020} defined these probabilities in Equations \ref{crossover} and \ref{mutation}.
-\begin{equation}
-	\label{crossover}
-	PC = \begin{cases}
-		pc_1 - \dfrac{(pc_1 - pc_2)(f' - f_{avg})}{f_{max} - f_{avg}}, & f' \ge f_{avg} \\
-		pc_1, & f' < f_{avg}
-	\end{cases}
-\end{equation}
+In this implementation, the population set is defined as $P = \left\{ p _{1},\dots, p _{n} \right\}$, where each individual $p _{i}$ represents a potential itinerary. An itinerary is encoded as a sequence of POIs, $p _{i}= \left\{ q _{1}, q _{2}, \dots, q _{m} \right\}$, where each gene $q _{i}$ corresponds to a specific POI visit. The length of the sequence depends on the number of POIs selected, and it is constrained by a user-defined limit $MAXN$.
 
-In this case, Equation \ref{crossover} is the probability of crossover. $pc_1$ and $pc_2$ are the input bounds that will limit the crossover. These values are often defined where $pc_1 \geq pc_2$, $f'$ then corresponds to the larger valued fitness score of two selected parents, $f_{max}$ is the largest valued fitness score among the set of populations $P$, and $f_{avg}$ refers to the average fitness score of the population $P$. 
+\textbf{Fitness Function.} The quality of each itinerary is evaluated by the fitness function given in Equation \ref{agamFitness}. Since factors such as popularity, rating, and interest are on different scales, a normalization process is applied to each factor so that its values is between 0 and 1. 
 
-\textbf{Adaptive Mutation. }The next one is Equation \ref{mutation} for the probability of mutation.
-\begin{equation}
-	\label{mutation}
-	PM = \begin{cases}
-		pm_1 - \dfrac{(pm_1 - pm_2)(f' - f_{avg})}{f_{max} - f_{avg}}, & f \ge f_{avg} \\
-		pm_1, & f < f_{avg}
-	\end{cases}
-\end{equation}
-Where, $pm_1$ and $pm_2$ are also predefined bounds to limit mutations, and prevent oversaturation, and $f$ is the fitness score of a parent that has to mutate. Furthermore, the parameters $pc_1$, $pc_2$, $pm_1$, and $pm_2$ are all predefined input bounds selected through parameter tuning, which controls the range of possible crossover and mutation probabilities during the evolution process.
-
-\textbf{Study Adoption. }AGAM works by taking specific factors that can affect the results of a solution. In this paper, the goal is to generate an optimal solution of a recommended itinerary, which lets the model take into account factors similar to the ones proposed by \textcite{Yochum2020}. The factor referring to mandatory POIs will from hereon refer to the interest of the user. In addition to these factors, AGAM also requires a certain probability that determines the chances of mutation and crossover to happen.
-AGAM considers the population set $P = {p_1,\dots, p_n}$ where each individual $p_i = {q_1, q_2, q_3,\dots, q_n}$ is a sequence where each $q_i$ is a POI. This means that AGAM treats each POI sequence $p_i$ as an individual gene, hence $P$ as a sequence of itineraries. 
-
-\textbf{Normalization Procedure. }\textcite{Yochum2020} noted that measuring different factors involves variables with inconsistent units and scales, and that each gene sequence may vary in length depending on the number of POIs selected. They addressed this by applying a normalization method that converts all variable values into a uniform range between 0 and 1, so that the algorithm can fairly compare and combine the factors within a fitness function.
-
-\textbf{Fitness Function. }This fitness function normalizes the evaluation of the quality of each $p_i$ by integrating the input factors defined earlier. In this way, every itinerary $p_i$ in $P$ obtains different weights given by Equation \ref{agamFitness}.
 \begin{equation}
 	\label{agamFitness}
-	f(p_i) = w_{1}Ti(p_i) + w_{2}Tn(p_i) + w_{3}Tr(p_i) + w_{4}Tp(p_i)
+	f(p_i) = w_{1}Ti(p_i) + w_{2}Tn(p_i) + w_{3}Tr(p_i) 
 \end{equation}
-Where in Equation \ref{agamFitness}, $f(p_i)$ is the fitness function score of each itinerary $p_i$. 
-$w_{j}$ is the weight of each factor.
-$Ti(p_i)$ is the sum of all interest values of each POI in the itinerary $p_i$. Each POI contains an interest value which quantifies how interested the user is in that specific POI category. 
+Where $w _{j}$ for $j = 1, 2, 3$, represents the weight assigned to each factor, and it is defined as follows:
+\begin{itemize}
+    
+    \item $Ti(p_i)$ is the sum of all interest values of each POI in the itinerary $p_i$. Each POI contains an interest value which quantifies how interested the user is in that specific POI category.
+    
+    \item $Tn (p _{i})$ is the total number of POIs in $p _{i}$, which is calculated in Equation \ref{Tn}.
+    \begin{equation}
+        \label{Tn}
+        Tn ( p _{i}) = \frac{N _{op} ( p _{i} )}{NOP}, \quad \text{where } N _{op} ( p _{i} ) \le MAXN 
+    \end{equation}
+    where $N _{op} ( p _{i} )$ is the number of POIs in itinerary $p _{i}$, and $NOP$ is the total number of available POIs.
+    
+    \item $Tr( p _{i} )$ is the total rating of $p_i$ given by Equation \ref{Tr},
+    \begin{equation}
+        \label{Tr}
+        Tr ( p _{i} ) = \frac{\sum_{q_i \in p_i} R(q_i)}{MAXR}
+    \end{equation} 
+    where $R(q_i)$ is the rating of a specific POI $q_i$ in itinerary $p_i$ obtained from Google Maps, and $MAXR$ is the best possible rating of all POIs defined as $MAXR = \text{Number of POIs} * \text{Maximum Rating}$.
+\end{itemize}
 
-$Tn(p_i)$ will be obtained by dividing the number of POIs in $p_i$, by the total number of possible POIs denoted by NOP. Also note that the selected number of POIs in $p_i$ will be limited by a user-defined parameter which will be referred to as $MAXN$, an integer limiting the number of POIs in a $N_op(p_i)$.	
-$N_{op}(p_i) \leq MAXN$.
-\begin{equation}
-	\label{agam1}
-	\dfrac{\sum_{j=1}^{n} (1)}{NOP}
-\end{equation}
-This ensures that AGAM does not prioritize the entirety of all of Bulacan’s POIs considered in the study.
+\textbf{Adaptive Genetic Operators.} AGAM incorporates dynamic adjustments in mutation and crossover probabilities to balance exploration (searching new solutions) and exploitation (refining existing solutions). These are defined as follows:
+\begin{itemize}
+    \item \textbf{Adaptive Crossover $ ( P _{c} )$.} To preserve high-quality solutions, the crossover probability decreases as the fitness of the parents exceeds the population average $ ( f _{avg} )$. This is given by Equation \ref{crossover},
+    \begin{equation}
+        \label{crossover}
+        PC = \begin{cases}
+            pc_1 - \dfrac{(pc_1 - pc_2)(f' - f_{avg})}{f_{max} - f_{avg}}, & f' \ge f_{avg} \\
+            pc_1, & f' < f_{avg}
+        \end{cases}
+    \end{equation}
+    Here, $pc_1$ and $pc_2$ are the upper and lower bounds for crossover probability,$f_{max}$ is the largest valued fitness score among the set of populations $P$, $f'$ is the larger fitness score of the two parents being crossed, and $f_{avg}$ refers to the average fitness score of the population $P$. 
 
-$Tr(p_i)$ is the total rating of $p_i$ given by Equation \ref{agam2}, taking the sum of all $q_i$ rating $R(q_i)$ Equation \ref{agam4} in $p_i$ and dividing it by the best possible rating of all POIs in consideration combined $MAXR = \text{Number of POIs} * \text{Maximum Rating}$.
+    \item \textbf{Adaptive Mutation $ ( P _{m} )$.} Similarly, mutation rates are adjusted to prevent destroying optimal solutions. This is defined in Equation \ref{mutation},
+    \begin{equation}
+        \label{mutation}
+        PM = \begin{cases}
+            pm_1 - \dfrac{(pm_1 - pm_2)(f - f_{avg})}{f_{max} - f_{avg}}, & f \ge f_{avg} \\
+            pm_1, & f < f_{avg}
+        \end{cases}
+    \end{equation}
+    where $pm_1$ and $pm_2$  are the bounds for mutation probability, and $f$ is the fitness score of the individual being mutated.
+\end{itemize}
 
-\begin{equation}
-	\label{agam2}
-	\dfrac{\sum_{j=1}^{n} R(q_j) \in p_i}{MAXR},\text{ such that } n = \text{last POI}
-\end{equation}
+For the parameters of AGAM, the following values were used: $pc_1 = 0.9$, $pc_2 = 0.6$, $pm_1 = 0.1$, and $pm_2 = 0.01$. These values were chosen based on \textcite{Yochum2020} recommendation, which are commonly used in dynamic crossover and mutation probabilities.
 
-$Tp(p_i)$ is the total popularity of $p_i$ given by Equation \ref{agam3} the sum of all $q_i$ popularity $P(q_i)$ in $p_i$ and dividing it by the total popularity count of the all POI $MAXP$.
-\begin{equation}
-	\label{agam3}
-	\dfrac{\sum_{n}^{i=1}P(q_i) \in p_i}{MAXP}, \text{ such that } n = \text{last POI}
-\end{equation} 
-
-The popularity of a POI $q_i$ is given by the visit count of the POI’s governing municipality.
-The rating of a POI $q_i$ is given by taking the average rating of all visitors for $q_i$.
-\begin{equation}
-	\label{agam4}
-	R(q_i) = \frac{1}{x} \sum_{j=1}^{x} r_{q_i}(u_j)
-\end{equation}
-
-Algorithm \ref{alg:agam} is a modified pseudocode of AGAM, adjusted to fit the changes mentioned above. In this way, the utilized algorithm is better suited to cater given data, obtained from sources available to the researchers.
-
+The procedure of AGAM is shown in Algorithm \ref{alg:agam}
 
 \begin{algorithm}[H]
 	\singlespacing
