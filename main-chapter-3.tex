@@ -69,16 +69,17 @@ To determine the best algorithm to implement for LAKAD, a comparative analysis w
 
 \begin{table}[H]
 	\centering
+	\singlespacing
 	\caption{TSPLIB Instances for Benchmarking}
-	\label{tsplib_instace} \renewcommand{\arraystretch}{0.6}
-	\begin{tabularx}{\linewidth}{lX}
+	\label{tsplib_instace} \renewcommand{\arraystretch}{1.2}
+	\begin{tabularx}{\linewidth}{XXX}
 		\toprule
-		\textbf{TSPLIB instance} & \textbf{Description} \\
+		\textbf{TSPLIB instance} & \textbf{Description} & \textbf{Optimal Solution} \\
 		\midrule
-		burma14 & Small instance with 14 cities. Optimal solution known: 3323. \\ 
-		bays29 & Medium instance with 29 cities. Optimal solution known: 2020. \\ 
-		eil51 & Large instance with 51 cities. Optimal solution known: 426. \\ 
-		berlin52 & Large instance with 52 cities. Optimal solution known: 7542. \\
+		burma14 & Small instance with 14 cities & 3323\\ 
+		bays29 & Medium instance with 29 cities & 2020\\ 
+		eil51 & Large instance with 51 cities & 426\\ 
+		berlin52 & Large instance with 52 cities & 7542\\
 		\bottomrule
 	\end{tabularx}
 \end{table}
@@ -415,7 +416,7 @@ This framework allows the researchers to develop the mobile application, LAKAD, 
 	\singlespacing
 	\caption{List of Tools for Development}
 	\label{listtools}
-	\renewcommand{\arraystretch}{1}
+	\renewcommand{\arraystretch}{1.2}
 	\begin{tabularx}{\linewidth}{XX}
 		\toprule 
 		\textbf{Name} & \textbf{Description} \\
@@ -472,27 +473,53 @@ The TAM questionnaire in this study was an adapted version of a TAM questionnair
 
 The respondents of this study consist of the end-users or the tourists in Bulacan and IT professionals for evaluating LAKAD. The tourists are the primary users  of the application, while the IT professionals are the secondary users who will evaluate the technical aspects of the system. 
 
-\textbf{End-Users.} 
+\textbf{End-Users.} The End-users or the tourists are the primary users of the application. The acceptance of the application, measured by TAM, were evaluated by the end-users. 
+
+A multi-stage non-probability sampling technique was used to select the respondents for the end-users. First, municipalities in Bulacan were grouped based on their tourist arrivals. Selected municipalities where chosen from different tourist arrival groups to ensure a diverse representation of tourists. This approach helps to reduce sampling bias and ensures that the sample reflects the diversity of tourists visiting different areas of Bulacan.
+
+Within the selected municipalities, respondents were allocated proportionately based on the tourist arrivals of each municipality, as provided by the data from the Provincial History, Arts, Culture, and Tourism Office (PHACTO) of Bulacan. This proportional allocation ensures that the sample size from each municipality is representative of the actual distribution of tourists across the region. 
+
+A total of 150 end-users was considered to be appropriate for the study. This sample size is sufficient to provide meaningful insights into user acceptance while being manageable for data collection and analysis. This is supported by previous tourism technology research by \textcite{Raynera2025}, which utilized the TAM with 80 respondents in similar regional tourism contexts, indicating that a sample size of 150 is adequate for achieving reliable results in this study. Additionally, methodological recommendations suggest that survey sample sizes should be justified based on research objectives, analytical approach, and practical constraints, rather than relying solely on numerical rules \parencite{Memon2020}. 
+
+The 150 end-users was selected using convenience sampling because volatility in tourist arrivals and the need for timely data collection. Convenience sampling allows for the selection of respondents who are readily available and willing to participate, which is practical in a tourism context where visitor numbers can fluctuate. This approach enables the researchers to gather data efficiently while still capturing a diverse range of tourist experiences and perceptions across different municipalities in Bulacan. The allocation of the sample size for end-users is shown in Table \ref{endusers}.
+
+\begin{table}[H]
+	\centering
+	\singlespacing
+	\caption{Allocation of Sample Size for End-users}
+	\label{endusers}
+	\renewcommand{\arraystretch}{1.2}
+	\begin{tabularx}{\linewidth}{XXX}
+		\toprule 
+		\textbf{Municipality} & \textbf{Proportion (\%)} & \textbf{Quantity} \\
+		\midrule
+		dummy & dummy & dummy \\
+		 &  &  \\
+		 &  &  \\
+		 &  &  \\
+		\bottomrule
+	\end{tabularx}
+\end{table}
+
 	
 \textbf{IT Professionals.} IT professionals evaluates the quality of LAKAD using the ISO/IEC 25010:2023. A total of 20 IT experts were purposively selected based on their qualification and relevant experiences. This includes but not limited to computer programmers, UI/UX, and selected faculty members from The College of Information and Communications Technology (CICT) at Bulacan State University (BulSU).
 
 
-
-
-To summarize, the total sample size for the study will consist of 405 respondents, with 385 end-users and 20 IT professionals as shown in Table \ref{pop_sample}.
+To summarize, the total sample size for the study will consist of 170 respondents, with 150 end-users and 20 IT professionals as shown in Table \ref{pop_sample}.
 
 \begin{table}[H]
 	\centering
+	\singlespacing
 	\caption{Summary of Population and Sample}
 	\label{pop_sample}
-	\renewcommand{\arraystretch}{0.6}
+	\renewcommand{\arraystretch}{1.2}
 	\begin{tabularx}{\linewidth}{XXX}
 		\toprule 
 		\textbf{Respondent Group} & \textbf{Population} & \textbf{Sample Size} \\
 		\midrule
-		End-users (Tourists) & Tourists visiting Bulacan attractions & 385 \\
+		End-users (Tourists) & Tourists visiting Bulacan tourist spots & 150 \\
 		IT Professionals & Software engineers, QA, UX professionals & 20 \\
-		Total & -- & 405 \\
+		Total &  & 170 \\
 		\bottomrule
 	\end{tabularx}
 \end{table}
