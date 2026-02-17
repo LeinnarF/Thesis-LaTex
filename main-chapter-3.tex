@@ -185,7 +185,12 @@ In this implementation, the population set is defined as $P = \left\{ p _{1},\do
 Where $w _{j}$ for $j = 1, 2, 3$, represents the weight assigned to each factor, and it is defined as follows:
 \begin{itemize}
     
-    \item $Ti(p_i)$ is the sum of all interest values of each POI in the itinerary $p_i$. Each POI contains an interest value which quantifies how interested the user is in that specific POI category.
+    \item $Ti(p_i)$ is the sum of all interest values of each POI in the itinerary $p_i$. Each POI contains an interest value which quantifies how interested the user is in that specific POI category. The formula for calculating $Ti(p_i)$ is shown in Equation \ref{Ti},
+    \begin{equation}
+		\label{Ti}
+		Ti ( p _{i} ) = \sum _{q_i \in p_i} I(q_i)
+	\end{equation}
+	where $I(q_i)$ is a binary value that indicates whether the user is interested in the category of POI $q_i$ (1 if interested, 0 otherwise).
     
     \item $Tn (p _{i})$ is the total number of POIs in $p _{i}$, which is calculated in Equation \ref{Tn}.
     \begin{equation}
