@@ -1,0 +1,277 @@
+\begin{algorithm}[H]
+	\singlespacing
+	\footnotesize
+	\caption{Genetic Algorithm}
+	\label{GA}
+	\begin{algorithmic}[1]
+		\State Initialize population $p$ using the \Call{initialize\_population}{} method.
+		\State Calculate the fitness for each individual in $p$ using the \Call{evaluate\_fitness}{} method.
+		\State Set the iteration counter $T = 0$.
+		\State Set $\text{max\_iterations} = 1000$.
+		\While {$T < \text{max\_iterations}$}
+		\State Select parents from the population $p$ using the \Call{selection}{} method.
+		\State Perform crossover on the selected parents with a probability of $0.8$ using the \Call{crossover}{} method to generate offspring.
+		\State Perform a mutation on the offspring with a probability of $0.2$ using the \Call{mutation}{} method.
+		\State Calculate fitness for each offspring using the \Call{evaluate\_fitness}{} method.
+		\State Replace the worst individuals in the population $p$ with the best offspring.
+		\State Update the best solution found so far.
+		\State Increment iteration counter $T = T + 1$.
+		\EndWhile
+		\State \textbf{Return} the best solution found ($\text{best\_individual}$).
+	\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+	\singlespacing
+	\footnotesize
+	\caption{Ant Colony Optimization}
+	\label{ACO}
+	\begin{algorithmic}[1]
+		\State Initialize the pheromone matrix $\tau$ with $\text{initial\_pheromone}$.
+		\State Set $\text{best\_tour} = \text{none}$ and $\text{best\_distance} = \infty$.
+		\State Start timer $\text{start\_time}$.
+		\For {$i = 1$ to $\text{num\_iterations}$}
+		\State Generate $\text{num\_ants}$ tours using the \Call{construct\_tour}{} method.
+		\For {each generated tour $k$}
+		\State Calculate $\text{tour\_distance}_k$.
+		\If {$\text{tour\_distance}_k < \text{best\_distance}$}
+		\State Update $\text{best\_tour} = \text{tour}_k$
+		\State Update $\text{best\_distance} = \text{tour\_distance}_k$
+		\EndIf
+		\EndFor
+		\State Update pheromone matrix $\tau$ using the \Call{update\_pheromone\_matrix}{} method.
+		\EndFor
+		\State Stop timer $\text{end\_time}$.
+		\State Calculate $\text{computation\_time} = \text{end\_time} - \text{start\_time}$.
+		\State \textbf{Return} $\text{best\_tour}$, $\text{best\_distance}$, and $\text{computation\_time}$.
+	\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+	\singlespacing
+	\footnotesize
+	\caption{Simulated Annealing}
+	\label{SA}
+
+	\begin{algorithmic}[1]
+		\Function{SimulatedAnnealing}{$\text{cities}$, $\text{initial\_temperature}$, $\text{cooling\_rate}$, $\text{num\_iterations}$}
+		\State Initialize the distances matrix by calculating the distances between cities.
+		\State Define $\text{calculate\_tour\_distance}(\text{tour})$.
+		\State Define $\text{generate\_neighbor}(\text{tour})$ (e.g., swapping two cities).
+		\State Define $\text{acceptance\_probability}(\Delta E, T) = e^{-\Delta E / T}$.
+		\State Initialize $\text{current\_tour}$ with a random tour.
+		\State $\text{current\_distance} \gets \text{calculate\_tour\_distance}(\text{current\_tour})$.
+		\State $\text{best\_tour} \gets \text{current\_tour}$.
+		\State $\text{best\_distance} \gets \text{current\_distance}$.
+		\State $T \gets \text{initial\_temperature}$.
+		\State $\text{start\_time} \gets \text{Timer.start}()$.
+		\For {$i = 1$ to $\text{num\_iterations}$}
+		\State $\text{new\_tour} \gets \text{generate\_neighbor}(\text{current\_tour})$.
+		\State $\text{new\_distance} \gets \text{calculate\_tour\_distance}(\text{new\_tour})$.
+		\State $\Delta E \gets \text{new\_distance} - \text{current\_distance}$.
+		\If {$\Delta E < 0$}
+		\State $\text{accept} \gets \text{True}$
+		\Else
+		\State $\text{prob} \gets \text{acceptance\_probability}(\Delta E, T)$
+		\State $\text{accept} \gets \text{prob} > \text{random}(0, 1)$
+		\EndIf
+
+		\If {$\text{accept}$}
+		\State $\text{current\_tour} \gets \text{new\_tour}$
+		\State $\text{current\_distance} \gets \text{new\_distance}$
+		\If {$\text{current\_distance} < \text{best\_distance}$}
+		\State $\text{best\_tour} \gets \text{current\_tour}$
+		\State $\text{best\_distance} \gets \text{current\_distance}$
+		\EndIf
+		\EndIf
+
+		\State $T \gets T \cdot \text{cooling\_rate}$
+		\EndFor
+		\State $\text{end\_time} \gets \text{Timer.stop}()$.
+		\State $\text{computation\_time} \gets \text{end\_time} - \text{start\_time}$.
+		\State \textbf{Return} $\text{best\_tour}$, $\text{best\_distance}$, $\text{computation\_time}$.
+		\EndFunction
+	\end{algorithmic}    
+\end{algorithm}
+
+\begin{algorithm}[H]
+	\singlespacing
+	\footnotesize
+	\caption{Particle Swarm Optimization}
+	\label{PSO}
+	\begin{algorithmic}[1]
+		\State \textbf{Initialize parameters:}
+		\State \hspace{1em} num\_particles = Number of particles
+		\State \hspace{1em} num\_iterations = Maximum number of iterations
+		\State \hspace{1em} cities = List of city coordinates
+		\State \hspace{1em} $w$ = Inertia weight, $c_1$ = Cognitive coefficient, $c_2$ = Social coefficient
+		\State
+		\State \textbf{Initialize particles:}
+		\For{$i = 1$ to num\_particles}
+		\State Initialize position $X[i]$ randomly (random tour)
+		\State Initialize velocity $V[i]$ randomly
+		\State $pBest[i] \gets X[i]$
+		\State $pBestFitness[i] \gets fitness(pBest[i])$
+		\EndFor
+
+		\State $gBest \gets$ Best particle position among all $pBest$
+		\State $gBestFitness \gets$ Best fitness among all particles
+
+		\State
+
+		\For{$t = 1$ to num\_iterations}
+		\For{$i = 1$ to num\_particles}
+		\State // Update velocity
+		\State Generate random numbers $r_1, r_2$
+		\State $V[i] \gets w \cdot V[i] + c_1 \cdot r_1 \cdot (pBest[i] - X[i]) + c_2 \cdot r_2 \cdot (gBest - X[i])$
+
+		\State // Update position
+		\State $X[i] \gets UpdatePosition(X[i], V[i])$
+		\State fitnessVal $\gets fitness(X[i])$
+
+		\State // Update personal best
+		\If{fitnessVal $<$ pBestFitness[i]}
+		\State $pBest[i] \gets X[i]$
+		\State $pBestFitness[i] \gets$ fitnessVal
+		\EndIf
+
+		\State // Update global best
+		\If{fitnessVal $<$ gBestFitness}
+		\State $gBest \gets X[i]$
+		\State $gBestFitness \gets$ fitnessVal
+		\EndIf
+		\EndFor
+		\EndFor
+
+		\State \Return $gBest$ as the best tour found
+
+	\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+	\singlespacing
+	\footnotesize
+	\caption{Elephant Herding Optimization}
+	\label{EHO}
+	\begin{algorithmic}[1]
+		\State \textbf{Initialize parameters:}
+		\State Initialize elephants with random tours
+		\State Set number of clans, elephants per clan, and max iterations
+		\State Initialize global best ($gBest$)
+		\State
+		\State \textbf{Main loop:}
+		\For{$t = 1$ to max\_iterations}
+		\For{each clan}
+		\State Compute clan center $E_{center}$
+		\For{each elephant $j$ in the clan}
+		\State // Update position
+		\State $X_j \gets X_{best} + \alpha \cdot (X_j - E_{center}) \cdot random\_factor$
+		\State Ensure valid tour
+		\State Update personal best $pBest_j$
+		\EndFor
+		\State Update clan’s best ($gBest$ candidate)
+		\EndFor
+		\State
+		\State \textbf{Migration step:}
+		\State Replace worst elephant with a new random tour
+		\State Update $gBest$ if a better solution is found
+		\EndFor
+		\State
+		\State \textbf{Termination:}
+		\State \Return $gBest$ as the best tour found
+	\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+	\singlespacing
+	\footnotesize
+	\caption{Grey Wolf Optimizer}
+	\label{GWO}
+	\begin{algorithmic}[1]
+		\State Initialize wolves
+		\State Set iteration counter
+		\State Set maximum number of iterations
+		\While{iteration\_counter $<$ max\_iterations}
+		\State Evaluate fitness for each wolf
+		\State Update the best wolf found so far
+		\State Determine $\alpha$, $\beta$, and $\delta$ wolves 
+		\Statex \hspace{2em} // best, second-best, and third-best solutions
+		\For{each wolf}
+		\State Update the wolf's position based on $\alpha$, $\beta$, and $\delta$
+		\EndFor
+		\State Increment iteration\_counter
+		\EndWhile
+		\State \Return best wolf found (best\_solution)
+	\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+	\singlespacing
+	\footnotesize
+	\caption{Hovering Scouts and Foraging Flocks Pied Kingfisher Optimizer (HSFFPKO)}
+	\label{HSFFPKO}
+	\begin{algorithmic}[1]
+		\Require Population size $N$, maximum iterations $T$, bounds $LB, UB$, objective function $f$
+		\Ensure Best solution $X^*$
+
+		\State Initialize population $\{X_i\}_{i=1}^N$ uniformly in $[LB, UB]$
+		\State Evaluate fitness $f(X_i)$ and set global best $X^*$
+
+		\For{$t = 1$ to $T$}
+		\State Compute contraction factor $o(t) = \exp(-(t/T)^2)$
+
+		\Comment{Phase 1: PKO exploration and exploitation}
+		\For{each agent $i$}
+		\If{rand $< 0.8$} \Comment{Exploration}
+		\State Select random peer $j \neq i$
+		\If{rand $< 0.5$} \Comment{Hovering}
+		\State $X_i' \gets X_i + \alpha L_{hov}(t)(X_j - X_i)$
+		\Else \Comment{Perching}
+		\State $X_i' \gets X_i + \alpha L_{per}(t)(X_j - X_i)$
+		\EndIf
+		\Else \Comment{Exploitation (Diving)}
+		\State Construct perturbed elite $b_i$
+		\State $X_i' \gets X_i + H_i(t)\, o(t)\,(b_i - X^*)$
+		\EndIf
+		\State Apply bounds and greedy acceptance
+		\EndFor
+
+		\Comment{Phase 2: Commensalism}
+		\For{each agent $i$}
+		\If{rand $> 1 - PE(t)$}
+		\State Select random peers $m,n$
+		\State $X_i' \gets X_m + o(t)\alpha |X_i - X_n|$
+		\State Apply bounds and greedy acceptance
+		\EndIf
+		\EndFor
+
+		\Comment{Phase 3: Hovering Scouts}
+		\If{$t \bmod T_{HS} = 0$}
+		\State Select scout set $S$
+		\For{each scout $i \in S$}
+		\State $X_i' \gets X_i + X_i \odot \mathcal{N}(0,I)$
+		\State $X_i' \gets X_i' + \eta \sigma \odot (X^* - X_i')$
+		\State Apply bounds and greedy acceptance
+		\EndFor
+		\EndIf
+
+		\Comment{Phase 4: Foraging Flocks}
+		\If{$t \bmod T_{FF} = 0$}
+		\State Partition population into flocks $\{F_k\}$
+		\For{each flock $F_k$}
+		\State Compute centroid $C_k$ and leader $L_k$
+		\State $T_k \gets \phi L_k + (1-\phi)C_k$
+		\For{each agent $i \in F_k$}
+		\State $X_i' \gets X_i + \xi (T_k - X_i) + \mathcal{N}(0,\rho(t)^2 I)$
+		\State Apply bounds and greedy acceptance
+		\EndFor
+		\EndFor
+		\EndIf
+
+		\State Update global best $X^*$
+		\EndFor
+
+		\Return $X^*$
+	\end{algorithmic}
+\end{algorithm}
+
