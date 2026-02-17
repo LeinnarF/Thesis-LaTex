@@ -174,7 +174,7 @@ The function is also constrained to the following:
 
 The study also chose to adopt a modified variant of the genetic algorithm developed by \textcite{Yochum2020} called Adaptive Genetic Algorithm with Dynamic Mutation and Crossover Probabilities (AGAM) for the optimization of recommended itineraries defined in terms of TSP. AGAM addresses itinerary planning as a Multi-Objective Optimization Problem, an optimization technique rooting from orienteering problems. As discussed in their work, \textcite{Yochum2020} developed AGAM to generate optimal and personalized travel itineraries by balancing several objectives such as point of interest (POI) rating, and distance of POIs between the next one. Rooting from Genetic Algorithm (GA), AGAM simulates the process of natural evolution and utilizes genetic operators such as selection, crossover, and mutation to iteratively improve the quality of itineraries which, unlike traditional GA that use fixed mutation rates, also employs dynamic adjustments in parameters during the evolutionary process in a way that can maintain population diversity and therefore generate efficient and adaptive solutions.
 
-In this implementation, the population set is defined as $P = \left\{ p _{1},\dots, p _{n} \right\}$, where each individual $p _{i}$ represents a potential itinerary. An itinerary is encoded as a sequence of POIs, $p _{i}= \left\{ q _{1}, q _{2}, \dots, q _{m} \right\}$, where each gene $q _{i}$ corresponds to a specific POI visit. The length of the sequence depends on the number of POIs selected, and it is constrained by a user-defined limit $MAXN$.
+In this implementation, the population set is defined as $P = \left\{ p _{1},\dots, p _{n} \right\}$, where each individual $p _{i}$ represents a potential itinerary. An itinerary is encoded as a sequence of POIs, $p _{i}= \left\{ q _{1}, q _{2}, \dots, q _{m} \right\}$, where each gene $q _{i}$ corresponds to a specific POI visit. The length of the sequence depends on the number of POIs selected, and it is constrained by a user-defined limit $MAXN$. The total travel distance of the itinerary is constrained by $MAXD$, which ensures that the generated itineraries does not exceed the user's travel distance budget. 
 
 \textbf{Fitness Function.} The quality of each itinerary is evaluated by the fitness function given in Equation \ref{agamFitness}. Since factors such as popularity, rating, and interest are on different scales, a normalization process is applied to each factor so that its values is between 0 and 1. 
 
@@ -230,20 +230,20 @@ Where $w _{j}$ for $j = 1, 2, 3$, represents the weight assigned to each factor,
     where $pm_1$ and $pm_2$  are the bounds for mutation probability, and $f$ is the fitness score of the individual being mutated.
 \end{itemize}
 
-For the parameters of AGAM, the following values were used: $pc_1 = 0.9$, $pc_2 = 0.6$, $pm_1 = 0.1$, and $pm_2 = 0.01$. These values were chosen based on \textcite{Yochum2020} recommendation, which are commonly used in dynamic crossover and mutation probabilities.
-
-The procedure of AGAM is shown in Algorithm \ref{alg:agam}
+For the parameters of AGAM, the following values were used: $pc_1 = 0.9$, $pc_2 = 0.6$, $pm_1 = 0.1$, and $pm_2 = 0.01$. These values were chosen based on \textcite{Yochum2020} recommendation, which are commonly used in dynamic crossover and mutation probabilities. The procedure of AGAM is shown in Algorithm \ref{alg:agam}.
 
 \begin{algorithm}[H]
 	\singlespacing
 	\footnotesize
 	\caption{Adaptive Genetic Algorithm for Itinerary Optimization (AGAM)}
 	\label{alg:agam}
-	\begin{algorithmic}[1]
 
+	\vspace{-0.4cm}
+
+	\begin{algorithmic}[1]
 		\Require $MAXD$ (maximum travel distance), $MAXN$ (maximum number of POIs), $N$ (population size)
 		\Require $pc_1, pc_2$ (crossover control parameters), $pm_1, pm_2$ (mutation control parameters)
-		\Require $w_1, w_2, w_3, w_4$ (fitness weights), $\delta$ (number of generations)
+		\Require $w_1, w_2, w_3$ (fitness weights), $\delta$ (number of generations)
 		\Ensure Optimal itinerary $p_{opt}$
 
 		\State Initialize population $P$ with $N$ randomly generated itineraries
@@ -255,7 +255,7 @@ The procedure of AGAM is shown in Algorithm \ref{alg:agam}
 
 		\State Evaluate fitness $F(p_i)$ for each itinerary using:
 		\[
-			F = w_1 f_{\text{interest}} + w_2 f_{\text{totalPOI}} + w_3 f_{\text{rating}} + w_4 f_{\text{popularity}}
+			F = w_1 Ti(p_i) + w_2 Tn(p_i) + w_3 Tr(p_i)
 		\]
 
 		\State Compute $f_{\max} = \max(F(p_i))$, $f_{\text{avg}} = average(F(p_i))$
@@ -269,10 +269,10 @@ The procedure of AGAM is shown in Algorithm \ref{alg:agam}
 		\If{$random(0,1) < PC$}
 		\State $(child_1, child_2) = OnePointCrossover(parent_1, parent_2)$
 
-		\If{$TotalDistanceCost(child_1) > MAXD$ \textbf{and} $NUMPOI(child_1) > MAXN$}
+		\If{$TotalDistanceCost(child_1) > MAXD$ \textbf{or} $NUMPOI(child_1) > MAXN$}
 		\State Regenerate($child_1$)
 		\EndIf
-		\If{$TotalDistanceCost(child_2) > MAXD$ \textbf{and} $NUMPOI(child_2) > MAXN$}
+		\If{$TotalDistanceCost(child_2) > MAXD$ \textbf{or} $NUMPOI(child_2) > MAXN$}
 		\State Regenerate($child_2$)
 		\EndIf
 
@@ -317,7 +317,6 @@ The procedure of AGAM is shown in Algorithm \ref{alg:agam}
 
 	\end{algorithmic}
 \end{algorithm}
-
 
 \section{Process of Developing the System}
 
