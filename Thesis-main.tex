@@ -7,12 +7,6 @@
 \usepackage{enumitem} 
 \usepackage{booktabs,longtable,threeparttable,siunitx,tabularx,makecell}
 
-% \usepackage{TimeNewRoman}
-% \usepackage{newtxtext,newtxmath}
-% \renewcommand{\rmdefault}{ptm}
-% \renewcommand{\sfdefault}{phv}
-% \renewcommand{\ttdefault}{pcr}
-
 \usepackage{pdfpages} 
 \usepackage{pdflscape,rotating} 
 \usepackage{adjustbox}
@@ -20,26 +14,19 @@
 \usepackage[style=apa, backend=biber]{biblatex}
 \usepackage{csquotes}
 \addbibresource{reference.bib}  
-\usepackage[hidelinks]{hyperref}
 \usepackage{url}
 
+\graphicspath{{Figures/}}
 \usepackage{float}
 
 \usepackage{algorithm}
 \usepackage{algpseudocode}
-% \usepackage[ruled,vlined,linesnumbered,longend]{algorithm2e}
 
-% Custom colors and styles
-% \usepackage{xcolor}
-% \definecolor{darkblue}{HTML}{020E34}
-% \usepackage{sectsty}
-% \usepackage[font=small,labelfont={color=darkblue},textfont={color=darkblue}]{caption}
-% \AtBeginDocument{\color{darkblue}}
+\usepackage[hidelinks]{hyperref}
 
+\title{LAKAD: A Personalized Mobile Itinerary Generator with Focus in Bulacan Tourism}
 
-\graphicspath{{Figures/}}
-
-\fronttitle{%
+\fronttitle{
 	LAKAD: A Personalized Mobile Itinerary 
 	Generator with Focus in \\
 	Bulacan Tourism
@@ -47,21 +34,42 @@
 
 
 \author{%<-Name of the research proponents, in alphabetical order 
-	Bryan Declaro C.
+	Bryan C. Declaro 
 
-	Franniel Luigi Hilario C.
+	Franniel Luigi C. Hilario 
 
-	Brian Gabriel Magbanua G.
+	Brian Gabriel G. Magbanua 
 
-	Richard Manansala M.
+	Richard M. Manansala 
 }
 
-\adviser{Aarhus M. Dela Cruz}	%<-full name of thesis adviser
-% \advisertitle{Mr. }	
+\authors{
+	Bryan C. ~Declaro,
+	Franniel Luigi C. ~Hilario,
+	Brian Gabriel G. ~Magbanua, and
+	Richard M. ~Manansala 
+}
+
+
+\adviser{Aarhus M. Dela Cruz}
+\advisertitle{Mr.}
 \advisersuffix{, MSc}	
-% \coadvisertitle{Dr. }
 \coadviser{Aaron Paul M. Dela Rosa}
+\coadvisertitle{Mr.}
 \coadvisersuffix{, DIT}
+
+\panelchair{Mr. Marco C. Mandap, PhD}
+\paneltwo{Ms. Deo Stephanie Angeles}
+\panelthree{Ms. Minerva Amores}
+
+\college{College of Science}    %<-student's college
+\degree{Bachelor of Science in Mathematics} %<-student's course
+\specialization{Computer Science} %<-student's specialization
+\papertype{Thesis}  %<-papertype can be thesis proposal, or thesis
+
+\csdean{Thelma V. Pagtalunan, PhD}%<-dean of the college
+\ddate{May 2026}     
+
 
 % -------------------------------------- START -------------------------------------------------------
 \begin{document}
@@ -75,32 +83,36 @@
 
 \begin{preliminary}
 	\maketitle
+	\approvalsheet
+	\input{acknowledgment.tex}
+	\input{dedication.tex}
+
+
 	\tableofcontents\cleardoublepage
 
 	\listoftables			
-	\addcontentsline{toc}{chapter}{LIST OF TABLES}
-	\addtocontents{lot}{\noindent\makebox[0.75in][l]{\textbf{Table}}\makebox[\linewidth-0.75in]{\textbf{Title}\hfill\textbf{Page}}\par}
-	\cleardoublepage
+		\addcontentsline{toc}{chapter}{LIST OF TABLES}
+		\addtocontents{lot}{\noindent\makebox[0.75in][l]{\textbf{Table}}\makebox[\linewidth-0.75in]{\textbf{Title}\hfill\textbf{Page}}\par}
+		\cleardoublepage
 
 	\listoffigures			
-	\addcontentsline{toc}{chapter}{LIST OF FIGURES}
-	\addtocontents{lof}{\noindent\makebox[0.75in][l]{\textbf{Figure}}\makebox[\linewidth-0.75in]{\textbf{Title}\hfill\textbf{Page}}\par}
-	\cleardoublepage
+		\addcontentsline{toc}{chapter}{LIST OF FIGURES}
+		\addtocontents{lof}{\noindent\makebox[0.75in][l]{\textbf{Figure}}\makebox[\linewidth-0.75in]{\textbf{Title}\hfill\textbf{Page}}\par}
+		\cleardoublepage
 
 \end{preliminary}
 
 \setcounter{chapter}{0} % Chapter Start at x
 
-% \input{main-chapter-1.tex}
-
-% \input{main-chapter-2.tex}
-
+\input{main-chapter-1.tex}
+\input{main-chapter-2.tex}
 \input{main-chapter-3.tex}
-
-% \input{agam-draft.tex}
+\input{main-chapter-4.tex}
+\input{main-chapter-5.tex}
 
 \printbibliography[heading=bibintoc,title={REFERENCES}] 
 
-\input{appendix.tex}
+% \input{appendix.tex}
+% \input{curriculumvitae.tex}
 
 \end{document}
