@@ -1,6 +1,98 @@
 \chapter{Presentation, Analysis, and Interpretation of Data}
 
+This chapter presents the results of the study, including a comparative analysis of TSP algorithms,  the developed application, and the evaluation of system acceptability and software quality. The findings are interpreted in the context of the research objectives and questions outlined in Chapter 1.
+
 \section{Comparative Analysis of TSP Algorithms}
+This section presents the performance evaluation of the selected metaheuristic algorithms for solving the Traveling Salesman Problem (TSP). The algorithms were tested on four standard instances from the TSPLIB library: burma14, bays29, eil51, and berlin52. The primary goal was to identify the most suitable algorithm for the LAKAD mobile application, balancing solution quality (minimizing travel distance) and runtime efficiency (minimizing user wait time).
+
+\subsection{Analysis of Solution Quality (Accuracy)}
+
+The solution quality is measured by the average relative error (\%) compared to the optimal solution for each TSP instance. Table \ref{tab:acc} summarizes the results, showing the performance of each algorithm across the four instances and their average relative error.
+
+\begin{table}[H]
+	\centering
+	\singlespacing
+	\caption{Summary of Average Relative Error (\%)}
+	\label{tab:acc} \renewcommand{\arraystretch}{1.2}
+	\begin{tabularx}{\linewidth}{XXXXXX}
+		\toprule
+        \multirow{2}{*}{\textbf{Algorithm}} & \multicolumn{4}{c}{\textbf{TSPLIB Instances}} & \multirow{2}{*}{\textbf{Average}} \\
+        \cmidrule(lr){2-5}
+         & \textbf{burma14} & \textbf{bays29} & \textbf{eil51} & \textbf{berlin52} &  \\
+		\midrule
+        GA & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
+        SA & 0.00 & 0.42 & 2.77 & 3.15 & 1.59 \\
+        ACO & 0.53 & 1.50 &  5.49 &  2.49 & 2.50 \\
+        EHO & 0.00 & 3.71 &  20.47 &  23.36 & 11.27 \\
+        PSO & 0.99 & 12.74 &  36.88 &   43.46 & 23.77 \\
+        HSFFPKO & 1.88 &  20.18 &  127.28 &  95.07 & 61.11 \\
+        GWO & 6.32 & 33.67 & 145.85 & 181.36 & 91.80 \\ 
+		\bottomrule
+	\end{tabularx}
+\end{table}
+
+The results indicate that the Genetic Algorithm (GA) consistently achieved highest solution quality, with an average relative error of 0\%. Simulated Annealing (SA) and Ant Colony Optimization (ACO) also performed well, with average errors of 1.59\% and 2.50\%, respectively. The Elephant Herding Optimization (EHO), Particle Swarm Optimization (PSO), Hovering Scouts and Foraging Flocks Pied Kingfisher Optimizer (HSFFPKO), and Grey Wolf Optimizer (GWO) showed significantly higher errors, indicating lower solution quality for the tested TSP instances.
+
+
+\subsection{Analysis of Runtime Efficiency}
+
+Runtime efficiency is critical for the LAKAD application, as users expect quick responses when optimizing their travel itineraries. Table \ref{tab:runtime} summarizes the average runtime (in seconds) for each algorithm across the four TSPLIB instances, along with an assessment of their growth trends.
+
+\begin{table}[H]
+	\centering
+	\singlespacing
+	\caption{Summary of Average Runtime Efficiency (seconds)}
+	\label{tab:runtime} \renewcommand{\arraystretch}{1.2}
+	\begin{tabularx}{\linewidth}{XXXXXX}
+		\toprule
+        \multirow{2}{*}{\textbf{Algorithm}} & \multicolumn{4}{c}{\textbf{TSPLIB Instances}} & \multirow{2}{*}{\textbf{Growth Trend}} \\
+        \cmidrule(lr){2-5}
+         & \textbf{burma14} & \textbf{bays29} & \textbf{eil51} & \textbf{berlin52} &  \\
+		\midrule
+        EHO     & 0.17 & 0.27   & 0.44      & 0.45    & Very Low \\
+        SA      & 0.49 & 1.04   & 1.82      & 1.90    & Low \\
+        GWO     & 0.51 & 1.02   & 1.73      & 1.75    & Low\\ 
+        HSFFPKO & 1.16 & 1.42   & 1.78      & 1.76    & Moderate \\
+        PSO     & 3.36 & 4.77   & 6.30      & 6.84    & Moderate \\
+        ACO     & 2.51 & 9.67   & 28.62     & 29.23   & High \\
+        GA      & 3.79 & 26.31  & 168.15    & 196.59    & Exponential\\
+		\bottomrule
+	\end{tabularx}
+\end{table}
+
+While GA achieved the best solution quality, its runtime increased exponentially with the problem size. For the berlin52 instance, GA required approximately 196.59 seconds (over 3 minutes) to complete. In contrast, EHO had the lowest runtime across all instances, with a runtime of $<0.5$ seconds even for the largest instance. SA and GWO also demonstrated low runtimes, while ACO and PSO showed moderate to high runtimes, especially as the problem size increased.
+
+\subsection{Algorithm Ranking}
+To select the most suitable algorithm for the LAKAD application, a multi-criteria decision analysis (MCDA) approach was used to rank the algorithms based on both solution quality and runtime efficiency, particularly the Simple Additive Weighting (SAW) method. The final scores and rankings are presented in Table \ref{tab:rank}. Equal weights ($w _{i}= 0.5$) were assigned to both criteria.
+
+\begin{table}[H]
+	\centering
+	\singlespacing
+	\caption{Final SAW Scores and Rankings of TSP Algorithms}
+	\label{tab:rank} \renewcommand{\arraystretch}{1.2}
+	\begin{tabularx}{\linewidth}{XXXXXX}
+		\toprule
+        \multirow{2}{*}{\textbf{Algorithm}} & \multicolumn{4}{c}{\textbf{TSPLIB Instances}} & \multirow{2}{*}{\textbf{Rank}} \\
+        \cmidrule(lr){2-5}
+         & \textbf{burma14} & \textbf{bays29} & \textbf{eil51} & \textbf{berlin52} &  \\
+		\midrule
+        SA      & 0.06  & 0.03  & 0.01  & 0.01 & 1st \\
+        EHO     & 0.02  & 0.06  & 0.07  & 0.07 & 2nd \\
+        ACO     & 0.37  & 0.21  & 0.10  & 0.08 & 3rd \\
+        PSO     & 0.52  & 0.28  & 0.14  & 0.14 & 4th \\
+        HSFFPKO & 0.30  & 0.33  & 0.44  & 0.33 & 5th \\
+        GA      & 0.50  & 0.50  & 0.50  & 0.50 & 6th \\
+        GWO     & 0.56  & 0.51  & 0.51  & 0.50 & 7th \\
+		\bottomrule
+	\end{tabularx}
+\end{table}
+
+Based on the SAW scores, Simulated Annealing (SA) emerged as the top-ranked algorithm, offering a strong balance between solution quality and runtime efficiency. Although GA achieved the best accuracy, its long runtime makes it resulted in a consistently high SAW score, placing it in the 6th position. EHO performed well on small instances, but its accuracy degraded on larger instances, making it less reliable for complex itineraries. 
+
+In conclusion, Simulated Annealing (SA) is the selected route optimization algorithm for LAKAD. It provides a good trade-off between solution quality and runtime efficiency, ensuring that users receive optimized itineraries in a reasonable time frame, enhancing the overall user experience of the LAKAD application.
+
+
+
 
 \section{The Developed Application}
 
