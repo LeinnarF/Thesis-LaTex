@@ -5,7 +5,7 @@
 \usepackage{bulsuthesis}  
 \usepackage{setspace}
 \usepackage{enumitem} 
-\usepackage{booktabs,longtable,threeparttable,siunitx,tabularx,makecell}
+\usepackage{booktabs,longtable,threeparttable,siunitx,tabularx,makecell, multirow}
 
 \usepackage{pdfpages} 
 \usepackage{pdflscape,rotating} 
@@ -100,6 +100,18 @@
 		\addtocontents{lof}{\noindent\makebox[0.75in][l]{\textbf{Figure}}\makebox[\linewidth-0.75in]{\textbf{Title}\hfill\textbf{Page}}\par}
 		\cleardoublepage
 
+   \setlength{\cftchapindent}{5ex}
+   \setlength{\cftchapnumwidth}{0.75in-2ex}
+   \setlength{\cftsecindent}{0.75in}
+   \renewcommand*{\cftchapfont}{\normalfont}
+   \renewcommand*{\cftchappagefont}{\normalfont}
+   \setlength{\cftbeforechapskip}{0pt}
+   
+   \listofappendix     %<-print the list of appendices page
+       \addcontentsline{toc}{chapter}{LIST OF APPENDICES}
+       \addtocontents{apc}{\noindent \textbf{Appendix}\hspace{1ex} \textbf{Title }\hfill\textbf{Page}\par}
+       \cleardoublepage
+
 \end{preliminary}
 
 \setcounter{chapter}{0} % Chapter Start at x
@@ -112,7 +124,7 @@
 
 \printbibliography[heading=bibintoc,title={REFERENCES}] 
 
-% \input{appendix.tex}
+\input{appendix.tex}
 \input{curriculumvitae.tex}
 
 \end{document}
