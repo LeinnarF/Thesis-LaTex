@@ -31,13 +31,7 @@ The objective is to minimize the total travel distance by finding the best order
 	\label{eq:tsp}
 	\text{Minimize } \sum_{i = 1}^{n} \sum_{j = 1, j \neq i} c_{ij} x_{ij}
 \end{equation}
-where:
-\begin{itemize}
-	\item $n$ is the total number of vertices (POI).
-	\item $c_{ij}$ refers to the cost of traveling from vertex $i$ to vertex $j$, which in this case is the distance between the two POI.
-	\item $x_{ij}$ refers to a binary value that indicates whether an edge directly connecting vertex $i$ to vertex $j$ exists in the solution (1 if it exists, 0 otherwise).
-\end{itemize}
-The function is also constrained to the following:
+Where $n$ is the total number of vertices (POI), $c_{ij}$ refers to the cost of traveling from vertex $i$ to vertex $j$, which in this case is the distance between the two POI, and $x_{ij}$ refers to a binary value that indicates whether an edge directly connecting vertex $i$ to vertex $j$ exists in the solution (1 if it exists, 0 otherwise). The function is also constrained to the following:
 \begin{enumerate}
 	\item Every city is entered and exited exactly once.
 	\item The solution does not contain any sub-tours.
@@ -93,43 +87,31 @@ Two primary metrics were defined to evaluate the algorithms:
 		\label{eq:runtime}
 		T_{avg} = \frac{1}{10} \sum_{i=1}^{10} T_i
 	\end{equation}
-	where $T _{i}$ is the runtime for the $i$-th iteration.
+	Where $T _{i}$ is the runtime for the $i$-th iteration.
 
 	\item \textbf{Solution Quality (\( Q_{avg} \)).} Since the best solution for each TSPLIB instance is known, the accuracy is measured by the average relative error of the solution found by the algorithm compared to the optimal solution. The calculation is shown in equation \ref{eq:quality}:
 	\begin{equation}
 		\label{eq:quality}
 		Q_{avg} = \frac{1}{10} \sum_{i=1}^{10} \frac{C_i - C_{opt}}{C_{opt}} \times 100
 	\end{equation}
-	where:
-	\begin{itemize}
-		\item $C_i$ is the cost of the solution found in the $i$-th iteration.
-		\item $C_{opt}$ is the cost of the known optimal solution for the instance.
-	\end{itemize}
+	Where $C_i$ is the cost of the solution found in the $i$-th iteration, and $C_{opt}$ is the cost of the known optimal solution for the instance. This metric provides insight into how close the algorithm's solutions are to the optimal solution, with lower values indicating better performance.
 \end{enumerate}
+
+Furthermore, each algorithm was executed on the same hardware and software environment to ensure a fair comparison. The experiments were conducted on a machine with a Ryzen 5 3400G processor, 16GB of RAM, and running Arch Linux. The algorithms were implemented with Jupyter Notebook, and the runtime was measured using Python's built-in `time` module.
 
 \textbf{Algorithm Ranking.} To select the final algorithm, the trade-off between speed and accuracy was resolved using Simple Additive Weighting (SAW).SAW was chosen because of its simplicity and interpretability, allowing for a straightforward comparison of the algorithms based on the defined metrics. Since both $T _{avg}$ and $Q_{avg}$ are “cost” criteria, i.e., lower values represent better performance, it is normalized relative to the maximum (worst) observed value to scale all metrics between 0 and 1. The normalization formula used was shown in equation \ref{eq:norm}:
 \begin{equation}
 	\label{eq:norm}
 	r _{ij} = \frac{x_{ij}}{\max(x_{ij})}
 \end{equation}
-where: 
-\begin{itemize}
-	\item $r _{ij}$ is the normalized value of the $j$-th criteria for the $i$-th algorithm.
-	\item $x_{ij}$ is the original value of the $j$-th criteria for the $i$-th algorithm.
-	\item $\max(x_{ij})$ is the maximum value observed for the $j$-th criteria across all algorithms.
-\end{itemize}
+Where $r _{ij}$ is the normalized value of the $j$-th criteria for the $i$-th algorithm, $x_{ij}$ is the original value of the $j$-th criteria for the $i$-th algorithm, and $\max(x_{ij})$ is the maximum value observed for the $j$-th criteria across all algorithms. This normalization ensures that both metrics are on a comparable scale, allowing for a fair assessment of each algorithm's performance in terms of both speed and accuracy. 
 
 The final score $S _{i}$ for each algorithm $i$ was calculated in equation \ref{eq:saw}: 
 \begin{equation}
 	\label{eq:saw}
 	S _{i} = \sum_{j=1}^{n} w_j \cdot r _{ij}
 \end{equation}
-where:
-\begin{itemize}
-	\item $S _{i}$ is the final score for the $i$-th algorithm.
-	\item $w_j$ is the weight assigned to the $j$-th criteria, such that $\sum_{j=1}^{n} w_j = 1$.
-	\item $r _{ij}$ is the normalized value of the $j$-th criteria for the $i$-th algorithm, which was defined in equation \ref{eq:norm}.
-\end{itemize}
+Where $S _{i}$ is the final score for the $i$-th algorithm, $w_j$ is the weight assigned to the $j$-th criteria, such that $\sum_{j=1}^{n} w_j = 1$, and $r _{ij}$ is the normalized value of the $j$-th criteria for the $i$-th algorithm. Additionally, the 
 
 For this study, since the weights can be subjectively assigned, equal weights were assigned to both criteria, i.e., $w _{1} = w _{2} = 0.5$. This gives equal importance of runtime speed and solution quality, the final score is shown in equation \ref{eq:finalscore}:
 \begin{equation}
@@ -156,14 +138,7 @@ The objective of the OP is to maximize the available profit, in the case of the 
 	\label{eq:op}
 	\text{Maximize } Z = \sum_{i = 2}^{n - 1} \sum_{j = 2}^{n}S _{i} x _{ij}  
 \end{equation}
-where:
-\begin{itemize}
-	\item $n$ is the total number of vertices (POI).
-	\item $S _{i}$ is the score of vertex $i$, which can be a combination of factors such as travel distance, user preferability score, and popularity rating.
-	\item $x _{ij}$ is a binary variable that indicates whether the edge from vertex $i$ to vertex $j$ is included in the itinerary (1 if included, 0 otherwise).
-	\item $Z$ is the total score of the itinerary, which the algorithm aims to maximize.
-\end{itemize}
-The function is also constrained to the following:
+Where $n$ is the total number of vertices (POI), $S _{i}$ is the score of vertex $i$, which can be a combination of factors such as travel distance, user preferability score, and popularity rating, $x _{ij}$ is a binary variable that indicates whether the edge from vertex $i$ to vertex $j$ is included in the itinerary (1 if included, 0 otherwise), and $Z$ is the total score of the itinerary, which the algorithm aims to maximize. The function is also constrained to the following:
 \begin{enumerate}
 	\item Each vertex must only be visited once.
 	\item The total score must not exceed the given budget.
@@ -320,7 +295,7 @@ For the parameters of AGAM, the following values were used: $pc_1 = 0.9$, $pc_2 
 
 \section{Process of Developing the System}
 
-The development of the LAKAD mobile application uses the AGILE methodology, with a specific focus on the Kanban method. This approach integrates all key software development phases. These phase include analysis, planning, design, development, testing, and review each of the phases contributes to the overall quality and functionality of the final product.
+The development of the LAKAD mobile application uses the AGILE methodology, with a specific focus on the Kanban method. This approach integrates all key software development phases. These phase include analysis, planning, design, development, testing, and review, each of the phases contributes to the overall quality and functionality of the final product.
 
 Kanban is a highly effective visual process management system designed to optimize the flow of work. It operates on the principle of Just In Time (JIT) delivery, as highlighted by \textcite{Alaidaros2021}, ensuring the tasks are completed and delivered precisely when needed to maximize efficiency. 
 
@@ -354,6 +329,8 @@ The analysis phase of the development involves outlining the system’s scope, o
 
 \end{enumerate}
 Furthermore, the application includes a user profile feature that allows users to create and manage their profiles, which can store their preferences, past itineraries, and other relevant information. This feature enhances the personalization aspect of the system by allowing it to learn from user behavior and preferences over time.
+
+In addition, the data gathering process was also conducted in this phase, which involved collecting data on tourist destinations in Bulacan given by PHACTO. This data was used to populate the system with verified and relevant information about the tourist spots in the province, which is crucial for the functionality of the search and itinerary generation features.
 
 \subsection{Planning}
 The Gantt chart provides a visual timeline of the schedule of the research activity that was conducted in the process of developing LAKAD. It outlines the sequence of tasks relating to Thesis I and Thesis II, including the flow of each phase of the research from documentation and planning until system development, evaluation, and final defense.
@@ -409,7 +386,7 @@ From itinerary management, there are two other flows: optimization and navigatio
 
 \subsection{Development}
 
-This development phase pertains to the actual coding and implementation of the system’s features inside an android application. The researchers’ will utilize the AGILE methodology, particularly the Kanban method for the software development life cycle. This includes weekly meetings and development checks by the researchers to ensure the system is properly developed to its intended uses. LAKAD was developed using the React Native main development framework, which uses fast and cost-efficient cross-platform mobile development, allowing a single codebase to function on both iOS and Android devices. The system utilized the JavaScript programming language for implementing the application’s user interface and core functionalities due to its flexibility and compatibility with React Native framework. The main development environment for writing, editing, and debugging the program was Visual Studio Code, which provided lightweight performance and had a large selection of extensions appropriate for React Native development. Throughout the development process, Git and GitHub was used to ensure structured collaboration and version control. The list of tools used in the development is presented in Table \ref{listtools}.
+This development phase pertains to the actual coding and implementation of the system’s features inside an android application. The researchers’ utilized the AGILE methodology, particularly the Kanban method for the software development life cycle. This includes weekly meetings and development checks by the researchers to ensure the system is properly developed to its intended uses. LAKAD was developed using the React Native main development framework, which uses fast and cost-efficient cross-platform mobile development, allowing a single codebase to function on both iOS and Android devices. The system utilized the JavaScript programming language for implementing the application’s user interface and core functionalities due to its flexibility and compatibility with React Native framework. The main development environment for writing, editing, and debugging the program was Visual Studio Code, which provided lightweight performance and had a large selection of extensions appropriate for React Native development. Throughout the development process, Git and GitHub was used to ensure structured collaboration and version control. The list of tools used in the development is presented in Table \ref{listtools}.
 
 Additionally, React Native extends the "Learn once, write anywhere" paradigm to mobile development, leveraging recent advancements like its new architecture and the JavaScript Interface (JSI). The framework's structure, represented by Fabric, aims to boost compatibility with modern React features such as concurrent rendering and synchronous data fetching. While JSI’s main element allows for direct calls between JavaScript and native code. This change features a smoother interaction with the host platform and significantly reduces performance bottlenecks. JSI also allows Fabric to create UI components on the native side more efficiently. The combined adoption of JSI and Fabric offers a significant enhancement in React Native's performance, making it a good choice for developers who desire the agility of mobile development and native platform functionalities \parencite{Zhou2024}.
 
@@ -440,7 +417,6 @@ For the testing phase, LAKAD undergo rigorous evaluation to ensure the overall f
 
 \subsection{Review}
 The review phase focuses on evaluating the overall functionality and usability of the system after development is completed. The researchers gather views and opinions of users, including a system analyst to determine whether the system runs efficiently and serves its desired purposes. Guided by their observation, necessary adjustments and enhancements done to refine the system.
-
 
 
 \section{System Evaluation}
@@ -475,7 +451,7 @@ The TAM questionnaire in this study was an adapted version of a TAM questionnair
 
 \subsection{Population and Sample}
 
-The respondents of this study consist of the end-users or the tourists in Bulacan and IT professionals for evaluating LAKAD. The tourists are the primary users  of the application, while the IT professionals are the secondary users who will evaluate the technical aspects of the system. 
+The respondents of this study consist of the end-users or the tourists in Bulacan and IT professionals for evaluating LAKAD. The tourists are the primary users  of the application, while the IT professionals are the secondary users who evaluates the technical aspects of the system. 
 
 \textbf{End-Users.} The End-users or the tourists are the primary users of the application. The acceptance of the application, measured by TAM, were evaluated by the end-users. 
 
@@ -584,23 +560,92 @@ The data collection process of this study was divided into two parts: one for th
 
 Both instruments utilized Likert scales to measure the responses of the respondents. The TAM questionnaire for end-users and the ISO/IEC 25010:2023 evaluation for IT professionals uses 5-point Likert scale. These scales were adopted from existing instruments and were modified to fit the context of this study especially for the TAM questionnaire. The use of Likert scales allows for quantifying the perceptions and evaluations of the respondents, providing a structured way to analyze the data collected from both groups.
 
-\textbf{Preparation and Pilot Testing.} Before the data collection, a formal permission was requested and obtained from the local government units (LGUs) of the selected municipalities to conduct the survey among tourists. After obtaining the necessary permissions, a pilot test was conducted to ensure the reliability and validity of the TAM questionnaire. The pilot test was done with a small group of respondents who were similar to the target population. A total of 20 respondents from the municipality of Pandi were selected for the pilot test, a municipality excluded from the main data collection to avoid bias. The pilot results were analyzed to calculate the Cronbach's alpha for the TAM questionnaire, which yielded a value of 0.881, indicating good internal consistency and reliability of the instrument for measuring user acceptance in this context. For the ISO/IEC 25010:2023, since it is a standardized evaluation method, a pilot test was not conducted for this instrument. 
+\textbf{Preparation and Pilot Testing.} Before the actual data collection, a formal permission was requested and obtained from the local government units (LGUs) of the selected municipalities to conduct the survey among tourists. After obtaining the necessary permissions, pilot testing was conducted to ensure the reliability and validity of the TAM questionnaire. The pilot test was done with a small group of respondents who were similar to the target population. A total of 20 respondents from the municipality of Pandi were selected for the pilot test because it is excluded from the main data collection to avoid bias. The Cronbach alpha of the pilot test results was calculated to make sure that the TAM questionnaire is reliable. The calculated Cronbach's alpha result yielded a value of 0.881 which is above the acceptable threshold of 0.7, indicating that the TAM questionnaire has good internal consistency and is reliable for measuring user acceptance. For the ISO/IEC 25010:2023, since it is a standardized evaluation method, a pilot test was not conducted for this instrument. 
 
 \textbf{Administration to End-users.} The data collection for end-users was conducted through face-to-face surveys in various tourist spots across the selected municipalities in Bulacan. The researchers approached tourists along with the informed consent and invited them to participate in the survey, which included a brief introduction to the LAKAD application and its features. After exploring the application, the respondents were asked to complete the TAM questionnaire, which assessed their perceptions of the system's usefulness, ease of use, attitude towards using it, and behavioral intention to use it in the future. Additionally, demographic information such as age bracket, travelling frequency, and technological proficiency was collected to analyze potential correlations between these factors and the TAM constructs.  
 
 \textbf{Administration to IT Professionals.} Permissions to conduct the survey among IT professionals was requested and obtained from the Information and Communications Technology Office (ICTO) of BulSU and to the dean of CICT. The data collection for IT professionals was conducted through an online survey or in-person sessions, depending on the availability and preference of the respondents. The IT professionals were provided with access to the LAKAD application and were given a brief overview of its features and functionalities. After exploring the application, they were asked to complete the ISO/IEC 25010:2023 evaluation, which assessed the system's functional suitability, performance efficiency, compatibility, interaction capability, reliability, security, maintainability, flexibility, and safety. In addition to the quantitative evaluation, IT professionals were also encouraged to provide qualitative feedback on the system's strengths and areas for improvement based on their technical expertise.  
 
 \subsection{Data Processing and Analysis}
+The researchers conducted systematic data processing and analysis of data from the Technology Acceptance Model (TAM) questionnaire and ISO/IEC 25010:2023 system quality evaluation instrument to evaluate user acceptance rates and the total system quality of the LAKAD application.
 
-The data collected from the surveys was organized and encoded in software such as Microsoft Excel and Jamovi for analysis. Descriptive statistics was used to summarize the data. Since this study employs a 5-point Likert scale for both TAM and ISO/IEC 25010:2023 evaluations, the median and mode were the primary measures of central tendency used to interpret the respondents' perceptions and evaluations. 
+The TAM questionnaire utilized a five-point Likert-type scale to measure respondents’ perception towards LAKAD. The response categories were coded numerically as follows: 1 (Strongly disagree); 2 (Disagree); 3 (Neutral); 4 (Agree); and 5 (Strongly agree). The instrument consists of declarative statements that is designed to measure the four TAM constructs (Perceived Usefulness, Perceived Ease of Use, Attitude Towards Using, and Behavioral Intention to Use).
+
+The ISO/IEC 25010:2023 evaluation instrument used a five-point performance rating scale to evaluate system quality constructs through expert assessment. The scale was coded as: 1 (Poor); 2 (Fair); 3 (Good); 4 (Very  good); and 5 (Excellent). The experts used this instrument to assess system quality attributes which included Functional Suitability Performance Efficiency Compatibility Reliability Security Maintainability Flexibility and Safety.
+
+Since responses to individual questionnaire items are ordinal in nature, descriptive statistics were utilized to summarize the data without assuming equal intervals between response categories. At the item level, frequency distributions and median values were computed to describe response patterns and determine the central tendency of each item.
+
+To obtain construct-level measures, composite scores were computed by averaging responses across items corresponding to each construct. For both TAM and ISO/IEC 25010:2023 instruments, the composite score for the $i$-th respondent was calculated using in Equation \ref{Xi},
+
+\begin{equation}
+	\label{Xi}
+	X_i = \frac{\sum_{j=1}^{n} Y_{ij}}{n}
+\end{equation}
+
+Where, $X_{i}$ is the composite score for the $i$-th respondent, $Y_{ij}$ is the rating of the $i$-th respondent on the $j$-evaluation item, and $n$ is the total number of item to evaluated for a given construct. 
+
+Although individual items were ordinal, aggregating multiple items to a composite score allows the resulting construct-level scores to the treated as continuous approximation interval data. This approach was supported by the study of \textcite{Huh2025}, which found that merging multiple Likert variables into a total score not only preserves the underlying correlation structures but also increases overall statistical power. 
+
+The overall mean score for each construct was computed by taking the mean of the composite scores of all respondents, this is given by Equation \ref{Xbar},
+
+\begin{equation}
+	\label{Xbar}
+	\bar{X} = \frac{\sum_{i=1}^{m} X_i}{m}
+\end{equation}
+
+Where, $\bar{X}$ is the overall mean score for a given construct, $X_i$ is the composite score for the $i$-th respondent, and $m$ is the total number of respondents. The mean provided a summary measure of overall user acceptance (for TAM constructs) and overall system quality (for ISO/IEC 25010:2023 constructs). 
+
+The sample standard deviation was also calculated to get the variability of response among the evaluators. A lower standard deviation indicates that the respondents were in strong agreement regarding LAKAD's system acceptance and quality.  The formula for sample standard deviation is given by Equation \ref{S},
+
+\begin{equation}
+	\label{S}
+	s = \sqrt{\frac{\sum_{i=1}^{m} (X_i - \bar{X})^2}{m-1}}
+\end{equation}
+
+Where, $s$ is the sample standard deviation, $X_i$ is the composite score for the $i$-th respondent, $\bar{X}$ is the overall mean score for a given construct, and $m$ is the total number of respondents.
+
+% Interpretation table
+
+The interpretation of the mean scores for both TAM and ISO/IEC 25010:2023 was based on a predefined scale that categorizes the mean scores into descriptive ratings and interpretations. This scale helps to contextualize the numerical results and provides a clear understanding of what the mean scores indicate about user acceptance and system quality. The interpretation tables for both TAM and ISO/IEC 25010:2023 are presented in Table \ref{inter:tam} and Table \ref{inter:iso}, respectively.
+
+\begin{table}[H]
+	\centering
+	\singlespacing
+	\caption{Interpretation of Mean Scores for TAM}
+	\label{inter:tam}
+	\renewcommand{\arraystretch}{1.2}
+	\begin{tabularx}{\linewidth}{XXX}
+		\toprule 
+		\textbf{Mean Score} & \textbf{Descriptive Rating} & \textbf{Interpretation} \\
+		\midrule
+		4.21–5.00 & Highly acceptable & The system is highly acceptable and meets user expectations\\
+		3.41–4.20 & Acceptable & The system is generally acceptable and meets user expectations with minor issues \\
+		2.61–3.40 & Fairly acceptable & The system is somewhat acceptable but has room for improvement \\
+		1.81–2.60 & Slightly acceptable & The system is barely acceptable and needs significant improvements \\
+		1.00–1.80 & Not acceptable & The system is not acceptable and requires major redesign \\
+		\bottomrule
+	\end{tabularx}
+\end{table}
 
 
-TODO: Media and Mode interpretation for TAM and ISO/IEC 25010:2023 results.
-
-
-
-
-
+\begin{table}[H]
+	\centering
+	\singlespacing
+	\caption{Interpretation of Mean Scores for ISO/IEC 25010:2023}
+	\label{inter:iso}
+	\renewcommand{\arraystretch}{1.2}
+	\begin{tabularx}{\linewidth}{XXX}
+		\toprule 
+		\textbf{Mean Score} & \textbf{Descriptive Rating} & \textbf{Interpretation} \\
+		\midrule
+		4.21–5.00 & Excellent & The quality of the system is outstanding and exceeds expectations \\
+		3.41–4.20 & Very Good & The quality of the system is above average and meets expectations \\
+		2.61–3.40 & Good & The quality of the system is average and meets basic expectations \\
+		1.81–2.60 & Fair & The quality of the system is below average and needs improvement \\
+		1.00–1.80 & Poor & The quality of the system is poor and requires major redesign \\
+		\bottomrule
+	\end{tabularx}
+\end{table}
 
 \section{Ethical Considerations}
 Gemini said
