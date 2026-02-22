@@ -367,12 +367,12 @@ Figure \ref{SysArch} illustrates the system architecture of LAKAD: A Personalize
 	\centering
 	\caption{Entity Relationship Diagram}
 	\label{erd}
-	\includegraphics[width=0.8\textwidth]{erd.png}
+	\includegraphics[width=0.8\textwidth]{erd.jpeg}
 \end{figure}
 
-The Entity Relationship Diagram (ERD) of the proposed system, as shown in Figure \ref{erd}, consists of seven entities; User, Itinerary, Itinerary\_POI, Verified\_POI, Custom\_POI, Category, Preferences, each connected in a circular way with the exception of the Custom\_POI entity connected only from outside. A User entity can generate many itineraries of the entity Itinerary. An Itinerary entity can contain as many Itinerary\_POI, an entity that acts as a buffer entity for a POI before being added inside an Itinerary, this lets the system properly assign a POI inside an itinerary. Itinerary\_POI entities reference either a Verified\_POI or Custom\_POI, which differs as Verified\_POI entities are locations that are specifically confirmed by PHACTO to be a tourist destination in Bulacan, whereas a Custom\_POI is not necessarily one. By consequence, each Verified\_POI has at least one dedicated Category they belong to. A User entity may also have their own Preferences which are then classified by Category.
+The Entity Relationship Diagram (ERD) of the system, as shown in Figure \ref{erd}, consists of eight entities; place, opening\_hours, distances, stops, itinerary, profiles, reviews, and review\_reports. A profiles entity can generate many itineraries of the entity itinerary and provide multiple entries in the reviews entity. An itinerary entity can contain as many stops, and acts as a junction entity for a place before being organized inside an itinerary, which lets the system properly assign a visit\_order and visit\_duration for a location within a specific trip. Stops entities reference a place, which serves as the central container for location data, coordinates, and ratings. By consequence, each place has at least one dedicated opening\_hours entry to define its schedule. A place entity can be the subject of multiple reviews. A reviews entity may also have its own review\_reports which are then used by the system to track moderation status.
 
-\begin{figure}
+\begin{figure}[H]
 	\centering
 	\caption{Data Flow Diagram}
 	\label{dfd}
@@ -604,7 +604,6 @@ The sample standard deviation was also calculated to get the variability of resp
 
 Where, $s$ is the sample standard deviation, $X_i$ is the composite score for the $i$-th respondent, $\bar{X}$ is the overall mean score for a given construct, and $m$ is the total number of respondents.
 
-% Interpretation table
 
 The interpretation of the mean scores for both TAM and ISO/IEC 25010:2023 was based on a predefined scale that categorizes the mean scores into descriptive ratings and interpretations. This scale helps to contextualize the numerical results and provides a clear understanding of what the mean scores indicate about user acceptance and system quality. The interpretation tables for both TAM and ISO/IEC 25010:2023 are presented in Table \ref{inter:tam} and Table \ref{inter:iso}, respectively.
 
