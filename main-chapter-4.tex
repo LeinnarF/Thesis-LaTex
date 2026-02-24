@@ -281,7 +281,39 @@ If the user chooses to create a new itinerary manually, they can select the tour
 
 \subsection{Itinerary Navigation}
 
-\subsection{Additional Features}
+LAKAD also features navigation of an itinerary by showing the direction to the first unvisited tourist spot in the itinerary. Figure \ref{fig:8a} shows the direction by displaying the route from the user's current location to the first unvisited tourist spot in the itinerary. It also shows the estimated time of arrival in the tourist spot and the departure time based on the duration set by the user. Scrolling down, users can view more information such as the entire direction to the tourist spot, the next tourist spot in the itinerary, also a button to mark the tourist spot as visited, as shown in Figure \ref{fig:8b}. Users can also change the travel mode for navigation, which includes driving, walking, and bicycling, as shown in Figure \ref{fig:8c}. The user can choose to avoid tolls and turn on the voice navigation. This feature provides users with a convenient way to navigate their itineraries and ensures that they can easily find their way to the tourist spots they want to visit.  
+
+\begin{figure}[H]
+    \centering
+    \caption{Itinerary Navigation}
+    \begin{subfigure}[H]{0.3\textwidth}
+        \centering
+        \fbox{\includegraphics[width=\textwidth]{dev-system/navigationdirection.jpg}}
+        \caption{Directions}
+        \label{fig:8a}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[H]{0.3\textwidth}
+        \centering
+        \fbox{\includegraphics[width=\textwidth]{dev-system/navigationarrival.jpg}}
+        \caption{More Information}
+        \label{fig:8b}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[H]{0.3\textwidth}
+        \centering
+        \fbox{\includegraphics[width=\textwidth]{dev-system/navigationmode.jpg}}
+        \caption{Travel Mode}
+        \label{fig:8c}
+    \end{subfigure}
+\end{figure}
+
+Additionally, a stop is also marked as visited when the user is detected to be within a certain proximity of the tourist spot. This feature provides users with a seamless navigation experience, allowing them to focus on enjoying their trip while the application automatically tracks their progress through the itinerary.
+
+\subsection{Admin Side}
+
+This is an additional feature of the LAKAD application that allows the application to be more manageable and scalable. The administrator side mainly features the management of the tourist spots that will be shown in the application. It also provides the analytics of each places
+
 
 \section{System Evaluation}
 
