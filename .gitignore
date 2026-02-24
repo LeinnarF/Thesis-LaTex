@@ -22,3 +22,5 @@ Figures/
 Letters/
 Instrument/
 Misc/
+.vscode/
+%OUTDIR%/

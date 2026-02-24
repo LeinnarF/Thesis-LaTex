@@ -153,16 +153,25 @@ LAKAD allows user to explore tourist spots in Bulacan in an interactive manner. 
 
 The tourist spot markers on the map are interactive, allowing users to click on them to view detailed information about the tourist spot, including its name, category, location, description, and user reviews and ratings as shown in Figure \ref{fig:2a}. There is also a button that allows users to quickly add the tourist spot to their itinerary. Scrolling down, users can view the reviews and ratings of the tourist spot, as shown in Figure \ref{fig:2b}. This feature provides users with valuable insights from other travelers. Figure \ref{fig:2c} shows more comprehensive reviews and ratings of the tourist spot by clicking the “See all reviews” button. The “All Reviews” shows the reviews and ratings of other users and allows sorting and filtering of the reviews.
 
-
 \begin{figure}[H]
     \centering
-    \caption{Writing Review and Rating}
+    \caption{Reviews and Ratings}
+    \begin{subfigure}[H]{0.3\textwidth}
         \centering
-        \fbox{\includegraphics[width=0.3\textwidth]{dev-system/makerating.jpg}}
+        \fbox{\includegraphics[width=\textwidth]{dev-system/makerating.jpg}}
+        \caption{Write Review and Rating}
         \label{fig:3a}
+    \end{subfigure}
+    \hfil
+    \begin{subfigure}[H]{0.3\textwidth}
+        \centering
+        \fbox{\includegraphics[width=\textwidth]{dev-system/report.png}}
+        \caption{Report Review}
+        \label{fig:3b}
+    \end{subfigure}
 \end{figure}
 
-Users of LAKAD can also create their own reviews and ratings for the tourist spots they have visited. They can rate the tourist spot using a star rating, write a review, and upload photos of their experience, as shown in Figure \ref{fig:3a}. This feature encourages user engagement and helps build a community of travelers sharing their experiences.
+Users of LAKAD can also create their own reviews and ratings for the tourist spots they have visited. They can rate the tourist spot using a star rating, write a review, and upload photos of their experience, as shown in Figure \ref{fig:3a}. Additionally, users can report inappropriate reviews to maintain the quality of reviews in the application, as shown in Figure \ref{fig:3b}. This encourages user engagement and helps build a community of travelers sharing their experiences while maintaining a healthy review environment.
 
 
 \subsection{Personalized Itinerary Generation}
@@ -313,6 +322,8 @@ Additionally, a stop is also marked as visited when the user is detected to be w
 
 \subsection{Admin Side}
 
+This is an additional feature of the LAKAD application that allows the application to be more manageable and scalable.
+
 \begin{figure}[H]
     \centering
     \caption{Admin Options}
@@ -320,7 +331,7 @@ Additionally, a stop is also marked as visited when the user is detected to be w
     \fbox{\includegraphics[width=0.3\textwidth]{dev-system/adminmode.jpg}}
 \end{figure}
 
-This is an additional feature of the LAKAD application that allows the application to be more manageable and scalable. The administrator side mainly features the management of the tourist spots that will be shown in the application. Figure \ref{admin:option} shows all the privileges of the administrator such as managing user accounts, managing tourist spots, and managing itineraries.  
+ The administrator side mainly features the management of the tourist spots that will be shown in the application. Figure \ref{admin:option} shows all the privileges of the administrator such as managing user accounts, managing tourist spots, and managing itineraries.  
 
 \begin{figure}[H]
     \centering
@@ -349,6 +360,8 @@ The administrator can see the summary and reports of the application in the Anal
     \end{subfigure}
 \end{figure}
 
+To keep the application scalable and up-to-date, the administrator can manage the tourist spots in the application by adding new tourist spots, updating existing tourist spots, see Figure \ref{admin:places}. When adding a new tourist spot, the administrator must fill in the required information such as the name, category, location, description, and upload photos of the tourist spot, as shown in Figure \ref{admin:add}. The coordinates of the tourist can either be retrieved manually from Google Maps or other mapping services, or by pinning the location of the tourist spot on the map. This feature allows the administrator to easily manage the tourist spots in the application.
+
 \begin{figure}[H]
     \centering
     \caption{Tourist Spot Management}
@@ -366,22 +379,37 @@ The administrator can see the summary and reports of the application in the Anal
         \label{admin:anal}
     \end{subfigure}
 \end{figure}
-To keep the application scalable and up-to-date, the administrator can manage  
 
+Existing tourist spots can also be updated by the administrator, as shown in Figure \ref{admin:update}. The administrator can update the information of the tourist spot such as the name, category, location, description, and photos. Additionally, the analytics of the tourist spot can also be viewed, which shows the total number of visits, total number of reviews, average rating, rating distribution, visit trends, and number of itineraries that include the tourist spot, as shown in Figure \ref{admin:anal}. This feature provides the administrator with insights into the performance of each tourist spot.
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \caption{Distance Matrix Management}
     \label{admin:distance}
     \fbox{\includegraphics[width=0.3\textwidth]{dev-system/admindistance.jpg}}
 \end{figure}
 
-\begin{figure}
+One of the critical components of the LAKAD application is the distance matrix, which contains the distances between all pairs of tourist spots. Figure \ref{admin:distance} shows the distance matrix management page, where the distance matrix can be recomputed when new tourist spots are added. This approach lowers the API usage from Mapbox, ensuring that the application can scale without incurring high costs from API calls. Since, it will calculate the distances between all pairs of tourist spots, expect that the recomputation process may take a while, especially as the number of tourist spots increases.  
+
+\begin{figure}[H]
     \centering
     \caption{Review Reports}
-    \label{admin:report}
-    \fbox{\includegraphics[width=0.3\textwidth]{dev-system/adminreport.jpg}}
+    \begin{subfigure}[H]{0.3\textwidth}
+        \centering
+        \fbox{\includegraphics[width=\textwidth]{dev-system/adminreport.jpg}}
+        \caption{{}}
+        \label{admin:report1}
+    \end{subfigure}
+    \hfil
+    \begin{subfigure}[H]{0.3\textwidth}
+        \centering
+        \fbox{\includegraphics[width=\textwidth]{dev-system/adminreport2.jpg}}
+        \caption{{ }}
+        \label{admin:report2}
+    \end{subfigure}
 \end{figure}
+
+The administrator can also view the reported reviews in the application, as shown in Figure \ref{admin:report1} and Figure \ref{admin:report2}. Users can report inappropriate reviews, and the administrator can view these reported reviews and take appropriate actions such as deleting the review, hide, or dismiss the report. This feature helps maintain the quality of reviews in the application and ensures that users can rely on the reviews and ratings provided by other travelers.
 
 \section{System Evaluation}
 
