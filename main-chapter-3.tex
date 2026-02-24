@@ -312,14 +312,14 @@ This methodology offers significant advantages for the LAKAD development team. I
 The analysis phase of the development involves outlining the system’s scope, objectives, and requirements. This was done by reviewing the existing literature in itinerary recommendation and local tourism in the province of Bulacan. This phase establishes the key features of LAKAD, that integrates five major features designed to provide optimized, personalized, and efficient itinerary planning for tourists exploring Bulacan. Each feature combines techniques, verified local data, and user-centric design principles.
 
 \begin{enumerate}
+	\item \textbf{Tourist Spot Exploration.}
+		A tourist spot search feature allows the users to explore Bulacan’s tourist attractions specifically through an interface where they can search through a catalog of  tourist destinations that was verified by the Provincial History, Arts, Culture, and Tourism Office (PHACTO) of Bulacan. Furthermore, the system displays important and relevant information such as location and short description about the tourist spot.
+
 	\item \textbf{Personalized Itinerary Generation.}
 		The main feature of LAKAD is the personalized itinerary generator focusing on the diverse cultural, historical and heritage tourist destinations located across the province of Bulacan. The system developed to adapt to user-specific factors that can affect the personalization aspect of an itinerary. This feature aims to cater the personal preferences that a user has while still promoting the exploration of the rich tourism culture of the region.
 
 	\item \textbf{Itinerary Optimization.}
 		The optimization feature of the system works in line with the personalized itinerary generator by employing the chosen best algorithm for route optimization. The optimization further helps the minimization of travel distance and constraints to visit every possible destination within the generated itinerary.
-
-	\item \textbf{Tourist Spot Searching.}
-		A tourist spot search feature allows the users to explore Bulacan’s tourist attractions specifically through an interface where they can search through a catalog of  tourist destinations that was verified by the Provincial History, Arts, Culture, and Tourism Office (PHACTO) of Bulacan. Furthermore, the system displays important and relevant information such as location and short description about the tourist spot.
 
 	\item \textbf{Itinerary Management.}
 		An Itinerary Management feature of the application allows users to manage and organize their itineraries. The users may add, edit, or remove destinations from their itinerary. It also allows the tracking of visited and unvisited locations so that users are informed of the status of their progress in the itinerary. Users are also able to save and reload itineraries for future use.
@@ -370,7 +370,7 @@ Figure \ref{SysArch} illustrates the system architecture of LAKAD: A Personalize
 	\includegraphics[width=0.8\textwidth]{erd.jpeg}
 \end{figure}
 
-The Entity Relationship Diagram (ERD) of the system, as shown in Figure \ref{erd}, consists of eight entities; place, opening\_hours, distances, stops, itinerary, profiles, reviews, and review\_reports. A profiles entity can generate many itineraries of the entity itinerary and provide multiple entries in the reviews entity. An itinerary entity can contain as many stops, and acts as a junction entity for a place before being organized inside an itinerary, which lets the system properly assign a visit\_order and visit\_duration for a location within a specific trip. Stops entities reference a place, which serves as the central container for location data, coordinates, and ratings. By consequence, each place has at least one dedicated opening\_hours entry to define its schedule. A place entity can be the subject of multiple reviews. A reviews entity may also have its own review\_reports which are then used by the system to track moderation status.
+The Entity Relationship Diagram (ERD) of the system, as shown in Figure \ref{erd}, consists of eight entities; \texttt{place}, \texttt{opening\_hours}, \texttt{distances}, \texttt{stops}, \texttt{itinerary}, \texttt{profiles}, \texttt{reviews}, and \texttt{review\_reports}. A \texttt{profiles} entity can generate many itineraries of the entity \texttt{itinerary} and provide multiple entries in the \texttt{reviews} entity. An \texttt{itinerary} entity can contain as many stops, and acts as a junction entity for a place before being organized inside an itinerary, which lets the system properly assign a \texttt{visit\_order} and \texttt{visit\_duration} for a location within a specific trip. \texttt{stops} entities reference a place, which serves as the central container for location data, coordinates, and ratings. Additionally, each place has at least one dedicated \texttt{opening\_hours} entry to define its schedule. A place entity can be the subject of multiple reviews. A \texttt{reviews} entity may also have its own \texttt{review\_reports} which are then used by the system to track moderation status.
 
 \begin{figure}[H]
 	\centering
