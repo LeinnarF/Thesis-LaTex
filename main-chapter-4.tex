@@ -3,7 +3,7 @@
 This chapter presents the results of the study, including a comparative analysis of TSP algorithms,  the developed application, and the evaluation of system acceptability and software quality. The findings are interpreted in the context of the research objectives and questions outlined in Chapter 1.
 
 \section{Comparative Analysis of TSP Algorithms}
-This section presents the performance evaluation of the selected metaheuristic algorithms for solving the Traveling Salesman Problem (TSP). The algorithms were tested on four standard instances from the TSPLIB library: burma14, bays29, eil51, and berlin52. The primary goal was to identify the most suitable algorithm for the LAKAD mobile application, balancing solution quality (minimizing travel distance) and runtime efficiency (minimizing user wait time).
+This section presents the performance evaluation of the selected metaheuristic algorithms for solving the Traveling Salesman Problem (TSP). The algorithms were tested on four standard instances from the TSPLIB library: burma14, bays29, eil51, and berlin52. The primary goal was to identify the most suitable algorithm for the Lakad mobile application, balancing solution quality (minimizing travel distance) and runtime efficiency (minimizing user wait time).
 
 \subsection{Analysis of Solution Quality (Accuracy)}
 
@@ -36,7 +36,7 @@ The results indicate that the Genetic Algorithm (GA) consistently achieved highe
 
 \subsection{Analysis of Runtime Efficiency}
 
-Runtime efficiency is critical for the LAKAD application, as users expect quick responses when optimizing their travel itineraries. Table \ref{tab:runtime} summarizes the average runtime (in seconds) for each algorithm across the four TSPLIB instances, along with an assessment of their growth trends.
+Runtime efficiency is critical for the Lakad application, as users expect quick responses when optimizing their travel itineraries. Table \ref{tab:runtime} summarizes the average runtime (in seconds) for each algorithm across the four TSPLIB instances, along with an assessment of their growth trends.
 
 \begin{table}[H]
 	\centering
@@ -63,7 +63,7 @@ Runtime efficiency is critical for the LAKAD application, as users expect quick 
 While GA achieved the best solution quality, its runtime increased exponentially with the problem size. For the berlin52 instance, GA required approximately 196.59 seconds (over 3 minutes) to complete. In contrast, EHO had the lowest runtime across all instances, with a runtime of $<0.5$ seconds even for the largest instance. SA and GWO also demonstrated low runtimes, while ACO and PSO showed moderate to high runtimes, especially as the problem size increases.
 
 \subsection{Algorithm Ranking}
-To select the most suitable algorithm for the LAKAD application, a multi-criteria decision analysis (MCDA) approach was used to rank the algorithms based on both solution quality and runtime efficiency, particularly the Simple Additive Weighting (SAW) method. The final scores and rankings are presented in Table \ref{tab:rank}. Equal weights ($w _{i}= 0.5$) were assigned to both criteria.
+To select the most suitable algorithm for the Lakad application, a multi-criteria decision analysis (MCDA) approach was used to rank the algorithms based on both solution quality and runtime efficiency, particularly the Simple Additive Weighting (SAW) method. The final scores and rankings are presented in Table \ref{tab:rank}. Equal weights ($w _{i}= 0.5$) were assigned to both criteria.
 
 \begin{table}[H]
 	\centering
@@ -89,13 +89,13 @@ To select the most suitable algorithm for the LAKAD application, a multi-criteri
 
 Based on the SAW scores, Simulated Annealing (SA) emerged as the top-ranked algorithm, offering a strong balance between solution quality and runtime efficiency. Although GA achieved the best accuracy, its long runtime makes it resulted in a consistently high SAW score, placing it in the 6th position. EHO performed well on small instances, but its accuracy degraded on larger instances, making it less reliable for complex itineraries. 
 
-In conclusion, Simulated Annealing (SA) is the selected route optimization algorithm for LAKAD. It provides a good trade-off between solution quality and runtime efficiency, ensuring that users receive optimized itineraries in a reasonable time frame, enhancing the overall user experience of the LAKAD application.
+In conclusion, Simulated Annealing (SA) is the selected route optimization algorithm for Lakad. It provides a good trade-off between solution quality and runtime efficiency, ensuring that users receive optimized itineraries in a reasonable time frame, enhancing the overall user experience of the Lakad application.
 
 
 
 
 \section{The Developed System}
-The developed system, LAKAD, was developed as both a place explorer and itinerary planner with route optimization capabilities. It allows tourists to search tourists spots within Bulacan and plan their itineraries by generating one for them and gives out navigation instructions to travel. The LAKAD application has five key features, which are described in the following subsections.
+The developed system, Lakad, was developed as both a place explorer and itinerary planner with route optimization capabilities. It allows tourists to search tourists spots within Bulacan and plan their itineraries by generating one for them and gives out navigation instructions to travel. The Lakad application has five key features, which are described in the following subsections.
 
 \subsection{Tourist Spot Exploration}
 
@@ -124,7 +124,7 @@ The developed system, LAKAD, was developed as both a place explorer and itinerar
     \end{subfigure}
 \end{figure}
 
-LAKAD allows user to explore tourist spots in Bulacan in an interactive manner. Figure \ref{fig:1a} shows a map which has markers for the respective tourist spots with their images. There is also a search bar that allows user to search for tourist spots by name, as shown in Figure \ref{fig:1b}. The user can also view the list of all tourist spots with their images, categories, locations, and ratings, as shown in Figure \ref{fig:1c}. This feature provides users with a comprehensive overview of the available tourist spots in Bulacan.
+Lakad allows user to explore tourist spots in Bulacan in an interactive manner. Figure \ref{fig:1a} shows a map which has markers for the respective tourist spots with their images. There is also a search bar that allows user to search for tourist spots by name, as shown in Figure \ref{fig:1b}. The user can also view the list of all tourist spots with their images, categories, locations, and ratings, as shown in Figure \ref{fig:1c}. This feature provides users with a comprehensive overview of the available tourist spots in Bulacan.
 
 \begin{figure}[H]
     \centering
@@ -171,7 +171,7 @@ The tourist spot markers on the map are interactive, allowing users to click on 
     \end{subfigure}
 \end{figure}
 
-Users of LAKAD can also create their own reviews and ratings for the tourist spots they have visited. They can rate the tourist spot using a star rating, write a review, and upload photos of their experience, as shown in Figure \ref{fig:3a}. Additionally, users can report inappropriate reviews to maintain the quality of reviews in the application, as shown in Figure \ref{fig:3b}. This encourages user engagement and helps build a community of travelers sharing their experiences while maintaining a healthy review environment.
+Users of Lakad can also create their own reviews and ratings for the tourist spots they have visited. They can rate the tourist spot using a star rating, write a review, and upload photos of their experience, as shown in Figure \ref{fig:3a}. Additionally, users can report inappropriate reviews to maintain the quality of reviews in the application, as shown in Figure \ref{fig:3b}. This encourages user engagement and helps build a community of travelers sharing their experiences while maintaining a healthy review environment.
 
 
 \subsection{Personalized Itinerary Generation}
@@ -201,7 +201,7 @@ Users of LAKAD can also create their own reviews and ratings for the tourist spo
     \end{subfigure}
 \end{figure}
 
-One of the core features of LAKAD is its ability to generate personalized itineraries for users based on their preferences and selected tourist spots. 
+One of the core features of Lakad is its ability to generate personalized itineraries for users based on their preferences and selected tourist spots. 
 The Adaptive Genetic Algorithm with Dynamic Mutation and Crossover Probabilities (AGAM) is the one responsible for generating personalized itineraries, and the required parameters are filled by the user, as shown in Figure \ref{fig:4a}. Users can select their preferred tourist spots location which are based on the districts and municipalities of Bulacan, as shown in Figure \ref{fig:4b}. Next, users must select the type of tourist spots they want to visit, which are based on the categories of the tourist spots, as shown in Figure \ref{fig:4c}. The maximum travel distance and the number of tourist spots to visit are also required parameters for itinerary generation. After filling in the required parameters, users can click the “Generate Itinerary” button to receive a personalized itinerary that optimizes their travel route based on their preferences and selected tourist spots.
 
 \begin{figure}[H]
@@ -246,7 +246,7 @@ After generating the itinerary, a card view of a tourist spot in the itinerary i
     \end{subfigure}
 \end{figure}
 
-The initial generated itinerary only considers the maximum travel distance, ensuring that the total distance of the itinerary does not exceed the specified limit. However, it does not optimize the travel route between the selected tourist spots. Hence, LAKAD incorporates the Simulated Annealing (SA) algorithm to optimize the travel route of the generated itinerary. Figure \ref{fig:6a} shows the initial arrangement of the tourist spots in the itinerary generated by AGAM. The “Optimize” button can then be clicked to optimize the travel route of the itinerary using SA. Figure \ref{fig:6b} shows the optimized arrangement of the tourist spots in the itinerary after applying SA. The first tourist spot in the itinerary is based on the shortest distance from the user's current location, and the subsequent tourist spots are arranged in a way that minimizes the total travel distance. As shown in 
+The initial generated itinerary only considers the maximum travel distance, ensuring that the total distance of the itinerary does not exceed the specified limit. However, it does not optimize the travel route between the selected tourist spots. Hence, Lakad incorporates the Simulated Annealing (SA) algorithm to optimize the travel route of the generated itinerary. Figure \ref{fig:6a} shows the initial arrangement of the tourist spots in the itinerary generated by AGAM. The “Optimize” button can then be clicked to optimize the travel route of the itinerary using SA. Figure \ref{fig:6b} shows the optimized arrangement of the tourist spots in the itinerary after applying SA. The first tourist spot in the itinerary is based on the shortest distance from the user's current location, and the subsequent tourist spots are arranged in a way that minimizes the total travel distance. As shown in 
 Figure \ref{fig:6}, from 71.326 km to 31.250 km, the total travel distance for this itinerary was significantly reduced. This shows the effectiveness of the SA algorithm. Additionally, optimization process is done in a reasonable time frame.
 
 There are also instances where the initial generated itinerary is the optimal solution, thus no changes are made to the arrangement of the tourist spots in the itinerary after optimization. 
@@ -316,13 +316,13 @@ If the user chooses to create a new itinerary manually, they can select the tour
     \end{subfigure}
 \end{figure}
 
-LAKAD also features navigation of an itinerary by showing the direction to the first unvisited tourist spot in the itinerary. Figure \ref{fig:8a} shows the direction by displaying the route from the user's current location to the first unvisited tourist spot in the itinerary. It also shows the estimated time of arrival in the tourist spot and the departure time based on the duration set by the user. Scrolling down, users can view more information such as the entire direction to the tourist spot, the next tourist spot in the itinerary, also a button to mark the tourist spot as visited, as shown in Figure \ref{fig:8b}. Users can also change the travel mode for navigation, which includes driving, walking, and bicycling, as shown in Figure \ref{fig:8c}. The user can choose to avoid tolls and turn on the voice navigation. This feature provides users with a convenient way to navigate their itineraries and ensures that they can easily find their way to the tourist spots they want to visit.  
+Lakad also features navigation of an itinerary by showing the direction to the first unvisited tourist spot in the itinerary. Figure \ref{fig:8a} shows the direction by displaying the route from the user's current location to the first unvisited tourist spot in the itinerary. It also shows the estimated time of arrival in the tourist spot and the departure time based on the duration set by the user. Scrolling down, users can view more information such as the entire direction to the tourist spot, the next tourist spot in the itinerary, also a button to mark the tourist spot as visited, as shown in Figure \ref{fig:8b}. Users can also change the travel mode for navigation, which includes driving, walking, and bicycling, as shown in Figure \ref{fig:8c}. The user can choose to avoid tolls and turn on the voice navigation. This feature provides users with a convenient way to navigate their itineraries and ensures that they can easily find their way to the tourist spots they want to visit.  
 
 Additionally, a stop is also marked as visited when the user is detected to be within a certain proximity of the tourist spot. This feature provides users with a seamless navigation experience, allowing them to focus on enjoying their trip while the application automatically tracks their progress through the itinerary.
 
 \subsection{Admin Side}
 
-This is an additional feature of the LAKAD application that allows the application to be more manageable and scalable.
+This is an additional feature of the Lakad application that allows the application to be more manageable and scalable.
 
 \begin{figure}[H]
     \centering
@@ -389,7 +389,7 @@ Existing tourist spots can also be updated by the administrator, as shown in Fig
     \fbox{\includegraphics[width=0.3\textwidth]{dev-system/admindistance.jpg}}
 \end{figure}
 
-One of the critical components of the LAKAD application is the distance matrix, which contains the distances between all pairs of tourist spots. Figure \ref{admin:distance} shows the distance matrix management page, where the distance matrix can be recomputed when new tourist spots are added. This approach lowers the API usage from Open Route Service, ensuring that the application can scale without incurring high costs from API calls. Since, it will calculate the distances between all pairs of tourist spots, expect that the recomputation process may take a while, especially as the number of tourist spots increases.  
+One of the critical components of the Lakad application is the distance matrix, which contains the distances between all pairs of tourist spots. Figure \ref{admin:distance} shows the distance matrix management page, where the distance matrix can be recomputed when new tourist spots are added. This approach lowers the API usage from Open Route Service, ensuring that the application can scale without incurring high costs from API calls. Since, it will calculate the distances between all pairs of tourist spots, expect that the recomputation process may take a while, especially as the number of tourist spots increases.  
 
 \begin{figure}[H]
     \centering
@@ -413,11 +413,11 @@ The administrator can also view the reported reviews in the application, as show
 
 \section{System Evaluation}
 
-This section presents the evaluation results of the LAKAD application, focusing on the acceptability of the system among users and the overall software quality. The data collected was processed and analyzed in Jupyter Notebook with the use of Python libraries such as Pandas, Matplotlib, and NumPy. The results are presented in terms of per construct median scores, frequency distributions, mean scores, and standard deviations. 
+This section presents the evaluation results of the Lakad application, focusing on the acceptability of the system among users and the overall software quality. The data collected was processed and analyzed in Jupyter Notebook with the use of Python libraries such as Pandas, Matplotlib, and NumPy. The results are presented in terms of per construct median scores, frequency distributions, mean scores, and standard deviations. 
 
 \subsection{Evaluation of System Acceptability}
 
-The acceptability of the LAKAD was evaluated  with a Technology Acceptance Model (TAM) survey, which was distributed to 150 respondents. The distribution was proportionately done across different tourist spots in a selected municipality in Bulacan. 
+The acceptability of the Lakad was evaluated  with a Technology Acceptance Model (TAM) survey, which was distributed to 150 respondents. The distribution was proportionately done across different tourist spots in a selected municipality in Bulacan. 
 
 \begin{table}[H]
 	\centering
@@ -439,7 +439,7 @@ The acceptability of the LAKAD was evaluated  with a Technology Acceptance Model
 	\end{tabularx}
 \end{table}
 
-Table \ref{tam1} summarizes the results of the TAM survey, showing the mean scores and standard deviations for each construct. All the constructs achieved a high mean which was interpreted as highly acceptable, indicating that users found the LAKAD application to be useful, easy to use, and had a positive attitude towards using it. Perceived usefulness, perceived ease of use, and attitude towards using all had a mean score of 4.71 or higher, suggesting that the LAKAD application effectively meets user needs and expectations. The behavioral intention to use scored slightly lower than the other constructs but still achieved a high mean score of 4.56, indicating that users are likely to continue using the application in the future. The standard deviations for all constructs were relatively low (ranging from 0.49 to 0.65), suggesting that there was a consensus among respondents regarding their perceptions of the LAKAD application. Overall, the results indicate that the LAKAD application is well-received by users and has a high level of acceptability with a grand TAM score of 4.67 which is interpreted as highly acceptable.
+Table \ref{tam1} summarizes the results of the TAM survey, showing the mean scores and standard deviations for each construct. All the constructs achieved a high mean which was interpreted as highly acceptable, indicating that users found the Lakad application to be useful, easy to use, and had a positive attitude towards using it. Perceived usefulness, perceived ease of use, and attitude towards using all had a mean score of 4.71 or higher, suggesting that the Lakad application effectively meets user needs and expectations. The behavioral intention to use scored slightly lower than the other constructs but still achieved a high mean score of 4.56, indicating that users are likely to continue using the application in the future. The standard deviations for all constructs were relatively low (ranging from 0.49 to 0.65), suggesting that there was a consensus among respondents regarding their perceptions of the Lakad application. Overall, the results indicate that the Lakad application is well-received by users and has a high level of acceptability with a grand TAM score of 4.67 which is interpreted as highly acceptable.
 
 \begin{table}[H]
 	\centering
@@ -476,13 +476,12 @@ Table \ref{tam1} summarizes the results of the TAM survey, showing the mean scor
 	\end{tabularx}
 \end{table}
 
-Table \ref{tam2} shows the per item median scores and frequency distributions for each item in the TAM survey. This shows the underlying distribution of responses for each item. The data is heavily skewed towards the higher end of the scale (4 and 5), indicating that most respondents had a positive perception towards LAKAD. In the Perceived Usefulness (PU), all items report a median score of 5. The Usefulness item (PU5) has the highest frequency of 5s, with 126 respondents rating it as 5, indicating that users find the system very useful. For the Perceived Ease of Use (PEOU), all items also report a median score of 5. The system is perceived as easy to operate, learn, and master. Ease of Operation (PEU5) has the highest frequency of 5s, with 120 respondents rating it as 5. For the Attitude Towards Using (ATU), all items also report a median score of 5. Users express high satisfaction, enjoyment, and positive feelings towards using the system. Satisfaction (ATU3) has the highest frequency of 5s, with 107 respondents rating it as 5. The Behavioral Intention to Use (BI) items show slightly more variance, this explains the results in the lower mean score for this construct in Table \ref{tam1}.   
-
-% TODO: Continue
-
+Table \ref{tam2} shows the per item median scores and frequency distributions for each item in the TAM survey. This shows the underlying distribution of responses for each item. The data is heavily skewed towards the higher end of the scale (4 and 5), indicating that most respondents had a positive perception towards Lakad. In the Perceived Usefulness (PU), all items report a median score of 5. The Usefulness item (PU5) has the highest frequency of 5s, with 126 respondents rating it as 5, indicating that users find the system very useful. For the Perceived Ease of Use (PEOU), all items also report a median score of 5. The system is perceived as easy to operate, learn, and master. Ease of Operation (PEU5) has the highest frequency of 5s, with 120 respondents rating it as 5. For the Attitude Towards Using (ATU), all items also report a median score of 5. Users express high satisfaction, enjoyment, and positive feelings towards using the system. Satisfaction (ATU3) has the highest frequency of 5s, with 107 respondents rating it as 5. The Behavioral Intention to Use (BI) items show slightly more variance, this explains the results in the lower mean score for this construct in Table \ref{tam1}. While the frequency reveal that respondents may not use the system intentionally, it can be implied that they might still use it in the future as shown in Future Use responses. It can also be linked to most of the respondents who answered that they rarely travel.
+ 
 \begin{figure}[H]
     \centering
     \caption{Frequency distribution of TAM survey responses}
+    \label{fig:tam-frequency-distribution}
     \begin{subfigure}[H]{0.3\textwidth}
         \centering
         \fbox{\includegraphics[width=\textwidth, trim=0 0 0 1cm, clip]{evaluation/pu.png}}
@@ -512,9 +511,11 @@ Table \ref{tam2} shows the per item median scores and frequency distributions fo
     \end{subfigure}
 \end{figure}
 
+Figure \ref{fig:tam-frequency-distribution} shows the frequency distribution of responses for each construct in the TAM survey. The distribution is heavily skewed towards the higher end of the scale (4 and 5), indicating that most respondents had a positive perception towards Lakad. This further supports the interpretation of the high mean scores for each construct in Table \ref{tam1}, suggesting that users find the Lakad application to be useful, easy to use, and have a positive attitude towards using it. It also explores the Behavioral Intention to Use construct, which shows a slightly more varied distribution compared to the other constructs, but still indicates a generally positive intention to use the application in the future.
+
 \subsection{Software Quality Evaluation}
 
-The software quality of the LAKAD application was evaluated using a survey based on the ISO/IEC 25010:2023 software quality model. The survey was done by IT experts, Software developers, and selected faculty members in the College of Information and Communications Technology (CICT) of Bulacan State University. The survey was initially distributed to 20 respondents, but now additional 2 respondents were added to the evaluation, making a total of 22 respondents. 
+The software quality of the Lakad application was evaluated using a survey based on the ISO/IEC 25010:2023 software quality model. The survey was done by IT experts, Software developers, and selected faculty members in the College of Information and Communications Technology (CICT) of Bulacan State University. The survey was initially distributed to 20 respondents, but now additional 2 respondents were added to the evaluation, making a total of 22 respondents. 
 
 \begin{table}[H]
 	\centering
@@ -541,14 +542,14 @@ The software quality of the LAKAD application was evaluated using a survey based
 	\end{tabularx}
 \end{table}
 
-Table \ref{iso1} summarizes the results of the software quality evaluation based on the ISO/IEC 25010:2023 model. All constructs achieved a high mean score ranging from 4.66 to 4.86, which were interpreted as excellent. The highest mean score was for Functional Suitability (4.86), indicating that the LAKAD application effectively meets the functional requirements and provides the necessary features for users. Security (4.83) and Reliability (4.82) also scored very high, suggesting that the application is secure and reliable for users. Compatibility had the lowest mean score (4.66) among the constructs, this is explained by the exclusivity of the app to Android devices, which limits its compatibility with other platforms. But since the app is written in React Native, it can be easily ported to other platforms in the future. The standard deviations for all constructs were relatively low (ranging from 0.35 to 0.57), indicating that there was a consensus among respondents regarding the software quality of the LAKAD application. Overall, the results indicate that the LAKAD application has excellent software quality across all evaluated constructs, with a grand ISO/IEC 25010:2023 score of 4.76 which is interpreted as excellent.  
+Table \ref{iso1} summarizes the results of the software quality evaluation based on the ISO/IEC 25010:2023 model. All constructs achieved a high mean score ranging from 4.66 to 4.86, which were interpreted as excellent. The highest mean score was for Functional Suitability (4.86), indicating that the Lakad application effectively meets the functional requirements and provides the necessary features for users. Security (4.83) and Reliability (4.82) also scored very high, suggesting that the application is secure and reliable for users. Compatibility had the lowest mean score (4.66) among the constructs, this is explained by the exclusivity of the app to Android devices, which limits its compatibility with other platforms. But since the app is written in React Native, it can be easily ported to other platforms in the future. The standard deviations for all constructs were relatively low (ranging from 0.35 to 0.57), indicating that there was a consensus among respondents regarding the software quality of the Lakad application. Overall, the results indicate that the Lakad application has excellent software quality across all evaluated constructs, with a grand ISO/IEC 25010:2023 score of 4.76 which is interpreted as excellent.  
 
 
 To provide a more detailed analysis of the software quality evaluation, the per item median scores and frequency distributions for each item in the survey are presented in the following tables. Exploring for deeper understanding of the specific aspects of each construct that contributed to the overall high scores.
 
 All the items in the survey reported a median score of 5, the majority of the respondents rated each item as 5. Figure \ref{fig:iso_freq} shows the per item frequency distribution of the ISO/IEC 25010:2023 survey, which illustrates the distribution of responses for each item in the survey. The letter before the item corresponds to the construct, such that (A) is for Functional Suitability, (B) is for Performance Efficiency, (C) is for Compatibility, (D) is for Interaction Capability, (E) is for Reliability, (F) is for Security, (G) is for Maintainability, (H) is for Flexibility, and (I) is for Safety. 
 
-The per item frequency distribution in Figure \ref{fig:iso_freq} reveals the cause of the high mean scores for each construct. It also shows the strengths and weaknesses of LAKAD in terms of software quality. Accountability (F), Functional Appropriateness (A), Testability (G), and Faultlessness (E) achieved the highest frequencies of 5 (Excellent), indicating that the app effectively accomplish the task of planning an itinerary while being reliable. On the other hand, Analysability (G), Replaceability (H), Modularity (G), and Interoperability (C) accumulated the lowest frequencies of 5. Although, those items have the lowest frequencies of 5, most of the response were above average (Very Good). Since LAKAD operates exclusively to Android devices, this explains the results in the Interoperability item that the app currently does not work to other devices like iOS. The score in Replaceability suggest that while LAKAD shows high Functional suitability score, competing against existing apps like Google Maps and TripAdvisor may be difficult. But since LAKAD is written in React Native, it can be easily ported to other platforms in the future, which may improve the score in Interoperability and Replaceability. Overall, the per item frequency distribution provides insights into the specific areas of software quality where LAKAD excels and where there may be opportunities for improvement.
+The per item frequency distribution in Figure \ref{fig:iso_freq} reveals the cause of the high mean scores for each construct. It also shows the strengths and weaknesses of Lakad in terms of software quality. Accountability (F), Functional Appropriateness (A), Testability (G), and Faultlessness (E) achieved the highest frequencies of 5 (Excellent), indicating that the app effectively accomplish the task of planning an itinerary while being reliable. On the other hand, Analysability (G), Replaceability (H), Modularity (G), and Interoperability (C) accumulated the lowest frequencies of 5. Although, those items have the lowest frequencies of 5, most of the response were above average (Very Good). Since Lakad operates exclusively to Android devices, this explains the results in the Interoperability item that the app currently does not work to other devices like iOS. The score in Replaceability suggest that while Lakad shows high Functional suitability score, competing against existing apps like Google Maps and TripAdvisor may be difficult. But since Lakad is written in React Native, it can be easily ported to other platforms in the future, which may improve the score in Interoperability and Replaceability. Overall, the per item frequency distribution provides insights into the specific areas of software quality where Lakad excels and where there may be opportunities for improvement.
 
 \begin{figure}[H]
     \centering
@@ -559,9 +560,11 @@ The per item frequency distribution in Figure \ref{fig:iso_freq} reveals the cau
     \rule{\textwidth}{0.5pt}
 \end{figure}
 
-\begin{figure}
+
+\begin{figure}[H]
     \centering
-    \caption{Frequency distribution of ISO/IEC 25010:2023 responses}
+    \caption{Per construct frequency distribution of ISO/IEC 25010:2023}
+    \label{fig:iso_construct}
     \begin{subfigure}[H]{0.3\textwidth}
         \centering
         \fbox{\includegraphics[width=\textwidth, trim=0 0 0 1cm, clip]{evaluation/isoa.png}}
@@ -625,3 +628,5 @@ The per item frequency distribution in Figure \ref{fig:iso_freq} reveals the cau
         \label{fig:isoi}
     \end{subfigure}
 \end{figure}
+
+Figure \ref{fig:iso_construct} shows the per construct frequency distribution of the ISO/IEC 25010:2023 survey. The Functional Suitability, Performance Efficiency, and Flexibility constructs shows a frequency distribution of only 4s and 5s, indicating that all respondents rated these constructs as either Very Good or Excellent. Generally, all constructs show a frequency distribution that is heavily skewed towards the higher end of the scale (4 and 5), indicating that most respondents had a positive perception towards the software quality of Lakad. This further supports the interpretation of the mean scores in Table \ref{iso1} that the Lakad application has excellent software quality across all evaluated constructs. This also shows that the evaluation achieved an overall median score of 5.
