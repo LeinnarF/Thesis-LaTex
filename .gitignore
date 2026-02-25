@@ -18,9 +18,6 @@
 *.pdf
 *.sty
 !Thesis-main.pdf
-Figures/
-Letters/
-Instrument/
 Misc/
 .vscode/
 %OUTDIR%/
