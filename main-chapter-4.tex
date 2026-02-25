@@ -413,6 +413,103 @@ The administrator can also view the reported reviews in the application, as show
 
 \section{System Evaluation}
 
+This section presents the evaluation results of the LAKAD application, focusing on the acceptability of the system among users and the overall software quality. The data collected was processed and analyzed in Jupyter Notebook with the use of Python libraries such as Pandas, Matplotlib, and NumPy. The results are presented in terms of per construct median scores, frequency distributions, mean scores, and standard deviations. 
+
 \subsection{Evaluation of System Acceptability}
+
+The acceptability of the LAKAD was evaluated  with a Technology Acceptance Model (TAM) survey, which was distributed to 150 respondents. The distribution was proportionately done across different tourist spots in a selected municipality in Bulacan. 
+
+\begin{table}[H]
+	\centering
+	\singlespacing
+	\caption{System Acceptability results}
+	\label{tam1}
+	\renewcommand{\arraystretch}{1.2}
+    \begin{tabularx}{\linewidth}{p{0.3\linewidth} >{\centering\arraybackslash}X >{\centering\arraybackslash}X p{0.23\linewidth}}
+		\toprule 
+		\textbf{Construct} & \textbf{Mean Score} & \textbf{Standard Deviation} & \textbf{Interpretation}\\
+		\midrule
+        Perceived usefulness        & 4.71 & 0.49 & Highly acceptable \\  
+        Perceived ease of use       & 4.71 & 0.52 & Highly acceptable \\
+        Attitude towards using      & 4.72 & 0.50 & Highly acceptable \\
+        Behavioral intention to use & 4.56 & 0.65 & Highly acceptable \\  
+        \midrule
+         \textbf{Grand TAM Score}           & \textbf{4.67} & \textbf{0.54} & \textbf{Highly acceptable} \\
+		\bottomrule
+	\end{tabularx}
+\end{table}
+
+Table \ref{tam1} summarizes the results of the TAM survey, showing the mean scores and standard deviations for each construct. All the constructs achieved a high mean which was interpreted as highly acceptable, indicating that users found the LAKAD application to be useful, easy to use, and had a positive attitude towards using it. Perceived usefulness, perceived ease of use, and attitude towards using all had a mean score of 4.71 or higher, suggesting that the LAKAD application effectively meets user needs and expectations. The behavioral intention to use scored slightly lower than the other constructs but still achieved a high mean score of 4.56, indicating that users are likely to continue using the application in the future. The standard deviations for all constructs were relatively low (ranging from 0.49 to 0.65), suggesting that there was a consensus among respondents regarding their perceptions of the LAKAD application. Overall, the results indicate that the LAKAD application is well-received by users and has a high level of acceptability with a grand TAM score of 4.67 which is interpreted as highly acceptable.
+
+\begin{table}[H]
+	\centering
+	\singlespacing
+	\caption{Per item median and frequency scores of TAM survey}
+	\label{tam2}
+	\renewcommand{\arraystretch}{1.2}
+	\begin{tabularx}{\linewidth}{>{\hsize=3.5\hsize}X >{\hsize=.583\hsize}X >{\hsize=.583\hsize}X >{\hsize=.583\hsize}X >{\hsize=.583\hsize}X >{\hsize=.583\hsize}X >{\hsize=.583\hsize}X}
+		\toprule 
+		\multirow{2}{*}{\textbf{Items}} & \multirow{2}{*}{\textbf{Median}} & \multicolumn{5}{c}{\textbf{Frequency}} \\
+		\cmidrule(l){3-7}
+		& & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} \\
+		\midrule
+		PU1 (Improvement in Performance) & 5 & 0 & 0 & 3 & 52 & 95 \\
+		PU2 (Task Efficiency)            & 5 & 0 & 0 & 3 & 30 & 117 \\
+		PU3 (Productivity)               & 5 & 0 & 0 & 1 & 54 & 95 \\
+		PU4 (Effectiveness)              & 5 & 0 & 0 & 4 & 38 & 108 \\
+		PU5 (Usefulness)                 & 5 & 0 & 0 & 1 & 23 & 126 \\
+		\midrule
+		PEU1 (Ease of Learning)          & 5 & 0 & 0 & 5 & 43 & 102 \\
+		PEU2 (Ease of Use)               & 5 & 0 & 0 & 2 & 39 & 109 \\
+		PEU3 (Clarity of Interaction)    & 5 & 0 & 0 & 2 & 37 & 111 \\
+		PEU4 (Ease of Becoming Skillful) & 5 & 0 & 0 & 10 & 30 & 110 \\
+		PEU5 (Ease of Operation)         & 5 & 0 & 0 & 3 & 27 & 120 \\
+		\midrule
+		ATU1 (Positive Feelings)         & 5 & 0 & 0 & 3 & 29 & 118 \\
+		ATU2 (Enjoyment)                 & 5 & 0 & 0 & 4 & 37 & 109 \\
+		ATU3 (Satisfaction)              & 5 & 0 & 0 & 3 & 40 & 107 \\
+		\midrule
+		BI1  (Intention to Use)          & 4 & 0 & 2 & 15 & 67 & 66 \\
+		BI2  (Future Use)                & 5 & 0 & 1 & 9 & 45 & 95 \\
+		BI3  (Recommendation)            & 5 & 0 & 2 & 1 & 23 & 124 \\
+		\bottomrule
+	\end{tabularx}
+\end{table}
+
+Table \ref{tam2} shows the per item median scores and frequency distributions for each item in the TAM survey. This shows the underlying distribution of responses for each item. The data is heavily skewed towards the higher end of the scale (4 and 5), indicating that most respondents had a positive perception towards LAKAD. In the Perceived Usefulness (PU), all items report a median score of 5. The Usefulness item (PU5) has the highest frequency of 5s, with 126 respondents rating it as 5, indicating that users find the system very useful. For the Perceived Ease of Use (PEOU), all items also report a median score of 5. The system is perceived as easy to operate, learn, and master. Ease of Operation (PEU5) has the highest frequency of 5s, with 120 respondents rating it as 5. For the Attitude Towards Using (ATU), all items also report a median score of 5. Users express high satisfaction, enjoyment, and positive feelings towards using the system. Satisfaction (ATU3) has the highest frequency of 5s, with 107 respondents rating it as 5. The Behavioral Intention to Use (BI) items show slightly more variance, this explains the results in the lower mean score for this construct in Table \ref{tam1}.   
+
+% TODO: Continue
+
+\begin{figure}[H]
+    \centering
+    \caption{Frequency distribution of TAM survey responses}
+    \begin{subfigure}[H]{0.3\textwidth}
+        \centering
+        \fbox{\includegraphics[width=\textwidth]{evaluation/pu.png}}
+        \caption{Perceived Usefulness}
+        \label{fig:pu}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[H]{0.3\textwidth}
+        \centering
+        \fbox{\includegraphics[width=\textwidth]{evaluation/peou.png}} 
+        \caption{Perceived Ease of Use}
+        \label{fig:peou}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[H]{0.3\textwidth}
+        \centering
+        \fbox{\includegraphics[width=\textwidth]{evaluation/au.png}}
+        \caption{Attitude Towards Using}
+        \label{fig:atu}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[H]{0.3\textwidth}
+        \centering
+        \fbox{\includegraphics[width=\textwidth]{evaluation/bi.png}}
+        \caption{Behavioral Intention to Use}
+        \label{fig:bi}
+    \end{subfigure}
+\end{figure}
 
 \subsection{Software Quality Evaluation}
