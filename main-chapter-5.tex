@@ -1,2 +1,54 @@
 \chapter{Summary, Conclusion and Recommendations}
 
+The objective of this study is to develop a personalized itinerary generator for the province of Bulacan, Philippines. Incorporating a route optimization algorithm to provide the optimal way to complete the itinerary. This chapter presents the summary of findings, conclusion, and recommendations based on the results of the study.
+
+\section{Summary of Findings}
+
+This study developed a mobile-based application designed to provide optimized travel itineraries for tourism in the Province of Bulacan. The system utilizes the Adaptive Genetic Algorithm (AGAM) for generating travel itineraries and Simulated Annealing (SA) for optimizing routes. The findings of the study were derived from the development process, comparative analysis, and formal evaluations utilizing the Technology Acceptance Model and ISO/IEC 25010:2023 standards. From these procedures, the following findings were obtained.
+
+\begin{enumerate}
+    \item \textbf{Algorithm Selection and Performance} \\
+    Simulated Annealing (SA) was found to be the most suitable algorithm to be incorporated within the Lakad application. Although the Genetic Algorithm (GA) performed the best in terms of solution quality with a relative error of 0\%, the execution efficiency of GA was found to be impractical for mobile application, taking more than 196 seconds for a problem size of 52 cities. However, SA maintained a small average relative error of 1.59\% and solved large problem sizes in about 1.90 seconds. When used through the Simple Additive Weighting (SAW) approach by giving equal weight to execution time and solution quality, SA was found to be the most preferred algorithm, followed by Elephant Herding Optimization (EHO). The findings show that SA provides the optimal balance of speed and accuracy, making it the best practical choice for real-time use in a mobile environment.
+
+    \item \textbf{Technical Implementation and Routing Architecture} \\
+    The system successfully utilized the Open Source Routing Machine (OSRM) as the routing engine in dealing with the distance matrices and large volume of routing requests. The system was able to overcome the limitations imposed by other APIs in terms of the number of requests and matrices, thus allowing the system to support the intensive computation of the AGAM and SA for Bulacan’s tourist spots.
+
+    \item \textbf{Personalized Itinerary Generation} \\
+    The AGAM was successfully used to solve the multi-objective itinerary planning problem. The model was able to optimize user satisfaction by considering the verified POI ratings from Google Maps, POI likeness based on user-defined preference categories, and individual travel distance constraint. The algorithm ensured that all itineraries satisfied the travel budget constraint and the maximum POI limits.
+
+
+    \item \textbf{Acceptability and Software Quality} \\
+    The instrument showed reliability through the testing results which obtained a Cronbach’s alpha value of 0.881. The results of the evaluation showed that users accepted the system while all technical quality metrics showed optimal performance. The Technology Acceptance Model (TAM) survey results found that users had a high level of acceptance for the system, with a mean of 4.71 for Perceived Usefulness, 4.71 for Perceived Ease of Use, 4.72 for Attitude Towards Using, and 4.72 for Behavioral Intention to Use. A grand mean of 4.67 was obtained showing that Lakad is highly accepted by users.  
+
+
+    Technology field professionals evaluated the system through the ISO/IEC 25010:2023 standard and achieved outstanding results, especially in Functional Suitability (4.86), Security (4.83), Reliability (4.82), and Performance Efficiency (4.77). Experts evaluated the system as technically sound, secure, and functionally appropriate based on their findings which showed all specialized categories. 
+
+\end{enumerate}
+
+
+\section{Conclusion}
+The study successfully developed a mobile-based system that effectively addresses the challenges of traditional manual trip planning and the uneven promotion of tourist spots in the Province of Bulacan. The researchers showed that data-driven tools enhance local tourism accessibility when they combine mathematical optimization models with modern mobile technology.
+
+The Traveling Salesman Problem (TSP) algorithms comparison showed that Simulated Annealing (SA) works best for mobile implementation. The mobile environment requires exact methods and complex genetic algorithms to achieve higher precision. Users need fast solutions, and SA provides high solution quality and rapid execution. The Open Source Routing Machine (OSRM) became a crucial element for system scalability because it allowed the system to perform matrix calculations for personalized generation without any limits from commercial API restrictions.
+
+The Adaptive Genetic Algorithm (AGAM) implementation shows that personalized recommendations become possible through balancing multiple objectives, such as interest, ratings, and distance. This approach moves beyond simple destination lists by creating meaningful and tailored itineraries that reflect the specific interest of the user while taking into consideration their physical and temporal constraints.
+
+Finally, the highly favorable evaluations from both tourists and IT professionals validate that Lakad is not only a technically sound system but also a socially relevant tool. The application serves as a promotional tool for the Provincial History Arts Culture and Tourism Office (PHACTO) who want to promote both popular tourist spots and the province's lesser-known attractions. The study demonstrates that Lakad provides a strong user-centered solution for Bulacan sustainable tourism development through metaheuristic optimization and localized data combination.
+
+
+\section{Recommendations}
+To further enhance the capabilities and reach of Lakad, the following recommendations are proposed:
+
+\begin{enumerate}
+    \item \textbf{Adding various Points of Interest (POIs).} The system needs to add more POIs compared to its current historical and cultural site base because its upcoming versions need to include different types of POIs. The application must include local hotels and dining options which will enable users to plan their travel needs through a single platform.
+
+    \item \textbf{Exploration of Emerging Optimization Algorithms. } The study used Simulated Annealing (SA) as its solution method, but researchers could investigate hybrid metaheuristic solutions and new algorithm designs to obtain better results for complex Traveling Salesman Problems (TSP).
+
+    
+    \item \textbf{Scaling by Region and Platform.} The system should extend its operations to additional provinces which will turn Lakad into a comprehensive national tourism tool that serves all parts of the Philippines. The application needs an iOS version to reach more users because its current Android-only system prevents users who use iOS devices from accessing the app.
+
+    \item \textbf{Support for Multi-day Itinerary Planning.} The system must develop multi-day tour planning capabilities because its current system only supports single-day travel planning. The system needs to create overnight stay logic which enables users to plan their extended vacation stays in the province.
+
+    \item \textbf{Real-time Traffic Information Integration.} Future versions could add public transportation routing and real-time traffic updates to improve the accuracy of travel duration predictions. 
+
+\end{enumerate}
