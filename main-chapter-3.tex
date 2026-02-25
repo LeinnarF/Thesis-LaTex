@@ -1,7 +1,7 @@
 \chapter{Research Methodology}
 \thispagestyle{empty}
 
-In this chapter the research design, model adoption, process of developing the system, system evaluation, population and sample, data collection, data processing, and ethical considerations are discussed. This ensures that the research methodology is well-defined and structured, providing a clear roadmap for the execution of the study. The research design outlines the approach and framework for conducting the research, while the model adoption section delves into the specific mathematical models and algorithms that are utilized in the development of LAKAD. The process of developing the system details the steps taken to create and implement the application, while the system evaluation focuses on assessing its performance and effectiveness. The population and sample section defines the target audience for the study, and the data collection and processing sections outlines how the data was gathered and analyzed. Finally, ethical considerations ensure that the research is conducted in a responsible and ethical manner, respecting the rights and privacy of participants.
+In this chapter the research design, model adoption, process of developing the system, system evaluation, population and sample, data collection, data processing, and ethical considerations are discussed. This ensures that the research methodology is well-defined and structured, providing a clear roadmap for the execution of the study. The research design outlines the approach and framework for conducting the research, while the model adoption section delves into the specific mathematical models and algorithms that are utilized in the development of Lakad. The process of developing the system details the steps taken to create and implement the application, while the system evaluation focuses on assessing its performance and effectiveness. The population and sample section defines the target audience for the study, and the data collection and processing sections outlines how the data was gathered and analyzed. Finally, ethical considerations ensure that the research is conducted in a responsible and ethical manner, respecting the rights and privacy of participants.
 
 \section{Research Design}
 
@@ -38,7 +38,7 @@ Where $n$ is the total number of vertices (POI), $c_{ij}$ refers to the cost of 
 \end{enumerate}
 
 \subsection{Candidate Algorithms for TSP}
-The study considers several metaheuristic algorithms for route optimization for LAKAD, each with its unique approach and characteristics. These algorithms include:
+The study considers several metaheuristic algorithms for route optimization for Lakad, each with its unique approach and characteristics. These algorithms include:
 
 \begin{enumerate}
 	
@@ -59,7 +59,7 @@ The study considers several metaheuristic algorithms for route optimization for 
 
 \subsection{TSP Algorithm Selection}
 
-To determine the best algorithm to implement for LAKAD, a comparative analysis was conducted on several metaheuristic algorithms used for solving TSP. The analysis focuses on solution quality (accuracy) and runtime speed of each algorithm. The algorithms were tested on selected instances from the TSPLIB library, a standard benchmark for TSP and related problems. Table \ref{tsplib_instace} presents selected instances for benchmarking. 
+To determine the best algorithm to implement for Lakad, a comparative analysis was conducted on several metaheuristic algorithms used for solving TSP. The analysis focuses on solution quality (accuracy) and runtime speed of each algorithm. The algorithms were tested on selected instances from the TSPLIB library, a standard benchmark for TSP and related problems. Table \ref{tsplib_instace} presents selected instances for benchmarking. 
 
 \begin{table}[H]
 	\centering
@@ -119,7 +119,7 @@ For this study, since the weights can be subjectively assigned, equal weights we
 	S _{i} = 0.5 \cdot r _{i1} + 0.5 \cdot r _{i2}
 \end{equation}
 
-The algorithm with the lowest score $S _{i}$ is considered the best choice for implementation for LAKAD. The results of the algorithm selection process are discussed in Chapter 4. 
+The algorithm with the lowest score $S _{i}$ is considered the best choice for implementation for Lakad. The results of the algorithm selection process are discussed in Chapter 4. 
 
 \subsection{Modeling Itinerary Generation as Orienteering Problem}
 
@@ -295,11 +295,11 @@ For the parameters of AGAM, the following values were used: $pc_1 = 0.9$, $pc_2 
 
 \section{Process of Developing the System}
 
-The development of the LAKAD mobile application uses the AGILE methodology, with a specific focus on the Kanban method. This approach integrates all key software development phases. These phase include analysis, planning, design, development, testing, and review, each of the phases contributes to the overall quality and functionality of the final product.
+The development of the Lakad mobile application uses the AGILE methodology, with a specific focus on the Kanban method. This approach integrates all key software development phases. These phase include analysis, planning, design, development, testing, and review, each of the phases contributes to the overall quality and functionality of the final product.
 
 Kanban is a highly effective visual process management system designed to optimize the flow of work. It operates on the principle of Just In Time (JIT) delivery, as highlighted by \textcite{Alaidaros2021}, ensuring the tasks are completed and delivered precisely when needed to maximize efficiency. 
 
-This methodology offers significant advantages for the LAKAD development team. It provides a clear, visual representation of the entire workflow, allowing all team members to easily track progress from start to finish. This transparency is crucial for quickly identifying potential bottlenecks, gaps in the process, or any mishaps that might arise. By making the workflow visible, the team can proactively address issues, rather than reacting to them after they have escalated. Kanban, being a type of Agile-based methodology, is an approach that promotes flexibility which can help in an environment of software development where problems and unforeseen challenges are inevitable. Kanban's adaptability allows the team to adjust priorities and reallocate resources as needed, ensuring that progress remains steady even when obstacles are encountered. This flexibility is key to maintaining momentum and delivering a high-quality software output \parencite{Risener2022}. The continuous flow and iterative nature of Kanban supports the team in delivering a robust and reliable system that meets user needs effectively. Figure \ref{kanban} shows a graphical representation of a Kanban workflow model.
+This methodology offers significant advantages for the Lakad development team. It provides a clear, visual representation of the entire workflow, allowing all team members to easily track progress from start to finish. This transparency is crucial for quickly identifying potential bottlenecks, gaps in the process, or any mishaps that might arise. By making the workflow visible, the team can proactively address issues, rather than reacting to them after they have escalated. Kanban, being a type of Agile-based methodology, is an approach that promotes flexibility which can help in an environment of software development where problems and unforeseen challenges are inevitable. Kanban's adaptability allows the team to adjust priorities and reallocate resources as needed, ensuring that progress remains steady even when obstacles are encountered. This flexibility is key to maintaining momentum and delivering a high-quality software output \parencite{Risener2022}. The continuous flow and iterative nature of Kanban supports the team in delivering a robust and reliable system that meets user needs effectively. Figure \ref{kanban} shows a graphical representation of a Kanban workflow model.
 
 \begin{figure}[H]
 	\centering
@@ -309,14 +309,14 @@ This methodology offers significant advantages for the LAKAD development team. I
 \end{figure}
 
 \subsection{Analysis}
-The analysis phase of the development involves outlining the system’s scope, objectives, and requirements. This was done by reviewing the existing literature in itinerary recommendation and local tourism in the province of Bulacan. This phase establishes the key features of LAKAD, that integrates five major features designed to provide optimized, personalized, and efficient itinerary planning for tourists exploring Bulacan. Each feature combines techniques, verified local data, and user-centric design principles.
+The analysis phase of the development involves outlining the system’s scope, objectives, and requirements. This was done by reviewing the existing literature in itinerary recommendation and local tourism in the province of Bulacan. This phase establishes the key features of Lakad, that integrates five major features designed to provide optimized, personalized, and efficient itinerary planning for tourists exploring Bulacan. Each feature combines techniques, verified local data, and user-centric design principles.
 
 \begin{enumerate}
 	\item \textbf{Tourist Spot Exploration.}
 		A tourist spot search feature allows the users to explore Bulacan’s tourist attractions specifically through an interface where they can search through a catalog of  tourist destinations that was verified by the Provincial History, Arts, Culture, and Tourism Office (PHACTO) of Bulacan. Furthermore, the system displays important and relevant information such as location and short description about the tourist spot.
 
 	\item \textbf{Personalized Itinerary Generation.}
-		The main feature of LAKAD is the personalized itinerary generator focusing on the diverse cultural, historical and heritage tourist destinations located across the province of Bulacan. The system developed to adapt to user-specific factors that can affect the personalization aspect of an itinerary. This feature aims to cater the personal preferences that a user has while still promoting the exploration of the rich tourism culture of the region.
+		The main feature of Lakad is the personalized itinerary generator focusing on the diverse cultural, historical and heritage tourist destinations located across the province of Bulacan. The system developed to adapt to user-specific factors that can affect the personalization aspect of an itinerary. This feature aims to cater the personal preferences that a user has while still promoting the exploration of the rich tourism culture of the region.
 
 	\item \textbf{Itinerary Optimization.}
 		The optimization feature of the system works in line with the personalized itinerary generator by employing the chosen best algorithm for route optimization. The optimization further helps the minimization of travel distance and constraints to visit every possible destination within the generated itinerary.
@@ -333,7 +333,7 @@ Furthermore, the application includes a user profile feature that allows users t
 In addition, the data gathering process was also conducted in this phase, which involved collecting data on tourist destinations in Bulacan given by PHACTO. This data was used to populate the system with verified and relevant information about the tourist spots in the province, which is crucial for the functionality of the search and itinerary generation features.
 
 \subsection{Planning}
-The Gantt chart provides a visual timeline of the schedule of the research activity that was conducted in the process of developing LAKAD. It outlines the sequence of tasks relating to Thesis I and Thesis II, including the flow of each phase of the research from documentation and planning until system development, evaluation, and final defense.
+The Gantt chart provides a visual timeline of the schedule of the research activity that was conducted in the process of developing Lakad. It outlines the sequence of tasks relating to Thesis I and Thesis II, including the flow of each phase of the research from documentation and planning until system development, evaluation, and final defense.
 
 \begin{figure}[H]
 	\centering
@@ -341,7 +341,7 @@ The Gantt chart provides a visual timeline of the schedule of the research activ
 	\includegraphics[angle=0, width=1\linewidth]{GanttChart.png}
 \end{figure}
 
-The \textbf{Thesis I} output focuses on the research documentation and planning for development of LAKAD. This process begins with the Review of Related Studies (Chapter 2), in which local and foreign studies are gathered, evaluated, and organized to develop the theoretical and conceptual framework. By gathering information in Chapter 2, determining the best algorithm for the system, and the appropriate approach to execute the idea, the researchers were able to establish a solid foundation that would be the basis of the succeeding phases. After completing Chapter 1: Problem and its Background and Chapter 2, the researchers finalize the concepts, models, and methods that was utilized in Chapter 3: Methodology preparation. Chapter 3 defines the research design, the selected development model, and the desired process on creating the system, as well as the foundation on system evaluation and data gathering that was conducted on Thesis II.
+The \textbf{Thesis I} output focuses on the research documentation and planning for development of Lakad. This process begins with the Review of Related Studies (Chapter 2), in which local and foreign studies are gathered, evaluated, and organized to develop the theoretical and conceptual framework. By gathering information in Chapter 2, determining the best algorithm for the system, and the appropriate approach to execute the idea, the researchers were able to establish a solid foundation that would be the basis of the succeeding phases. After completing Chapter 1: Problem and its Background and Chapter 2, the researchers finalize the concepts, models, and methods that was utilized in Chapter 3: Methodology preparation. Chapter 3 defines the research design, the selected development model, and the desired process on creating the system, as well as the foundation on system evaluation and data gathering that was conducted on Thesis II.
 
 For \textbf{Thesis II}, the researcher proceeds to the implementation and completion phase. The group developed and implemented the proposed system based on the design created in Thesis I. 
 
@@ -361,7 +361,7 @@ The design phase focuses on creating the overall architecture and structure of t
 	\includegraphics[width=\textwidth]{SysArch.png}
 \end{figure}
 
-Figure \ref{SysArch} illustrates the system architecture of LAKAD: A Personalized Mobile Itinerary Creator and how the different components of the application interact to provide personalized and optimized travel itineraries for users. At the core of the system is the mobile frontend, which serves as the main interface where tourists can search for tourist destinations, generate itineraries, and manage their travel plans. When a user interacts with the application, the frontend communicates with the Mapbox API to send requests for map data, location coordinates The API processes these requests and returns the corresponding responses, which are then displayed on the user interface in the form of maps and travel routes. In addition, the application stores user-generated itineraries and relevant information in a remote database using Supabase, allowing users to access and manage their itineraries. While admin users have access to admin gui separate from tourists where they can manage the places shown to the users as well as recalculate the distance matrix via the OpenRouteService matrix api.
+Figure \ref{SysArch} illustrates the system architecture of Lakad: A Personalized Mobile Itinerary Creator and how the different components of the application interact to provide personalized and optimized travel itineraries for users. At the core of the system is the mobile frontend, which serves as the main interface where tourists can search for tourist destinations, generate itineraries, and manage their travel plans. When a user interacts with the application, the frontend communicates with the Mapbox API to send requests for map data, location coordinates The API processes these requests and returns the corresponding responses, which are then displayed on the user interface in the form of maps and travel routes. In addition, the application stores user-generated itineraries and relevant information in a remote database using Supabase, allowing users to access and manage their itineraries. While admin users have access to admin gui separate from tourists where they can manage the places shown to the users as well as recalculate the distance matrix via the OpenRouteService matrix api.
 
 \begin{figure}[H]
 	\centering
@@ -385,11 +385,11 @@ Two types of users exists for the whole system which is the tourist and admins a
 
 \subsection{Development}
 
-This development phase pertains to the actual coding and implementation of the system’s features inside an android application. The researchers’ utilized the AGILE methodology, particularly the Kanban method for the software development life cycle. This includes weekly meetings and development checks by the researchers to ensure the system is properly developed to its intended uses. LAKAD was developed using the React Native main development framework, which uses fast and cost-efficient cross-platform mobile development, allowing a single codebase to function on both iOS and Android devices. The system utilized the JavaScript programming language for implementing the application’s user interface and core functionalities due to its flexibility and compatibility with React Native framework. The main development environment for writing, editing, and debugging the program was Visual Studio Code, which provided lightweight performance and had a large selection of extensions appropriate for React Native development. Throughout the development process, Git and GitHub was used to ensure structured collaboration and version control. The list of tools used in the development is presented in Table \ref{listtools}.
+This development phase pertains to the actual coding and implementation of the system’s features inside an android application. The researchers’ utilized the AGILE methodology, particularly the Kanban method for the software development life cycle. This includes weekly meetings and development checks by the researchers to ensure the system is properly developed to its intended uses. Lakad was developed using the React Native main development framework, which uses fast and cost-efficient cross-platform mobile development, allowing a single codebase to function on both iOS and Android devices. The system utilized the JavaScript programming language for implementing the application’s user interface and core functionalities due to its flexibility and compatibility with React Native framework. The main development environment for writing, editing, and debugging the program was Visual Studio Code, which provided lightweight performance and had a large selection of extensions appropriate for React Native development. Throughout the development process, Git and GitHub was used to ensure structured collaboration and version control. The list of tools used in the development is presented in Table \ref{listtools}.
 
 Additionally, React Native extends the "Learn once, write anywhere" paradigm to mobile development, leveraging recent advancements like its new architecture and the JavaScript Interface (JSI). The framework's structure, represented by Fabric, aims to boost compatibility with modern React features such as concurrent rendering and synchronous data fetching. While JSI’s main element allows for direct calls between JavaScript and native code. This change features a smoother interaction with the host platform and significantly reduces performance bottlenecks. JSI also allows Fabric to create UI components on the native side more efficiently. The combined adoption of JSI and Fabric offers a significant enhancement in React Native's performance, making it a good choice for developers who desire the agility of mobile development and native platform functionalities \parencite{Zhou2024}.
 
-This framework allows the researchers to develop the mobile application, LAKAD, as React Native’s cross-platform capabilities also allow for android development.
+This framework allows the researchers to develop the mobile application, Lakad, as React Native’s cross-platform capabilities also allow for android development.
 
 \begin{table}[H]
 	\centering
@@ -412,14 +412,14 @@ This framework allows the researchers to develop the mobile application, LAKAD, 
 
 
 \subsection{Testing}
-For the testing phase, LAKAD undergo rigorous evaluation to ensure the overall functionality and quality. The process includes system integration and user acceptance testing. System testing focuses on validating each module of the system by using test cases that evaluates the logic of the system which identifies and resolve issues affecting itinerary generation and recommendation features. Integration testing was conducted to ensure that all components of the system, such as itinerary generation and optimization, management, and user interface, operates cohesively to provide a seamless user experience.
+For the testing phase, Lakad undergo rigorous evaluation to ensure the overall functionality and quality. The process includes system integration and user acceptance testing. System testing focuses on validating each module of the system by using test cases that evaluates the logic of the system which identifies and resolve issues affecting itinerary generation and recommendation features. Integration testing was conducted to ensure that all components of the system, such as itinerary generation and optimization, management, and user interface, operates cohesively to provide a seamless user experience.
 
 \subsection{Review}
 The review phase focuses on evaluating the overall functionality and usability of the system after development is completed. The researchers gather views and opinions of users, including a system analyst to determine whether the system runs efficiently and serves its desired purposes. Guided by their observation, necessary adjustments and enhancements done to refine the system.
 
 
 \section{System Evaluation}
-This section outlines the methods and criteria used to evaluate LAKAD, the developed mobile itinerary generator system. It details the instruments and standards for assessment, describes the target population and sampling approach, and explains the procedures for data collection and analysis. The goal is to ensure that the system meets user needs and quality benchmarks through structured evaluation using both user and expert feedback.
+This section outlines the methods and criteria used to evaluate Lakad, the developed mobile itinerary generator system. It details the instruments and standards for assessment, describes the target population and sampling approach, and explains the procedures for data collection and analysis. The goal is to ensure that the system meets user needs and quality benchmarks through structured evaluation using both user and expert feedback.
 
 \subsection{Evaluation Instrument}
 The evaluation instrument for the developed system uses Technology Acceptance Model (TAM) for the end-users and ISO / IEC 25010:2023 for IT professionals. This combination of evaluation methods allows for a comprehensive assessment of the system from both user experience and technical quality perspectives. 
@@ -432,9 +432,9 @@ The evaluation instrument for the developed system uses Technology Acceptance Mo
 	\item \textbf{Behavioral Intention To Use}. This criterion measures the tendency and likelihood of the user to continue using the system in the future. It measures the intentions of the people to recommend or repeatedly use the system as their preferred tool.
 \end{enumerate}
 
-The TAM questionnaire in this study was an adapted version of a TAM questionnaire, which was modified to fit the context of LAKAD. Additionally, a reliability test was conducted on the TAM questionnaire to ensure that the instrument is consistent and reliable for measuring user acceptance. The reliability test was performed using Cronbach's alpha, which assesses the internal consistency of the questionnaire items. A Cronbach's alpha value of 0.7 or higher is generally considered acceptable, indicating that the items in the questionnaire are measuring the same underlying construct effectively \parencite{Cronbach2025}.
+The TAM questionnaire in this study was an adapted version of a TAM questionnaire, which was modified to fit the context of Lakad. Additionally, a reliability test was conducted on the TAM questionnaire to ensure that the instrument is consistent and reliable for measuring user acceptance. The reliability test was performed using Cronbach's alpha, which assesses the internal consistency of the questionnaire items. A Cronbach's alpha value of 0.7 or higher is generally considered acceptable, indicating that the items in the questionnaire are measuring the same underlying construct effectively \parencite{Cronbach2025}.
 
-\textbf{ISO/IEC 25010:2023.} The developed system was also evaluated by IT professionals using the ISO/IEC 25010:2023 questionnaire which evaluates the overall quality of LAKAD. The following criteria was used in the questionnaire and are based on the ISO/IEC 25010:2023 standards:
+\textbf{ISO/IEC 25010:2023.} The developed system was also evaluated by IT professionals using the ISO/IEC 25010:2023 questionnaire which evaluates the overall quality of Lakad. The following criteria was used in the questionnaire and are based on the ISO/IEC 25010:2023 standards:
 
 \begin{enumerate}
 	\item \textbf{Functional Suitability}. This focused on how well the proposed system meets the user's needs. The questions were about the system's main features such as itinerary optimization, personalized itinerary generation, and itinerary management.
@@ -450,7 +450,7 @@ The TAM questionnaire in this study was an adapted version of a TAM questionnair
 
 \subsection{Population and Sample}
 
-The respondents of this study consist of the end-users or the tourists in Bulacan and IT professionals for evaluating LAKAD. The tourists are the primary users  of the application, while the IT professionals are the secondary users who evaluates the technical aspects of the system. 
+The respondents of this study consist of the end-users or the tourists in Bulacan and IT professionals for evaluating Lakad. The tourists are the primary users  of the application, while the IT professionals are the secondary users who evaluates the technical aspects of the system. 
 
 \textbf{End-Users.} The End-users or the tourists are the primary users of the application. The acceptance of the application, measured by TAM, were evaluated by the end-users. 
 
@@ -529,7 +529,7 @@ The 150 end-users was selected using convenience sampling because volatility in 
 \end{table}
 
 	
-\textbf{IT Professionals.} IT professionals evaluates the quality of LAKAD using the ISO/IEC 25010:2023. A total of 20 IT experts were chosen based on their qualification and relevant experiences. This includes but not limited to computer programmers, UI/UX, and selected faculty members from The College of Information and Communications Technology (CICT) at Bulacan State University (BulSU). Additionally, they also provide qualitative feedback on the system’s strengths and areas for improvement.
+\textbf{IT Professionals.} IT professionals evaluates the quality of Lakad using the ISO/IEC 25010:2023. A total of 20 IT experts were chosen based on their qualification and relevant experiences. This includes but not limited to computer programmers, UI/UX, and selected faculty members from The College of Information and Communications Technology (CICT) at Bulacan State University (BulSU). Additionally, they also provide qualitative feedback on the system’s strengths and areas for improvement.
 
 To summarize, the total sample size for the study consists of 170 respondents, with 150 end-users and 20 IT professionals as shown in Table \ref{pop_sample}.
 
@@ -561,14 +561,14 @@ Both instruments utilized Likert scales to measure the responses of the responde
 
 \textbf{Preparation and Pilot Testing.} Before the actual data collection, a formal permission was requested and obtained from the local government units (LGUs) of the selected municipalities to conduct the survey among tourists. After obtaining the necessary permissions, pilot testing was conducted to ensure the reliability and validity of the TAM questionnaire. The pilot test was done with a small group of respondents who were similar to the target population. A total of 20 respondents from the municipality of Pandi were selected for the pilot test because it is excluded from the main data collection to avoid bias. The Cronbach alpha of the pilot test results was calculated to make sure that the TAM questionnaire is reliable. The calculated Cronbach's alpha result yielded a value of 0.881 which is above the acceptable threshold of 0.7, indicating that the TAM questionnaire has good internal consistency and is reliable for measuring user acceptance. For the ISO/IEC 25010:2023, since it is a standardized evaluation method, a pilot test was not conducted for this instrument. 
 
-\textbf{Administration to End-users.} The data collection for end-users was conducted through face-to-face surveys in various tourist spots across the selected municipalities in Bulacan. The researchers approached tourists along with the informed consent and invited them to participate in the survey, which included a brief introduction to the LAKAD application and its features. After exploring the application, the respondents were asked to complete the TAM questionnaire, which assessed their perceptions of the system's usefulness, ease of use, attitude towards using it, and behavioral intention to use it in the future. Additionally, demographic information such as age bracket, travelling frequency, and technological proficiency was collected to analyze potential correlations between these factors and the TAM constructs.  
+\textbf{Administration to End-users.} The data collection for end-users was conducted through face-to-face surveys in various tourist spots across the selected municipalities in Bulacan. The researchers approached tourists along with the informed consent and invited them to participate in the survey, which included a brief introduction to the Lakad application and its features. After exploring the application, the respondents were asked to complete the TAM questionnaire, which assessed their perceptions of the system's usefulness, ease of use, attitude towards using it, and behavioral intention to use it in the future. Additionally, demographic information such as age bracket, travelling frequency, and technological proficiency was collected to analyze potential correlations between these factors and the TAM constructs.  
 
-\textbf{Administration to IT Professionals.} Permissions to conduct the survey among IT professionals was requested and obtained from the Information and Communications Technology Office (ICTO) of BulSU and to the dean of CICT. The data collection for IT professionals was conducted through an online survey or in-person sessions, depending on the availability and preference of the respondents. The IT professionals were provided with access to the LAKAD application and were given a brief overview of its features and functionalities. After exploring the application, they were asked to complete the ISO/IEC 25010:2023 evaluation, which assessed the system's functional suitability, performance efficiency, compatibility, interaction capability, reliability, security, maintainability, flexibility, and safety. In addition to the quantitative evaluation, IT professionals were also encouraged to provide qualitative feedback on the system's strengths and areas for improvement based on their technical expertise.  
+\textbf{Administration to IT Professionals.} Permissions to conduct the survey among IT professionals was requested and obtained from the Information and Communications Technology Office (ICTO) of BulSU and to the dean of CICT. The data collection for IT professionals was conducted through an online survey or in-person sessions, depending on the availability and preference of the respondents. The IT professionals were provided with access to the Lakad application and were given a brief overview of its features and functionalities. After exploring the application, they were asked to complete the ISO/IEC 25010:2023 evaluation, which assessed the system's functional suitability, performance efficiency, compatibility, interaction capability, reliability, security, maintainability, flexibility, and safety. In addition to the quantitative evaluation, IT professionals were also encouraged to provide qualitative feedback on the system's strengths and areas for improvement based on their technical expertise.  
 
 \subsection{Data Processing and Analysis}
-The researchers conducted systematic data processing and analysis of data from the Technology Acceptance Model (TAM) questionnaire and ISO/IEC 25010:2023 system quality evaluation instrument to evaluate user acceptance rates and the total system quality of the LAKAD application.
+The researchers conducted systematic data processing and analysis of data from the Technology Acceptance Model (TAM) questionnaire and ISO/IEC 25010:2023 system quality evaluation instrument to evaluate user acceptance rates and the total system quality of the Lakad application.
 
-The TAM questionnaire utilized a five-point Likert-type scale to measure respondents’ perception towards LAKAD. The response categories were coded numerically as follows: 1 (Strongly disagree); 2 (Disagree); 3 (Neutral); 4 (Agree); and 5 (Strongly agree). The instrument consists of declarative statements that is designed to measure the four TAM constructs (Perceived Usefulness, Perceived Ease of Use, Attitude Towards Using, and Behavioral Intention to Use).
+The TAM questionnaire utilized a five-point Likert-type scale to measure respondents’ perception towards Lakad. The response categories were coded numerically as follows: 1 (Strongly disagree); 2 (Disagree); 3 (Neutral); 4 (Agree); and 5 (Strongly agree). The instrument consists of declarative statements that is designed to measure the four TAM constructs (Perceived Usefulness, Perceived Ease of Use, Attitude Towards Using, and Behavioral Intention to Use).
 
 The ISO/IEC 25010:2023 evaluation instrument used a five-point performance rating scale to evaluate system quality constructs through expert assessment. The scale was coded as: 1 (Poor); 2 (Fair); 3 (Good); 4 (Very  good); and 5 (Excellent). The experts used this instrument to assess system quality attributes which included Functional Suitability Performance Efficiency Compatibility Reliability Security Maintainability Flexibility and Safety.
 
@@ -594,7 +594,7 @@ The overall mean score for each construct was computed by taking the mean of the
 
 Where, $\bar{X}$ is the overall mean score for a given construct, $X_i$ is the composite score for the $i$-th respondent, and $m$ is the total number of respondents. The mean provided a summary measure of overall user acceptance (for TAM constructs) and overall system quality (for ISO/IEC 25010:2023 constructs). 
 
-The sample standard deviation was also calculated to get the variability of response among the evaluators. A lower standard deviation indicates that the respondents were in strong agreement regarding LAKAD's system acceptance and quality.  The formula for sample standard deviation is given by Equation \ref{S},
+The sample standard deviation was also calculated to get the variability of response among the evaluators. A lower standard deviation indicates that the respondents were in strong agreement regarding Lakad's system acceptance and quality.  The formula for sample standard deviation is given by Equation \ref{S},
 
 \begin{equation}
 	\label{S}
