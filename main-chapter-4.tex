@@ -389,7 +389,7 @@ Existing tourist spots can also be updated by the administrator, as shown in Fig
     \fbox{\includegraphics[width=0.3\textwidth]{dev-system/admindistance.jpg}}
 \end{figure}
 
-One of the critical components of the LAKAD application is the distance matrix, which contains the distances between all pairs of tourist spots. Figure \ref{admin:distance} shows the distance matrix management page, where the distance matrix can be recomputed when new tourist spots are added. This approach lowers the API usage from Mapbox, ensuring that the application can scale without incurring high costs from API calls. Since, it will calculate the distances between all pairs of tourist spots, expect that the recomputation process may take a while, especially as the number of tourist spots increases.  
+One of the critical components of the LAKAD application is the distance matrix, which contains the distances between all pairs of tourist spots. Figure \ref{admin:distance} shows the distance matrix management page, where the distance matrix can be recomputed when new tourist spots are added. This approach lowers the API usage from Open Route Service, ensuring that the application can scale without incurring high costs from API calls. Since, it will calculate the distances between all pairs of tourist spots, expect that the recomputation process may take a while, especially as the number of tourist spots increases.  
 
 \begin{figure}[H]
     \centering
