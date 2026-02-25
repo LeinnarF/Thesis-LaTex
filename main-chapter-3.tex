@@ -379,9 +379,8 @@ The Entity Relationship Diagram (ERD) of the system, as shown in Figure \ref{erd
 	\includegraphics[width=0.8\textwidth]{datFlow.png}
 \end{figure}
 
-Only one user exists for the whole system which is the tourist as illustrated in Figure \ref{dfd}. There are two main flows for the user actions: preferences flow and itinerary flow. The preferences flow is straightforward, the user submits the preferences per category and then is saved in the app to be used later. The itinerary flow starts from the user generating an itinerary through the AGAM process in which is saved to the database and is sent to the itinerary management process for the visualization through graphical user interface.
+Two types of users exists for the whole system which is the tourist and admins as illustrated in Figure \ref{dfd}. There are two main flows for the tourist actions: place flow and itinerary flow. The  tourists can view and add places to their itineraries. They can also perform create, read, update, and delete (CRUD) operations on their itineraries. One part of the itinerary flow starts from the user generating an itinerary through the AGAM process is sent to the itinerary management process for the visualization through graphical user interface and is saved to the database. Tourists can also optimize the stops in the itineraries and request navigation instructions for the itinerary. Admins on the other hand, manages what the users can see. They can perform CRUD operations on the places that are seen by the tourists. 
 
-From itinerary management, there are two other flows: optimization and navigation flow. The optimization flow would use the best TSP algorithm selected from the analysis to optimize the itinerary visitation where the changes would be saved and flow back to the management. Navigation flow would start the navigation process, showing the tourist the directions and steps to go to the POI in the itinerary.
 
 
 \subsection{Development}
