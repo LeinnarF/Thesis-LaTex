@@ -1,40 +1,88 @@
-\chapter{Summary, Conclusion and Recommendations}
-
-The objective of this study is to develop a personalized itinerary generator for the province of Bulacan, Philippines. Incorporating a route optimization algorithm to provide the optimal way to complete the itinerary. This chapter presents the summary of findings, conclusion, and recommendations based on the results of the study.
+\chapter{Summary, Conclusions, and Recommendations}
+\thispagestyle{empty}
 
 \section{Summary of Findings}
 
-This study developed a mobile-based application designed to provide optimized travel itineraries for tourism in the Province of Bulacan. The system utilizes the Adaptive Genetic Algorithm (AGAM) for generating travel itineraries and Simulated Annealing (SA) for optimizing routes. The findings of the study were derived from the development process, comparative analysis, and formal evaluations utilizing the Technology Acceptance Model and ISO/IEC 25010:2023 standards. From these procedures, the following findings were obtained.
+This study aimed to develop Lakad, a mobile personalized itinerary generator for tourists in the province of Bulacan. The study addressed four research questions concerning the best-performing algorithm for route optimization, the development of the system, its acceptability among end-users, and its software quality as evaluated by IT professionals.
+
+\subsection{Comparative Analysis of TSP Algorithms}
+
+The first objective of the study was to determine the best-performing algorithm among seven metaheuristic algorithms for solving the Traveling Salesman Problem (TSP). The algorithms were evaluated based on two criteria: solution quality, measured by average relative error (\%), and runtime efficiency, measured in seconds. Four standard TSPLIB instances were used to test the performance of each algorithm, this includes burma14, bays29, eil51, and berlin52. The Simple Additive Weighting (SAW) method with equal weights ($w = 0.5$) was used for final ranking of each algorithm.
+
+In terms of solution quality, the Genetic Algorithm (GA) achieved the best performance with an average relative error of 0.00\% across all instances, followed by Simulated Annealing (SA) at 1.59\% and Ant Colony Optimization (ACO) at 2.50\%. The remaining algorithms such as Elephant Herding Optimization (EHO), Particle Swarm Optimization (PSO), Hovering Scouts and Foraging Flocks Pied Kingfisher Optimizer (HSFFPKO), and Grey Wolf Optimizer (GWO) exhibited significantly higher relative errors of 11.27\%, 23.77\%, 61.11\%, and 91.80\%, respectively.
+
+In terms of runtime efficiency, the Elephant Herding Optimization (EHO) was the fastest algorithm, completing within 0.5 seconds even for the largest instance. However, its solution quality degraded substantially on larger instances. While GA achieved the best solution quality, its runtime scaled exponentially, reaching approximately 196.59 seconds for the berlin52 instance.
+
+Based on the SAW ranking, \textbf{Simulated Annealing (SA)} emerged as the best algorithm, ranking first overall. It provided a strong balance between solution quality (1.59\% average relative error) and runtime efficiency, making it the most suitable algorithm for route optimization in the Lakad application.
+
+\subsection{Development of the System}
+
+The Lakad mobile application was developed as an Android-based application using the React Native framework, following the Agile-Kanban methodology. The system was successfully developed with five core features:
 
 \begin{enumerate}
-    \item \textbf{Algorithm Selection and Performance} \\
-    Simulated Annealing (SA) was found to be the most suitable algorithm to be incorporated within the Lakad application. Although the Genetic Algorithm (GA) performed the best in terms of solution quality with a relative error of 0\%, the execution efficiency of GA was found to be impractical for mobile application, taking more than 196 seconds for a problem size of 52 cities. However, SA maintained a small average relative error of 1.59\% and solved large problem sizes in about 1.90 seconds. When used through the Simple Additive Weighting (SAW) approach by giving equal weight to execution time and solution quality, SA was found to be the most preferred algorithm, followed by Elephant Herding Optimization (EHO). The findings show that SA provides the optimal balance of speed and accuracy, making it the best practical choice for real-time use in a mobile environment.
+    \item \textbf{Tourist Spot Exploration.} \\
+    Users can explore Bulacan's tourist destinations through an interactive map with markers, a search bar, and a categorized place list. Detailed information, user reviews, and ratings are accessible for each tourist spot. Users can also write their own reviews, upload photos, and report inappropriate content.
 
-    \item \textbf{Technical Implementation and Routing Architecture} \\
-    The system successfully utilized the Open Source Routing Machine (OSRM) as the routing engine in dealing with the distance matrices and large volume of routing requests. The system was able to overcome the limitations imposed by other APIs in terms of the number of requests and matrices, thus allowing the system to support the intensive computation of the AGAM and SA for Bulacan’s tourist spots.
+    \item \textbf{Personalized Itinerary Generation. } \\
+    The Adaptive Genetic Algorithm with Dynamic Mutation and Crossover Probabilities (AGAM) was implemented to generate personalized itineraries. Users can specify parameters such as preferred location, tourist spot categories, maximum travel distance, and number of places to visit. The resulting itinerary is presented through a swipeable card interface, allowing users to accept or reject suggested stops.
 
-    \item \textbf{Personalized Itinerary Generation} \\
-    The AGAM was successfully used to solve the multi-objective itinerary planning problem. The model was able to optimize user satisfaction by considering the verified POI ratings from Google Maps, POI likeness based on user-defined preference categories, and individual travel distance constraint. The algorithm ensured that all itineraries satisfied the travel budget constraint and the maximum POI limits.
+    \item \textbf{Itinerary Optimization.} \\ The Simulated Annealing (SA) algorithm was integrated to optimize the route of a generated itinerary. The optimization significantly reduced total travel distances. In one demonstration, the travel distance was reduced from 71.326 km to 31.250 km, showcasing the effectiveness of the SA algorithm.
 
+    \item \textbf{Itinerary Management.} \\ Users can create, view, edit, and delete itineraries. The feature supports both manual creation and smart generation with the help of AGAM. Progress tracking allows users to monitor visited and unvisited stops.
 
-    \item \textbf{Acceptability and Software Quality} \\
-    The instrument showed reliability through the testing results which obtained a Cronbach’s alpha value of 0.881. The results of the evaluation showed that users accepted the system while all technical quality metrics showed optimal performance. The Technology Acceptance Model (TAM) survey results found that users had a high level of acceptance for the system, with a mean of 4.71 for Perceived Usefulness, 4.71 for Perceived Ease of Use, 4.72 for Attitude Towards Using, and 4.72 for Behavioral Intention to Use. A grand mean of 4.67 was obtained showing that Lakad is highly accepted by users.  
+    \item \textbf{Itinerary Navigation.} \\ Real-time GPS navigation was implemented using the Mapbox API, providing turn-by-turn directions, estimated arrival times, and support for driving, walking, and cycling travel modes. It also supports voice-guided navigation for hands-free use. Stops are automatically marked as visited when the user is within proximity of a destination. 
+\end{enumerate}
 
+Additionally, an administrative interface was developed to manage tourist spots, view analytics, handle review reports, and recompute the distance matrix when new places are added. Ensuring the scalability of the system.
 
-    Technology field professionals evaluated the system through the ISO/IEC 25010:2023 standard and achieved outstanding results, especially in Functional Suitability (4.86), Security (4.83), Reliability (4.82), and Performance Efficiency (4.77). Experts evaluated the system as technically sound, secure, and functionally appropriate based on their findings which showed all specialized categories. 
+\subsection{System Acceptability}
+
+The acceptability of the Lakad application was evaluated using the Technology Acceptance Model (TAM) survey administered to 150 end-users (tourists) across selected municipalities in Bulacan. The results showed that:
+
+\begin{itemize}
+    \item \textbf{Perceived Usefulness} obtained a mean score of 4.71 ($s = 0.34$), rated as \textit{Highly Acceptable}.
+    \item \textbf{Perceived Ease of Use} obtained a mean score of 4.71 ($s = 0.43$), rated as \textit{Highly Acceptable}.
+    \item \textbf{Attitude Towards Using} obtained the highest mean score of 4.72 ($s = 0.40$), rated as \textit{Highly Acceptable}.
+    \item \textbf{Behavioral Intention to Use} obtained a mean score of 4.56 ($s = 0.47$), rated as \textit{Highly Acceptable}.
+\end{itemize}
+
+The \textbf{Grand TAM Score} was 4.67 ($s = 0.42$), interpreted as \textit{Highly Acceptable}. The slightly lower score in Behavioral Intention to Use was attributed to the travel frequency of the respondents, as many rarely travel. Per-item analysis revealed that responses were heavily skewed towards scores of 4 and 5 across all constructs, with all items recording a median score of 5, except for the Intention to Use item (BI1), which recorded a median of 4. Low standard deviations across all constructs indicate a strong consensus among respondents in their positive perceptions of the system.
+
+\subsection{Software Quality}
+
+The software quality of the Lakad application was evaluated by 22 IT professionals using the ISO/IEC 25010:2023 standard. The results across all nine quality constructs were rated as \textit{Excellent}:
+
+\begin{itemize}
+    \item \textbf{Functional Suitability} achieved the highest mean score of 4.86 ($s = 0.24$).
+    \item \textbf{Security} scored 4.83 ($s = 0.32$).
+    \item \textbf{Reliability} scored 4.82 ($s = 0.36$).
+    \item \textbf{Interaction Capability} scored 4.76 ($s = 0.26$).
+    \item \textbf{Performance Efficiency} scored 4.77 ($s = 0.39$).
+    \item \textbf{Safety} and \textbf{Flexibility} both scored 4.75 ($s = 0.45$ and $s = 0.31$, respectively).
+    \item \textbf{Maintainability} scored 4.68 ($s = 0.32$).
+    \item \textbf{Compatibility} obtained the lowest mean score of 4.66 ($s = 0.50$), attributed to the application's current exclusivity to the Android platform.
+\end{itemize}
+
+The \textbf{Grand ISO/IEC 25010:2023 Score} was 4.76 ($s = 0.36$), interpreted as \textit{Excellent}. Per-item analysis indicated that Functional Appropriateness, Accountability, Testability, and Faultlessness achieved the highest frequencies of excellent ratings. Items related to Analysability, Modularity, Replaceability, and Interoperability received comparatively lower but still above-average ratings, which were attributed to the application's current limitation to Android devices and competition from established platforms such as Google Maps and TripAdvisor.
+
+\section{Conclusion}
+
+The study successfully developed Lakad, a mobile personalized itinerary generator for tourists in Bulacan. Based on the findings of this study, the following conclusions were drawn:
+
+\begin{enumerate}
+    \item Among the seven metaheuristic algorithms evaluated for solving the Traveling Salesman Problem, \textbf{Simulated Annealing (SA)} was determined to be the most suitable algorithm for route optimization for Lakad. While the Genetic Algorithm (GA) achieved perfect solution quality with a 0.00\% average relative error, its exponentially increasing runtime reaching over 196 seconds for the berlin52 instance renders it impractical for real-time use in a mobile application where users expect responsive feedback. On the other hand, while Elephant Herding Optimization (EHO) demonstrated the fastest runtime, its solution quality degraded significantly on larger problem instances, making it unreliable for complex itineraries. SA achieved a balance between the two criteria, with a low average relative error of 1.59\% and a consistently fast runtime across all TSPLIB instances. The Simple Additive Weighting (SAW) rankings confirmed this trade-off, placing SA in first position. These results affirm that for the specific demands of a mobile-based tourism application, runtime efficiency is as critical as solution quality, and SA effectively addresses both requirements.
+
+    \item The Lakad mobile application was successfully developed as a personalized tourism planning tool for tourist destinations in the province of Bulacan. The system was built using the React Native framework following the Agile-Kanban methodology, and all five target functionalities were fully implemented such as Tourist Spot Exploration, Personalized Itinerary Generation, Itinerary Optimization, Itinerary Management, and Itinerary Navigation.
+    
+    The Adaptive Genetic Algorithm with Dynamic Mutation and Crossover Probabilities (AGAM) was successfully implemented for generating personalized itineraries, effectively balancing multiple objectives such as POI ratings, user-defined interests, and travel distance constraints. The integration of Simulated Annealing (SA) for route optimization demonstrated improvements in travel distance by lowering the total distance for the entire itinerary. The system further provides real-time GPS navigation through the Mapbox API, supporting multiple travel modes and automatic progress tracking. The development of an administrative interface additionally ensures that the application is scalable and maintainable as new tourist spots are added over time. All in all, these functionalities demonstrate that the system is a practical and complete solution for addressing the identified gaps in tourism planning in Bulacan.
+
+    \item The Lakad application achieved a Grand TAM Score of \textbf{4.67} ($s = 0.42$), interpreted as \textit{Highly Acceptable}, demonstrating a strong level of acceptance among end-users. All four TAM constructs such as Perceived Usefulness (4.71), Perceived Ease of Use (4.71), Attitude Towards Using (4.72), and Behavioral Intention to Use (4.56) were rated Highly Acceptable, with low standard deviations reflecting a strong consensus among the 150 respondents. The slightly lower score in Behavioral Intention to Use is attributed to the travel frequency of the respondents and does not negatively reflect on the system's usability or design. The heavy skew of responses towards scores of 4 and 5 across all constructs, particularly in Perceived Usefulness and Perceived Ease of Use, validates that Lakad is intuitive, useful, and well-aligned with the needs of tourists in Bulacan. These results demonstrate that the application successfully meets the expectations of its intended users.
+    
+    \item The Lakad application demonstrated excellent software quality, achieving a Grand ISO/IEC 25010:2023 Score of \textbf{4.76} ($s = 0.36$), interpreted as \textit{Excellent}, as evaluated by 22 IT professionals. All nine quality constructs were rated Excellent, with Functional Suitability (4.86) receiving the highest rating, confirming that the system comprehensively fulfills its intended functional requirements. The high scores in Security (4.83) and Reliability (4.82) further indicate that the system is robust, trustworthy, and dependable for end-users. Compatibility (4.66) received the lowest score among the constructs, which is attributable to the application's current exclusivity to the Android platform. However, given that Lakad is built on the React Native framework, this limitation can be addressed in the future by extending support to iOS. The frequency distribution for all items further revealed that Accountability, Functional Appropriateness, Testability, and Faultlessness garnered the highest ratings, while Analysability, Modularity, Replaceability, and Interoperability, though still rated above average, reflect areas with room for future improvement, particularly as competition with established platforms such as Google Maps and TripAdvisor is acknowledged. Overall, the evaluation confirms that Lakad was developed to a high standard of software quality that meets professional and academic expectations.
 
 \end{enumerate}
 
-
-\section{Conclusion}
-The study successfully developed a mobile-based system that effectively addresses the challenges of traditional manual trip planning and the uneven promotion of tourist spots in the Province of Bulacan. The researchers showed that data-driven tools enhance local tourism accessibility when they combine mathematical optimization models with modern mobile technology.
-
-The Traveling Salesman Problem (TSP) algorithms comparison showed that Simulated Annealing (SA) works best for mobile implementation. The mobile environment requires exact methods and complex genetic algorithms to achieve higher precision. Users need fast solutions, and SA provides high solution quality and rapid execution. The Open Source Routing Machine (OSRM) became a crucial element for system scalability because it allowed the system to perform matrix calculations for personalized generation without any limits from commercial API restrictions.
-
-The Adaptive Genetic Algorithm (AGAM) implementation shows that personalized recommendations become possible through balancing multiple objectives, such as interest, ratings, and distance. This approach moves beyond simple destination lists by creating meaningful and tailored itineraries that reflect the specific interest of the user while taking into consideration their physical and temporal constraints.
-
-Finally, the highly favorable evaluations from both tourists and IT professionals validate that Lakad is not only a technically sound system but also a socially relevant tool. The application serves as a promotional tool for the Provincial History Arts Culture and Tourism Office (PHACTO) who want to promote both popular tourist spots and the province's lesser-known attractions. The study demonstrates that Lakad provides a strong user-centered solution for Bulacan sustainable tourism development through metaheuristic optimization and localized data combination.
-
+In summary, the study successfully achieved all its objectives. Lakad is a well-developed, highly acceptable, and high-quality mobile application that offers a practical, personalized, and optimized itinerary planning experience for tourists in Bulacan. The integration of AGAM for personalized itinerary generation and Simulated Annealing for route optimization provides a meaningful and technically sound contribution to both the field of tourism technology and the broader domain of applied metaheuristic optimization. The system directly addresses the identified gaps in manual trip planning within Bulacan and supports the province's broader tourism development goals.
 
 \section{Recommendations}
 To further enhance the capabilities and reach of Lakad, the following recommendations are proposed:
@@ -42,8 +90,7 @@ To further enhance the capabilities and reach of Lakad, the following recommenda
 \begin{enumerate}
     \item \textbf{Adding various Points of Interest (POIs).} The system needs to add more POIs compared to its current historical and cultural site base because its upcoming versions need to include different types of POIs. The application must include local hotels and dining options which will enable users to plan their travel needs through a single platform.
 
-    \item \textbf{Exploration of Emerging Optimization Algorithms. } The study used Simulated Annealing (SA) as its solution method, but researchers could investigate hybrid metaheuristic solutions and new algorithm designs to obtain better results for complex Traveling Salesman Problems (TSP).
-
+    \item \textbf{Exploration of Emerging Optimization Algorithms. } While SA was determined to be the optimal among the evaluated algorithms, future work may extend the comparative analysis to include hybrid approach and new algorithm designs to obtain better results for complex Traveling Salesman Problems (TSP).
     
     \item \textbf{Scaling by Region and Platform.} The system should extend its operations to additional provinces which will turn Lakad into a comprehensive national tourism tool that serves all parts of the Philippines. The application needs an iOS version to reach more users because its current Android-only system prevents users who use iOS devices from accessing the app.
 
