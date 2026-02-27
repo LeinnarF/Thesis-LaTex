@@ -57,6 +57,8 @@ The study considers several metaheuristic algorithms for route optimization for 
 \item \textbf{Hovering Scouts and Foraging Flocks Pied Kingfisher Optimizer (HSFFPKO).} HSFFPKO enhances the traditional Pied Kingfisher Optimizer by introducing multiscale search mechanisms to improve optimization performance. By adding Hovering Scouts for fine-grained local adjustments and Foraging Flocks for parallel group-based exploitation, the algorithm maintains better population diversity than its predecessor. These additions allow HSFFPKO to mitigate local optima entrapment and solve complex, high-dimensional problems more efficiently \parencite{DelaCruz2025HSFFPKO}.
 \end{enumerate}
 
+The pseudocode for each of the algorithms is shown in Appendix A.
+
 \subsection{TSP Algorithm Selection}
 
 To determine the best algorithm to implement for Lakad, a comparative analysis was conducted on several metaheuristic algorithms used for solving TSP. The analysis focuses on solution quality (accuracy) and runtime speed of each algorithm. The algorithms were tested on selected instances from the TSPLIB library, a standard benchmark for TSP and related problems. Table \ref{tsplib_instace} presents selected instances for benchmarking. 
@@ -363,7 +365,7 @@ The design phase focuses on creating the overall architecture and structure of t
 	\includegraphics[width=\textwidth]{SysArch.png}
 \end{figure}
 
-Figure \ref{SysArch} illustrates the system architecture of Lakad: A Personalized Mobile Itinerary Creator and how the different components of the application interact to provide personalized and optimized travel itineraries for users. At the core of the system is the mobile frontend, which serves as the main interface where tourists can search for tourist destinations, generate itineraries, and manage their travel plans. When a user interacts with the application, the frontend communicates with the Mapbox API to send requests for map data, location coordinates The API processes these requests and returns the corresponding responses, which are then displayed on the user interface in the form of maps and travel routes. In addition, the application stores user-generated itineraries and relevant information in a remote database using Supabase, allowing users to access and manage their itineraries. While admin users have access to admin gui separate from tourists where they can manage the places shown to the users as well as recalculate the distance matrix via the OpenRouteService matrix api.
+Figure \ref{SysArch} illustrates the system architecture of Lakad: A Personalized Mobile Itinerary Creator and how the different components of the application interact to provide personalized and optimized travel itineraries for users. At the core of the system is the mobile frontend, which serves as the main interface where tourists can search for tourist destinations, generate itineraries, and manage their travel plans. When a user interacts with the application, the frontend communicates with the Mapbox API to send requests for map data, location coordinates The API processes these requests and returns the corresponding responses, which are then displayed on the user interface in the form of maps and travel routes. In addition, the application stores user-generated itineraries and relevant information in a remote database using Supabase, allowing users to access and manage their itineraries. While admin users have access to admin GUI separate from tourists where they can manage the places shown to the users as well as recalculate the distance matrix via the OpenRouteService matrix API.
 
 \begin{figure}[H]
 	\centering
@@ -461,11 +463,11 @@ Additionally, a reliability test was conducted on the TAM questionnaire to ensur
 
 \subsection{Population and Sample}
 
-The respondents of this study consist of the end-users or the tourists in Bulacan and IT professionals for evaluating Lakad. The tourists are the primary users  of the application, while the IT professionals are the secondary users who evaluates the technical aspects of the system. 
+The respondents of this study consist of the end-users or the tourists in Bulacan and IT professionals for evaluating Lakad. The tourists are the primary users  of the application, while the IT professionals are the secondary users who evaluate the technical aspects of the system. 
 
-\textbf{End-Users.} The End-users or the tourists are the primary users of the application. The acceptance of the application, measured by TAM, were evaluated by the end-users. 
+\textbf{End-Users.} The End-users or the tourists are the primary users of the application. The acceptance of the application, measured by TAM, were evaluated by the end-users. A multi-stage sampling technique was used to select the respondents for the end-users. 
 
-A multi-stage non-probability sampling technique was used to select the respondents for the end-users. First, municipalities in Bulacan were classified based on their 2025 tourist arrivals (low, medium, high), see Table \ref{tourist_arrivals}. These classifications were based on the data provided by PHACTO, such that < 100,000 arrivals is classified as low, 100,000 to 500,000 arrivals is classified as medium, and > 500,000 arrivals is classified as high. Selected municipalities were chosen from different tourist arrival classifications to ensure a diverse representation of tourists. This approach helps to reduce sampling bias and ensures that the sample reflects the diversity of tourists visiting different areas of Bulacan.
+First, municipalities in Bulacan were classified according to their 2025 tourist arrivals (low, medium, high) based on the data provided by PHACTO. 
 
 \begin{table}[H]
 	\centering
@@ -507,7 +509,9 @@ A multi-stage non-probability sampling technique was used to select the responde
 	\end{tabularx}
 \end{table}
 
-The selected municipalities for the study were Baliwag, Bocaue, Bustos, Calumpit, Guiguinto, Malolos, Marilao, Plaridel, Pulilan, and San Rafael. These municipalities were chosen to represent a range of tourist arrival classifications (low, medium, high) to ensure that the sample of end-users reflects the diversity of tourists visiting different areas of Bulacan. Within these selected municipalities, respondents were allocated proportionately based on the tourist arrivals of each municipality. This proportional allocation ensures that the sample size from each municipality is representative of the actual distribution of tourists across the region. 
+In Table \ref{tourist_arrivals}, municipalities were classified. These classifications were based on the data provided by PHACTO, such that < 100,000 arrivals is classified as low, 100,000 to 500,000 arrivals is classified as medium, and > 500,000 arrivals is classified as high. Selected municipalities were chosen from different tourist arrival classifications to ensure a diverse representation of tourists. This approach helps to reduce sampling bias and ensures that the sample reflects the diversity of tourists visiting different areas of Bulacan.
+
+In the second stage, tourists within the selected municipalities were randomly selected to participate in the survey. The selected municipalities for the study were Baliwag, Bocaue, Bustos, Calumpit, Guiguinto, Malolos, Marilao, Plaridel, Pulilan, and San Rafael. These municipalities were chosen to represent a range of tourist arrival classifications (low, medium, high) to ensure that the sample of end-users reflects the diversity of tourists visiting different areas of Bulacan. Within these selected municipalities, respondents were allocated proportionately based on the tourist arrivals of each municipality. This proportional allocation ensures that the sample size from each municipality is representative of the actual distribution of tourists across the region. 
 
 A total sample size of 150 end-users was determined to be appropriate for the study. While standard probability sampling formulas for a population of $N = 8,023,618$ would typically suggest a sample of approximately 400 respondents to achieve a 5\% margin of error. However, the researchers also consider the practical logistical constraints in conducting face-to-face tourist data collection. Hence, a more manageable target of 150 respondents was established, which accepts an approximate margin of error of 8\% at a 95\% confidence level.
 
