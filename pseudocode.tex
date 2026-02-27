@@ -1,277 +1,490 @@
-\begin{algorithm}[H]
-	\singlespacing
-	\footnotesize
-	\caption{Genetic Algorithm}
-	\label{GA}
-	\begin{algorithmic}[1]
-		\State Initialize population $p$ using the \Call{initialize\_population}{} method.
-		\State Calculate the fitness for each individual in $p$ using the \Call{evaluate\_fitness}{} method.
-		\State Set the iteration counter $T = 0$.
-		\State Set $\text{max\_iterations} = 1000$.
-		\While {$T < \text{max\_iterations}$}
-		\State Select parents from the population $p$ using the \Call{selection}{} method.
-		\State Perform crossover on the selected parents with a probability of $0.8$ using the \Call{crossover}{} method to generate offspring.
-		\State Perform a mutation on the offspring with a probability of $0.2$ using the \Call{mutation}{} method.
-		\State Calculate fitness for each offspring using the \Call{evaluate\_fitness}{} method.
-		\State Replace the worst individuals in the population $p$ with the best offspring.
-		\State Update the best solution found so far.
-		\State Increment iteration counter $T = T + 1$.
-		\EndWhile
-		\State \textbf{Return} the best solution found ($\text{best\_individual}$).
-	\end{algorithmic}
+% Required packages for these pseudocode algorithms:
+% \usepackage{algorithm}
+% \usepackage{algpseudocode}
+% \usepackage{amsmath}
+
+% ============================================================================
+% 1. Genetic Algorithm for TSP
+% ============================================================================
+
+\begin{algorithm}
+\caption{Genetic Algorithm for TSP}
+\label{alg:ga_tsp}
+\begin{algorithmic}[1]
+\Require Graph $G$, $\text{pop\_size}$, $\text{generations}$, $\text{mutation\_rate}$
+\Ensure Best tour and its cost
+\State Initialize population $P$ with $\text{pop\_size}$ random tours
+\State Evaluate fitness (tour cost) for each individual in $P$
+\For{generation $= 1$ to $\text{generations}$}
+    \State Create empty offspring population $P'$
+    \State \Comment{Elitism: preserve best individuals}
+    \State Sort $P$ by fitness
+    \State Add top $\text{elite\_size}$ individuals to $P'$
+    \State \Comment{Generate offspring}
+    \While{$|P'| < \text{pop\_size}$}
+        \State $\text{parent1} \gets \text{TOURNAMENT\_SELECTION}(P, \text{tournament\_size})$
+        \State $\text{parent2} \gets \text{TOURNAMENT\_SELECTION}(P, \text{tournament\_size})$
+        \State $\text{offspring} \gets \text{ORDER\_CROSSOVER}(\text{parent1}, \text{parent2})$
+        \If{$\text{random}() < \text{mutation\_rate}$}
+            \State $\text{offspring} \gets \text{TWO\_OPT\_MUTATION}(\text{offspring})$
+        \EndIf
+        \State $\text{offspring} \gets \text{LOCAL\_SEARCH}(\text{offspring})$ \Comment{2-opt improvement}
+        \State Evaluate fitness of offspring
+        \State Add offspring to $P'$
+    \EndWhile
+    \State $P \gets P'$ \Comment{Replace old population}
+    \State Update $\text{best\_tour}$ if improved
+\EndFor
+\State \Return $\text{best\_tour}, \text{best\_cost}$
+\end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}[H]
-	\singlespacing
-	\footnotesize
-	\caption{Ant Colony Optimization}
-	\label{ACO}
-	\begin{algorithmic}[1]
-		\State Initialize the pheromone matrix $\tau$ with $\text{initial\_pheromone}$.
-		\State Set $\text{best\_tour} = \text{none}$ and $\text{best\_distance} = \infty$.
-		\State Start timer $\text{start\_time}$.
-		\For {$i = 1$ to $\text{num\_iterations}$}
-		\State Generate $\text{num\_ants}$ tours using the \Call{construct\_tour}{} method.
-		\For {each generated tour $k$}
-		\State Calculate $\text{tour\_distance}_k$.
-		\If {$\text{tour\_distance}_k < \text{best\_distance}$}
-		\State Update $\text{best\_tour} = \text{tour}_k$
-		\State Update $\text{best\_distance} = \text{tour\_distance}_k$
-		\EndIf
-		\EndFor
-		\State Update pheromone matrix $\tau$ using the \Call{update\_pheromone\_matrix}{} method.
-		\EndFor
-		\State Stop timer $\text{end\_time}$.
-		\State Calculate $\text{computation\_time} = \text{end\_time} - \text{start\_time}$.
-		\State \textbf{Return} $\text{best\_tour}$, $\text{best\_distance}$, and $\text{computation\_time}$.
-	\end{algorithmic}
+\begin{algorithm}
+\caption{Tournament Selection}
+\label{alg:tournament_selection}
+\begin{algorithmic}[1]
+\Function{TOURNAMENT\_SELECTION}{$P, k$}
+    \State Randomly select $k$ individuals from $P$
+    \State \Return best individual among the $k$ selected
+\EndFunction
+\end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}[H]
-	\singlespacing
-	\footnotesize
-	\caption{Simulated Annealing}
-	\label{SA}
-
-	\begin{algorithmic}[1]
-		\Function{SimulatedAnnealing}{$\text{cities}$, $\text{initial\_temperature}$, $\text{cooling\_rate}$, $\text{num\_iterations}$}
-		\State Initialize the distances matrix by calculating the distances between cities.
-		\State Define $\text{calculate\_tour\_distance}(\text{tour})$.
-		\State Define $\text{generate\_neighbor}(\text{tour})$ (e.g., swapping two cities).
-		\State Define $\text{acceptance\_probability}(\Delta E, T) = e^{-\Delta E / T}$.
-		\State Initialize $\text{current\_tour}$ with a random tour.
-		\State $\text{current\_distance} \gets \text{calculate\_tour\_distance}(\text{current\_tour})$.
-		\State $\text{best\_tour} \gets \text{current\_tour}$.
-		\State $\text{best\_distance} \gets \text{current\_distance}$.
-		\State $T \gets \text{initial\_temperature}$.
-		\State $\text{start\_time} \gets \text{Timer.start}()$.
-		\For {$i = 1$ to $\text{num\_iterations}$}
-		\State $\text{new\_tour} \gets \text{generate\_neighbor}(\text{current\_tour})$.
-		\State $\text{new\_distance} \gets \text{calculate\_tour\_distance}(\text{new\_tour})$.
-		\State $\Delta E \gets \text{new\_distance} - \text{current\_distance}$.
-		\If {$\Delta E < 0$}
-		\State $\text{accept} \gets \text{True}$
-		\Else
-		\State $\text{prob} \gets \text{acceptance\_probability}(\Delta E, T)$
-		\State $\text{accept} \gets \text{prob} > \text{random}(0, 1)$
-		\EndIf
-
-		\If {$\text{accept}$}
-		\State $\text{current\_tour} \gets \text{new\_tour}$
-		\State $\text{current\_distance} \gets \text{new\_distance}$
-		\If {$\text{current\_distance} < \text{best\_distance}$}
-		\State $\text{best\_tour} \gets \text{current\_tour}$
-		\State $\text{best\_distance} \gets \text{current\_distance}$
-		\EndIf
-		\EndIf
-
-		\State $T \gets T \cdot \text{cooling\_rate}$
-		\EndFor
-		\State $\text{end\_time} \gets \text{Timer.stop}()$.
-		\State $\text{computation\_time} \gets \text{end\_time} - \text{start\_time}$.
-		\State \textbf{Return} $\text{best\_tour}$, $\text{best\_distance}$, $\text{computation\_time}$.
-		\EndFunction
-	\end{algorithmic}    
+\begin{algorithm}
+\caption{Order Crossover}
+\label{alg:order_crossover}
+\begin{algorithmic}[1]
+\Function{ORDER\_CROSSOVER}{$\text{parent1}, \text{parent2}$}
+    \State Select random substring from $\text{parent1}$
+    \State Fill remaining positions with $\text{parent2}$'s order
+    \State \Return offspring
+\EndFunction
+\end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}[H]
-	\singlespacing
-	\footnotesize
-	\caption{Particle Swarm Optimization}
-	\label{PSO}
-	\begin{algorithmic}[1]
-		\State \textbf{Initialize parameters:}
-		\State \hspace{1em} num\_particles = Number of particles
-		\State \hspace{1em} num\_iterations = Maximum number of iterations
-		\State \hspace{1em} cities = List of city coordinates
-		\State \hspace{1em} $w$ = Inertia weight, $c_1$ = Cognitive coefficient, $c_2$ = Social coefficient
-		\State
-		\State \textbf{Initialize particles:}
-		\For{$i = 1$ to num\_particles}
-		\State Initialize position $X[i]$ randomly (random tour)
-		\State Initialize velocity $V[i]$ randomly
-		\State $pBest[i] \gets X[i]$
-		\State $pBestFitness[i] \gets fitness(pBest[i])$
-		\EndFor
-
-		\State $gBest \gets$ Best particle position among all $pBest$
-		\State $gBestFitness \gets$ Best fitness among all particles
-
-		\State
-
-		\For{$t = 1$ to num\_iterations}
-		\For{$i = 1$ to num\_particles}
-		\State // Update velocity
-		\State Generate random numbers $r_1, r_2$
-		\State $V[i] \gets w \cdot V[i] + c_1 \cdot r_1 \cdot (pBest[i] - X[i]) + c_2 \cdot r_2 \cdot (gBest - X[i])$
-
-		\State // Update position
-		\State $X[i] \gets UpdatePosition(X[i], V[i])$
-		\State fitnessVal $\gets fitness(X[i])$
-
-		\State // Update personal best
-		\If{fitnessVal $<$ pBestFitness[i]}
-		\State $pBest[i] \gets X[i]$
-		\State $pBestFitness[i] \gets$ fitnessVal
-		\EndIf
-
-		\State // Update global best
-		\If{fitnessVal $<$ gBestFitness}
-		\State $gBest \gets X[i]$
-		\State $gBestFitness \gets$ fitnessVal
-		\EndIf
-		\EndFor
-		\EndFor
-
-		\State \Return $gBest$ as the best tour found
-
-	\end{algorithmic}
+\begin{algorithm}
+\caption{Two-Opt Mutation}
+\label{alg:two_opt_mutation}
+\begin{algorithmic}[1]
+\Function{TWO\_OPT\_MUTATION}{$\text{tour}$}
+    \State Select two random positions $i, j$
+    \State Reverse tour segment between $i$ and $j$
+    \State \Return mutated tour
+\EndFunction
+\end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}[H]
-	\singlespacing
-	\footnotesize
-	\caption{Elephant Herding Optimization}
-	\label{EHO}
-	\begin{algorithmic}[1]
-		\State \textbf{Initialize parameters:}
-		\State Initialize elephants with random tours
-		\State Set number of clans, elephants per clan, and max iterations
-		\State Initialize global best ($gBest$)
-		\State
-		\State \textbf{Main loop:}
-		\For{$t = 1$ to max\_iterations}
-		\For{each clan}
-		\State Compute clan center $E_{center}$
-		\For{each elephant $j$ in the clan}
-		\State // Update position
-		\State $X_j \gets X_{best} + \alpha \cdot (X_j - E_{center}) \cdot random\_factor$
-		\State Ensure valid tour
-		\State Update personal best $pBest_j$
-		\EndFor
-		\State Update clan’s best ($gBest$ candidate)
-		\EndFor
-		\State
-		\State \textbf{Migration step:}
-		\State Replace worst elephant with a new random tour
-		\State Update $gBest$ if a better solution is found
-		\EndFor
-		\State
-		\State \textbf{Termination:}
-		\State \Return $gBest$ as the best tour found
-	\end{algorithmic}
+\begin{algorithm}
+\caption{Simulated Annealing for TSP}
+\label{alg:sa_tsp}
+\begin{algorithmic}[1]
+\Require Graph $G$, initial temperature $T$, cooling rate $\alpha$, $\text{max\_iterations}$
+\Ensure Best tour and its cost
+\State $\text{current\_tour} \gets \text{random permutation of cities}$
+\State $\text{current\_cost} \gets \text{EVALUATE}(\text{current\_tour})$
+\State $\text{best\_tour} \gets \text{current\_tour}$
+\State $\text{best\_cost} \gets \text{current\_cost}$
+\State $T \gets T_{\text{initial}}$
+\For{iteration $= 1$ to $\text{max\_iterations}$}
+    \State $\text{neighbor\_tour} \gets \text{RANDOM\_SWAP}(\text{current\_tour})$
+    \State $\text{neighbor\_cost} \gets \text{EVALUATE}(\text{neighbor\_tour})$
+    \State $\Delta \gets \text{neighbor\_cost} - \text{current\_cost}$
+    \State \Comment{Metropolis acceptance criterion}
+    \If{$\Delta < 0$ \textbf{or} $\text{random}() < \exp(-\Delta / T)$}
+        \State $\text{current\_tour} \gets \text{neighbor\_tour}$
+        \State $\text{current\_cost} \gets \text{neighbor\_cost}$
+        \If{$\text{current\_cost} < \text{best\_cost}$}
+            \State $\text{best\_tour} \gets \text{current\_tour}$
+            \State $\text{best\_cost} \gets \text{current\_cost}$
+        \EndIf
+    \EndIf
+    \State $T \gets \alpha \times T$ \Comment{Cool down temperature}
+\EndFor
+\State \Return $\text{best\_tour}, \text{best\_cost}$
+\end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}[H]
-	\singlespacing
-	\footnotesize
-	\caption{Grey Wolf Optimizer}
-	\label{GWO}
-	\begin{algorithmic}[1]
-		\State Initialize wolves
-		\State Set iteration counter
-		\State Set maximum number of iterations
-		\While{iteration\_counter $<$ max\_iterations}
-		\State Evaluate fitness for each wolf
-		\State Update the best wolf found so far
-		\State Determine $\alpha$, $\beta$, and $\delta$ wolves 
-		\Statex \hspace{2em} // best, second-best, and third-best solutions
-		\For{each wolf}
-		\State Update the wolf's position based on $\alpha$, $\beta$, and $\delta$
-		\EndFor
-		\State Increment iteration\_counter
-		\EndWhile
-		\State \Return best wolf found (best\_solution)
-	\end{algorithmic}
+\begin{algorithm}
+\caption{Random Swap}
+\label{alg:random_swap}
+\begin{algorithmic}[1]
+\Function{RANDOM\_SWAP}{$\text{tour}$}
+    \State Select two random positions $i, j$
+    \State Swap $\text{tour}[i]$ and $\text{tour}[j]$
+    \State \Return modified tour
+\EndFunction
+\end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}[H]
-	\singlespacing
-	\footnotesize
-	\caption{Hovering Scouts and Foraging Flocks Pied Kingfisher Optimizer (HSFFPKO)}
-	\label{HSFFPKO}
-	\begin{algorithmic}[1]
-		\Require Population size $N$, maximum iterations $T$, bounds $LB, UB$, objective function $f$
-		\Ensure Best solution $X^*$
-
-		\State Initialize population $\{X_i\}_{i=1}^N$ uniformly in $[LB, UB]$
-		\State Evaluate fitness $f(X_i)$ and set global best $X^*$
-
-		\For{$t = 1$ to $T$}
-		\State Compute contraction factor $o(t) = \exp(-(t/T)^2)$
-
-		\Comment{Phase 1: PKO exploration and exploitation}
-		\For{each agent $i$}
-		\If{rand $< 0.8$} \Comment{Exploration}
-		\State Select random peer $j \neq i$
-		\If{rand $< 0.5$} \Comment{Hovering}
-		\State $X_i' \gets X_i + \alpha L_{hov}(t)(X_j - X_i)$
-		\Else \Comment{Perching}
-		\State $X_i' \gets X_i + \alpha L_{per}(t)(X_j - X_i)$
-		\EndIf
-		\Else \Comment{Exploitation (Diving)}
-		\State Construct perturbed elite $b_i$
-		\State $X_i' \gets X_i + H_i(t)\, o(t)\,(b_i - X^*)$
-		\EndIf
-		\State Apply bounds and greedy acceptance
-		\EndFor
-
-		\Comment{Phase 2: Commensalism}
-		\For{each agent $i$}
-		\If{rand $> 1 - PE(t)$}
-		\State Select random peers $m,n$
-		\State $X_i' \gets X_m + o(t)\alpha |X_i - X_n|$
-		\State Apply bounds and greedy acceptance
-		\EndIf
-		\EndFor
-
-		\Comment{Phase 3: Hovering Scouts}
-		\If{$t \bmod T_{HS} = 0$}
-		\State Select scout set $S$
-		\For{each scout $i \in S$}
-		\State $X_i' \gets X_i + X_i \odot \mathcal{N}(0,I)$
-		\State $X_i' \gets X_i' + \eta \sigma \odot (X^* - X_i')$
-		\State Apply bounds and greedy acceptance
-		\EndFor
-		\EndIf
-
-		\Comment{Phase 4: Foraging Flocks}
-		\If{$t \bmod T_{FF} = 0$}
-		\State Partition population into flocks $\{F_k\}$
-		\For{each flock $F_k$}
-		\State Compute centroid $C_k$ and leader $L_k$
-		\State $T_k \gets \phi L_k + (1-\phi)C_k$
-		\For{each agent $i \in F_k$}
-		\State $X_i' \gets X_i + \xi (T_k - X_i) + \mathcal{N}(0,\rho(t)^2 I)$
-		\State Apply bounds and greedy acceptance
-		\EndFor
-		\EndFor
-		\EndIf
-
-		\State Update global best $X^*$
-		\EndFor
-
-		\Return $X^*$
-	\end{algorithmic}
+\begin{algorithm}
+\caption{Simulated Annealing Improved for TSP}
+\label{alg:sai_tsp}
+\begin{algorithmic}[1]
+\Require Graph $G$, $T_{\text{start}}$, $T_{\text{end}}$, cooling rate
+\Ensure Best tour and its cost
+\State $\text{current\_tour} \gets \text{random permutation of cities}$
+\State $\text{current\_cost} \gets \text{EVALUATE}(\text{current\_tour})$
+\State $\text{best\_tour} \gets \text{current\_tour}$
+\State $\text{best\_cost} \gets \text{current\_cost}$
+\State $T \gets T_{\text{start}}$
+\State $\text{iter\_per\_temp} \gets n \times 1.5$
+\While{$T > T_{\text{end}}$}
+    \For{$i = 1$ to $\text{iter\_per\_temp}$}
+        \State $\text{neighbor\_tour} \gets \text{SEGMENT\_INSERTION}(\text{current\_tour})$
+        \State $\text{neighbor\_cost} \gets \text{EVALUATE}(\text{neighbor\_tour})$
+        \State $\Delta \gets \text{neighbor\_cost} - \text{current\_cost}$
+        \If{$\Delta < 0$ \textbf{or} $\text{random}() < \exp(-\Delta / T)$}
+            \State $\text{current\_tour} \gets \text{neighbor\_tour}$
+            \State $\text{current\_cost} \gets \text{neighbor\_cost}$
+            \If{$\text{current\_cost} < \text{best\_cost}$}
+                \State $\text{best\_tour} \gets \text{current\_tour}$
+                \State $\text{best\_cost} \gets \text{current\_cost}$
+            \EndIf
+        \EndIf
+    \EndFor
+    \State $T \gets \text{cooling\_rate} \times T$
+\EndWhile
+\State \Return $\text{best\_tour}, \text{best\_cost}$
+\end{algorithmic}
 \end{algorithm}
 
+\begin{algorithm}
+\caption{Segment Insertion}
+\label{alg:segment_insertion}
+\begin{algorithmic}[1]
+\Function{SEGMENT\_INSERTION}{$\text{tour}$}
+    \State Select random position $a$
+    \State Select random position $b$ (not adjacent to $a$)
+    \State Remove city at position $a$
+    \State Insert it at position $b$
+    \State \Return modified tour
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{Ant Colony Optimization for TSP}
+\label{alg:aco_tsp}
+\begin{algorithmic}[1]
+\Require Graph $G$, $n_{\text{ants}}$, $n_{\text{iterations}}$, $\alpha$, $\beta$, $\rho$, $Q$
+\Ensure Best tour and its cost
+\State Initialize pheromone matrix $\tau[i][j] \gets 1.0$ for all edges
+\State $\text{best\_tour} \gets \text{null}$
+\State $\text{best\_cost} \gets \infty$
+\For{iteration $= 1$ to $n_{\text{iterations}}$}
+    \State $\text{tours} \gets [\,]$
+    \State $\text{costs} \gets [\,]$
+    \State \Comment{Each ant constructs a tour}
+    \For{$k = 1$ to $n_{\text{ants}}$}
+        \State $\text{current\_city} \gets \text{random city}$
+        \State $\text{tour} \gets [\text{current\_city}]$
+        \State $\text{unvisited} \gets \text{all cities except current\_city}$
+        \While{$\text{unvisited} \neq \emptyset$}
+            \State \Comment{Calculate probabilities for next city}
+            \For{\textbf{each} city $j$ in unvisited}
+                \State $\text{numerator} \gets \tau[\text{current\_city}][j]^{\alpha} \times (1/d[\text{current\_city}][j])^{\beta}$
+                \State $p[j] \gets \text{numerator} / \Sigma(\text{numerators})$
+            \EndFor
+            \State $\text{next\_city} \gets \text{ROULETTE\_SELECTION}(p)$
+            \State Append $\text{next\_city}$ to tour
+            \State Remove $\text{next\_city}$ from unvisited
+            \State $\text{current\_city} \gets \text{next\_city}$
+        \EndWhile
+        \State $\text{cost} \gets \text{EVALUATE}(\text{tour})$
+        \State Append tour to tours
+        \State Append cost to costs
+        \If{$\text{cost} < \text{best\_cost}$}
+            \State $\text{best\_tour} \gets \text{tour}$
+            \State $\text{best\_cost} \gets \text{cost}$
+        \EndIf
+    \EndFor
+    \State \Comment{Pheromone evaporation}
+    \State $\tau[i][j] \gets (1 - \rho) \times \tau[i][j]$ for all edges
+    \State \Comment{Pheromone deposition}
+    \For{\textbf{each} tour in tours with cost $c$}
+        \For{\textbf{each} edge $(i,j)$ in tour}
+            \State $\tau[i][j] \gets \tau[i][j] + Q/c$
+        \EndFor
+    \EndFor
+\EndFor
+\State \Return $\text{best\_tour}, \text{best\_cost}$
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{Hybrid PSO for TSP}
+\label{alg:pso_tsp}
+\begin{algorithmic}[1]
+\Require Graph $G$, $n_{\text{particles}}$, $n_{\text{iterations}}$, $w$, $c_1$, $c_2$
+\Ensure Best tour and its cost
+\State \Comment{Initialize swarm}
+\For{$i = 1$ to $n_{\text{particles}}$}
+    \State $\text{position}[i] \gets \text{random permutation of cities}$
+    \State $\text{position}[i] \gets \text{TWO\_OPT}(\text{position}[i])$ \Comment{Local search}
+    \State $\text{velocity}[i] \gets [\,]$ \Comment{Empty swap sequence}
+    \State $\text{pbest}[i] \gets \text{position}[i]$ \Comment{Personal best}
+    \State $\text{pbest\_cost}[i] \gets \text{EVALUATE}(\text{position}[i])$
+\EndFor
+\State $\text{gbest} \gets \text{argmin}(\text{pbest\_cost})$ \Comment{Global best}
+\State $\text{gbest\_cost} \gets \min(\text{pbest\_cost})$
+\For{iteration $= 1$ to $n_{\text{iterations}}$}
+    \For{$i = 1$ to $n_{\text{particles}}$}
+        \State \Comment{Calculate swap sequences}
+        \State $\text{swaps\_cognitive} \gets \text{GET\_SWAPS}(\text{position}[i], \text{pbest}[i])$
+        \State $\text{swaps\_social} \gets \text{GET\_SWAPS}(\text{position}[i], \text{gbest})$
+        \State \Comment{Update velocity (swap sequence)}
+        \State $\text{velocity}[i] \gets w \times \text{velocity}[i]$
+        \State $\text{velocity}[i] \gets \text{velocity}[i] + c_1 \times \text{rand}() \times \text{swaps\_cognitive}$
+        \State $\text{velocity}[i] \gets \text{velocity}[i] + c_2 \times \text{rand}() \times \text{swaps\_social}$
+        \State Limit $|\text{velocity}[i]|$ to $v_{\max}$
+        \State \Comment{Update position}
+        \State $\text{position}[i] \gets \text{APPLY\_SWAPS}(\text{position}[i], \text{velocity}[i])$
+        \State $\text{position}[i] \gets \text{TWO\_OPT}(\text{position}[i])$ \Comment{Local search}
+        \State $\text{cost} \gets \text{EVALUATE}(\text{position}[i])$
+        \State \Comment{Update personal best}
+        \If{$\text{cost} < \text{pbest\_cost}[i]$}
+            \State $\text{pbest}[i] \gets \text{position}[i]$
+            \State $\text{pbest\_cost}[i] \gets \text{cost}$
+        \EndIf
+        \State \Comment{Update global best}
+        \If{$\text{cost} < \text{gbest\_cost}$}
+            \State $\text{gbest} \gets \text{position}[i]$
+            \State $\text{gbest\_cost} \gets \text{cost}$
+        \EndIf
+    \EndFor
+\EndFor
+\State \Return $\text{gbest}, \text{gbest\_cost}$
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{Get Swaps}
+\label{alg:get_swaps}
+\begin{algorithmic}[1]
+\Function{GET\_SWAPS}{$\text{tour\_a}, \text{tour\_b}$}
+    \State Find sequence of swaps to transform $\text{tour\_a}$ into $\text{tour\_b}$
+    \State \Return swap sequence
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{Apply Swaps}
+\label{alg:apply_swaps}
+\begin{algorithmic}[1]
+\Function{APPLY\_SWAPS}{$\text{tour}, \text{swaps}$}
+    \State Apply each swap operation in swaps to tour
+    \State \Return modified tour
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{Elephant Herding Optimization for TSP}
+\label{alg:eho_tsp}
+\begin{algorithmic}[1]
+\Require Graph $G$, $\text{pop\_size}$, $n_{\text{clans}}$, $\text{max\_iterations}$
+\Ensure Best tour and its cost
+\State \Comment{Initialize population}
+\State $\text{population} \gets [\,]$
+\For{$i = 1$ to $\text{pop\_size}$}
+    \State $\text{elephant}[i].\text{tour} \gets \text{random permutation of cities}$
+    \State $\text{elephant}[i].\text{fitness} \gets \text{EVALUATE}(\text{elephant}[i].\text{tour})$
+    \State Add elephant $[i]$ to population
+\EndFor
+\State $\text{best\_solution} \gets \text{null}$
+\State $\text{best\_fitness} \gets \infty$
+\State $\text{clan\_size} \gets \text{pop\_size} / n_{\text{clans}}$
+\For{iteration $= 1$ to $\text{max\_iterations}$}
+    \State Shuffle population randomly
+    \State Divide population into $n_{\text{clans}}$ of size $\text{clan\_size}$
+    \For{\textbf{each} clan in clans}
+        \State Sort clan by fitness (ascending)
+        \State $\text{leader} \gets \text{clan}[0]$ \Comment{Best elephant in clan}
+        \State \Comment{Clan updating operator}
+        \For{$i = 1$ to $\text{clan\_size} - 1$}
+            \State $\text{new\_tour} \gets \text{CLAN\_UPDATE}(\text{clan}[i].\text{tour}, \text{leader}.\text{tour})$
+            \State $\text{new\_elephant}.\text{tour} \gets \text{new\_tour}$
+            \State $\text{new\_elephant}.\text{fitness} \gets \text{EVALUATE}(\text{new\_tour})$
+            \State \Comment{Greedy selection}
+            \If{$\text{new\_elephant}.\text{fitness} < \text{clan}[i].\text{fitness}$}
+                \State $\text{clan}[i] \gets \text{new\_elephant}$
+            \EndIf
+        \EndFor
+        \State \Comment{Update global best}
+        \If{$\text{leader}.\text{fitness} < \text{best\_fitness}$}
+            \State $\text{best\_solution} \gets \text{leader}$
+            \State $\text{best\_fitness} \gets \text{leader}.\text{fitness}$
+        \EndIf
+    \EndFor
+    \State \Comment{Separating operator: worst elephants leave}
+    \State Sort population by fitness (descending)
+    \For{$i = 1$ to ($\text{pop\_size} / 10$)}  \Comment{Replace worst 10\%}
+        \State $\text{population}[-(i)].\text{tour} \gets \text{random permutation}$
+        \State $\text{population}[-(i)].\text{fitness} \gets \text{EVALUATE}(\text{population}[-(i)].\text{tour})$
+    \EndFor
+\EndFor
+\State \Return $\text{best\_solution}.\text{tour}, \text{best\_fitness}$
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{Clan Update}
+\label{alg:clan_update}
+\begin{algorithmic}[1]
+\Function{CLAN\_UPDATE}{$\text{member\_tour}, \text{leader\_tour}$}
+    \State Blend member tour with leader tour using crossover
+    \State Apply local perturbation
+    \State \Return updated tour
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{Grey Wolf Optimization for TSP}
+\label{alg:gwo_tsp}
+\begin{algorithmic}[1]
+\Require Graph $G$, $n_{\text{wolves}}$, $\text{max\_iterations}$
+\Ensure Best tour and its cost
+\State \Comment{Initialize wolf pack with random-key encoding}
+\For{$i = 1$ to $n_{\text{wolves}}$}
+    \State $\text{wolf}[i] \gets \text{random vector in } [0,1]^n$
+    \State $\text{tour}[i] \gets \text{DECODE}(\text{wolf}[i])$ \Comment{argsort to get permutation}
+    \State $\text{fitness}[i] \gets \text{EVALUATE}(\text{tour}[i])$
+\EndFor
+\State \Comment{Initialize $\alpha$, $\beta$, $\delta$ (top 3 wolves)}
+\State Sort wolves by fitness
+\State $\alpha \gets \text{wolf}[0]$, $\alpha_{\text{fitness}} \gets \text{fitness}[0]$
+\State $\beta \gets \text{wolf}[1]$, $\beta_{\text{fitness}} \gets \text{fitness}[1]$
+\State $\delta \gets \text{wolf}[2]$, $\delta_{\text{fitness}} \gets \text{fitness}[2]$
+\For{iteration $= 1$ to $\text{max\_iterations}$}
+    \State $a \gets 2 - \text{iteration} \times (2 / \text{max\_iterations})$ \Comment{Linearly decrease}
+    \For{$i = 1$ to $n_{\text{wolves}}$}
+        \State \Comment{Update position based on $\alpha$, $\beta$, $\delta$}
+        \For{$d = 1$ to $n$}  \Comment{For each dimension}
+            \State $r_1, r_2 \gets \text{random}() \in [0,1]$
+            \State $A_1 \gets 2 \times a \times r_1 - a$
+            \State $C_1 \gets 2 \times r_2$
+            \State $D_{\alpha} \gets |C_1 \times \alpha[d] - \text{wolf}[i][d]|$
+            \State $X_1 \gets \alpha[d] - A_1 \times D_{\alpha}$
+            \State \Comment{Repeat for $\beta$ and $\delta$ (similar calculations for $X_2, X_3$)}
+            \State $\text{wolf}[i][d] \gets (X_1 + X_2 + X_3) / 3$
+        \EndFor
+        \State \Comment{Ensure bounds $[0, 1]$}
+        \State $\text{wolf}[i] \gets \text{CLIP}(\text{wolf}[i], 0, 1)$
+        \State $\text{tour}[i] \gets \text{DECODE}(\text{wolf}[i])$
+        \State $\text{fitness}[i] \gets \text{EVALUATE}(\text{tour}[i])$
+        \State \Comment{Update $\alpha$, $\beta$, $\delta$}
+        \If{$\text{fitness}[i] < \alpha_{\text{fitness}}$}
+            \State $\delta \gets \beta$, $\delta_{\text{fitness}} \gets \beta_{\text{fitness}}$
+            \State $\beta \gets \alpha$, $\beta_{\text{fitness}} \gets \alpha_{\text{fitness}}$
+            \State $\alpha \gets \text{wolf}[i]$, $\alpha_{\text{fitness}} \gets \text{fitness}[i]$
+        \ElsIf{$\text{fitness}[i] < \beta_{\text{fitness}}$}
+            \State $\delta \gets \beta$, $\delta_{\text{fitness}} \gets \beta_{\text{fitness}}$
+            \State $\beta \gets \text{wolf}[i]$, $\beta_{\text{fitness}} \gets \text{fitness}[i]$
+        \ElsIf{$\text{fitness}[i] < \delta_{\text{fitness}}$}
+            \State $\delta \gets \text{wolf}[i]$, $\delta_{\text{fitness}} \gets \text{fitness}[i]$
+        \EndIf
+    \EndFor
+\EndFor
+\State \Return $\text{DECODE}(\alpha), \alpha_{\text{fitness}}$
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{Decode Priority Vector}
+\label{alg:decode}
+\begin{algorithmic}[1]
+\Function{DECODE}{$\text{priority\_vector}$}
+    \State \Return $\text{argsort}(\text{priority\_vector})$ \Comment{indices sorted by values}
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{Hybrid Pied Kingfisher Optimizer for TSP}
+\label{alg:hsffpko_tsp}
+\begin{algorithmic}[1]
+\Require Graph $G$ (via wrapper), $\text{pop\_size}$, $\text{scouts\_rate}$, $n_{\text{flocks}}$, $\text{max\_iterations}$
+\Ensure Best tour and its cost
+\State \Comment{Initialize population in continuous space}
+\State $n_{\text{scouts}} \gets \lfloor \text{pop\_size} \times \text{scouts\_rate} \rfloor$
+\State $n_{\text{flock\_birds}} \gets \text{pop\_size} - n_{\text{scouts}}$
+\State $\text{birds\_per\_flock} \gets \lfloor n_{\text{flock\_birds}} / n_{\text{flocks}} \rfloor$
+\State \Comment{Initialize birds (continuous positions)}
+\For{$i = 1$ to $\text{pop\_size}$}
+    \State $\text{bird}[i].\text{position} \gets \text{random vector in } [LB, UB]$
+    \State $\text{bird}[i].\text{fitness} \gets \text{OBJECTIVE\_FUNCTION}(\text{bird}[i].\text{position})$
+\EndFor
+\State Sort birds by fitness
+\State $\text{best\_bird} \gets \text{bird}[0]$
+\State $\text{best\_fitness} \gets \text{bird}[0].\text{fitness}$
+\For{iteration $= 1$ to $\text{max\_iterations}$}
+    \State \Comment{Divide population}
+    \State $\text{scouts} \gets \text{birds}[0:n_{\text{scouts}}]$
+    \State $\text{flock\_birds} \gets \text{birds}[n_{\text{scouts}}:\text{pop\_size}]$
+    \State \Comment{Phase 1: Hovering Scouts (HS) -- Exploration}
+    \For{\textbf{each} scout in scouts}
+        \For{$d = 1$ to dimension}
+            \State $r_1, r_2, r_3 \gets \text{random}() \in [0,1]$
+            \State \Comment{Hovering behavior with random exploration}
+            \State $\text{scout}.\text{position}[d] \gets \text{scout}.\text{position}[d] +$
+            \State $\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\alpha \times r_1 \times (\text{best\_bird}.\text{position}[d] - \text{scout}.\text{position}[d]) +$
+            \State $\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad r_2 \times (\text{random\_position}[d] - \text{scout}.\text{position}[d])$
+        \EndFor
+        \State $\text{scout}.\text{position} \gets \text{CLIP}(\text{scout}.\text{position}, LB, UB)$
+        \State $\text{scout}.\text{fitness} \gets \text{OBJECTIVE\_FUNCTION}(\text{scout}.\text{position})$
+    \EndFor
+    \State \Comment{Phase 2: Foraging Flocks (FF) -- Exploitation}
+    \State Divide $\text{flock\_birds}$ into $n_{\text{flocks}}$
+    \For{\textbf{each} flock in flocks}
+        \State Sort flock by fitness
+        \State $\text{leader} \gets \text{flock}[0]$
+        \For{\textbf{each} bird in flock (except leader)}
+            \For{$d = 1$ to dimension}
+                \State $r_1, r_2 \gets \text{random}() \in [0,1]$
+                \State \Comment{Follow leader while exploring locally}
+                \State $\text{bird}.\text{position}[d] \gets \text{bird}.\text{position}[d] +$
+                \State $\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\beta \times r_1 \times (\text{leader}.\text{position}[d] - \text{bird}.\text{position}[d]) +$
+                \State $\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\gamma \times r_2 \times (\text{random\_bird}.\text{position}[d] - \text{bird}.\text{position}[d])$
+            \EndFor
+            \State $\text{bird}.\text{position} \gets \text{CLIP}(\text{bird}.\text{position}, LB, UB)$
+            \State $\text{bird}.\text{fitness} \gets \text{OBJECTIVE\_FUNCTION}(\text{bird}.\text{position})$
+        \EndFor
+    \EndFor
+    \State \Comment{Update global best}
+    \State Sort all birds by fitness
+    \If{$\text{birds}[0].\text{fitness} < \text{best\_fitness}$}
+        \State $\text{best\_bird} \gets \text{birds}[0]$
+        \State $\text{best\_fitness} \gets \text{birds}[0].\text{fitness}$
+    \EndIf
+    \State \Comment{Optional: Dynamic parameter adaptation}
+    \State $\alpha \gets \alpha \times \text{decay\_factor}$
+    \State $\beta \gets \beta \times \text{decay\_factor}$
+\EndFor
+\State \Comment{Decode best position to TSP tour}
+\State $\text{best\_tour} \gets \text{DECODE\_TO\_TSP}(\text{best\_bird}.\text{position})$
+\State \Return $\text{best\_tour}, \text{best\_fitness}$
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{Objective Function}
+\label{alg:objective_function}
+\begin{algorithmic}[1]
+\Function{OBJECTIVE\_FUNCTION}{position}
+    \State $\text{tour} \gets \text{DECODE\_TO\_TSP}(\text{position})$ \Comment{Map continuous to permutation}
+    \State \Return $\text{TSP\_COST}(\text{tour})$
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{Decode to TSP}
+\label{alg:decode_to_tsp}
+\begin{algorithmic}[1]
+\Function{DECODE\_TO\_TSP}{position}
+    \State \Return $\text{argsort}(\text{position})$ \Comment{Random-key encoding}
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
