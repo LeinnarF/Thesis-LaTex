@@ -23,6 +23,49 @@
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Kotlin syntax highlighting configuration
+\lstdefinelanguage{Kotlin}{
+  comment=[l]{//},
+  commentstyle={\color{gray!60}\ttfamily},
+  emph={abstract, actual, as, break, by, catch, class, companion, const, constructor, continue, crossinline, data, delegate, do, dynamic, else, enum, expect, external, false, final, finally, for, fun, get, if, import, in, infix, interface, internal, is, it, lateinit, noinline, null, object, open, operator, out, override, package, private, protected, public, reified, return, sealed, set, setparam, super, suspend, tailrec, this, throw, true, try, typealias, typeof, val, var, vararg, when, where, while},
+  emphstyle={\color{blue!70}\bfseries},
+  identifierstyle=\color{black},
+  keywordstyle={\color{blue}\bfseries},
+  ndkeywordstyle={\color{orange}},
+  sensitive=true,
+  stringstyle={\color{red!60}\ttfamily},
+  morestring=[b]",
+  morestring=[s]{"""*}{*"""},
+}
+
+\lstset{
+  language=Kotlin,
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  commentstyle=\color{gray!60}\itshape,
+  deletekeywords={...},
+  escapeinside={\%*}{*)},
+  extendedchars=true,
+  firstnumber=1,
+  keywordstyle=\color{blue}\bfseries,
+  morekeywords={*,...},
+  numbers=left,
+  numbersep=8pt,
+  numberstyle=\tiny\color{gray},
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  stepnumber=1,
+  stringstyle=\color{red!60},
+  tabsize=4,
+  title=\lstname,
+}
+
 \usepackage[hidelinks]{hyperref}
 
 \title{LAKAD: A Personalized Mobile Itinerary Generator with Focus in Bulacan Tourism}
