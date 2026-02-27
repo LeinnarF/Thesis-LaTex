@@ -7,10 +7,11 @@
 % 1. Genetic Algorithm for TSP
 % ============================================================================
 
-\begin{algorithm}
+\begin{algorithm}[!htbp]
 \caption{Genetic Algorithm for TSP}
 \label{alg:ga_tsp}
 \begin{algorithmic}[1]
+\scriptsize
 \Require Graph $G$, $\text{pop\_size}$, $\text{generations}$, $\text{mutation\_rate}$
 \Ensure Best tour and its cost
 \State Initialize population $P$ with $\text{pop\_size}$ random tours
@@ -38,88 +39,11 @@
 \State \Return $\text{best\_tour}, \text{best\_cost}$
 \end{algorithmic}
 \end{algorithm}
-
-\begin{algorithm}
-\caption{Tournament Selection}
-\label{alg:tournament_selection}
-\begin{algorithmic}[1]
-\Function{TOURNAMENT\_SELECTION}{$P, k$}
-    \State Randomly select $k$ individuals from $P$
-    \State \Return best individual among the $k$ selected
-\EndFunction
-\end{algorithmic}
-\end{algorithm}
-
-\begin{algorithm}
-\caption{Order Crossover}
-\label{alg:order_crossover}
-\begin{algorithmic}[1]
-\Function{ORDER\_CROSSOVER}{$\text{parent1}, \text{parent2}$}
-    \State Select random substring from $\text{parent1}$
-    \State Fill remaining positions with $\text{parent2}$'s order
-    \State \Return offspring
-\EndFunction
-\end{algorithmic}
-\end{algorithm}
-
-\begin{algorithm}
-\caption{Two-Opt Mutation}
-\label{alg:two_opt_mutation}
-\begin{algorithmic}[1]
-\Function{TWO\_OPT\_MUTATION}{$\text{tour}$}
-    \State Select two random positions $i, j$
-    \State Reverse tour segment between $i$ and $j$
-    \State \Return mutated tour
-\EndFunction
-\end{algorithmic}
-\end{algorithm}
-
-\begin{algorithm}
+\begin{algorithm}[!htbp]
 \caption{Simulated Annealing for TSP}
-\label{alg:sa_tsp}
-\begin{algorithmic}[1]
-\Require Graph $G$, initial temperature $T$, cooling rate $\alpha$, $\text{max\_iterations}$
-\Ensure Best tour and its cost
-\State $\text{current\_tour} \gets \text{random permutation of cities}$
-\State $\text{current\_cost} \gets \text{EVALUATE}(\text{current\_tour})$
-\State $\text{best\_tour} \gets \text{current\_tour}$
-\State $\text{best\_cost} \gets \text{current\_cost}$
-\State $T \gets T_{\text{initial}}$
-\For{iteration $= 1$ to $\text{max\_iterations}$}
-    \State $\text{neighbor\_tour} \gets \text{RANDOM\_SWAP}(\text{current\_tour})$
-    \State $\text{neighbor\_cost} \gets \text{EVALUATE}(\text{neighbor\_tour})$
-    \State $\Delta \gets \text{neighbor\_cost} - \text{current\_cost}$
-    \State \Comment{Metropolis acceptance criterion}
-    \If{$\Delta < 0$ \textbf{or} $\text{random}() < \exp(-\Delta / T)$}
-        \State $\text{current\_tour} \gets \text{neighbor\_tour}$
-        \State $\text{current\_cost} \gets \text{neighbor\_cost}$
-        \If{$\text{current\_cost} < \text{best\_cost}$}
-            \State $\text{best\_tour} \gets \text{current\_tour}$
-            \State $\text{best\_cost} \gets \text{current\_cost}$
-        \EndIf
-    \EndIf
-    \State $T \gets \alpha \times T$ \Comment{Cool down temperature}
-\EndFor
-\State \Return $\text{best\_tour}, \text{best\_cost}$
-\end{algorithmic}
-\end{algorithm}
-
-\begin{algorithm}
-\caption{Random Swap}
-\label{alg:random_swap}
-\begin{algorithmic}[1]
-\Function{RANDOM\_SWAP}{$\text{tour}$}
-    \State Select two random positions $i, j$
-    \State Swap $\text{tour}[i]$ and $\text{tour}[j]$
-    \State \Return modified tour
-\EndFunction
-\end{algorithmic}
-\end{algorithm}
-
-\begin{algorithm}
-\caption{Simulated Annealing Improved for TSP}
 \label{alg:sai_tsp}
 \begin{algorithmic}[1]
+\scriptsize
 \Require Graph $G$, $T_{\text{start}}$, $T_{\text{end}}$, cooling rate
 \Ensure Best tour and its cost
 \State $\text{current\_tour} \gets \text{random permutation of cities}$
@@ -148,24 +72,12 @@
 \end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}
-\caption{Segment Insertion}
-\label{alg:segment_insertion}
-\begin{algorithmic}[1]
-\Function{SEGMENT\_INSERTION}{$\text{tour}$}
-    \State Select random position $a$
-    \State Select random position $b$ (not adjacent to $a$)
-    \State Remove city at position $a$
-    \State Insert it at position $b$
-    \State \Return modified tour
-\EndFunction
-\end{algorithmic}
-\end{algorithm}
 
 \begin{algorithm}
 \caption{Ant Colony Optimization for TSP}
 \label{alg:aco_tsp}
 \begin{algorithmic}[1]
+\scriptsize
 \Require Graph $G$, $n_{\text{ants}}$, $n_{\text{iterations}}$, $\alpha$, $\beta$, $\rho$, $Q$
 \Ensure Best tour and its cost
 \State Initialize pheromone matrix $\tau[i][j] \gets 1.0$ for all edges
@@ -215,6 +127,7 @@
 \caption{Hybrid PSO for TSP}
 \label{alg:pso_tsp}
 \begin{algorithmic}[1]
+\scriptsize
 \Require Graph $G$, $n_{\text{particles}}$, $n_{\text{iterations}}$, $w$, $c_1$, $c_2$
 \Ensure Best tour and its cost
 \State \Comment{Initialize swarm}
@@ -257,32 +170,12 @@
 \end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}
-\caption{Get Swaps}
-\label{alg:get_swaps}
-\begin{algorithmic}[1]
-\Function{GET\_SWAPS}{$\text{tour\_a}, \text{tour\_b}$}
-    \State Find sequence of swaps to transform $\text{tour\_a}$ into $\text{tour\_b}$
-    \State \Return swap sequence
-\EndFunction
-\end{algorithmic}
-\end{algorithm}
-
-\begin{algorithm}
-\caption{Apply Swaps}
-\label{alg:apply_swaps}
-\begin{algorithmic}[1]
-\Function{APPLY\_SWAPS}{$\text{tour}, \text{swaps}$}
-    \State Apply each swap operation in swaps to tour
-    \State \Return modified tour
-\EndFunction
-\end{algorithmic}
-\end{algorithm}
 
 \begin{algorithm}
 \caption{Elephant Herding Optimization for TSP}
 \label{alg:eho_tsp}
 \begin{algorithmic}[1]
+\scriptsize
 \Require Graph $G$, $\text{pop\_size}$, $n_{\text{clans}}$, $\text{max\_iterations}$
 \Ensure Best tour and its cost
 \State \Comment{Initialize population}
@@ -328,22 +221,12 @@
 \end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}
-\caption{Clan Update}
-\label{alg:clan_update}
-\begin{algorithmic}[1]
-\Function{CLAN\_UPDATE}{$\text{member\_tour}, \text{leader\_tour}$}
-    \State Blend member tour with leader tour using crossover
-    \State Apply local perturbation
-    \State \Return updated tour
-\EndFunction
-\end{algorithmic}
-\end{algorithm}
 
 \begin{algorithm}
 \caption{Grey Wolf Optimization for TSP}
 \label{alg:gwo_tsp}
 \begin{algorithmic}[1]
+\scriptsize
 \Require Graph $G$, $n_{\text{wolves}}$, $\text{max\_iterations}$
 \Ensure Best tour and its cost
 \State \Comment{Initialize wolf pack with random-key encoding}
@@ -391,20 +274,12 @@
 \end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}
-\caption{Decode Priority Vector}
-\label{alg:decode}
-\begin{algorithmic}[1]
-\Function{DECODE}{$\text{priority\_vector}$}
-    \State \Return $\text{argsort}(\text{priority\_vector})$ \Comment{indices sorted by values}
-\EndFunction
-\end{algorithmic}
-\end{algorithm}
 
 \begin{algorithm}
 \caption{Hybrid Pied Kingfisher Optimizer for TSP}
 \label{alg:hsffpko_tsp}
 \begin{algorithmic}[1]
+\scriptsize
 \Require Graph $G$ (via wrapper), $\text{pop\_size}$, $\text{scouts\_rate}$, $n_{\text{flocks}}$, $\text{max\_iterations}$
 \Ensure Best tour and its cost
 \State \Comment{Initialize population in continuous space}
@@ -465,26 +340,5 @@
 \State \Comment{Decode best position to TSP tour}
 \State $\text{best\_tour} \gets \text{DECODE\_TO\_TSP}(\text{best\_bird}.\text{position})$
 \State \Return $\text{best\_tour}, \text{best\_fitness}$
-\end{algorithmic}
-\end{algorithm}
-
-\begin{algorithm}
-\caption{Objective Function}
-\label{alg:objective_function}
-\begin{algorithmic}[1]
-\Function{OBJECTIVE\_FUNCTION}{position}
-    \State $\text{tour} \gets \text{DECODE\_TO\_TSP}(\text{position})$ \Comment{Map continuous to permutation}
-    \State \Return $\text{TSP\_COST}(\text{tour})$
-\EndFunction
-\end{algorithmic}
-\end{algorithm}
-
-\begin{algorithm}
-\caption{Decode to TSP}
-\label{alg:decode_to_tsp}
-\begin{algorithmic}[1]
-\Function{DECODE\_TO\_TSP}{position}
-    \State \Return $\text{argsort}(\text{position})$ \Comment{Random-key encoding}
-\EndFunction
 \end{algorithmic}
 \end{algorithm}
