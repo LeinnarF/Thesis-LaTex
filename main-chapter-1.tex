@@ -1,7 +1,7 @@
 \chapter{The Problem And Its Background}
 \thispagestyle{empty}
 Itinerary planning is an important process that can enhance the experience of tourists in their travel such as how well the places interest the user and the flow in which the places are traversed. In the case of the province of Bulacan, this study created a mobile personalized itinerary generator as a possible solution to optimizing existing itineraries and providing rich and personalized itineraries of Bulacan tourism, based on the interests of the user. This chapter introduces the background, objectives, significance, and scope of the study.
- 
+
 \section{Background of the Study}
 
 In the midst of advancement in technology and sciences, culture remains a vital part of many people’s lives. Tourism, being a significant contributor to preservation of culture and local development, relies heavily on how well travel experiences are delivered. One of the most crucial aspects of this process is itinerary planning, a practice ensuring the maximization of multiple points of interest (POIs) efficiently without the unnecessary inconvenience. The ability to create structured travel plans does not only influence convenience but also impacts tourist satisfaction and chance of returning or recommending the destination to others.
@@ -16,16 +16,16 @@ Another problem of planning a travel itinerary arises when considering other con
 
 These limitations, taken together, imply that manual travel planning methods in Bulacan remain inefficient due to uneven attraction popularity, lack of a personalized and optimized routing system, and the absence of accessible tools that integrate both user preferences and route optimization, which points to a need for a practical, user-centered, and localized solution.
 
-This study developed Lakad to address the identified problems and provide a tourist utility app for exploring destinations in the province of Bulacan. The system was developed to deliver two core features: a personalized itinerary generation, helping tourists better plan their trips according to their specifics, and an optimization algorithm to ensure routes are arranged in the best way possible. By combining the ideas of integrating personalized preference modeling and route optimization, Lakad seeks to provide a simplified and localized solution. 
+This study developed Lakad to address the identified problems and provide a tourist utility app for exploring destinations in the province of Bulacan. The system was developed to deliver two core features: a personalized itinerary generation, helping tourists better plan their trips according to their specifics, and an optimization algorithm to ensure routes are arranged in the best way possible. By combining the ideas of integrating personalized preference modeling and route optimization, Lakad seeks to provide a simplified and localized solution.
 
 
 \section{Statement of the Problem}
 
-The lack of systems and applications for itinerary generation in Bulacan makes it much harder for tourists to traverse the wonders the province has to offer. As such, the main objective of this study is to develop a mobile personalized itinerary generator for promoting tourist locations in Bulacan as well as providing optimized paths in the itinerary, allowing the tourist to further enjoy their trip. Specifically, this study aims to answer the following questions: 
+The lack of systems and applications for itinerary generation in Bulacan makes it much harder for tourists to traverse the wonders the province has to offer. As such, the main objective of this study is to develop a mobile personalized itinerary generator for promoting tourist locations in Bulacan as well as providing optimized paths in the itinerary, allowing the tourist to further enjoy their trip. Specifically, this study aims to answer the following questions:
 
 \begin{enumerate}
     \item Which algorithm performs best in terms of run time and solution quality for solving the Traveling Salesman Problem (TSP) among the following:
-    \begin{enumerate} [label*=\arabic*.] 
+    \begin{enumerate} [label*=\arabic*.]
         \item Ant Colony Optimization (ACO),
         \item Genetic Algorithm (GA),
         \item Simulated Annealing (SA),
@@ -35,12 +35,12 @@ The lack of systems and applications for itinerary generation in Bulacan makes i
         \item Hovering Scouts and Foraging Flocks Pied Kingfisher Optimizer (HSFFPKO)?
     \end{enumerate}
     \item How can the proposed system be developed with the following functionalities:
-    \begin{enumerate} [label*=\arabic*.] 
+    \begin{enumerate} [label*=\arabic*.]
         \item  Tourist Spot Exploration,
         \item  Personalized Itinerary Generation,
         \item  Itinerary Optimization,
         \item  Itinerary Navigation,
-        \item  Itinerary Management, and 
+        \item  Itinerary Management, and
         \item  Admin Management?
     \end{enumerate}
     \item How acceptable is the developed system based on the criteria defined in the Technology Acceptance Model?
@@ -75,8 +75,6 @@ This study developed an optimized mobile itinerary planner designed to promote t
 
 \textbf{Local Communities.} The system provides residents and local communities with assistance in moving around the province and discovering nearby attractions. By improving mobility, the system helps develop the community and allows all people to appreciate the Bulacan’s cultural and historical sites more.
 
-\textbf{Commuters.} The system provides an alternative tool designed to enhance daily travel efficiency for commuters within Bulacan. It brings practical convenience to people who rely on mobile guidance during regular transport because it offers optimized routing and accessible location information.
-
 \textbf{Future Researchers.} This research can be a reference for researchers who would want to improve or further develop the tourism recommender system. The use of AGAM and TSP algorithms provides a foundation that others may extend, compare with different algorithms, or further improve by adding other features.
 
 Overall, this study is significant because it supports development of tourism, sustainable development, and culture enhancement in Bulacan, and provides an example of how optimized and technology-driven solutions may enhance travel and navigation experiences.
@@ -86,7 +84,7 @@ Overall, this study is significant because it supports development of tourism, s
 
 This study focuses on the development and evaluation of Lakad, a mobile personalized itinerary generator designed for the province of Bulacan. The research addresses the identified gap in manual itinerary planning and the limitations of existing travel applications by providing a localized solution that promotes the tourism in Bulacan. The application enhances the travel experience of tourists by providing functionalities such as itinerary optimization, personalized itinerary generation, tourist spot searching, itinerary navigation, and itinerary management. By integrating these features, the system makes traveling within Bulacan more convenient, efficient, and engaging for visitors.
 
-Lakad is limited to the tourist destinations within Bulacan. The Points of Interest (POIs) included in the application are natural attractions, historical sites, cultural landmarks, and recreational areas, which are verified by the Provincial History, Arts, Culture, and Tourism Office (PHACTO). Pasalubong Center were also included in the application. Restaurants are not included as POIs due to their large number and the potential bias towards bigger establishments. 
+Lakad is limited to the tourist destinations within Bulacan. The Points of Interest (POIs) included in the application are natural attractions, historical sites, cultural landmarks, and recreational areas, which are verified by the Provincial History, Arts, Culture, and Tourism Office (PHACTO). Pasalubong Center were also included in the application. Restaurants are not included as POIs due to their large number and the potential bias towards bigger establishments. Furthermore, the system can generate up to 50 POIs in an itenerary due to API limitation.
 
 The system was developed using the React Native framework, which enables cross-platform compatibility. However, deployment is limited to Android operating systems due to resource and cost constraints. iOS development requires access to macOS hardware and an Apple Developer account, which were not feasible for this study. Future iterations of Lakad may consider iOS implementation to expand platform reach.
 
@@ -97,7 +95,3 @@ The itinerary generation feature applies Adaptive Genetic Algorithm with Dynamic
 The system generates single-day itineraries constrained by user-defined parameters such as maximum travel distance and maximum number of POIs. Multi-day tour planning is not supported in the current implementation. Users may pause and resume itinerary navigation, and stops are automatically marked as visited based on proximity detection or manual confirmation. The system does not integrate external booking services such as accommodation reservations, and ticket purchases.
 
 The system’s quality and acceptability was quantitatively evaluated using two standard instruments, Technology Acceptance Model (TAM) and ISO/IEC 25010:2023. The evaluation for the end-users utilize TAM to assess perceived usefulness, ease of use, and intention to use towards the application. In addition, the system was assessed against the ISO/IEC 25010:2023 software quality standards, covering functional suitability, performance efficiency, compatibility, interaction capability, reliability, security, maintainability, flexibility and safety.
-
-
-
-

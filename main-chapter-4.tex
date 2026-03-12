@@ -1,11 +1,12 @@
 \chapter{Presentation, Analysis, and Interpretation of Data}
+\thispagestyle{empty}
 
 This chapter presents the results of the study, including a comparative analysis of TSP algorithms,  the developed application, and the evaluation of system acceptability and software quality. The findings are interpreted in the context of the research objectives and questions outlined in Chapter 1.
 
-\section{Route Optimization Algorithms}
+\section{Route Optimization Algorithms Selection}
 This section presents the performance evaluation of the selected metaheuristic algorithms for solving the Traveling Salesman Problem (TSP). The algorithms were tested on four standard instances from the TSPLIB library: burma14, bays29, eil51, and berlin52. The primary goal was to identify the most suitable route optimization algorithm for Lakad, balancing solution quality (minimizing travel distance) and runtime efficiency (minimizing user wait time). Each algorithm was run for 10 independent executions to account for their stochastic nature, and the average results were recorded for analysis.
 
-Each algorithm has their specific parameters to ensure fair comparison. The Genetic Algorithm (GA) utilized a population size of 100 individuals with tournament selection (tournament size of 5), Order Crossover (OX), and 2-opt mutation with a low mutation rate of 0.01. The algorithm ran for 50 generations while preserving the top 10\% of solutions through elitism. Simulated Annealing (SA) was configured with an initial temperature $T_{start}=1000$, a final temperature $T_{end}=1$, a cooling rate of 0.999, and $n \times 1.5$ iterations per temperature level. Ant Colony Optimization (ACO) deployed 50 ants over 200 epochs, with pheromone factor $\alpha = 1.0$, heuristic information importance $\beta = 5.0$, evaporation rate $\rho = 0.1$, and pheromone deposit factor $q = 100$. Particle Swarm Optimization (PSO) used 30 particles running for 500 iterations, with inertia weight $w = 0.7$, cognitive coefficient $c_1 = 1.4$, social coefficient $c_2 = 1.4$, maximum velocity $v_{max} = 80$, and incorporated 2-opt local search for 40 iterations. The Elephant Herding Optimization (EHO) algorithm utilized a population of 50 elephants divided into 5 clans, running for 500 iterations with clan update and separating operators. Grey Wolf Optimization (GWO) was configured with a pack size of 15 wolves running for 500 iterations, with linearly decreasing parameter $a$ from 2.0 to 0.0, employing random-key encoding to map continuous values to permutations. Finally, the Hybrid Pied Kingfisher Optimizer (HSFFPKO) used a population size of 50 with 15\% hovering scouts and 8 foraging flocks, running for 500 iterations with search space bounds of [0, 20] per dimension. All algorithms were executed 30 times for each TSP instance to ensure statistical significance, and the average performance metrics were recorded for analysis. The parameter settings were chosen based on preliminary experiments and literature recommendations. 
+Each algorithm has their specific parameters to ensure fair comparison. The Genetic Algorithm (GA) utilized a population size of 100 individuals with tournament selection (tournament size of 5), Order Crossover (OX), and 2-opt mutation with a low mutation rate of 0.01. The algorithm ran for 50 generations while preserving the top 10\% of solutions through elitism. Simulated Annealing (SA) was configured with an initial temperature $T_{start}=1000$, a final temperature $T_{end}=1$, a cooling rate of 0.999, and $n \times 1.5$ iterations per temperature level. Ant Colony Optimization (ACO) deployed 50 ants over 200 epochs, with pheromone factor $\alpha = 1.0$, heuristic information importance $\beta = 5.0$, evaporation rate $\rho = 0.1$, and pheromone deposit factor $q = 100$. Particle Swarm Optimization (PSO) used 30 particles running for 500 iterations, with inertia weight $w = 0.7$, cognitive coefficient $c_1 = 1.4$, social coefficient $c_2 = 1.4$, maximum velocity $v_{max} = 80$, and incorporated 2-opt local search for 40 iterations. The Elephant Herding Optimization (EHO) algorithm utilized a population of 50 elephants divided into 5 clans, running for 500 iterations with clan update and separating operators. Grey Wolf Optimization (GWO) was configured with a pack size of 15 wolves running for 500 iterations, with linearly decreasing parameter $a$ from 2.0 to 0.0, employing random-key encoding to map continuous values to permutations. Finally, the Hybrid Pied Kingfisher Optimizer (HSFFPKO) used a population size of 50 with 15\% hovering scouts and 8 foraging flocks, running for 500 iterations with search space bounds of [0, 20] per dimension. All algorithms were executed 30 times for each TSP instance to ensure statistical significance, and the average performance metrics were recorded for analysis. The parameter settings were chosen based on preliminary experiments and literature recommendations.
 
 \subsection{Analysis of Solution Quality (Accuracy)}
 
@@ -28,16 +29,16 @@ The solution quality is measured by the average relative error (\%) compared to 
         EHO & 0.00 & 3.71 &  20.47 &  23.36 & 11.27 \\
         PSO & 0.99 & 12.74 &  36.88 &   43.46 & 23.77 \\
         HSFFPKO & 1.88 &  20.18 &  127.28 &  95.07 & 61.11 \\
-        GWO & 6.32 & 33.67 & 145.85 & 181.36 & 91.80 \\ 
+        GWO & 6.32 & 33.67 & 145.85 & 181.36 & 91.80 \\
 		\bottomrule
 	\end{tabularx}
 \end{table}
 
-Table \ref{tab:acc} summarizes the results of each algorithm showing their performance across the four TSPLIB instances and their average relative error. The results indicate that the Genetic Algorithm (GA) consistently achieved the highest solution quality, with an average result of 0.10\%. Simulated Annealing (SA) and Ant Colony Optimization (ACO) also performed well, with average results of 1.59\% and 2.50\%, respectively. The Elephant Herding Optimization (EHO), Particle Swarm Optimization (PSO), Hovering Scouts and Foraging Flocks Pied Kingfisher Optimizer (HSFFPKO), and Grey Wolf Optimizer (GWO) showed significantly higher errors, indicating lower solution quality for the tested TSP instances. Additionally, the results of each algorithm may vary across different TSP instances and execution runs due to their stochastic.
+Table \ref{tab:acc} summarizes the results of each algorithm showing their performance across the four TSPLIB instances and their average relative error. The results indicate that the Genetic Algorithm (GA) consistently achieved the highest solution quality, with an average result of 0.10\%. Simulated Annealing (SA) and Ant Colony Optimization (ACO) also performed well, with average results of 1.59\% and 2.50\%, respectively. The Elephant Herding Optimization (EHO), Particle Swarm Optimization (PSO), Hovering Scouts and Foraging Flocks Pied Kingfisher Optimizer (HSFFPKO), and Grey Wolf Optimizer (GWO) showed significantly higher errors, indicating lower solution quality for the tested TSP instances. Additionally, the results of each algorithm may vary across different TSP instances and execution runs due to their stochastic nature.
 
 \subsection{Analysis of Runtime Efficiency}
 
-Runtime efficiency is critical for the Lakad application, as users expect quick responses when optimizing their travel itineraries. 
+Runtime efficiency is critical for the Lakad application, as users expect quick responses when optimizing their travel itineraries.
 
 \begin{table}[H]
 	\centering
@@ -50,7 +51,7 @@ Runtime efficiency is critical for the Lakad application, as users expect quick 
         \cmidrule(lr){2-5}
          & \textbf{burma14} & \textbf{bays29} & \textbf{eil51} & \textbf{berlin52} \\
 		\midrule
-        EHO     & 0.17 & 0.27   & 0.44      & 0.45   \\ 
+        EHO     & 0.17 & 0.27   & 0.44      & 0.45    \\
         SA      & 0.49 & 1.04   & 1.82      & 1.90    \\
         GWO     & 0.51 & 1.02   & 1.73      & 1.75    \\
         HSFFPKO & 1.16 & 1.42   & 1.78      & 1.76    \\
@@ -88,9 +89,9 @@ To select the most suitable algorithm for the Lakad application, a multi-criteri
 	\end{tabularx}
 \end{table}
 
-Based on the SAW scores, Simulated Annealing (SA) emerged as the top-ranked algorithm, offering a strong balance between solution quality and runtime efficiency. Although GA achieved the best accuracy, its long runtime makes it resulted in a consistently high SAW score, placing it in the 6th position. EHO performed well on small instances, but its accuracy degraded on larger instances, making it less reliable for complex itineraries. 
+Based on the SAW scores, Simulated Annealing (SA) emerged as the top-ranked algorithm, offering a strong balance between solution quality and runtime efficiency. Although GA achieved the best accuracy, its long runtime makes it resulted in a consistently high SAW score, placing it in the 6th position. EHO performed well on small instances, but its accuracy degraded on larger instances, making it less reliable for complex itineraries. Furthermore,
 
-In conclusion, Simulated Annealing (SA) was the selected route optimization algorithm for Lakad. It provides a good trade-off between solution quality and runtime efficiency, ensuring that users receive optimized itineraries in a reasonable time frame, enhancing the overall user experience of the Lakad application.
+Considering the findings, Simulated Annealing (SA) was the selected route optimization algorithm for Lakad. It provides a good trade-off between solution quality and runtime efficiency, ensuring that users receive optimized itineraries in a reasonable time frame, enhancing the overall user experience of the Lakad application.
 
 
 \section{The Developed System}
@@ -107,14 +108,14 @@ The developed system, Lakad, was developed as both a place explorer and itinerar
         \caption{Place Exploration}
         \label{fig:1a}
     \end{subfigure}
-    \hfill 
+    \hfill
     \begin{subfigure}[H]{0.3\textwidth}
         \centering
         \fbox{\includegraphics[width=\textwidth]{dev-system/searching2.jpg}}
         \caption{Search Places}
         \label{fig:1b}
     \end{subfigure}
-    \hfill 
+    \hfill
     \begin{subfigure}[H]{0.3\textwidth}
         \centering
         \fbox{\includegraphics[width=\textwidth]{dev-system/touristspotlist.jpg}}
@@ -199,8 +200,7 @@ In accordance with the suggestions obtained through professionals' evaluation co
     \end{subfigure}
 \end{figure}
 
-One of the core features of Lakad is its ability to generate personalized itineraries for users based on their preferences and selected tourist spots. 
-The Adaptive Genetic Algorithm with Dynamic Mutation and Crossover Probabilities (AGAM) is the one responsible for generating personalized itineraries, and the required parameters are filled by the user, as shown in Figure \ref{fig:4a}. Users can select their preferred tourist spots location which are based on the districts and municipalities of Bulacan, as shown in Figure \ref{fig:4b}. Next, users must select the type of tourist spots they want to visit, which are based on the categories of the tourist spots, as shown in Figure \ref{fig:4c}. The maximum travel distance and the number of tourist spots to visit are also required parameters for itinerary generation. After filling in the required parameters, users can click the “Generate Itinerary” button to receive a personalized itinerary that optimizes their travel route based on their preferences and selected tourist spots.
+One of the core features of Lakad is its ability to generate personalized itineraries for users based on their preferences and selected tourist spots which was adopted in the study of \textcite{Yochum2020}. The Adaptive Genetic Algorithm with Dynamic Mutation and Crossover Probabilities (AGAM) is the one responsible for generating personalized itineraries, and the required parameters are filled by the user, as shown in Figure \ref{fig:4a}. Users can select their preferred tourist spots location which are based on the districts and municipalities of Bulacan, as shown in Figure \ref{fig:4b}. Next, users must select the type of tourist spots they want to visit, which are based on the categories of the tourist spots, as shown in Figure \ref{fig:4c}. The maximum travel distance and the number of tourist spots to visit are also required parameters for itinerary generation. After filling in the required parameters, users can click the “Generate Itinerary” button to receive a personalized itinerary that optimizes their travel route based on their preferences and selected tourist spots.
 
 \begin{figure}[H]
     \centering
@@ -243,10 +243,10 @@ Figure \ref{fig:5a} shows what can be seen after the generation of the itinerary
     \end{subfigure}
 \end{figure}
 
-The initial generated itinerary only considers the maximum travel distance, ensuring that the total distance of the itinerary does not exceed the specified limit. However, it does not optimize the travel route between the selected tourist spots. Hence, Lakad incorporates the Simulated Annealing (SA) algorithm to optimize the travel route of the generated itinerary. Figure \ref{fig:6a} shows the initial arrangement of the tourist spots in the itinerary generated by AGAM. The “Optimize” button can then be clicked to optimize the travel route of the itinerary using SA. Figure \ref{fig:6b} shows the optimized arrangement of the tourist spots in the itinerary after applying SA. The first tourist spot in the itinerary is based on the shortest distance from the user's current location, and the subsequent tourist spots are arranged in a way that minimizes the total travel distance. As shown in 
+The initial generated itinerary only considers the maximum travel distance, ensuring that the total distance of the itinerary does not exceed the specified limit. However, it does not optimize the travel route between the selected tourist spots. Hence, Lakad incorporates the Simulated Annealing (SA) algorithm to optimize the travel route of the generated itinerary. Figure \ref{fig:6a} shows the initial arrangement of the tourist spots in the itinerary generated by AGAM. The “Optimize” button can then be clicked to optimize the travel route of the itinerary using SA. Figure \ref{fig:6b} shows the optimized arrangement of the tourist spots in the itinerary after applying SA. The first tourist spot in the itinerary is based on the shortest distance from the user's current location, and the subsequent tourist spots are arranged in a way that minimizes the total travel distance. As shown in
 Figure \ref{fig:6}, from 71.326 km to 31.250 km, the total travel distance for this itinerary was significantly reduced. This shows the effectiveness of the SA algorithm. Additionally, optimization process is done in a reasonable time frame.
 
-There are also instances where the initial generated itinerary is the optimal solution, thus no changes are made to the arrangement of the tourist spots in the itinerary after optimization. 
+There are also instances where the initial generated itinerary is the optimal solution, thus no changes are made to the arrangement of the tourist spots in the itinerary after optimization.
 
 \subsection{Itinerary Management}
 
@@ -328,7 +328,7 @@ This feature of the Lakad application allows the application to be secure, more 
     \fbox{\includegraphics[width=0.3\textwidth]{dev-system/adminmode.jpg}}
 \end{figure}
 
- The administrator side mainly features the management of the tourist spots that will be shown in the application. Figure \ref{admin:option} shows all the privileges of the administrator such as managing user accounts, managing tourist spots, and managing itineraries.  
+ The administrator side mainly features the management of the tourist spots that will be shown in the application. Figure \ref{admin:option} shows all the privileges of the administrator such as managing user accounts, managing tourist spots, and managing itineraries.
 
 \begin{figure}[H]
     \centering
@@ -337,7 +337,7 @@ This feature of the Lakad application allows the application to be secure, more 
     \fbox{\includegraphics[width=0.3\textwidth]{dev-system/admindashboard.jpg}}
 \end{figure}
 
-Figure \ref{admin:dash} shows what an administrator can see. It includes the summary and reports of the application in the Analytics page. The summary shows the total number of itineraries, total number of tourist spots, archived tourist spots, and the total kilometers planned in the itineraries. Summary of popular places is also shown along with the least popular places. This feature provides the administrator with insights into the usage of the application and helps them make informed decisions about managing the tourist spots and improving the user experience. 
+Figure \ref{admin:dash} shows what an administrator can see. It includes the summary and reports of the application in the Analytics page. The summary shows the total number of itineraries, total number of tourist spots, archived tourist spots, and the total kilometers planned in the itineraries. Summary of popular places is also shown along with the least popular places. This feature provides the administrator with insights into the usage of the application and helps them make informed decisions about managing the tourist spots and improving the user experience.
 
 \begin{figure}[H]
     \centering
@@ -386,7 +386,7 @@ Existing tourist spots can also be updated by the administrator, as shown in Fig
     \fbox{\includegraphics[width=0.3\textwidth]{dev-system/admindistance.jpg}}
 \end{figure}
 
-One of the critical components of the Lakad application is the distance matrix, which contains the distances between all pairs of tourist spots. Figure \ref{admin:distance} shows the distance matrix management page, where the distance matrix can be recomputed when new tourist spots are added. This approach lowers the API usage from Open Route Service, ensuring that the application can scale without incurring high costs from API calls. Since, it will calculate the distances between all pairs of tourist spots, expect that the recomputation process may take a while, especially as the number of tourist spots increases.  
+One of the critical components of the Lakad application is the distance matrix, which contains the distances between all pairs of tourist spots. Figure \ref{admin:distance} shows the distance matrix management page, where the distance matrix can be recomputed when new tourist spots are added. This approach lowers the API usage from Open Route Service, ensuring that the application can scale without incurring high costs from API calls. Since, it will calculate the distances between all pairs of tourist spots, expect that the recomputation process may take a while, especially as the number of tourist spots increases.
 
 \begin{figure}[H]
     \centering
@@ -410,11 +410,11 @@ The administrator can also view the reported reviews in the application, as show
 
 \section{System Evaluation}
 
-This section presents the evaluation results of the Lakad application, focusing on the acceptability of the system among users and the overall software quality. The data collected was processed and analyzed in Jupyter Notebook with the use of Python libraries such as Pandas, Matplotlib, and NumPy. The results are presented in terms of per construct median scores, frequency distributions, mean scores, and standard deviations. 
+This section presents the evaluation results of the Lakad application, focusing on the acceptability of the system among users and the overall software quality. The data collected was processed and analyzed in Jupyter Notebook with the use of Python libraries such as Pandas, Matplotlib, and NumPy. The results are presented in terms of per construct median scores, frequency distributions, mean scores, and standard deviations.
 
 \subsection{Evaluation of System Acceptability}
 
-The acceptability of the Lakad was evaluated  with a Technology Acceptance Model (TAM) survey, which was distributed to 150 respondents. The distribution was proportionately done across different tourist spots in a selected municipality in Bulacan. 
+The acceptability of the Lakad was evaluated  with a Technology Acceptance Model (TAM) survey, which was distributed to 150 respondents. The distribution was proportionately done across different tourist spots in a selected municipality in Bulacan.
 
 \begin{table}[H]
 	\centering
@@ -423,13 +423,13 @@ The acceptability of the Lakad was evaluated  with a Technology Acceptance Model
 	\label{tam1}
 	\renewcommand{\arraystretch}{1.2}
     \begin{tabularx}{\linewidth}{p{0.3\linewidth} >{\centering\arraybackslash}X >{\centering\arraybackslash}X p{0.23\linewidth}}
-		\toprule 
+		\toprule
 		\textbf{Construct} & \textbf{Mean Score} & \textbf{Standard Deviation} & \textbf{Interpretation}\\
 		\midrule
-        Perceived usefulness        & 4.7053 & 0.3435 & Highly acceptable \\  
+        Perceived usefulness        & 4.7053 & 0.3435 & Highly acceptable \\
         Perceived ease of use       & 4.7067 & 0.4383 & Highly acceptable \\
         Attitude towards using      & 4.7200 & 0.4015 & Highly acceptable \\
-        Behavioral intention to use & 4.5556 & 0.4740 & Highly acceptable \\  
+        Behavioral intention to use & 4.5556 & 0.4740 & Highly acceptable \\
         \midrule
          \textbf{Grand TAM Score}           & \textbf{4.6719} & \textbf{0.4189} & \textbf{Highly acceptable} \\
 		\bottomrule
@@ -438,7 +438,7 @@ The acceptability of the Lakad was evaluated  with a Technology Acceptance Model
 
 Table \ref{tam1} summarizes the results of the TAM survey, showing the mean scores and standard deviations for each construct. All the constructs achieved a high mean which was interpreted as highly acceptable, indicating that users found the Lakad application to be useful, easy to use, and had a positive attitude towards using it. Perceived usefulness, perceived ease of use, and attitude towards using all had a mean score of 4.71 or higher, suggesting that the Lakad application effectively meets user needs and expectations. The behavioral intention to use scored slightly lower than the other constructs but still achieved a high mean score of 4.56, indicating that users are likely to continue using the application in the future. The standard deviations for all constructs were relatively low (ranging from 0.34 to 0.47), suggesting that there was a consensus among respondents regarding their perceptions of the Lakad application. Overall, the results indicate that the Lakad application is well-received by users and has a high level of acceptability with a grand TAM score of 4.67 which is interpreted as highly acceptable.
 Median scores and frequency distributions for each item in the TAM survey further support this. The Usefulness item (PU5) in Perceived Usefulness construct, most of the respondents answered 5, an indication that they find the system very useful. The system is perceived as easy to operate, learn, and master since most of the respondents rated the Ease of Operation item (PEU5) 5. Users also expressed high satisfaction, enjoyment, and positive feelings towards using the system with the Satisfaction item (ATU3) being rated having the most 5 in the construct. The Behavioral Intention to Use (BI) items show slightly more variance, this explains the results in the lower mean score for this construct in Table \ref{tam1}. The Intention to Use item (BI1) most of the respondents rated it 4, one more than the people rating it 5. This suggests that while many users have a strong intention to use the system, there is also a notable portion that is less certain about their intention to use it. Lastly most of the responses for the Future Use item (BI2) is 5, indicating that many users are likely to continue using the system in the future. This can also connect the responses in BI1, implying that while many users are less certain in using the system in the present, they are still likely to continue using the system in the future.
- 
+
 \subsection{Software Quality Evaluation}
 
 The software quality of the Lakad application was evaluated using a survey based on the ISO/IEC 25010:2023 software quality model. The survey was done by IT experts, Software developers, and selected faculty members in the College of Information and Communications Technology (CICT) of Bulacan State University. The survey was distributed to a total of 22 professionals.
@@ -450,7 +450,7 @@ The software quality of the Lakad application was evaluated using a survey based
 	\label{iso1}
 	\renewcommand{\arraystretch}{1.2}
     \begin{tabularx}{\linewidth}{p{0.4\linewidth} >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X}
-		\toprule 
+		\toprule
 		\textbf{Construct} & \textbf{Mean Score} & \textbf{Standard Deviation} & \textbf{Interpretation}\\
 		\midrule
         Functional Suitability & 4.8636 & 0.2447  & Excellent \\
