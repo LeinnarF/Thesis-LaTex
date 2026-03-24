@@ -21,7 +21,7 @@ Route optimization refers to the process of finding the optimal order in visitin
 
 \begin{figure}[H]
 	\centering
-	\caption{Sample Graph}
+	\caption{Example Graph (Complete Graph)}
 	\label{tspgraph}
 	\includegraphics[width=0.8\textwidth]{TSP.jpeg}
 \end{figure}
@@ -103,7 +103,7 @@ Two primary metrics were defined to evaluate the algorithms:
 
 Furthermore, each algorithm was executed on the same hardware and software environment to ensure a fair comparison. The experiments were conducted on a machine with a Ryzen 5 3400G processor, 16GB of RAM, and running Arch Linux. The algorithms were implemented with Jupyter Notebook, and the runtime was measured using Python's built-in `time` module.
 
-\textbf{Algorithm Ranking.} To select the final algorithm, the trade-off between speed and accuracy was resolved using Simple Additive Weighting (SAW).SAW was chosen because of its simplicity and interpretability, allowing for a straightforward comparison of the algorithms based on the defined metrics. Since both $T _{avg}$ and $Q_{avg}$ are “cost” criteria, i.e., lower values represent better performance, it is normalized relative to the maximum (worst) observed value to scale all metrics between 0 and 1. The normalization formula used was shown in equation \ref{eq:norm}:
+\textbf{Algorithm Ranking.} To select the final algorithm, the trade-off between speed and accuracy was assessed using Simple Additive Weighting (SAW). SAW was chosen because of its simplicity and interpretability, allowing for a straightforward comparison of the algorithms based on the defined metrics. Since both $T _{avg}$ and $Q_{avg}$ are “cost” criteria, i.e., lower values represent better performance, it is normalized relative to the maximum (worst) observed value to scale all metrics between 0 and 1. The normalization formula used was shown in equation \ref{eq:norm}:
 \begin{equation}
 	\label{eq:norm}
 	r _{ij} = \frac{x_{ij}}{\max(x_{ij})}
@@ -209,93 +209,94 @@ Where $w _{j}$ for $j = 1, 2, 3$, represents the weight assigned to each factor,
     where $pm_1$ and $pm_2$  are the bounds for mutation probability, and $f$ is the fitness score of the individual being mutated.
 \end{itemize}
 
-For the parameters of AGAM, the following values were used: $pc_1 = 0.9$, $pc_2 = 0.6$, $pm_1 = 0.1$, and $pm_2 = 0.01$. These values were chosen based on \textcite{Yochum2020} recommendation, which are commonly used in dynamic crossover and mutation probabilities. The procedure of AGAM is shown in Algorithm \ref{alg:agam}.
+For the parameters of AGAM, the following values were used: $pc_1 = 0.9$, $pc_2 = 0.6$, $pm_1 = 0.1$, and $pm_2 = 0.01$. These values were chosen based on \textcite{Yochum2020} recommendation, which are commonly used in dynamic crossover and mutation probabilities. 
+% The procedure of AGAM is shown in Algorithm \ref{alg:agam}.
 
-\begin{algorithm}[H]
-	\singlespacing
-	\footnotesize
-	\caption{Adaptive Genetic Algorithm for Itinerary Optimization (AGAM)}
-	\label{alg:agam}
-
-	\vspace{-0.4cm}
-
-	\begin{algorithmic}[1]
-		\Require $MAXD$ (maximum travel distance), $MAXN$ (maximum number of POIs), $N$ (population size)
-		\Require $pc_1, pc_2$ (crossover control parameters), $pm_1, pm_2$ (mutation control parameters)
-		\Require $w_1, w_2, w_3$ (fitness weights), $\delta$ (number of generations)
-		\Ensure Optimal itinerary $p_{opt}$
-
-		\State Initialize population $P$ with $N$ randomly generated itineraries
-		\For{each $p_i \in P$}
-		\State Ensure $TotalDistanceCost(p_i) \le MAXD$
-		\EndFor
-
-		\For{iteration = 1 to $\delta$}
-
-		\State Evaluate fitness $F(p_i)$ for each itinerary using:
-		\[
-			F = w_1 Ti(p_i) + w_2 Tn(p_i) + w_3 Tr(p_i)
-		\]
-
-		\State Compute $f_{\max} = \max(F(p_i))$, $f_{\text{avg}} = average(F(p_i))$
-
-		\State Initialize new population $P_i = \emptyset$
-
-		\While{$|P_i| < N$}
-		\State $(parent_1, parent_2) = TournamentSelection(P, k=2)$
-		\State $PC = calculateCrossoverProbability(F(parent_1), F(parent_2), f_{\text{avg}}, f_{\max})$
-
-		\If{$random(0,1) < PC$}
-		\State $(child_1, child_2) = OnePointCrossover(parent_1, parent_2)$
-
-		\If{$TotalDistanceCost(child_1) > MAXD$ \textbf{or} $NUMPOI(child_1) > MAXN$}
-		\State Regenerate($child_1$)
-		\EndIf
-		\If{$TotalDistanceCost(child_2) > MAXD$ \textbf{or} $NUMPOI(child_2) > MAXN$}
-		\State Regenerate($child_2$)
-		\EndIf
-
-		\If{$TotalDistanceCost(child_1) < MAXD$ \textbf{and} $NUMPOI(child_1) < MAXN$}
-		\State InsertUnvisitedPOIs($child_1$)
-		\EndIf
-		\If{$TotalDistanceCost(child_2) < MAXD$ \textbf{and} $NUMPOI(child_2) < MAXN$}
-		\State InsertUnvisitedPOIs($child_2$)
-		\EndIf
-
-		\State Add $child_1$ and $child_2$ to $P_i$
-
-		\Else
-		\State Add $parent_1$ and $parent_2$ to $P_i$
-		\EndIf
-		\EndWhile
-
-		\For{each itinerary $p_i \in P_i$}
-		\State $PM = calculateMutationProbability(F(p_i), f_{\text{avg}}, f_{\max})$
-
-		\If{$random(0,1) < PM$}
-		\State $Mutated\_p_i = ApplyMutation(p_i)$
-
-		\If{$TotalDistanceCost(Mutated\_p_i) > MAXD$ \textbf{or} $NUMPOI(Mutated\_p_i) > MAXN$}
-		\State Regenerate($Mutated\_p_i$)
-		\EndIf
-
-		\If{$TotalDistanceCost(Mutated\_p_i) < MAXD$ \textbf{and} $NUMPOI(Mutated\_p_i) < MAXN$}
-		\State InsertUnvisitedPOIs($Mutated\_p_i$)
-		\EndIf
-
-		\State $p_i \gets Mutated\_p_i$
-		\EndIf
-		\EndFor
-
-		\State Recalculate fitness of all itineraries in $P_i$
-		\State $P \gets P_i$
-
-		\EndFor
-
-		\State \Return $p_{opt}$ = itinerary with the highest fitness in $P$
-
-	\end{algorithmic}
-\end{algorithm}
+% \begin{algorithm}[H]
+% 	\singlespacing
+% 	\footnotesize
+% 	\caption{Adaptive Genetic Algorithm for Itinerary Optimization (AGAM)}
+% 	\label{alg:agam}
+%
+% 	\vspace{-0.4cm}
+%
+% 	\begin{algorithmic}[1]
+% 		\Require $MAXD$ (maximum travel distance), $MAXN$ (maximum number of POIs), $N$ (population size)
+% 		\Require $pc_1, pc_2$ (crossover control parameters), $pm_1, pm_2$ (mutation control parameters)
+% 		\Require $w_1, w_2, w_3$ (fitness weights), $\delta$ (number of generations)
+% 		\Ensure Optimal itinerary $p_{opt}$
+%
+% 		\State Initialize population $P$ with $N$ randomly generated itineraries
+% 		\For{each $p_i \in P$}
+% 		\State Ensure $TotalDistanceCost(p_i) \le MAXD$
+% 		\EndFor
+%
+% 		\For{iteration = 1 to $\delta$}
+%
+% 		\State Evaluate fitness $F(p_i)$ for each itinerary using:
+% 		\[
+% 			F = w_1 Ti(p_i) + w_2 Tn(p_i) + w_3 Tr(p_i)
+% 		\]
+%
+% 		\State Compute $f_{\max} = \max(F(p_i))$, $f_{\text{avg}} = average(F(p_i))$
+%
+% 		\State Initialize new population $P_i = \emptyset$
+%
+% 		\While{$|P_i| < N$}
+% 		\State $(parent_1, parent_2) = TournamentSelection(P, k=2)$
+% 		\State $PC = calculateCrossoverProbability(F(parent_1), F(parent_2), f_{\text{avg}}, f_{\max})$
+%
+% 		\If{$random(0,1) < PC$}
+% 		\State $(child_1, child_2) = OnePointCrossover(parent_1, parent_2)$
+%
+% 		\If{$TotalDistanceCost(child_1) > MAXD$ \textbf{or} $NUMPOI(child_1) > MAXN$}
+% 		\State Regenerate($child_1$)
+% 		\EndIf
+% 		\If{$TotalDistanceCost(child_2) > MAXD$ \textbf{or} $NUMPOI(child_2) > MAXN$}
+% 		\State Regenerate($child_2$)
+% 		\EndIf
+%
+% 		\If{$TotalDistanceCost(child_1) < MAXD$ \textbf{and} $NUMPOI(child_1) < MAXN$}
+% 		\State InsertUnvisitedPOIs($child_1$)
+% 		\EndIf
+% 		\If{$TotalDistanceCost(child_2) < MAXD$ \textbf{and} $NUMPOI(child_2) < MAXN$}
+% 		\State InsertUnvisitedPOIs($child_2$)
+% 		\EndIf
+%
+% 		\State Add $child_1$ and $child_2$ to $P_i$
+%
+% 		\Else
+% 		\State Add $parent_1$ and $parent_2$ to $P_i$
+% 		\EndIf
+% 		\EndWhile
+%
+% 		\For{each itinerary $p_i \in P_i$}
+% 		\State $PM = calculateMutationProbability(F(p_i), f_{\text{avg}}, f_{\max})$
+%
+% 		\If{$random(0,1) < PM$}
+% 		\State $Mutated\_p_i = ApplyMutation(p_i)$
+%
+% 		\If{$TotalDistanceCost(Mutated\_p_i) > MAXD$ \textbf{or} $NUMPOI(Mutated\_p_i) > MAXN$}
+% 		\State Regenerate($Mutated\_p_i$)
+% 		\EndIf
+%
+% 		\If{$TotalDistanceCost(Mutated\_p_i) < MAXD$ \textbf{and} $NUMPOI(Mutated\_p_i) < MAXN$}
+% 		\State InsertUnvisitedPOIs($Mutated\_p_i$)
+% 		\EndIf
+%
+% 		\State $p_i \gets Mutated\_p_i$
+% 		\EndIf
+% 		\EndFor
+%
+% 		\State Recalculate fitness of all itineraries in $P_i$
+% 		\State $P \gets P_i$
+%
+% 		\EndFor
+%
+% 		\State \Return $p_{opt}$ = itinerary with the highest fitness in $P$
+%
+% 	\end{algorithmic}
+% \end{algorithm}
 
 \section{Process of Developing the System}
 
