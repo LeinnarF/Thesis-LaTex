@@ -52,7 +52,7 @@ The study considers several metaheuristic algorithms for route optimization for 
 
 \item \textbf{Elephant Herding Optimization (EHO).} The Elephant Herding Optimization (EHO) algorithm is a swarm-based metaheuristic search approach for addressing optimization problems that mimics the real herding behavior of elephants, which involves organizing elephant swarms into smaller clans, each led by a matriarch and consisting of multiple female elephants and their calves, while adult male calves are expelled from the clan \parencite{Wadi2025}.
 
-\item \textbf{Gray Wolf Optimizer (GWO).} The Gray Wolf Optimization (GWO) algorithm is a metaheuristic technique inspired by gray wolves, simulating their leadership and cooperative hunting behaviors to locate optimal solutions. The hierarchical structure of a wolf pack (Alpha, Beta, Delta, and Omega wolves) is shown in the algorithm's design. Wolves' positions are updated based on the Alpha's location and the calculated hunting distance. GWO leverages a balance of exploration and exploitation to discover the best possible solutions. This approach has been successfully applied to various optimization challenges \parencite{Hossain2024}. 
+\item \textbf{Gray Wolf Optimizer (GWO).} The Gray Wolf Optimization (GWO) algorithm is a metaheuristic technique inspired by gray wolves, simulating their leadership and cooperative hunting behaviors to locate optimal solutions. The hierarchical structure of a wolf pack (Alpha, Beta, Delta, and Omega wolves) is shown in the algorithm’s design. Wolves’ positions are updated based on the Alpha’s location and the calculated hunting distance. GWO leverages a balance of exploration and exploitation to discover the best possible solutions. This approach has been successfully applied to various optimization challenges \parencite{Hossain2024}. 
 
 \item \textbf{Hovering Scouts and Foraging Flocks Pied Kingfisher Optimizer (HSFFPKO).} HSFFPKO enhances the traditional Pied Kingfisher Optimizer by introducing multiscale search mechanisms to improve optimization performance. By adding Hovering Scouts for fine-grained local adjustments and Foraging Flocks for parallel group-based exploitation, the algorithm maintains better population diversity than its predecessor. These additions allow HSFFPKO to mitigate local optima entrapment and solve complex, high-dimensional problems more efficiently \parencite{DelaCruz2025HSFFPKO}.
 \end{enumerate}
@@ -96,17 +96,17 @@ Two primary metrics were defined to evaluate the algorithms:
 		\label{eq:quality}
 		Q_{avg} = \frac{1}{10} \sum_{i=1}^{10} \frac{C_i - C_{opt}}{C_{opt}} \times 100
 	\end{equation}
-	Where $C_i$ is the cost of the solution found in the $i$-th iteration, and $C_{opt}$ is the cost of the known optimal solution for the instance. This metric provides insight into how close the algorithm's solutions are to the optimal solution, with lower values indicating better performance.
+	Where $C_i$ is the cost of the solution found in the $i$-th iteration, and $C_{opt}$ is the cost of the known optimal solution for the instance. This metric provides insight into how close the algorithm’s solutions are to the optimal solution, with lower values indicating better performance.
 \end{enumerate}
 
-Furthermore, each algorithm was executed on the same hardware and software environment to ensure a fair comparison. The experiments were conducted on a machine with a Ryzen 5 3400G processor, 16GB of RAM, and running Arch Linux. The algorithms were implemented with Jupyter Notebook, and the runtime was measured using Python's built-in `time` module.
+Furthermore, each algorithm was executed on the same hardware and software environment to ensure a fair comparison. The experiments were conducted on a machine with a Ryzen 5 3400G processor, 16GB of RAM, and running Arch Linux. The algorithms were implemented with Jupyter Notebook, and the runtime was measured using Python’s built-in `time` module.
 
 \textbf{Algorithm Ranking.} To select the final algorithm, the trade-off between speed and accuracy was assessed using Simple Additive Weighting (SAW). SAW was chosen because of its simplicity and interpretability, allowing for a straightforward comparison of the algorithms based on the defined metrics. Since both $T _{avg}$ and $Q_{avg}$ are “cost” criteria, i.e., lower values represent better performance, it is normalized relative to the maximum (worst) observed value to scale all metrics between 0 and 1. The normalization formula used was shown in equation \ref{eq:norm}:
 \begin{equation}
 	\label{eq:norm}
 	r _{ij} = \frac{x_{ij}}{\max(x_{ij})}
 \end{equation}
-Where $r _{ij}$ is the normalized value of the $j$-th criteria for the $i$-th algorithm, $x_{ij}$ is the original value of the $j$-th criteria for the $i$-th algorithm, and $\max(x_{ij})$ is the maximum value observed for the $j$-th criteria across all algorithms. This normalization ensures that both metrics are on a comparable scale, allowing for a fair assessment of each algorithm's performance in terms of both speed and accuracy. 
+Where $r _{ij}$ is the normalized value of the $j$-th criteria for the $i$-th algorithm, $x_{ij}$ is the original value of the $j$-th criteria for the $i$-th algorithm, and $\max(x_{ij})$ is the maximum value observed for the $j$-th criteria across all algorithms. This normalization ensures that both metrics are on a comparable scale, allowing for a fair assessment of each algorithm’s performance in terms of both speed and accuracy. 
 
 The final score $S _{i}$ for each algorithm $i$ was calculated in equation \ref{eq:saw}: 
 \begin{equation}
@@ -151,7 +151,7 @@ Where $n$ is the total number of vertices (POI), $S _{i}$ is the score of vertex
 
 The study also chose to adopt a modified variant of the genetic algorithm developed by \textcite{Yochum2020} called Adaptive Genetic Algorithm with Dynamic Mutation and Crossover Probabilities (AGAM) for the optimization of recommended itineraries defined in terms of TSP. AGAM addresses itinerary planning as a Multi-Objective Optimization Problem, an optimization technique rooting from orienteering problems. As discussed in their work, \textcite{Yochum2020} developed AGAM to generate optimal and personalized travel itineraries by balancing several objectives such as point of interest (POI) rating, and distance of POIs between the next one. Rooting from Genetic Algorithm (GA), AGAM simulates the process of natural evolution and utilizes genetic operators such as selection, crossover, and mutation to iteratively improve the quality of itineraries which, unlike traditional GA that use fixed mutation rates, also employs dynamic adjustments in parameters during the evolutionary process in a way that can maintain population diversity and therefore generate efficient and adaptive solutions. Even though AGAM can also be used for route optimization, the study chose to use it for itinerary generation because of its effectiveness in generating personalized itineraries as shown in the study of \textcite{Yochum2020}.
 
-In this implementation, the population set is defined as $P = \left\{ p _{1},\dots, p _{n} \right\}$, where each individual $p _{i}$ represents a potential itinerary. An itinerary is encoded as a sequence of POIs, $p _{i}= \left\{ q _{1}, q _{2}, \dots, q _{m} \right\}$, where each gene $q _{i}$ corresponds to a specific POI visit. The length of the sequence depends on the number of POIs selected, and it is constrained by a user-defined limit $MAXN$. The total travel distance of the itinerary is constrained by $MAXD$, which ensures that the generated itineraries does not exceed the user's travel distance budget. 
+In this implementation, the population set is defined as $P = \left\{ p _{1},\dots, p _{n} \right\}$, where each individual $p _{i}$ represents a potential itinerary. An itinerary is encoded as a sequence of POIs, $p _{i}= \left\{ q _{1}, q _{2}, \dots, q _{m} \right\}$, where each gene $q _{i}$ corresponds to a specific POI visit. The length of the sequence depends on the number of POIs selected, and it is constrained by a user-defined limit $MAXN$. The total travel distance of the itinerary is constrained by $MAXD$, which ensures that the generated itineraries does not exceed the user’s travel distance budget. 
 
 \textbf{Fitness Function.} The quality of each itinerary is evaluated by the fitness function given in Equation \ref{agamFitness}. Since factors such as popularity, rating, and interest are on different scales, a normalization process is applied to each factor so that its values is between 0 and 1. 
 
@@ -208,93 +208,6 @@ Where $w _{j}$ for $j = 1, 2, 3$, represents the weight assigned to each factor,
 \end{itemize}
 
 For the parameters of AGAM, the following values were used: $pc_1 = 0.9$, $pc_2 = 0.6$, $pm_1 = 0.1$, and $pm_2 = 0.01$. These values were chosen based on \textcite{Yochum2020} recommendation, which are commonly used in dynamic crossover and mutation probabilities. 
-% The procedure of AGAM is shown in Algorithm \ref{alg:agam}.
-
-% \begin{algorithm}[H]
-% 	\singlespacing
-% 	\footnotesize
-% 	\caption{Adaptive Genetic Algorithm for Itinerary Optimization (AGAM)}
-% 	\label{alg:agam}
-%
-% 	\vspace{-0.4cm}
-%
-% 	\begin{algorithmic}[1]
-% 		\Require $MAXD$ (maximum travel distance), $MAXN$ (maximum number of POIs), $N$ (population size)
-% 		\Require $pc_1, pc_2$ (crossover control parameters), $pm_1, pm_2$ (mutation control parameters)
-% 		\Require $w_1, w_2, w_3$ (fitness weights), $\delta$ (number of generations)
-% 		\Ensure Optimal itinerary $p_{opt}$
-%
-% 		\State Initialize population $P$ with $N$ randomly generated itineraries
-% 		\For{each $p_i \in P$}
-% 		\State Ensure $TotalDistanceCost(p_i) \le MAXD$
-% 		\EndFor
-%
-% 		\For{iteration = 1 to $\delta$}
-%
-% 		\State Evaluate fitness $F(p_i)$ for each itinerary using:
-% 		\[
-% 			F = w_1 Ti(p_i) + w_2 Tn(p_i) + w_3 Tr(p_i)
-% 		\]
-%
-% 		\State Compute $f_{\max} = \max(F(p_i))$, $f_{\text{avg}} = average(F(p_i))$
-%
-% 		\State Initialize new population $P_i = \emptyset$
-%
-% 		\While{$|P_i| < N$}
-% 		\State $(parent_1, parent_2) = TournamentSelection(P, k=2)$
-% 		\State $PC = calculateCrossoverProbability(F(parent_1), F(parent_2), f_{\text{avg}}, f_{\max})$
-%
-% 		\If{$random(0,1) < PC$}
-% 		\State $(child_1, child_2) = OnePointCrossover(parent_1, parent_2)$
-%
-% 		\If{$TotalDistanceCost(child_1) > MAXD$ \textbf{or} $NUMPOI(child_1) > MAXN$}
-% 		\State Regenerate($child_1$)
-% 		\EndIf
-% 		\If{$TotalDistanceCost(child_2) > MAXD$ \textbf{or} $NUMPOI(child_2) > MAXN$}
-% 		\State Regenerate($child_2$)
-% 		\EndIf
-%
-% 		\If{$TotalDistanceCost(child_1) < MAXD$ \textbf{and} $NUMPOI(child_1) < MAXN$}
-% 		\State InsertUnvisitedPOIs($child_1$)
-% 		\EndIf
-% 		\If{$TotalDistanceCost(child_2) < MAXD$ \textbf{and} $NUMPOI(child_2) < MAXN$}
-% 		\State InsertUnvisitedPOIs($child_2$)
-% 		\EndIf
-%
-% 		\State Add $child_1$ and $child_2$ to $P_i$
-%
-% 		\Else
-% 		\State Add $parent_1$ and $parent_2$ to $P_i$
-% 		\EndIf
-% 		\EndWhile
-%
-% 		\For{each itinerary $p_i \in P_i$}
-% 		\State $PM = calculateMutationProbability(F(p_i), f_{\text{avg}}, f_{\max})$
-%
-% 		\If{$random(0,1) < PM$}
-% 		\State $Mutated\_p_i = ApplyMutation(p_i)$
-%
-% 		\If{$TotalDistanceCost(Mutated\_p_i) > MAXD$ \textbf{or} $NUMPOI(Mutated\_p_i) > MAXN$}
-% 		\State Regenerate($Mutated\_p_i$)
-% 		\EndIf
-%
-% 		\If{$TotalDistanceCost(Mutated\_p_i) < MAXD$ \textbf{and} $NUMPOI(Mutated\_p_i) < MAXN$}
-% 		\State InsertUnvisitedPOIs($Mutated\_p_i$)
-% 		\EndIf
-%
-% 		\State $p_i \gets Mutated\_p_i$
-% 		\EndIf
-% 		\EndFor
-%
-% 		\State Recalculate fitness of all itineraries in $P_i$
-% 		\State $P \gets P_i$
-%
-% 		\EndFor
-%
-% 		\State \Return $p_{opt}$ = itinerary with the highest fitness in $P$
-%
-% 	\end{algorithmic}
-% \end{algorithm}
 
 \section{Process of Developing the System}
 
@@ -302,7 +215,7 @@ The development of the Lakad mobile application uses the AGILE methodology, with
 
 Kanban is a highly effective visual process management system designed to optimize the flow of work. It operates on the principle of Just In Time (JIT) delivery, as highlighted by \textcite{Alaidaros2021}, ensuring the tasks are completed and delivered precisely when needed to maximize efficiency. 
 
-This methodology offers significant advantages for the Lakad development team. It provides a clear, visual representation of the entire workflow, allowing all team members to easily track progress from start to finish. This transparency is crucial for quickly identifying potential bottlenecks, gaps in the process, or any mishaps that might arise. By making the workflow visible, the team can proactively address issues, rather than reacting to them after they have escalated. Kanban, being a type of Agile-based methodology, is an approach that promotes flexibility which can help in an environment of software development where problems and unforeseen challenges are inevitable. Kanban's adaptability allows the team to adjust priorities and reallocate resources as needed, ensuring that progress remains steady even when obstacles are encountered. This flexibility is key to maintaining momentum and delivering a high-quality software output \parencite{Risener2022}. The continuous flow and iterative nature of Kanban supports the team in delivering a robust and reliable system that meets user needs effectively. Figure \ref{kanban} shows a graphical representation of a Kanban workflow model.
+This methodology offers significant advantages for the Lakad development team. It provides a clear, visual representation of the entire workflow, allowing all team members to easily track progress from start to finish. This transparency is crucial for quickly identifying potential bottlenecks, gaps in the process, or any mishaps that might arise. By making the workflow visible, the team can proactively address issues, rather than reacting to them after they have escalated. Kanban, being a type of Agile-based methodology, is an approach that promotes flexibility which can help in an environment of software development where problems and unforeseen challenges are inevitable. Kanban’s adaptability allows the team to adjust priorities and reallocate resources as needed, ensuring that progress remains steady even when obstacles are encountered. This flexibility is key to maintaining momentum and delivering a high-quality software output \parencite{Risener2022}. The continuous flow and iterative nature of Kanban supports the team in delivering a robust and reliable system that meets user needs effectively. Figure \ref{kanban} shows a graphical representation of a Kanban workflow model.
 
 \begin{figure}[H]
 	\centering
@@ -391,7 +304,7 @@ Two types of users exist for the whole system which is the tourist and admins as
 
 This development phase pertains to the actual coding and implementation of the system’s features inside an android application. The researchers’ utilized the AGILE methodology, particularly the Kanban method for the software development life cycle. This includes weekly meetings and development checks by the researchers to ensure the system is properly developed to its intended uses. Lakad was developed using the React Native main development framework, which uses fast and cost-efficient cross-platform mobile development, allowing a single codebase to function on both iOS and Android devices. The system utilized the JavaScript programming language for implementing the application’s user interface and core functionalities due to its flexibility and compatibility with React Native framework. The main development environment for writing, editing, and debugging the program was Visual Studio Code, which provided lightweight performance and had a large selection of extensions appropriate for React Native development. Throughout the development process, Git and GitHub was used to ensure structured collaboration and version control. The list of tools used in the development is presented in Table \ref{listtools}.
 
-Additionally, React Native extends the "Learn once, write anywhere" paradigm to mobile development, leveraging recent advancements like its new architecture and the JavaScript Interface (JSI). The framework's structure, represented by Fabric, aims to boost compatibility with modern React features such as concurrent rendering and synchronous data fetching. While JSI’s main element allows for direct calls between JavaScript and native code. This change features a smoother interaction with the host platform and significantly reduces performance bottlenecks. JSI also allows Fabric to create UI components on the native side more efficiently. The combined adoption of JSI and Fabric offers a significant enhancement in React Native's performance, making it a good choice for developers who desire the agility of mobile development and native platform functionalities \parencite{Zhou2024}.
+Additionally, React Native extends the "Learn once, write anywhere" paradigm to mobile development, leveraging recent advancements like its new architecture and the JavaScript Interface (JSI). The framework’s structure, represented by Fabric, aims to boost compatibility with modern React features such as concurrent rendering and synchronous data fetching. While JSI’s main element allows for direct calls between JavaScript and native code. This change features a smoother interaction with the host platform and significantly reduces performance bottlenecks. JSI also allows Fabric to create UI components on the native side more efficiently. The combined adoption of JSI and Fabric offers a significant enhancement in React Native’s performance, making it a good choice for developers who desire the agility of mobile development and native platform functionalities \parencite{Zhou2024}.
 
 This framework allows the researchers to develop the mobile application, Lakad, as React Native’s cross-platform capabilities also allow for android development.
 
@@ -438,7 +351,7 @@ The evaluation instrument for the developed system uses Technology Acceptance Mo
 
 The TAM questionnaire in this study was an adapted version of a TAM questionnaire, which was modified to fit the context of Lakad. 
 
-A demographic section is also included in the questionnaire to assess the respondent's experience in mobile application, and travelling frequency.
+A demographic section is also included in the questionnaire to assess the respondent’s experience in mobile application, and travelling frequency.
 
 \begin{enumerate}
 	\item \textbf{Experience in Mobile Applications}. This demographic assesses how knowledgeable the respondent is in terms of mobile application usage, their familiarity with mobile applications. This identifies whether the respondent is a beginner, intermediate, or advanced user of mobile applications. 
@@ -447,19 +360,19 @@ A demographic section is also included in the questionnaire to assess the respon
 	\item \textbf{Travelling Frequency}. This demographic assesses how much time does a respondent spend away from their home, which is defined by how often they go out in a week or month. The following categories were used to classify the travelling frequency of the respondents: Rarely (0–1 times a month), Occasionally (2–3 times a month), Frequently (4–5 times a month).
 \end{enumerate}
 
-Additionally, a reliability test was conducted on the TAM questionnaire to ensure that the instrument is consistent and reliable for measuring user acceptance. The reliability test was performed using Cronbach's alpha, which assesses the internal consistency of the questionnaire items. A Cronbach's alpha value of 0.7 or higher is generally considered acceptable, indicating that the items in the questionnaire are measuring the same underlying construct effectively \parencite{Cronbach2025}.
+Additionally, a reliability test was conducted on the TAM questionnaire to ensure that the instrument is consistent and reliable for measuring user acceptance. The reliability test was performed using Cronbach’s alpha, which assesses the internal consistency of the questionnaire items. A Cronbach’s alpha value of 0.7 or higher is generally considered acceptable, indicating that the items in the questionnaire are measuring the same underlying construct effectively \parencite{Cronbach2025}.
 
 \textbf{ISO/IEC 25010:2023.} The developed system was also evaluated by IT professionals using the ISO/IEC 25010:2023 questionnaire which evaluates the overall quality of Lakad. The following criteria was used in the questionnaire and are based on the ISO/IEC 25010:2023 standards:
 
 \begin{enumerate}
-	\item \textbf{Functional Suitability}. This focused on how well the proposed system meets the user's needs. The questions were about the system's main features such as itinerary optimization, personalized itinerary generation, and itinerary management.
-	\item \textbf{Performance Efficiency}. This assessed the system's ability to provide fast and efficient processing and its capability to handle large amounts of tasks. The questions assessed the system's response time when it comes to itinerary optimization and generation as well as managing the itineraries of the user.
-	\item \textbf{Compatibility}. This evaluated the system's compatibility with other external systems that the users might use. The questionnaire verified how well the developed system integrates and works alongside other mapping applications and systems.
-	\item \textbf{Interaction Capability}. This focused on the system's usability, accessibility, and user satisfaction. Through this, the system was assessed on how easy the system is to navigate, how intuitive and simple the user interface is for itinerary planning, and how effectively it guides the users.
-	\item \textbf{Reliability}. This assessed the system's dependability and consistency in performing its intended functions. The criterion assessed how well the system can operate without failure, maintain stability, and recover from unexpected errors or interruptions.
+	\item \textbf{Functional Suitability}. This focused on how well the proposed system meets the user’s needs. The questions were about the system’s main features such as itinerary optimization, personalized itinerary generation, and itinerary management.
+	\item \textbf{Performance Efficiency}. This assessed the system’s ability to provide fast and efficient processing and its capability to handle large amounts of tasks. The questions assessed the system’s response time when it comes to itinerary optimization and generation as well as managing the itineraries of the user.
+	\item \textbf{Compatibility}. This evaluated the system’s compatibility with other external systems that the users might use. The questionnaire verified how well the developed system integrates and works alongside other mapping applications and systems.
+	\item \textbf{Interaction Capability}. This focused on the system’s usability, accessibility, and user satisfaction. Through this, the system was assessed on how easy the system is to navigate, how intuitive and simple the user interface is for itinerary planning, and how effectively it guides the users.
+	\item \textbf{Reliability}. This assessed the system’s dependability and consistency in performing its intended functions. The criterion assessed how well the system can operate without failure, maintain stability, and recover from unexpected errors or interruptions.
 	\item \textbf{Security}.  This criterion ensured that all collected data remains confidential, secure, and protected. Access to the data will only be available to the researchers and authorized users. No information will be shared with third parties without proper consent.
 	\item \textbf{Maintainability}. This assessed the ability of the system to be updated, debugged, and improved. This criterion focused on the ability of the system to adapt to changes and its efficiency during system updates. It ensured that new features or fixes can be integrated without disrupting existing functionalities of the system.
-	\item \textbf{Flexibility}. This evaluated the system's ability to adapt to changing user needs, technological changes, and requirement changes. The criterion assessed how easily the system can support new itinerary features, and integrate additional modules or tools.
+	\item \textbf{Flexibility}. This evaluated the system’s ability to adapt to changing user needs, technological changes, and requirement changes. The criterion assessed how easily the system can support new itinerary features, and integrate additional modules or tools.
 	\item \textbf{Safety}. This focused on ensuring that the system does not cause any harm to its users. The criterion assessed how well the system protects users from potential risks, errors, or negative consequences that may arise from using the system.
 \end{enumerate}
 
@@ -521,7 +434,7 @@ The researchers collected data by conducting surveys with participants at variou
 
 A sample size of 150 respondents was determined for the end-user evaluation while considering the practical constraints of data collection and the need for a manageable sample size to draw results. The researchers consider this sample size sufficient given the limited resources, time constraints, and logistical challenges associated with collecting data from tourists at various sites across multiple municipalities. 
 
-The Cochran's formula for large populations follows a 95\% confidence level, a 5\% margin of error, and an estimated proportion of 0.5 to calculate the required sample size. 
+The Cochran’s formula for large populations follows a 95\% confidence level, a 5\% margin of error, and an estimated proportion of 0.5 to calculate the required sample size. 
 
 \begin{equation}
 	\label{cochran}
@@ -534,7 +447,7 @@ However, in Equation \ref{cochran}, the calculated sample size is 384, consideri
 	E = z \sqrt{\frac{p(1-p)}{n}} = 1.96 \sqrt{\frac{(0.5)(0.5)}{150}} \approx 0.079
 \end{equation}
 
-This reduced sample size remains acceptable for TAM evaluation studies. According to \textcite{Memon2020}, a sample sizes of 30 to 500 are appropriate for most behavioral studies based on Roscoe's rule of thumb, which TAM falls under. Hence, a sample size of 150 is well within the recommended range for TAM studies. This aligns with methodological recommendations emphasizing that survey sample sizes should be driven by the specific analytical approach and research objectives rather than rigid population proportions \parencite{Memon2020}. It is also consistent with recent regional tourism technology research by \textcite{Raynera2025}, which successfully validated TAM constructs using 80 respondents, further indicating that 150 is more than adequate for achieving reliable results.
+This reduced sample size remains acceptable for TAM evaluation studies. According to \textcite{Memon2020}, a sample sizes of 30 to 500 are appropriate for most behavioral studies based on Roscoe’s rule of thumb, which TAM falls under. Hence, a sample size of 150 is well within the recommended range for TAM studies. This aligns with methodological recommendations emphasizing that survey sample sizes should be driven by the specific analytical approach and research objectives rather than rigid population proportions \parencite{Memon2020}. It is also consistent with recent regional tourism technology research by \textcite{Raynera2025}, which successfully validated TAM constructs using 80 respondents, further indicating that 150 is more than adequate for achieving reliable results.
 
 \begin{table}[H]
 	\centering
@@ -564,7 +477,7 @@ This reduced sample size remains acceptable for TAM evaluation studies. Accordin
 
 Table \ref{endusers} shows the allocation of respondents for end-users based on the proportion of tourist arrivals in each selected municipality. This ensures that the 150 respondents accurately reflect the true geographical distribution of tourist arrivals across the selected municipalities significantly reduces sampling bias and prioritizing a highly representative sample. 
 	
-\textbf{IT Professionals.} IT professionals evaluated the technical quality of Lakad using ISO/IEC 25010:2023 standards through purposive sampling. A total of 22 IT experts were deliberately selected based on their professional qualifications and relevant experience. The sample comprised of but not limited to software engineers, UI/UX designers, Quality Assurance professionals and faculty members from The College of Information and Communications Technology (CICT) at Bulacan State University (BulSU). Purposive sampling was appropriate for expert evaluation, as the goal was to ensure participants possessed requisite technical knowledge rather than statistical representativeness of a broader population. In addition to quantitative ISO/IEC 25010:2023 assessment, IT professionals were also encouraged to provide qualitative feedback on the system's strengths and areas for improvement based on their technical expertise.
+\textbf{IT Professionals.} IT professionals evaluated the technical quality of Lakad using ISO/IEC 25010:2023 standards through purposive sampling. A total of 22 IT experts were deliberately selected based on their professional qualifications and relevant experience. The sample comprised of but not limited to software engineers, UI/UX designers, Quality Assurance professionals and faculty members from The College of Information and Communications Technology (CICT) at Bulacan State University (BulSU). Purposive sampling was appropriate for expert evaluation, as the goal was to ensure participants possessed requisite technical knowledge rather than statistical representativeness of a broader population. In addition to quantitative ISO/IEC 25010:2023 assessment, IT professionals were also encouraged to provide qualitative feedback on the system’s strengths and areas for improvement based on their technical expertise.
 
 \begin{table}[H]
 	\centering
@@ -594,16 +507,16 @@ The data collection process of this study was divided into two parts: one for th
 
 Both instruments utilized Likert scales to measure the responses of the respondents. The TAM questionnaire for end-users and the ISO/IEC 25010:2023 evaluation for IT professionals uses 5-point Likert scale. These scales were adopted from existing instruments and were modified to fit the context of this study especially for the TAM questionnaire. The use of Likert scales allows for quantifying the perceptions and evaluations of the respondents, providing a structured way to analyze the data collected from both groups.
 
-\textbf{Preparation and Pilot Testing.} Before the actual data collection, a formal permission was requested and obtained from the local government units (LGUs) of the selected municipalities to conduct the survey among tourists. After obtaining the necessary permissions, pilot testing was conducted to ensure the reliability and validity of the TAM questionnaire. The pilot test was done with a small group of respondents who were similar to the target population. A total of 20 respondents from the municipality of Pandi were selected for the pilot test because it is excluded from the main data collection to avoid bias. Cronbach's alpha was computed on the pilot test results to verify internal consistency and reliability of the adapted TAM questionnaire. The calculated Cronbach's alpha coefficient of 0.881 exceeded the acceptability threshold of 0.70, indicating good internal consistency across TAM items and reliability for measuring user technology acceptance within this study's context. 
+\textbf{Preparation and Pilot Testing.} Before the actual data collection, a formal permission was requested and obtained from the local government units (LGUs) of the selected municipalities to conduct the survey among tourists. After obtaining the necessary permissions, pilot testing was conducted to ensure the reliability and validity of the TAM questionnaire. The pilot test was done with a small group of respondents who were similar to the target population. A total of 20 respondents from the municipality of Pandi were selected for the pilot test because it is excluded from the main data collection to avoid bias. Cronbach’s alpha was computed on the pilot test results to verify internal consistency and reliability of the adapted TAM questionnaire. The calculated Cronbach’s alpha coefficient of 0.881 exceeded the acceptability threshold of 0.70, indicating good internal consistency across TAM items and reliability for measuring user technology acceptance within this study’s context. 
 
-While the ISO/IEC 25010:2023 is a standardized international quality evaluation framework, formal validation was not conducted with a separate pilot sample. However, the instrument was reviewed with two senior faculty members from CICT to ensure appropriateness of the quality criteria for evaluating mobile itinerary generation applications and to verify clarity of the assessment items. This validity review, while less rigorous than full pilot testing, provided assurance that the standardized instrument could be meaningfully applied to Lakad's specific functionality.
+While the ISO/IEC 25010:2023 is a standardized international quality evaluation framework, formal validation was not conducted with a separate pilot sample. However, the instrument was reviewed with two senior faculty members from CICT to ensure appropriateness of the quality criteria for evaluating mobile itinerary generation applications and to verify clarity of the assessment items. This validity review, while less rigorous than full pilot testing, provided assurance that the standardized instrument could be meaningfully applied to Lakad’s specific functionality.
 
-\textbf{Administration to End-users.} The data collection for end-users was conducted through face-to-face surveys in various tourist spots across the selected municipalities in Bulacan via convenience sampling. The researchers approached tourists along with the informed consent and invited them to participate in the survey, which included a brief introduction to the Lakad application and its features. After exploring the application, the respondents were asked to complete the TAM questionnaire, which assessed their perceptions of the system's usefulness, ease of use, attitude towards using it, and behavioral intention to use it in the future. Additionally, demographic information such as age bracket, travelling frequency, and technological proficiency was collected to analyze potential correlations between these factors and the TAM constructs. While this convenience-based approach ensured practical feasibility and adequate sample size achievement, readers should note the selection bias limitations acknowledged in the Sampling Design section.  
-
-
+\textbf{Administration to End-users.} The data collection for end-users was conducted through face-to-face surveys in various tourist spots across the selected municipalities in Bulacan via convenience sampling. The researchers approached tourists along with the informed consent and invited them to participate in the survey, which included a brief introduction to the Lakad application and its features. After exploring the application, the respondents were asked to complete the TAM questionnaire, which assessed their perceptions of the system’s usefulness, ease of use, attitude towards using it, and behavioral intention to use it in the future. Additionally, demographic information such as age bracket, travelling frequency, and technological proficiency was collected to analyze potential correlations between these factors and the TAM constructs. While this convenience-based approach ensured practical feasibility and adequate sample size achievement, readers should note the selection bias limitations acknowledged in the Sampling Design section.  
 
 
-\textbf{Administration to IT Professionals.} Permissions to conduct the survey among IT professionals was requested and obtained from the Information and Communications Technology Office (ICTO) of BulSU and to the dean of CICT. The data collection for IT professionals was conducted through an online survey or in-person sessions, depending on the availability and preference of the respondents. The IT professionals were provided with access to the Lakad application and were given a brief overview of its features and functionalities. After exploring the application, they were asked to complete the ISO/IEC 25010:2023 evaluation, which assessed the system's functional suitability, performance efficiency, compatibility, interaction capability, reliability, security, maintainability, flexibility, and safety. In addition to the quantitative evaluation, IT professionals were also encouraged to provide qualitative feedback on the system's strengths and areas for improvement based on their technical expertise.  
+
+
+\textbf{Administration to IT Professionals.} Permissions to conduct the survey among IT professionals was requested and obtained from the Information and Communications Technology Office (ICTO) of BulSU and to the dean of CICT. The data collection for IT professionals was conducted through an online survey or in-person sessions, depending on the availability and preference of the respondents. The IT professionals were provided with access to the Lakad application and were given a brief overview of its features and functionalities. After exploring the application, they were asked to complete the ISO/IEC 25010:2023 evaluation, which assessed the system’s functional suitability, performance efficiency, compatibility, interaction capability, reliability, security, maintainability, flexibility, and safety. In addition to the quantitative evaluation, IT professionals were also encouraged to provide qualitative feedback on the system’s strengths and areas for improvement based on their technical expertise.  
 
 \subsection{Data Processing and Analysis}
 The researchers conducted systematic data processing and analysis of data from the Technology Acceptance Model (TAM) questionnaire and ISO/IEC 25010:2023 system quality evaluation instrument to evaluate user acceptance rates and the total system quality of the Lakad application.
@@ -634,7 +547,7 @@ The overall mean score for each construct was computed by taking the mean of the
 
 Where, $\bar{X}$ is the overall mean score for a given construct, $X_i$ is the composite score for the $i$-th respondent, and $m$ is the total number of respondents. The mean provided a summary measure of overall user acceptance (for TAM constructs) and overall system quality (for ISO/IEC 25010:2023 constructs). 
 
-The sample standard deviation was also calculated to get the variability of response among the evaluators. A lower standard deviation indicates that the respondents were in strong agreement regarding Lakad's system acceptance and quality.  The formula for sample standard deviation is given by Equation \ref{S},
+The sample standard deviation was also calculated to get the variability of response among the evaluators. A lower standard deviation indicates that the respondents were in strong agreement regarding Lakad’s system acceptance and quality.  The formula for sample standard deviation is given by Equation \ref{S},
 
 \begin{equation}
 	\label{S}

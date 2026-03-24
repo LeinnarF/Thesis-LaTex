@@ -1,8 +1,6 @@
 \noaddvspace 
 \noindent \textbf {Appendix}\hspace {1ex} \textbf {Title }\hfill \textbf {Page}\par 
-\contentsline {chapter}{\numberline {A}Pseudocode of TSP Algorithms}{111}{section*.118}%
-\contentsline {chapter}{\numberline {B}Sample Code Snippets}{118}{section*.119}%
-\contentsline {chapter}{\numberline {C}System Evaluation Results}{123}{section*.120}%
-\contentsline {chapter}{\numberline {D}System Flow Chart}{128}{section*.121}%
-\contentsline {chapter}{\numberline {E}Evaluation Instrument}{164}{section*.157}%
-\contentsline {chapter}{\numberline {F}Letters}{170}{section*.158}%
+\contentsline {chapter}{\numberline {A}System Evaluation Results}{109}{section*.118}%
+\contentsline {chapter}{\numberline {B}System Flow Chart}{114}{section*.119}%
+\contentsline {chapter}{\numberline {C}Evaluation Instrument}{150}{section*.155}%
+\contentsline {chapter}{\numberline {D}Letters}{156}{section*.156}%
