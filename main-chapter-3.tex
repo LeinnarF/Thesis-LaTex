@@ -31,7 +31,7 @@ The objective is to minimize the total travel distance by finding the best order
 	\label{eq:tsp}
 	\text{Minimize } \sum_{i = 1}^{n} \sum_{j = 1, j \neq i} c_{ij} x_{ij}
 \end{equation}
-Where $n$ is the total number of vertices (POI), $c_{ij}$ refers to the cost of traveling from vertex $i$ to vertex $j$, which in this case is the distance between the two POI, and $x_{ij}$ refers to a binary value that indicates whether an edge directly connecting vertex $i$ to vertex $j$ exists in the solution (1 if it exists, 0 otherwise). The function is also constrained to the following:
+Where $n$ is the total number of vertices (POI), $c_{ij}$ refers to the cost of traveling from vertex $i$ to vertex $j$, which in this case is the distance between the two POI, and $x_{ij}$ refers to a binary value that indicates whether an edge directly connecting vertex $i$ to vertex $j$ exists in the solution (1 if it exists, 0 otherwise). And it is constrained to the following conditions:
 \begin{enumerate}
 	\item Every city is entered and exited exactly once.
 	\item The solution does not contain any sub-tours.
@@ -40,19 +40,21 @@ Where $n$ is the total number of vertices (POI), $c_{ij}$ refers to the cost of 
 \subsection{Candidate Algorithms for TSP}
 The study considers several metaheuristic algorithms for route optimization for Lakad, each with its unique approach and characteristics. These algorithms include:
 
+The following metaheuristic algorithms for route optimization were considered for this study. This is due to the nature of metaheuristic algorithms to not guarantee an optimal solution, but rather a near-optimal solution within a reasonable time frame. These algorithm includes:
+
 \begin{enumerate}
 	
-\item \textbf{Genetic Algorithm (GA).} Inspired by genetics and evolution, the Genetic Algorithm is an optimization technique that works by analyzing potential solutions and generating new ones through the processes of selection, crossover, and mutation. This iterative process continues until a predefined termination requirement is met. GA is widely used across various domains because of its ability to navigate complex search spaces and identify optimal or near-optimal solutions \parencite{Hossain2024}.
+\item \textbf{Genetic Algorithm (GA).} Inspired by evolution, the Genetic Algorithm is an optimization technique that works by analyzing potential solutions and generating new ones through the processes of selection, crossover, and mutation. This iterative process continues until a predefined termination requirement is met. GA is widely used across various domains because of its ability to navigate complex search spaces and identify optimal or near-optimal solutions \parencite{Hossain2024}.
 
-\item \textbf{Ant Colony Optimization (ACO).} The Ant Colony Optimization (ACO) is an optimization algorithm that mimics the foraging behavior of ants. It utilizes artificial pheromone trails to guide the search for optimal solutions. Ants in the algorithm employ probabilistic pheromones and heuristic information to address problems. The quality of the solutions determines how the pheromone trails are updated. This mechanism encourages exploration and prevents premature convergence. ACO has proven effective for various optimization difficulties \parencite{Hossain2024}.
+\item \textbf{Ant Colony Optimization (ACO).} The Ant Colony Optimization (ACO) is an optimization algorithm that mimics the foraging behavior of ants. It utilizes artificial pheromone trails to guide the search for optimal solutions. Ants in the algorithm uses probabilistic pheromones and heuristic information to address problems. The quality of the solutions determines how the pheromone trails are updated, this mechanism encourages exploration and prevents premature convergence \parencite{Hossain2024}.
 
-\item \textbf{Simulated Annealing (SA).} The Simulated Annealing (SA) algorithm is a metaheuristic technique influenced by the annealing process in metallurgy. It begins with an initial solution and incorporates a mechanism that allows for the occasional acceptance of a "worse" solution based on and more thoroughly explore the solution space. The probability of accepting a worse solution is gradually reduced over time, simulating the cooling process. SA is applicable to a wide range of optimization problems \parencite{Hossain2024}.
+\item \textbf{Simulated Annealing (SA).} The Simulated Annealing (SA) algorithm is a metaheuristic algorithm based on the annealing process in metallurgy. It begins with an initial solution and incorporates a mechanism that allows for the occasional acceptance of a ``worse'' solution based on current temperature and more thoroughly explore the solution space. The probability of accepting a worse solution is gradually reduced over time, simulating the cooling process \parencite{Hossain2024}.
 
 \item \textbf{Particle Swarm Optimization (PSO).} The Particle Swarm Optimization (PSO) algorithm is inspired by the social behavior of bird flocks and fish schools. In PSO, the population is made up of numerous particles, each representing a potential solution within the search space. Every particle is characterized by a velocity and a fitness value. Conceptually, PSO is very straightforward, as it relies solely on elementary mathematical operations and does not require any derived information about the optimization function \parencite{Wadi2025}.
 
 \item \textbf{Elephant Herding Optimization (EHO).} The Elephant Herding Optimization (EHO) algorithm is a swarm-based metaheuristic search approach for addressing optimization problems that mimics the real herding behavior of elephants, which involves organizing elephant swarms into smaller clans, each led by a matriarch and consisting of multiple female elephants and their calves, while adult male calves are expelled from the clan \parencite{Wadi2025}.
 
-\item \textbf{Gray Wolf Optimizer (GWO).} The Gray Wolf Optimization (GWO) algorithm is a metaheuristic technique inspired by gray wolves, simulating their leadership and cooperative hunting behaviors to locate optimal solutions. The hierarchical structure of a wolf pack (Alpha, Beta, Delta, and Omega wolves) is shown in the algorithm’s design. Wolves’ positions are updated based on the Alpha’s location and the calculated hunting distance. GWO leverages a balance of exploration and exploitation to discover the best possible solutions. This approach has been successfully applied to various optimization challenges \parencite{Hossain2024}. 
+\item \textbf{Gray Wolf Optimizer (GWO).} The Gray Wolf Optimization (GWO) algorithm is a metaheuristic technique inspired by gray wolves, simulating their leadership and cooperative hunting behaviors to locate optimal solutions. The hierarchical structure of a wolf pack (Alpha, Beta, Delta, and Omega wolves) is shown in the algorithm’s design. Wolves’ positions are updated based on the Alpha’s location and the calculated hunting distance. GWO leverages a balance of exploration and exploitation to discover the best possible solutions \parencite{Hossain2024}. 
 
 \item \textbf{Hovering Scouts and Foraging Flocks Pied Kingfisher Optimizer (HSFFPKO).} HSFFPKO enhances the traditional Pied Kingfisher Optimizer by introducing multiscale search mechanisms to improve optimization performance. By adding Hovering Scouts for fine-grained local adjustments and Foraging Flocks for parallel group-based exploitation, the algorithm maintains better population diversity than its predecessor. These additions allow HSFFPKO to mitigate local optima entrapment and solve complex, high-dimensional problems more efficiently \parencite{DelaCruz2025HSFFPKO}.
 \end{enumerate}
@@ -84,24 +86,24 @@ The results were averaged to get the baseline performance profile.
 Two primary metrics were defined to evaluate the algorithms:
 
 \begin{enumerate}
-	\item \textbf{Runtime Speed (\( T_{avg} \)).} It measures the average time it takes to find the solution across the 10 iterations, measured in seconds. This metric is crucial for assessing the efficiency of the algorithm, and is calculated using the formula shown in equation \ref{eq:runtime}: 
+	\item \textbf{Runtime Speed (\( T_{avg} \)).} It measures the average time it takes to find the solution across the 10 iterations and measured in seconds.  The calculation is shown in Equation \ref{eq:runtime}: 
 	\begin{equation}
 		\label{eq:runtime}
 		T_{avg} = \frac{1}{10} \sum_{i=1}^{10} T_i
 	\end{equation}
 	Where $T _{i}$ is the runtime for the $i$-th iteration.
 
-	\item \textbf{Solution Quality (\( Q_{avg} \)).} Since the best solution for each TSPLIB instance is known, the accuracy is measured by the average relative error of the solution found by the algorithm compared to the optimal solution. The calculation is shown in equation \ref{eq:quality}:
+\item \textbf{Solution Quality (\( Q_{avg} \)).} The accuracy of algorithm is measured with average relative error since the optimal solution for each TSPLIB instance is known. This is computed in Equation \ref{eq:quality}
 	\begin{equation}
 		\label{eq:quality}
 		Q_{avg} = \frac{1}{10} \sum_{i=1}^{10} \frac{C_i - C_{opt}}{C_{opt}} \times 100
 	\end{equation}
-	Where $C_i$ is the cost of the solution found in the $i$-th iteration, and $C_{opt}$ is the cost of the known optimal solution for the instance. This metric provides insight into how close the algorithm’s solutions are to the optimal solution, with lower values indicating better performance.
+	Where $C_i$ is the cost of the solution found in the $i$-th iteration, and $C_{opt}$ is the cost of the known optimal solution for the instance.
 \end{enumerate}
 
-Furthermore, each algorithm was executed on the same hardware and software environment to ensure a fair comparison. The experiments were conducted on a machine with a Ryzen 5 3400G processor, 16GB of RAM, and running Arch Linux. The algorithms were implemented with Jupyter Notebook, and the runtime was measured using Python’s built-in `time` module.
+All algorithms were executed under identical testing conditions. The tests were performed on a computer system that has Ryzen 5 3400G CPU and 16 gigabytes RAM running Arch Linux operating system. The researchers developed the algorithms through Jupyter Notebook development environment and they used Python built-in time module for runtime measurement.
 
-\textbf{Algorithm Ranking.} To select the final algorithm, the trade-off between speed and accuracy was assessed using Simple Additive Weighting (SAW). SAW was chosen because of its simplicity and interpretability, allowing for a straightforward comparison of the algorithms based on the defined metrics. Since both $T _{avg}$ and $Q_{avg}$ are “cost” criteria, i.e., lower values represent better performance, it is normalized relative to the maximum (worst) observed value to scale all metrics between 0 and 1. The normalization formula used was shown in equation \ref{eq:norm}:
+\textbf{Algorithm Ranking.} To select the final algorithm, the trade-off between speed and accuracy was assessed using Simple Additive Weighting (SAW). SAW was chosen because of its simplicity and interpretability. Allowing for a straightforward comparison of the algorithms based on the defined metrics. Since both $T _{avg}$ and $Q_{avg}$ are “cost” criteria, i.e., lower values represent better performance, it is normalized with respect to the maximum (worst) observed value to scale all metrics between 0 and 1. The normalization formula used was shown in equation \ref{eq:norm}:
 \begin{equation}
 	\label{eq:norm}
 	r _{ij} = \frac{x_{ij}}{\max(x_{ij})}
