@@ -103,7 +103,7 @@ Two primary metrics were defined to evaluate the algorithms:
 
 All algorithms were executed under identical testing conditions. The tests were performed on a computer system that has Ryzen 5 3400G CPU and 16 gigabytes RAM running Arch Linux operating system. The researchers developed the algorithms through Jupyter Notebook development environment and they used Python built-in time module for runtime measurement.
 
-\textbf{Algorithm Ranking.} To select the final algorithm, the trade-off between speed and accuracy was assessed using Simple Additive Weighting (SAW). SAW was chosen because of its simplicity and interpretability. Allowing for a straightforward comparison of the algorithms based on the defined metrics. Since both $T _{avg}$ and $Q_{avg}$ are “cost” criteria, i.e., lower values represent better performance, it is normalized with respect to the maximum (worst) observed value to scale all metrics between 0 and 1. The normalization formula used was shown in equation \ref{eq:norm}:
+\textbf{Algorithm Ranking.} To select the final algorithm, the trade-off between speed and accuracy was assessed using Simple Additive Weighting (SAW). The researchers chose it because of its simplicity and interpretability. Allowing for a straightforward comparison of the algorithms based on the defined metrics. Since both $T _{avg}$ and $Q_{avg}$ are “cost” criteria, i.e., lower values represent better performance, it is normalized with respect to the maximum (worst) observed value to scale all metrics between 0 and 1. The normalization formula used was shown in equation \ref{eq:norm}:
 \begin{equation}
 	\label{eq:norm}
 	r _{ij} = \frac{x_{ij}}{\max(x_{ij})}
@@ -215,9 +215,7 @@ For the parameters of AGAM, the following values were used: $pc_1 = 0.9$, $pc_2 
 
 The development of the Lakad mobile application uses the AGILE methodology, with a specific focus on the Kanban method. This approach integrates all key software development phases. These phase include analysis, planning, design, development, testing, and review, each of the phases contributes to the overall quality and functionality of the final product.
 
-Kanban is a highly effective visual process management system designed to optimize the flow of work. It operates on the principle of Just In Time (JIT) delivery, as highlighted by \textcite{Alaidaros2021}, ensuring the tasks are completed and delivered precisely when needed to maximize efficiency. 
-
-This methodology offers significant advantages for the Lakad development team. It provides a clear, visual representation of the entire workflow, allowing all team members to easily track progress from start to finish. This transparency is crucial for quickly identifying potential bottlenecks, gaps in the process, or any mishaps that might arise. By making the workflow visible, the team can proactively address issues, rather than reacting to them after they have escalated. Kanban, being a type of Agile-based methodology, is an approach that promotes flexibility which can help in an environment of software development where problems and unforeseen challenges are inevitable. Kanban’s adaptability allows the team to adjust priorities and reallocate resources as needed, ensuring that progress remains steady even when obstacles are encountered. This flexibility is key to maintaining momentum and delivering a high-quality software output \parencite{Risener2022}. The continuous flow and iterative nature of Kanban supports the team in delivering a robust and reliable system that meets user needs effectively. Figure \ref{kanban} shows a graphical representation of a Kanban workflow model.
+Kanban method is use because of its effective visual process management. It optimize the workflow and allowing the researchers to track the progress of developement. \textcite{Alaidaros2021} highlighted that Kanban operates on the Just In Time principle, meaning tasks are completed and delivered while maximizing efficiency. Kanban’s adaptability allows the team to adjust priorities and reallocate resources as needed. This flexibility is key to maintaining momentum and delivering a high-quality software output \parencite{Risener2022}. Figure \ref{kanban} shows a graphical representation of a Kanban workflow model.
 
 \begin{figure}[H]
 	\centering
@@ -249,9 +247,8 @@ The analysis phase of the development involves outlining the system’s scope, o
 		The admin management feature allows the admin users to manage the tourist spots shown to the users. Admin users can add, edit, or remove tourist spots from the system, as well as update the information of the tourist spots. Admin users can also recalculate the distance matrix via the OpenRouteService matrix API whenever there are changes in the tourist spots.
 
 \end{enumerate}
-Furthermore, the application includes a user profile feature that allows users to create and manage their profiles, which can store their preferences, past itineraries, and other relevant information. This feature enhances the personalization aspect of the system by allowing it to learn from user behavior and preferences over time.
 
-In addition, the data gathering process was also conducted in this phase, which involved collecting data on tourist destinations in Bulacan given by PHACTO. This data was used to populate the system with verified and relevant information about the tourist spots in the province, which is crucial for the functionality of the search and itinerary generation features.
+The application includes a user profile feature that allows users to create and manage their profiles. Allowing to store their preferences, past itineraries, and other relevant information. In addition, the data gathering process for the content of the application was also conducted in this phase, which involved collecting data on tourist destinations in Bulacan given by PHACTO. This data was used by the system with verified and relevant information about the tourist spots in the province.
 
 \subsection{Planning}
 The Gantt chart provides a visual timeline of the schedule of the research activity that was conducted in the process of developing Lakad. It outlines the sequence of tasks relating to Thesis I and Thesis II, including the flow of each phase of the research from documentation and planning until system development, evaluation, and final defense.
@@ -266,14 +263,17 @@ The \textbf{Thesis I} output focuses on the research documentation and planning 
 
 For \textbf{Thesis II}, the researcher proceeds to the implementation and completion phase. The group developed and implemented the proposed system based on the design created in Thesis I. 
 
-\textbf{System Development and Implementation}. This phase focuses on building and integrating the components of the system based on the planned design. In the development process, the construction of the front-end, database integration, and feature implementation following the chosen development model. Testing and debugging processes was carried out on a regular basis to ensure proper functionality and performance.
+\textbf{System Development and Implementation.} The system development process starts with system building which creates system components according to established design specifications. The development process requires constructing front-end elements and integrating databases while executing the features according to the selected development model. The team conducted testing and debugging activities throughout the project to confirm that all systems worked correctly and met performance standards.
 
-\textbf{System Testing and Evaluation}. This phase is for testing the reliability, usability, and general quality of the system. Various testing procedures was conducted to ensure that every function works as planned and meets user needs. Feedback was collected from users and a system analyst to identify areas that need improvement.
+\textbf{System Testing and Feedbacking.} The testing phase of the system evaluation process assesses three key system attributes which include reliability and usability and overall system quality. Testing procedures were performed to confirm that all functions operate correctly according to user requirements. Users provided feedback together with a system analyst who evaluated system performance to find areas where upgrades are needed.
 
-\textbf{Data Analysis and Interpretation}. This stage includes data processing and data analysis that are conducted from the system evaluation. Responses collected was organized, encoded, and statistically analyzed to determine user perceptions as well as the general performance of the system.
+
+\textbf{Data Analysis and Interpretation.} The data processing stage includes all data analysis activities which derive from the system evaluation process. The collected responses were processed through organizational steps which included encoding and statistical analysis to identify user perceptions about system performance.
+
 
 \subsection{Design}
-The design phase focuses on creating the overall architecture and structure of the system. This includes defining the system components, their interactions, and the data flow within the application. The system architecture was designed to ensure scalability, maintainability, and efficiency. The researchers created diagrams and models to visualize the system’s structure and functionality.
+
+The design phase focuses on creating the overall architecture of the system. The process involves establishing the system components and their connections and the flow of data throughout the application. The researchers created diagrams and models to show the system structure and its operational capabilities.
 
 \begin{figure}[H]
 	\centering
@@ -282,7 +282,7 @@ The design phase focuses on creating the overall architecture and structure of t
 	\includegraphics[width=\textwidth]{SysArch.png}
 \end{figure}
 
-Figure \ref{SysArch} illustrates the system architecture of Lakad: A Personalized Mobile Itinerary Creator and how the different components of the application interact to provide personalized and optimized travel itineraries for users. At the core of the system is the mobile frontend, which serves as the main interface where tourists can search for tourist destinations, generate itineraries, and manage their travel plans. When a user interacts with the application, the frontend communicates with the Mapbox API to send requests for map data, location coordinates The API processes these requests and returns the corresponding responses, which are then displayed on the user interface in the form of maps and travel routes. In addition, the application stores user-generated itineraries and relevant information in a remote database using Supabase, allowing users to access and manage their itineraries. While admin users have access to admin GUI separate from tourists where they can manage the places shown to the users as well as recalculate the distance matrix via the OpenRouteService matrix API.
+Figure \ref{SysArch} shows the system architecture of Lakad shows how various application components work together to produce optimize travel routes for users. The mobile frontend functions as the system`s primary interface which enables tourists to search for destinations and create itineraries while they organize their travel arrangements. The application frontend establishes links with Mapbox API to handle user interactions through which users request map data and location coordinates. The API processes these requests and returns the corresponding responses, which are then displayed on the user interface as maps and travel routes. Supabase enables the application to store user-created itineraries together with additional data in a distant database which users can use to view and control their itineraries. The admin users use their dedicated admin GUI which keeps them separate from tourists to handle user-visible location content while they calculate distance matrices using OpenRouteService matrix API.
 
 \begin{figure}[H]
 	\centering
@@ -304,11 +304,7 @@ Two types of users exist for the whole system which is the tourist and admins as
 
 \subsection{Development}
 
-This development phase pertains to the actual coding and implementation of the system’s features inside an android application. The researchers’ utilized the AGILE methodology, particularly the Kanban method for the software development life cycle. This includes weekly meetings and development checks by the researchers to ensure the system is properly developed to its intended uses. Lakad was developed using the React Native main development framework, which uses fast and cost-efficient cross-platform mobile development, allowing a single codebase to function on both iOS and Android devices. The system utilized the JavaScript programming language for implementing the application’s user interface and core functionalities due to its flexibility and compatibility with React Native framework. The main development environment for writing, editing, and debugging the program was Visual Studio Code, which provided lightweight performance and had a large selection of extensions appropriate for React Native development. Throughout the development process, Git and GitHub was used to ensure structured collaboration and version control. The list of tools used in the development is presented in Table \ref{listtools}.
-
-Additionally, React Native extends the "Learn once, write anywhere" paradigm to mobile development, leveraging recent advancements like its new architecture and the JavaScript Interface (JSI). The framework’s structure, represented by Fabric, aims to boost compatibility with modern React features such as concurrent rendering and synchronous data fetching. While JSI’s main element allows for direct calls between JavaScript and native code. This change features a smoother interaction with the host platform and significantly reduces performance bottlenecks. JSI also allows Fabric to create UI components on the native side more efficiently. The combined adoption of JSI and Fabric offers a significant enhancement in React Native’s performance, making it a good choice for developers who desire the agility of mobile development and native platform functionalities \parencite{Zhou2024}.
-
-This framework allows the researchers to develop the mobile application, Lakad, as React Native’s cross-platform capabilities also allow for android development.
+The development phase of the system is about coding and implementing the features. The researchers used the AGILE methodology which included the Kanban method as their software development life cycle framework. Weekly meetings and development checks by researchers work to confirm that system development achieves its planned operational targets. The main development framework of Lakad was built with React Native because it enables developers to create mobile applications that run on both iOS and Android platforms from a single codebase. The system used JavaScript programming language to build the application interface and main functions because it provides flexible options to work with the React Native framework. Visual Studio Code served as the main development environment for the program because it enabled developers to write and edit code and debug problems with its extensive React Native development extensions. Git and GitHub was used throughout the development process to maintain organized team work and track software versions. The list of tools used in the development is presented in Table \ref{listtools}.
 
 \begin{table}[H]
 	\centering
@@ -320,7 +316,7 @@ This framework allows the researchers to develop the mobile application, Lakad, 
 		\toprule 
 		\textbf{Name} & \textbf{Description} \\
 		\midrule
-		Visual Studio Code  & A lightweight and powerful source code developed by Microsoft. It supports multiple programming languages and offers built-in debugging, version control integration, and extensions suitable for React Native development. \\
+		Visual Studio Code  & A powerful text editor developed by Microsoft. It supports multiple programming languages and offers built-in debugging, version control integration, and extensions suitable for React Native development. \\
 		React Native        & An open-source framework developed by Meta for building cross-platform mobile applications using JavaScript and React. \\
 		JavaScript     & An Interpreted, high-level programming language for building user interfaces, interaction and application logic.\\
 		Git                 & A software for versioning and managing software projects. \\
@@ -329,21 +325,20 @@ This framework allows the researchers to develop the mobile application, Lakad, 
 	\end{tabularx}
 \end{table}
 
-
 \subsection{Testing}
-For the testing phase, Lakad undergo rigorous evaluation to ensure the overall functionality and quality. The process includes system integration and user acceptance testing. System testing focuses on validating each module of the system by using test cases that evaluates the logic of the system which identifies and resolve issues affecting itinerary generation and recommendation features. Integration testing was conducted to ensure that all components of the system, such as itinerary generation and optimization, management, and user interface, operates cohesively to provide a seamless user experience.
+The system testing process involves testing at multiple levels which includes both system integration testing and user acceptance testing. The testing process validates system functionality through the assessment of all system components which includes both technical and user acceptance testing. System testing involves testing every system module through predefined test cases that assess system logic for the purpose of identifying and resolving itinerary generation and optimization system problems. The testing process confirmed that all system components functioned together to create a smooth user experience which included itinerary generation and optimization and management and user interface functions.
 
 \subsection{Review}
-The review phase focuses on evaluating the overall functionality and usability of the system after development is completed. The researchers gather views and opinions of users, including a system analyst to determine whether the system runs efficiently and serves its desired purposes. Guided by their observation, necessary adjustments and enhancements done to refine the system.
-
+The review phase assesses system performance through testing after development has been completed. The researchers gather views and opinions of users, including a system analyst to determine whether the system runs efficiently and serves its desired purposes. The team implemented system changes based on their observation to improve system performance.
 
 \section{System Evaluation}
-This section outlines the methods and criteria used to evaluate Lakad, the developed mobile itinerary generator system. It details the instruments and standards for assessment, describes the target population and sampling approach, and explains the procedures for data collection and analysis. The goal is to ensure that the system meets user needs and quality benchmarks through structured evaluation using both user and expert feedback.
+
+The section outlines the evaluation methods and assessment criteria which assess the performance of Lakad, the mobile itinerary generator system that was developed. The assessment process uses specific instruments and assessment standards to evaluate Lakad which targets particular population groups through its defined sampling method and data collection and analysis.
 
 \subsection{Evaluation Instrument}
-The evaluation instrument for the developed system uses Technology Acceptance Model (TAM) for the end-users and ISO / IEC 25010:2023 for IT professionals. This combination of evaluation methods allows for a comprehensive assessment of the system from both user experience and technical quality perspectives. 
+The evaluation instrument for the developed system uses Technology Acceptance Model (TAM) for the end-users and ISO / IEC 25010:2023 for IT professionals. The combination of these evaluation methods allows for a comprehensive assessment of the system from both user experience and technical quality. 
 
-\textbf{Technology Acceptance Model (TAM).} The developed system was evaluated using the Technology Acceptance Model (TAM), as it provides a theoretical framework for understanding the process by which users accept and adopt new technologies. TAM is widely applied in system development studies for calculating the level of user acceptance based on their perceptions and intentions for using a system. To evaluate the effectiveness and acceptance of the proposed system, the following key constructs was evaluated:
+\textbf{Technology Acceptance Model (TAM).} The developed system was evaluated using the Technology Acceptance Model (TAM). TAM is widely applied in system development studies for calculating the level of user acceptance based on their perceptions and intentions for using a system. To evaluate the effectiveness and acceptance of the proposed system, the following key constructs was evaluated:
 \begin{enumerate}
 	\item \textbf{Perceived Usefulness}. This construct measures how much users would believe that system usage would improve their task performance. It looks at whether system functionalities like itinerary recommendation, generation, and optimal route provide concrete value and efficiency to the user.
 	\item \textbf{Perceived Ease Of Use}. This measures the degree of which users find the system easy to learn and operate. It singles out features including interface design, feature clarity, and the convenience of performing tasks.
@@ -362,7 +357,7 @@ A demographic section is also included in the questionnaire to assess the respon
 	\item \textbf{Travelling Frequency}. This demographic assesses how much time does a respondent spend away from their home, which is defined by how often they go out in a week or month. The following categories were used to classify the travelling frequency of the respondents: Rarely (0–1 times a month), Occasionally (2–3 times a month), Frequently (4–5 times a month).
 \end{enumerate}
 
-Additionally, a reliability test was conducted on the TAM questionnaire to ensure that the instrument is consistent and reliable for measuring user acceptance. The reliability test was performed using Cronbach’s alpha, which assesses the internal consistency of the questionnaire items. A Cronbach’s alpha value of 0.7 or higher is generally considered acceptable, indicating that the items in the questionnaire are measuring the same underlying construct effectively \parencite{Cronbach2025}.
+Additionally, a reliability test was conducted on the TAM questionnaire to ensure that the instrument is consistent and reliable for measuring user acceptance. The reliability test was performed using Cronbach’s alpha to assesses the internal consistency of the questionnaire items. A Cronbach’s alpha value of 0.7 or higher is generally considered acceptable, indicating that the items in the questionnaire are measuring the same underlying construct effectively \parencite{Cronbach2025}.
 
 \textbf{ISO/IEC 25010:2023.} The developed system was also evaluated by IT professionals using the ISO/IEC 25010:2023 questionnaire which evaluates the overall quality of Lakad. The following criteria was used in the questionnaire and are based on the ISO/IEC 25010:2023 standards:
 
@@ -430,11 +425,11 @@ The PHACTO data was used to classify Bulacan municipalities into three groups wh
 
 In Table \ref{tourist_arrivals}, municipalities were classified. These classifications were based on the data provided by PHACTO, such that < 100,000 arrivals is classified as low, 100,000 to 500,000 arrivals is classified as medium, and > 500,000 arrivals is classified as high. Selected municipalities were chosen from different tourist arrival classifications to ensure a diverse representation of tourists. This approach helps to reduce sampling bias and ensures that the sample reflects the diversity of tourists visiting different areas of Bulacan.
 
-In the second stage, tourists within the selected municipalities were recruited through convenience sampling at active tourist attraction sites. The selected municipalities for the study were Baliwag, Bocaue, Bustos, Calumpit, Guiguinto, Malolos, Marilao, Plaridel, Pulilan, and San Rafael. The researchers selected these ten municipalities to represent different levels of tourist arrivals which included low and medium and high categories to create a sample that showed the full variety of tourists who visit different regions in Bulacan. Within these selected municipalities, respondents were allocated proportionately based on the tourist arrivals of each municipality. This proportional allocation ensures that the sample composition approximates the actual distribution of tourist arrivals across the selected municipalities.
+In the second stage, tourists within the selected municipalities were recruited through convenience sampling at active tourist attraction sites. The selected municipalities for the study were Baliwag, Bocaue, Bustos, Calumpit, Guiguinto, Malolos, Marilao, Plaridel, Pulilan, and San Rafael. The researchers selected these ten municipalities to represent different levels of tourist arrivals which included low and medium and high categories to create a sample that showed the full variety of tourists who visit different regions in Bulacan. Within these selected municipalities, respondents were allocated proportionately based on the tourist arrivals of each municipality. % This proportional allocation ensures that the sample composition approximates the actual distribution of tourist arrivals across the selected municipalities.
 
-The researchers collected data by conducting surveys with participants at various tourist sites throughout the duration of the study. The recruitment method based on convenience helps researchers access tourist populations. However, this method also introduces potential biases that need to be acknowledged. One is that respondents who were available and accessible at tourist sites may differ from tourists who avoid crowded areas. The sample reflects only tourists present during data collection dates and times, potentially excluding different seasonal visitor profiles. The process of showing application demonstrations at the site before completing their questionnaires may lead to different rating outcomes than what actual usage would produce. Researchers acknowledge these limitations and have taken steps to mitigate them, such as ensuring a diverse range of tourist sites and times for data collection. 
+% The researchers collected data by conducting surveys with participants at various tourist sites throughout the duration of the study. The recruitment method based on convenience helps researchers access tourist populations. However, this method also introduces potential biases that need to be acknowledged. One is that respondents who were available and accessible at tourist sites may differ from tourists who avoid crowded areas. Secondly, the sample reflects only tourists present during data collection dates and times, potentially excluding different seasonal visitor profiles. The process of showing application demonstrations at the site before completing their questionnaires may lead to different rating outcomes than what actual usage would produce. Researchers acknowledge these limitations and have taken steps to mitigate them, such as ensuring a diverse range of tourist sites and times for data collection. 
 
-A sample size of 150 respondents was determined for the end-user evaluation while considering the practical constraints of data collection and the need for a manageable sample size to draw results. The researchers consider this sample size sufficient given the limited resources, time constraints, and logistical challenges associated with collecting data from tourists at various sites across multiple municipalities. 
+A sample size of 150 respondents was determined for the end-user evaluation. Considering the practical constraints of data collection and the need for a manageable sample size to draw reliable results. The researchers consider 150 sample size sufficient because of the limited resources, time constraints, and logistical challenges associated with collecting data from tourists at various sites across multiple municipalities. 
 
 The Cochran’s formula for large populations follows a 95\% confidence level, a 5\% margin of error, and an estimated proportion of 0.5 to calculate the required sample size. 
 
@@ -449,7 +444,7 @@ However, in Equation \ref{cochran}, the calculated sample size is 384, consideri
 	E = z \sqrt{\frac{p(1-p)}{n}} = 1.96 \sqrt{\frac{(0.5)(0.5)}{150}} \approx 0.079
 \end{equation}
 
-This reduced sample size remains acceptable for TAM evaluation studies. According to \textcite{Memon2020}, a sample sizes of 30 to 500 are appropriate for most behavioral studies based on Roscoe’s rule of thumb, which TAM falls under. Hence, a sample size of 150 is well within the recommended range for TAM studies. This aligns with methodological recommendations emphasizing that survey sample sizes should be driven by the specific analytical approach and research objectives rather than rigid population proportions \parencite{Memon2020}. It is also consistent with recent regional tourism technology research by \textcite{Raynera2025}, which successfully validated TAM constructs using 80 respondents, further indicating that 150 is more than adequate for achieving reliable results.
+The smaller sample size of this study still meets the requirements for conducting TAM evaluation research. The research by \textcite{Memon2020} shows that behavioral studies should use sample sizes between 30 and 500 according to Roscoe's rule of thumb, which applies to TAM research. The TAM research guidelines permit 150 participants as an acceptable sample size because it falls between the established limits of the recommended sample size range. The results of this study support methodological guidelines which state that survey sample sizes must match the specific analytical methods and research goals instead of following fixed population distribution requirements\parencite{Memon2020}. It is also consistent with recent regional tourism technology research by \textcite{Raynera2025}, which successfully validated TAM constructs using 80 respondents, further indicating that 150 is more than adequate for achieving reliable results.
 
 \begin{table}[H]
 	\centering
@@ -477,9 +472,9 @@ This reduced sample size remains acceptable for TAM evaluation studies. Accordin
 	\end{tabularx}
 \end{table}
 
-Table \ref{endusers} shows the allocation of respondents for end-users based on the proportion of tourist arrivals in each selected municipality. This ensures that the 150 respondents accurately reflect the true geographical distribution of tourist arrivals across the selected municipalities significantly reduces sampling bias and prioritizing a highly representative sample. 
+Table \ref{endusers} shows the allocation of respondents for end-users based on the proportion of tourist arrivals in each selected municipality.
 	
-\textbf{IT Professionals.} IT professionals evaluated the technical quality of Lakad using ISO/IEC 25010:2023 standards through purposive sampling. A total of 22 IT experts were deliberately selected based on their professional qualifications and relevant experience. The sample comprised of but not limited to software engineers, UI/UX designers, Quality Assurance professionals and faculty members from The College of Information and Communications Technology (CICT) at Bulacan State University (BulSU). Purposive sampling was appropriate for expert evaluation, as the goal was to ensure participants possessed requisite technical knowledge rather than statistical representativeness of a broader population. In addition to quantitative ISO/IEC 25010:2023 assessment, IT professionals were also encouraged to provide qualitative feedback on the system’s strengths and areas for improvement based on their technical expertise.
+\textbf{IT Professionals.} IT professionals assess the technical quality of Lakad using ISO/IEC 25010:2023 standards through purposive sampling. A total of 22 IT experts were deliberately selected based on their professional qualifications and relevant experience. The sample comprised of but not limited to software engineers, UI/UX designers, Quality Assurance professionals and faculty members from The College of Information and Communications Technology (CICT) at Bulacan State University (BulSU). Purposive sampling was appropriate for expert evaluation, as the goal was to ensure participants possessed requisite technical knowledge rather than statistical representativeness of a broader population.
 
 \begin{table}[H]
 	\centering
@@ -499,35 +494,28 @@ Table \ref{endusers} shows the allocation of respondents for end-users based on 
 	\end{tabularx}
 \end{table}
 
-To summarize, the total sample size for the study consists of 172 respondents, with 150 end-users and 22 IT professionals as shown in Table \ref{pop_sample}.
-
-% -----------------------------------------------------------------------
+Table \ref{pop_sample} presents the total sample size for the study. 150 end-users and 22 IT professionals, giving a total sample size of 172 respondents.
 
 \subsection{Data Collection}
 
-The data collection process of this study was divided into two parts: one for the end-users (tourists) and another for the IT professionals. Each group was evaluated using different instruments to gather relevant data for assessing the system from both user experience and technical quality perspectives. The end-users were evaluated using TAM, while the IT professionals were evaluated using ISO/IEC 25010:2023. 
+The data collection process of this study was divided into two parts, one for the end-users (tourists) and another for the IT professionals. Each was evaluated using different instruments to gather relevant data for assessing the system from both user experience and technical quality perspectives. The end-users were evaluated using TAM, while the IT professionals were evaluated using ISO/IEC 25010:2023. The TAM questionnaire for end-users uses 5-point Likert scale to assess the acceptability of Lakad. For the ISO/IEC 25010:2023 evaluation for IT professionals uses 5-point numerical scale. These scales were adopted from existing instruments and were modified to fit the context of this study especially for the TAM questionnaire. 
 
-Both instruments utilized Likert scales to measure the responses of the respondents. The TAM questionnaire for end-users and the ISO/IEC 25010:2023 evaluation for IT professionals uses 5-point Likert scale. These scales were adopted from existing instruments and were modified to fit the context of this study especially for the TAM questionnaire. The use of Likert scales allows for quantifying the perceptions and evaluations of the respondents, providing a structured way to analyze the data collected from both groups.
+\textbf{Preparation and Pilot Testing.} The data collection process began after the local government units of the selected municipalities granted their formal authorization to conduct tourist surveys. The research team conducted pilot testing after receiving all the required permissions to assess the TAM questionnaire’s reliability and validity. The pilot test involved a group of respondents who shared characteristics with the target study population. The pilot test selected 20 respondents from municipality of Pandi because this group would not participate in the main study to prevent any potential research bias. The research team used Cronbach’s alpha to assess the internal consistency and reliability of the adapted TAM questionnaire based on pilot test results. The computed Cronbach’s alpha coefficient of 0.881 confirmed that all TAM items demonstrated good internal consistency while maintaining reliable performance for user technology acceptance measurement within this research study.
 
-\textbf{Preparation and Pilot Testing.} Before the actual data collection, a formal permission was requested and obtained from the local government units (LGUs) of the selected municipalities to conduct the survey among tourists. After obtaining the necessary permissions, pilot testing was conducted to ensure the reliability and validity of the TAM questionnaire. The pilot test was done with a small group of respondents who were similar to the target population. A total of 20 respondents from the municipality of Pandi were selected for the pilot test because it is excluded from the main data collection to avoid bias. Cronbach’s alpha was computed on the pilot test results to verify internal consistency and reliability of the adapted TAM questionnaire. The calculated Cronbach’s alpha coefficient of 0.881 exceeded the acceptability threshold of 0.70, indicating good internal consistency across TAM items and reliability for measuring user technology acceptance within this study’s context. 
+For the ISO/IEC 25010:2023, since it is a standardized international quality evaluation framework, formal validation was not conducted with a separate pilot sample. And the instrument was acuired from CICT.
 
-While the ISO/IEC 25010:2023 is a standardized international quality evaluation framework, formal validation was not conducted with a separate pilot sample. However, the instrument was reviewed with two senior faculty members from CICT to ensure appropriateness of the quality criteria for evaluating mobile itinerary generation applications and to verify clarity of the assessment items. This validity review, while less rigorous than full pilot testing, provided assurance that the standardized instrument could be meaningfully applied to Lakad’s specific functionality.
-
-\textbf{Administration to End-users.} The data collection for end-users was conducted through face-to-face surveys in various tourist spots across the selected municipalities in Bulacan via convenience sampling. The researchers approached tourists along with the informed consent and invited them to participate in the survey, which included a brief introduction to the Lakad application and its features. After exploring the application, the respondents were asked to complete the TAM questionnaire, which assessed their perceptions of the system’s usefulness, ease of use, attitude towards using it, and behavioral intention to use it in the future. Additionally, demographic information such as age bracket, travelling frequency, and technological proficiency was collected to analyze potential correlations between these factors and the TAM constructs. While this convenience-based approach ensured practical feasibility and adequate sample size achievement, readers should note the selection bias limitations acknowledged in the Sampling Design section.  
+\textbf{Administration to End-users.} The data collection for end-users was conducted through face-to-face surveys in various tourist spots across the selected municipalities in Bulacan via convenience sampling. The researchers approached tourists along with the informed consent and invited them to participate in the survey, which included a brief introduction to Lakad and its features. After exploring the application they were asked to complete the TAM questionnaire. Additionally, demographic information such as age bracket, travelling frequency, and technological proficiency was collected to analyze potential correlations between these factors and the TAM constructs. % While this convenience-based approach ensured practical feasibility and adequate sample size achievement, readers should note the selection bias limitations acknowledged in the Sampling Design section.  
 
 
-
-
-\textbf{Administration to IT Professionals.} Permissions to conduct the survey among IT professionals was requested and obtained from the Information and Communications Technology Office (ICTO) of BulSU and to the dean of CICT. The data collection for IT professionals was conducted through an online survey or in-person sessions, depending on the availability and preference of the respondents. The IT professionals were provided with access to the Lakad application and were given a brief overview of its features and functionalities. After exploring the application, they were asked to complete the ISO/IEC 25010:2023 evaluation, which assessed the system’s functional suitability, performance efficiency, compatibility, interaction capability, reliability, security, maintainability, flexibility, and safety. In addition to the quantitative evaluation, IT professionals were also encouraged to provide qualitative feedback on the system’s strengths and areas for improvement based on their technical expertise.  
+\textbf{Administration to IT Professionals.} A permissions to conduct the survey among IT professionals was requested and obtained from the Information and Communications Technology Office (ICTO) of BulSU and to the dean of CICT. The data collection for IT professionals was conducted through an online survey or in-person sessions, depending on the availability and preference of the respondents. The IT professionals were provided with access to Lakad and were given a brief overview of its features and functionalities. After exploring the application, they were asked to complete the ISO/IEC 25010:2023 evaluation. In addition to the quantitative evaluation, IT professionals were also encouraged to provide qualitative feedback on the system’s strengths and areas for improvement based on their technical expertise.  
 
 \subsection{Data Processing and Analysis}
-The researchers conducted systematic data processing and analysis of data from the Technology Acceptance Model (TAM) questionnaire and ISO/IEC 25010:2023 system quality evaluation instrument to evaluate user acceptance rates and the total system quality of the Lakad application.
 
-The TAM questionnaire utilized a five-point Likert-type scale to measure respondents’ perception towards Lakad. The response categories were coded numerically as follows: 1 (Strongly disagree); 2 (Disagree); 3 (Neutral); 4 (Agree); and 5 (Strongly agree). The instrument consists of declarative statements that is designed to measure the four TAM constructs (Perceived Usefulness, Perceived Ease of Use, Attitude Towards Using, and Behavioral Intention to Use).
+This study conducted a systematic data processing and analysis of data from the Technology Acceptance Model (TAM) questionnaire and ISO/IEC 25010:2023 system quality evaluation instrument to evaluate user acceptance rates and the total system quality of the Lakad application.
 
-The ISO/IEC 25010:2023 evaluation instrument used a five-point performance rating scale to evaluate system quality constructs through expert assessment. The scale was coded as: 1 (Poor); 2 (Fair); 3 (Good); 4 (Very  good); and 5 (Excellent). The experts used this instrument to assess system quality attributes which included Functional Suitability Performance Efficiency Compatibility Reliability Security Maintainability Flexibility and Safety.
+The TAM questionnaire utilized a five-point Likert-type scale to measure respondents’ perception towards Lakad. The response categories were coded numerically as follows, 1 (Strongly disagree); 2 (Disagree); 3 (Neutral); 4 (Agree); and 5 (Strongly agree). The instrument consists of declarative statements that is designed to measure the four TAM constructs (Perceived Usefulness, Perceived Ease of Use, Attitude Towards Using, and Behavioral Intention to Use). For the ISO/IEC 25010:2023 evaluation instrument used a five-point performance rating scale to evaluate system quality constructs through expert assessment. The scale was coded as, 1 (Poor); 2 (Fair); 3 (Good); 4 (Very  good); and 5 (Excellent).
 
-Since responses to individual questionnaire items are ordinal in nature, descriptive statistics were utilized to summarize the data without assuming equal intervals between response categories. At the item level, frequency distributions and median values were computed to describe response patterns and determine the central tendency of each item.
+The responses from individual questionnaire items are ordinal in nature, descriptive statistics were utilized to summarize the data without assuming equal intervals between response categories. At the item level, frequency distributions and median values were computed to describe response patterns and determine the central tendency of each item.
 
 To obtain construct-level measures, composite scores were computed by averaging responses across items corresponding to each construct. For both TAM and ISO/IEC 25010:2023 instruments, the composite score for the $i$-th respondent was calculated using in Equation \ref{Xi},
 
@@ -560,12 +548,50 @@ Where, $s$ is the sample standard deviation, $X_i$ is the composite score for th
 
 The interpretation of the mean scores for both TAM and ISO/IEC 25010:2023 was based on a predefined scale that categorizes the mean scores into descriptive ratings and interpretations. The interpretation tables for both TAM and ISO/IEC 25010:2023 are presented in Table \ref{inter:tam} and Table \ref{inter:iso}, respectively.
 
+% \begin{table}[H]
+% 	\centering
+% 	\singlespacing
+% 	\caption{Interpretation of Mean Scores for TAM}
+% 	\label{inter:tam}
+% 	\renewcommand{\arraystretch}{1.2}
+% 	\begin{tabularx}{0.75\linewidth}{XX}
+% 		\toprule 
+% 		\textbf{Mean Score} & \textbf{Descriptive Rating}\\
+% 		\midrule
+% 		4.21–5.00 & Highly acceptable \\
+% 		3.41–4.20 & Acceptable \\
+% 		2.61–3.40 & Fairly acceptable \\
+% 		1.81–2.60 & Slightly acceptable \\
+% 		1.00–1.80 & Not acceptable \\
+% 		\bottomrule
+% 	\end{tabularx}
+% \end{table}
+%
+% \begin{table}[H]
+% 	\centering
+% 	\singlespacing
+% 	\caption{Interpretation of Mean Scores for ISO/IEC 25010:2023}
+% 	\label{inter:iso}
+% 	\renewcommand{\arraystretch}{1.2}
+% 	\begin{tabularx}{0.75\linewidth}{XX}
+% 		\toprule 
+% 		\textbf{Mean Score} & \textbf{Descriptive Rating}\\
+% 		\midrule
+% 		4.21–5.00 & Excellent \\
+% 		3.41–4.20 & Very Good \\
+% 		2.61–3.40 & Good \\
+% 		1.81–2.60 & Fair \\
+% 		1.00–1.80 & Poor \\
+% 		\bottomrule
+% 	\end{tabularx}
+% \end{table}
+
 \begin{table}[H]
 	\centering
 	\singlespacing
 	\caption{Interpretation of Mean Scores for TAM}
 	\label{inter:tam}
-	\renewcommand{\arraystretch}{1.2}
+	\renewcommand{\arraystretch}{1.1}
 	\begin{tabularx}{\linewidth}{p{0.2\textwidth}p{0.25\textwidth}X}
 		\toprule 
 		\textbf{Mean Score} & \textbf{Descriptive Rating} & \textbf{Interpretation} \\
@@ -584,21 +610,19 @@ The interpretation of the mean scores for both TAM and ISO/IEC 25010:2023 was ba
 	\singlespacing
 	\caption{Interpretation of Mean Scores for ISO/IEC 25010:2023}
 	\label{inter:iso}
-	\renewcommand{\arraystretch}{1.2}
+	\renewcommand{\arraystretch}{1.1}
 	\begin{tabularx}{\linewidth}{p{0.2\textwidth}p{0.25\textwidth}X}
 		\toprule 
 		\textbf{Mean Score} & \textbf{Descriptive Rating} & \textbf{Interpretation} \\
 		\midrule
-		4.21–5.00 & Excellent & The quality of the system is outstanding and exceeds expectations \\
-		3.41–4.20 & Very Good & The quality of the system is above average and meets expectations \\
-		2.61–3.40 & Good & The quality of the system is average and meets basic expectations \\
-		1.81–2.60 & Fair & The quality of the system is below average and needs improvement \\
-		1.00–1.80 & Poor & The quality of the system is poor and requires major redesign \\
+		4.21–5.00 & Excellent &  The system’s quality is outstanding and exceeds expectations \\
+		3.41–4.20 & Very Good & The system’s quality is above average and meets expectations \\
+		2.61–3.40 & Good & The system’s quality is average and meets basic expectations \\
+		1.81–2.60 & Fair & The system’s quality is below average and needs improvement \\
+		1.00–1.80 & Poor & The system’s quality is poor and requires major redesign \\
 		\bottomrule
 	\end{tabularx}
 \end{table}
-
-This scale helps to contextualize the numerical results and provides a clear understanding of what the mean scores indicate about user acceptance and system quality.
 
 \section{Ethical Considerations}
 Ethical considerations played a crucial role in the conduct of this study, especially since it involved the participation of real people, and government institutions and offices. The ethical guidelines were strictly followed in compliance with the Data Privacy Act of 2012 (Republic Act No. 10173) and Bulacan State University’s (BulSU) College of Science (CS) Ethical Committee, to uphold the integrity of the research and to ensure the privacy and security of all collected data. Obtaining informed consent, implementing data encryption, and enforcing strict access controls were observed to safeguard the rights and confidentiality of all individuals and institutions involved in the evaluation and development of the system.
