@@ -38,13 +38,11 @@ Where $n$ is the total number of vertices (POI), $c_{ij}$ refers to the cost of 
 \end{enumerate}
 
 \subsection{Candidate Algorithms for TSP}
-The study considers several metaheuristic algorithms for route optimization for Lakad, each with its unique approach and characteristics. These algorithms include:
-
 The following metaheuristic algorithms for route optimization were considered for this study. This is due to the nature of metaheuristic algorithms to not guarantee an optimal solution, but rather a near-optimal solution within a reasonable time frame. These algorithm includes:
 
 \begin{enumerate}
 	
-\item \textbf{Genetic Algorithm (GA).} Inspired by evolution, the Genetic Algorithm is an optimization technique that works by analyzing potential solutions and generating new ones through the processes of selection, crossover, and mutation. This iterative process continues until a predefined termination requirement is met. GA is widely used across various domains because of its ability to navigate complex search spaces and identify optimal or near-optimal solutions \parencite{Hossain2024}.
+\item \textbf{Genetic Algorithm (GA).} Inspired by evolution and natural selection, the Genetic Algorithm is an optimization technique that works by analyzing potential solutions and generating new ones through the processes of selection, crossover, and mutation. This iterative process continues until a predefined termination requirement is met. GA is widely used across various domains because of its ability to navigate complex search spaces and identify optimal or near-optimal solutions \parencite{Hossain2024}.
 
 \item \textbf{Ant Colony Optimization (ACO).} The Ant Colony Optimization (ACO) is an optimization algorithm that mimics the foraging behavior of ants. It utilizes artificial pheromone trails to guide the search for optimal solutions. Ants in the algorithm uses probabilistic pheromones and heuristic information to address problems. The quality of the solutions determines how the pheromone trails are updated, this mechanism encourages exploration and prevents premature convergence \parencite{Hossain2024}.
 
@@ -98,12 +96,12 @@ Two primary metrics were defined to evaluate the algorithms:
 		\label{eq:quality}
 		Q_{avg} = \frac{1}{10} \sum_{i=1}^{10} \frac{C_i - C_{opt}}{C_{opt}} \times 100
 	\end{equation}
-	Where $C_i$ is the cost of the solution found in the $i$-th iteration, and $C_{opt}$ is the cost of the known optimal solution for the instance.
+	Where $C_i$ is the cost of the solution found in the $i$-th iteration, and $C_{opt}$ is the cost of the known optimal solution for that TSPLIB instance.
 \end{enumerate}
 
-All algorithms were executed under identical testing conditions. The tests were performed on a computer system that has Ryzen 5 3400G CPU and 16 gigabytes RAM running Arch Linux operating system. The researchers developed the algorithms through Jupyter Notebook development environment and they used Python built-in time module for runtime measurement.
+All algorithms were executed under identical testing conditions. The tests were performed on a computer system that has Ryzen 5 3400G CPU and 16 gigabytes of RAM running Arch Linux operating system. The researchers developed the algorithms through Jupyter Notebook development environment and they used Python built-in time module for runtime measurement.
 
-\textbf{Algorithm Ranking.} To select the final algorithm, the trade-off between speed and accuracy was assessed using Simple Additive Weighting (SAW). The researchers chose it because of its simplicity and interpretability. Allowing for a straightforward comparison of the algorithms based on the defined metrics. Since both $T _{avg}$ and $Q_{avg}$ are “cost” criteria, i.e., lower values represent better performance, it is normalized with respect to the maximum (worst) observed value to scale all metrics between 0 and 1. The normalization formula used was shown in equation \ref{eq:norm}:
+\textbf{Algorithm Ranking.} To select the final algorithm, the trade-off between speed and accuracy was assessed using Simple Additive Weighting (SAW). The researchers chose it because of its simplicity and interpretability. Allowing for a straightforward comparison of the algorithms based on the defined metrics. Since both $T _{avg}$ and $Q_{avg}$ are “cost” criteria, meaning a lower values represent better performance, it is normalized with respect to the maximum (worst) observed value to scale all metrics between 0 and 1. The normalization formula used was shown in equation \ref{eq:norm}:
 \begin{equation}
 	\label{eq:norm}
 	r _{ij} = \frac{x_{ij}}{\max(x_{ij})}
@@ -196,7 +194,7 @@ Where $w _{j}$ for $j = 1, 2, 3$, represents the weight assigned to each factor,
             pc_1, & f' < f_{avg}
         \end{cases}
     \end{equation}
-    Here, $pc_1$ and $pc_2$ are the upper and lower bounds for crossover probability,$f_{max}$ is the largest valued fitness score among the set of populations $P$, $f'$ is the larger fitness score of the two parents being crossed, and $f_{avg}$ refers to the average fitness score of the population $P$. 
+    Here, $pc_1$ and $pc_2$ are the upper and lower bounds for crossover probability, $f_{max}$ is the largest valued fitness score among the set of populations $P$, $f'$ is the larger fitness score of the two parents being crossed, and $f_{avg}$ refers to the average fitness score of the population $P$. 
 
     \item \textbf{Adaptive Mutation $ ( P _{m} )$.} Similarly, mutation rates are adjusted to prevent destroying optimal solutions. This is defined in Equation \ref{mutation},
     \begin{equation}
@@ -251,7 +249,7 @@ The analysis phase of the development involves outlining the system’s scope, o
 The application includes a user profile feature that allows users to create and manage their profiles. Allowing to store their preferences, past itineraries, and other relevant information. In addition, the data gathering process for the content of the application was also conducted in this phase, which involved collecting data on tourist destinations in Bulacan given by PHACTO. This data was used by the system with verified and relevant information about the tourist spots in the province.
 
 \subsection{Planning}
-The Gantt chart provides a visual timeline of the schedule of the research activity that was conducted in the process of developing Lakad. It outlines the sequence of tasks relating to Thesis I and Thesis II, including the flow of each phase of the research from documentation and planning until system development, evaluation, and final defense.
+The Gantt chart shows the  timeline of the schedule of the research activity that was conducted in the process of developing Lakad. It outlines the sequence of tasks relating to Thesis I and Thesis II, including the flow of each phase of the research from documentation and planning until system development, evaluation, and final defense.
 
 \begin{figure}[H]
 	\centering
@@ -282,7 +280,7 @@ The design phase focuses on creating the overall architecture of the system. The
 	\includegraphics[width=\textwidth]{SysArch.png}
 \end{figure}
 
-Figure \ref{SysArch} shows the system architecture of Lakad shows how various application components work together to produce optimize travel routes for users. The mobile frontend functions as the system`s primary interface which enables tourists to search for destinations and create itineraries while they organize their travel arrangements. The application frontend establishes links with Mapbox API to handle user interactions through which users request map data and location coordinates. The API processes these requests and returns the corresponding responses, which are then displayed on the user interface as maps and travel routes. Supabase enables the application to store user-created itineraries together with additional data in a distant database which users can use to view and control their itineraries. The admin users use their dedicated admin GUI which keeps them separate from tourists to handle user-visible location content while they calculate distance matrices using OpenRouteService matrix API.
+Figure \ref{SysArch} shows the system architecture of Lakad shows how various application components work together to produce optimize travel routes for users. The mobile frontend functions as the system’s primary interface which enables tourists to search for destinations and create itineraries while they organize their travel arrangements. The application frontend is connected to Mapbox API to handle user interactions through which users request map data and location coordinates. The API processes these requests and returns the corresponding responses, which are then displayed on the user interface as maps and travel routes. Supabase enables the application to store user-created itineraries together with additional data in an external database which users can use to view and control their itineraries. The admin users use their dedicated admin GUI which keeps them separate from tourists to handle user-visible location content while they calculate distance matrices using OpenRouteService matrix API.
 
 \begin{figure}[H]
 	\centering
@@ -303,8 +301,7 @@ The Entity Relationship Diagram (ERD) of the system, as shown in Figure \ref{erd
 Two types of users exist for the whole system which is the tourist and admins as illustrated in Figure \ref{dfd}. There are two main flows for the tourist actions: place flow and itinerary flow. The  tourists can view and add places to their itineraries. They can also perform create, read, update, and delete (CRUD) operations on their itineraries. One part of the itinerary flow starts from the user generating an itinerary through the AGAM process is sent to the itinerary management process for the visualization through graphical user interface and is saved to the database. Tourists can also optimize the stops in the itineraries and request navigation instructions for the itinerary. Admins on the other hand, manages what the users can see. They can perform CRUD operations on the places that are seen by the tourists.
 
 \subsection{Development}
-
-The development phase of the system is about coding and implementing the features. The researchers used the AGILE methodology which included the Kanban method as their software development life cycle framework. Weekly meetings and development checks by researchers work to confirm that system development achieves its planned operational targets. The main development framework of Lakad was built with React Native because it enables developers to create mobile applications that run on both iOS and Android platforms from a single codebase. The system used JavaScript programming language to build the application interface and main functions because it provides flexible options to work with the React Native framework. Visual Studio Code served as the main development environment for the program because it enabled developers to write and edit code and debug problems with its extensive React Native development extensions. Git and GitHub was used throughout the development process to maintain organized team work and track software versions. The list of tools used in the development is presented in Table \ref{listtools}.
+This development phase pertains to the actual coding and implementation of the system’s features inside an android application. The researchers’ utilized the AGILE methodology, particularly the Kanban method for the software development life cycle. This includes weekly meetings and development checks by the researchers to ensure the system is properly developed to its intended uses. 
 
 \begin{table}[H]
 	\centering
@@ -312,7 +309,7 @@ The development phase of the system is about coding and implementing the feature
 	\caption{List of Tools for Development}
 	\label{listtools}
 	\renewcommand{\arraystretch}{1.2}
-	\begin{tabularx}{\linewidth}{XX}
+	\begin{tabularx}{\linewidth}{p{0.3\textwidth}X}
 		\toprule 
 		\textbf{Name} & \textbf{Description} \\
 		\midrule
@@ -324,6 +321,9 @@ The development phase of the system is about coding and implementing the feature
 		\bottomrule
 	\end{tabularx}
 \end{table}
+
+Table \ref{listtools} presents the list of tools used for the development. Lakad was developed using the React Native main development framework, which uses fast and cost-efficient cross-platform mobile development, allowing a single codebase to function on both iOS and Android devices. The system utilized the JavaScript programming language for implementing the application’s user interface and core functionalities due to its flexibility and compatibility with React Native framework. The main development environment for writing, editing, and debugging the program was Visual Studio Code, which provided lightweight performance and had a large selection of extensions appropriate for React Native development. Git and GitHub was used throughout the development process to maintain organized team work and track software versions.
+
 
 \subsection{Testing}
 The system testing process involves testing at multiple levels which includes both system integration testing and user acceptance testing. The testing process validates system functionality through the assessment of all system components which includes both technical and user acceptance testing. System testing involves testing every system module through predefined test cases that assess system logic for the purpose of identifying and resolving itinerary generation and optimization system problems. The testing process confirmed that all system components functioned together to create a smooth user experience which included itinerary generation and optimization and management and user interface functions.
@@ -348,6 +348,7 @@ The evaluation instrument for the developed system uses Technology Acceptance Mo
 
 The TAM questionnaire in this study was an adapted version of a TAM questionnaire, which was modified to fit the context of Lakad. 
 
+\newpage
 A demographic section is also included in the questionnaire to assess the respondent’s experience in mobile application, and travelling frequency.
 
 \begin{enumerate}
@@ -362,15 +363,15 @@ Additionally, a reliability test was conducted on the TAM questionnaire to ensur
 \textbf{ISO/IEC 25010:2023.} The developed system was also evaluated by IT professionals using the ISO/IEC 25010:2023 questionnaire which evaluates the overall quality of Lakad. The following criteria was used in the questionnaire and are based on the ISO/IEC 25010:2023 standards:
 
 \begin{enumerate}
-	\item \textbf{Functional Suitability}. This focused on how well the proposed system meets the user’s needs. The questions were about the system’s main features such as itinerary optimization, personalized itinerary generation, and itinerary management.
+	\item \textbf{Functional Suitability}. This focuses on how well the developed system meets the user’s needs. The questions were about the system’s main features such as itinerary optimization, personalized itinerary generation, and itinerary management.
 	\item \textbf{Performance Efficiency}. This assessed the system’s ability to provide fast and efficient processing and its capability to handle large amounts of tasks. The questions assessed the system’s response time when it comes to itinerary optimization and generation as well as managing the itineraries of the user.
-	\item \textbf{Compatibility}. This evaluated the system’s compatibility with other external systems that the users might use. The questionnaire verified how well the developed system integrates and works alongside other mapping applications and systems.
-	\item \textbf{Interaction Capability}. This focused on the system’s usability, accessibility, and user satisfaction. Through this, the system was assessed on how easy the system is to navigate, how intuitive and simple the user interface is for itinerary planning, and how effectively it guides the users.
+	\item \textbf{Compatibility}. This evaluated the system’s compatibility with other external systems that the users might use. Questions includes how well the developed system integrates and works alongside other mapping applications and systems.
+	\item \textbf{Interaction Capability}. This focused on the system’s usability, accessibility, and user satisfaction. This system assessed how easy the system is to navigate, how intuitive and simple the user interface is for itinerary planning, and how effectively it guides the users.
 	\item \textbf{Reliability}. This assessed the system’s dependability and consistency in performing its intended functions. The criterion assessed how well the system can operate without failure, maintain stability, and recover from unexpected errors or interruptions.
-	\item \textbf{Security}.  This criterion ensured that all collected data remains confidential, secure, and protected. Access to the data will only be available to the researchers and authorized users. No information will be shared with third parties without proper consent.
-	\item \textbf{Maintainability}. This assessed the ability of the system to be updated, debugged, and improved. This criterion focused on the ability of the system to adapt to changes and its efficiency during system updates. It ensured that new features or fixes can be integrated without disrupting existing functionalities of the system.
-	\item \textbf{Flexibility}. This evaluated the system’s ability to adapt to changing user needs, technological changes, and requirement changes. The criterion assessed how easily the system can support new itinerary features, and integrate additional modules or tools.
-	\item \textbf{Safety}. This focused on ensuring that the system does not cause any harm to its users. The criterion assessed how well the system protects users from potential risks, errors, or negative consequences that may arise from using the system.
+	\item \textbf{Security}.  This ensured that all collected data remains confidential, secure, and protected. Access to the data will only be available to the researchers and authorized users. And no information will be shared with third parties without proper consent.
+	\item \textbf{Maintainability}. This assessed the ability of the system to be updated, debugged, and improved. It focuses on the ability of the system to adapt to changes and its efficiency during system updates. It ensured that new features or fixes can be integrated without disrupting existing functionalities of the system.
+	\item \textbf{Flexibility}. This evaluates the system’s ability to adapt to changing user needs, technological changes, and requirement changes. The criterion assessed how easily the system can support new itinerary features, and integrate additional modules or tools.
+	\item \textbf{Safety}. This focused on ensuring that the system does not cause any harm to its users. The criterion assessed how well the system protects users from potential risks or negative consequences that may arise from using the system.
 \end{enumerate}
 
 \subsection{Population and Sample}
@@ -383,45 +384,99 @@ The respondents of this study consist of two distinct groups, the end-users (ind
 
 The PHACTO data was used to classify Bulacan municipalities into three groups which reflected their expected 2025 tourist arrivals of low, medium and high.
 
-\begin{table}[H]
-	\centering
-	\singlespacing
-	\caption{Tourist Arrivals in Bulacan (2025)}
-	\label{tourist_arrivals}
-	\renewcommand{\arraystretch}{1.2}
-	\begin{tabularx}{\linewidth}{X>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
-		\toprule 
-		\textbf{Municipality} & \textbf{No. of Arrivals} & \textbf{Classification} \\
-		\midrule
-		Hagonoy 		& 1,105 	& Low \\
-		Obando  		& 5,190 	& Low \\
-		Guiguinto 		& 7,907 	& Low \\
-		Plaridel 		& 25,323 	& Low \\ 
-		San Ildefonso 	& 40,715 	& Low \\
-		Baliwag 		& 42,775 	& Low \\
-		Paombong 		& 43,510 	& Low \\
-		Bulakan 		& 49,078 	& Low \\
-		San Rafael 		& 59,044 	& Low \\
-		Balagtas 		& 85,236 	& Low \\
-		San Miguel 		& 104,990 	& Medium \\
-		Santa Maria 	& 110,279 	& Medium \\
-		Calumpit 		& 114,000 	& Medium \\
-		Pulilan 		& 130,222 	& Medium \\
-		Pandi 			& 200,667 	& Medium \\
-		Angat 			& 233,255 	& Medium \\
-		Meycauayan 		& 278,211 	& Medium \\
-		Bustos 			& 295,682 	& Medium \\
-		DRT 			& 750,233 	& High \\
-		Malolos 		& 816,299 	& High \\
-		Norzagaray 		& 1,048,633 & High \\
-		Marilao 		& 1,116,989 & High \\
-		CSJDM 			& 1,128,736 & High \\
-		Bocaue 			& 1,335,539 & High \\
-		\midrule
-		\textbf{Total} & 8,023,618 &\\
-		\bottomrule
-	\end{tabularx}
-\end{table}
+\begingroup
+\singlespacing
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{p{0.4\linewidth} >{\centering\arraybackslash}p{0.25\linewidth} >{\centering\arraybackslash}p{0.25\linewidth}}
+    \caption{Tourist Arrivals in Bulacan (2025)} \label{tourist_arrivals} \\
+    \toprule
+    \textbf{Municipality} & \textbf{No. of Arrivals} & \textbf{Classification} \\
+    \midrule
+    \endfirsthead
+
+    \multicolumn{3}{c}%
+    {{\bfseries \tablename\ \thetable{} -- Continued from previous page}} \\
+    \toprule
+    \textbf{Municipality} & \textbf{No. of Arrivals} & \textbf{Classification} \\
+    \midrule
+    \endhead
+
+    \midrule
+    \multicolumn{3}{r}{{Continued on next page...}} \\
+    \bottomrule
+    \endfoot
+
+    \bottomrule
+    \endlastfoot
+
+    Hagonoy        & 1,105     & Low \\
+    Obando         & 5,190     & Low \\
+    Guiguinto      & 7,907     & Low \\
+    Plaridel       & 25,323    & Low \\ 
+    San Ildefonso  & 40,715    & Low \\
+    Baliwag        & 42,775    & Low \\
+    Paombong       & 43,510    & Low \\
+    Bulakan        & 49,078    & Low \\
+    San Rafael     & 59,044    & Low \\
+    Balagtas       & 85,236    & Low \\
+    San Miguel     & 104,990   & Medium \\
+    Santa Maria    & 110,279   & Medium \\
+    Calumpit       & 114,000   & Medium \\
+    Pulilan        & 130,222   & Medium \\
+    Pandi          & 200,667   & Medium \\
+    Angat          & 233,255   & Medium \\
+    Meycauayan     & 278,211   & Medium \\
+    Bustos         & 295,682   & Medium \\
+    DRT            & 750,233   & High \\
+    Malolos        & 816,299   & High \\
+    Norzagaray     & 1,048,633 & High \\
+    Marilao        & 1,116,989 & High \\
+    CSJDM          & 1,128,736 & High \\
+    Bocaue         & 1,335,539 & High \\
+    \midrule
+    \textbf{Total} & \textbf{8,023,618} & \\
+\end{longtable}
+\endgroup
+
+% \begin{table}[H]
+% 	\centering
+% 	\singlespacing
+% 	\caption{Tourist Arrivals in Bulacan (2025)}
+% 	\label{tourist_arrivals}
+% 	\renewcommand{\arraystretch}{1.2}
+% 	\begin{tabularx}{\linewidth}{X>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
+% 		\toprule 
+% 		\textbf{Municipality} & \textbf{No. of Arrivals} & \textbf{Classification} \\
+% 		\midrule
+% 		Hagonoy 		& 1,105 	& Low \\
+% 		Obando  		& 5,190 	& Low \\
+% 		Guiguinto 		& 7,907 	& Low \\
+% 		Plaridel 		& 25,323 	& Low \\ 
+% 		San Ildefonso 	& 40,715 	& Low \\
+% 		Baliwag 		& 42,775 	& Low \\
+% 		Paombong 		& 43,510 	& Low \\
+% 		Bulakan 		& 49,078 	& Low \\
+% 		San Rafael 		& 59,044 	& Low \\
+% 		Balagtas 		& 85,236 	& Low \\
+% 		San Miguel 		& 104,990 	& Medium \\
+% 		Santa Maria 	& 110,279 	& Medium \\
+% 		Calumpit 		& 114,000 	& Medium \\
+% 		Pulilan 		& 130,222 	& Medium \\
+% 		Pandi 			& 200,667 	& Medium \\
+% 		Angat 			& 233,255 	& Medium \\
+% 		Meycauayan 		& 278,211 	& Medium \\
+% 		Bustos 			& 295,682 	& Medium \\
+% 		DRT 			& 750,233 	& High \\
+% 		Malolos 		& 816,299 	& High \\
+% 		Norzagaray 		& 1,048,633 & High \\
+% 		Marilao 		& 1,116,989 & High \\
+% 		CSJDM 			& 1,128,736 & High \\
+% 		Bocaue 			& 1,335,539 & High \\
+% 		\midrule
+% 		\textbf{Total} & 8,023,618 &\\
+% 		\bottomrule
+% 	\end{tabularx}
+% \end{table}
 
 In Table \ref{tourist_arrivals}, municipalities were classified. These classifications were based on the data provided by PHACTO, such that < 100,000 arrivals is classified as low, 100,000 to 500,000 arrivals is classified as medium, and > 500,000 arrivals is classified as high. Selected municipalities were chosen from different tourist arrival classifications to ensure a diverse representation of tourists. This approach helps to reduce sampling bias and ensures that the sample reflects the diversity of tourists visiting different areas of Bulacan.
 
@@ -474,7 +529,7 @@ The smaller sample size of this study still meets the requirements for conductin
 
 Table \ref{endusers} shows the allocation of respondents for end-users based on the proportion of tourist arrivals in each selected municipality.
 	
-\textbf{IT Professionals.} IT professionals assess the technical quality of Lakad using ISO/IEC 25010:2023 standards through purposive sampling. A total of 22 IT experts were deliberately selected based on their professional qualifications and relevant experience. The sample comprised of but not limited to software engineers, UI/UX designers, Quality Assurance professionals and faculty members from The College of Information and Communications Technology (CICT) at Bulacan State University (BulSU). Purposive sampling was appropriate for expert evaluation, as the goal was to ensure participants possessed requisite technical knowledge rather than statistical representativeness of a broader population.
+\textbf{IT Professionals.} IT professionals assess the technical quality of Lakad using ISO/IEC 25010:2023 standards via purposive sampling. A total of 22 IT experts were deliberately selected based on their professional qualifications and relevant experience. The sample comprised of but not limited to software engineers, UI/UX designers, Quality Assurance professionals and faculty members from The College of Information and Communications Technology (CICT) at Bulacan State University (BulSU). Purposive sampling was appropriate for expert evaluation, as the goal was to ensure participants possessed requisite technical knowledge rather than statistical representativeness of a broader population.
 
 \begin{table}[H]
 	\centering
@@ -502,7 +557,7 @@ The data collection process of this study was divided into two parts, one for th
 
 \textbf{Preparation and Pilot Testing.} The data collection process began after the local government units of the selected municipalities granted their formal authorization to conduct tourist surveys. The research team conducted pilot testing after receiving all the required permissions to assess the TAM questionnaire’s reliability and validity. The pilot test involved a group of respondents who shared characteristics with the target study population. The pilot test selected 20 respondents from municipality of Pandi because this group would not participate in the main study to prevent any potential research bias. The research team used Cronbach’s alpha to assess the internal consistency and reliability of the adapted TAM questionnaire based on pilot test results. The computed Cronbach’s alpha coefficient of 0.881 confirmed that all TAM items demonstrated good internal consistency while maintaining reliable performance for user technology acceptance measurement within this research study.
 
-For the ISO/IEC 25010:2023, since it is a standardized international quality evaluation framework, formal validation was not conducted with a separate pilot sample. And the instrument was acuired from CICT.
+For the ISO/IEC 25010:2023, since it is a standardized international quality evaluation framework, formal validation was not conducted with a separate pilot sample. And the instrument was acquired from CICT at Bulacan State University.
 
 \textbf{Administration to End-users.} The data collection for end-users was conducted through face-to-face surveys in various tourist spots across the selected municipalities in Bulacan via convenience sampling. The researchers approached tourists along with the informed consent and invited them to participate in the survey, which included a brief introduction to Lakad and its features. After exploring the application they were asked to complete the TAM questionnaire. Additionally, demographic information such as age bracket, travelling frequency, and technological proficiency was collected to analyze potential correlations between these factors and the TAM constructs. % While this convenience-based approach ensured practical feasibility and adequate sample size achievement, readers should note the selection bias limitations acknowledged in the Sampling Design section.  
 
@@ -511,9 +566,31 @@ For the ISO/IEC 25010:2023, since it is a standardized international quality eva
 
 \subsection{Data Processing and Analysis}
 
-This study conducted a systematic data processing and analysis of data from the Technology Acceptance Model (TAM) questionnaire and ISO/IEC 25010:2023 system quality evaluation instrument to evaluate user acceptance rates and the total system quality of the Lakad application.
+A systematic data processing and analysis was done for this study. The collected data from TAM questionnaires and ISO/IEC 25010:2023 evaluations were analyzed and interpreted according to the results.
 
-The TAM questionnaire utilized a five-point Likert-type scale to measure respondents’ perception towards Lakad. The response categories were coded numerically as follows, 1 (Strongly disagree); 2 (Disagree); 3 (Neutral); 4 (Agree); and 5 (Strongly agree). The instrument consists of declarative statements that is designed to measure the four TAM constructs (Perceived Usefulness, Perceived Ease of Use, Attitude Towards Using, and Behavioral Intention to Use). For the ISO/IEC 25010:2023 evaluation instrument used a five-point performance rating scale to evaluate system quality constructs through expert assessment. The scale was coded as, 1 (Poor); 2 (Fair); 3 (Good); 4 (Very  good); and 5 (Excellent).
+The TAM questionnaire utilized a five-point Likert-type scale to measure respondents’ perception towards Lakad. The instrument consists of declarative statements that is designed to measure the four TAM constructs. For the ISO/IEC 25010:2023 evaluation instrument used a five-point performance rating scale to evaluate system quality constructs through expert assessment. The encoding for the scales of both instruments are presented in Table \ref{tab:scale_encoding}.
+
+\begin{table}[H]
+	\centering
+	\singlespacing
+	\caption{Encoding of Measurement Scales for TAM and ISO/IEC 25010:2023}
+	\label{tab:scale_encoding}
+	\renewcommand{\arraystretch}{1.2}
+	\begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X}
+		\toprule
+		\textbf{Scale/Code} & \textbf{TAM} & \textbf{ISO/IEC 25010:2023} \\ 
+		\midrule
+		1      & Strongly disagree & Poor       \\
+		2      & Disagree          & Fair       \\
+		3      & Neutral           & Good       \\
+		4      & Agree             & Very good  \\
+		5      & Strongly agree    & Excellent  \\ 
+		\bottomrule
+	\end{tabularx}
+\end{table}
+
+ 
+
 
 The responses from individual questionnaire items are ordinal in nature, descriptive statistics were utilized to summarize the data without assuming equal intervals between response categories. At the item level, frequency distributions and median values were computed to describe response patterns and determine the central tendency of each item.
 
