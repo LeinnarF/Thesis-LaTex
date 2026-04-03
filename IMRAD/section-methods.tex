@@ -1,0 +1,204 @@
+\section{Methods}
+
+This section outlines the research design, model adoption, process of developing the system, system evaluation, sampling population, data collection, data processing, and ethical considerations are discussed. Ensuring the steps taken for this study are well-defined to answer the objectives of the study. Furthermore, this also ensures that the study follows a clear structure that can be followed and replicated by researchers in the future.
+
+\subsection{Research Design}
+
+The research design for this study follows Applied and Quantitative research design. Applied aspect is for the adoption and implementation of mathematical models for itinerary generation and route optimization. The models that are adopted for this study are the Adaptive Genetic Algorithm with Dynamic Mutation and Crossover Probabilities (AGAM) for personalized itinerary generation, and various metaheuristic algorithms for solving the Traveling Salesman Provincial (TSP). The Quantitative is for the evaluation of the developed system using the Technology Acceptance Model (TAM) and ISO/IEC 25010:2023 standards.
+
+\subsection{Model Adoption}
+
+This section discusses the optimization problems such as route optimization and itinerary generation and the steps in modeling each mathematically. Specifically, the mathematical models used in the study are the traveling salesman problem (TSP) and the orienteering problem (OP).
+
+\subsection{Modeling Route Optimization with TSP}
+Route optimization refers to the process of finding the optimal order in visiting a set of places. This is also another definition of the TSP, where the salesman must minimize the travel cost between traveling a set of cities. In the study, the POI represents the nodes and the edges connecting each node as the distance between the shortest route, a sample graph is shown in Figure \ref{tspgraph}. 
+
+\begin{figure}[H]
+	\centering
+	\caption{Complete Graph}
+	\label{tspgraph}
+	\includegraphics[width=0.8\textwidth]{TSP.jpeg}
+\end{figure}
+
+The objective is to minimize the total travel distance by finding the best order to travel each POI from an itinerary. Using integer programming and given a graph $G$ = $(V, E)$ where \( V \) is the set of vertices (POI) and \( E \) is the set of edges (road distance), the objective function is as shown in Equation \ref{eq:tsp}:
+\begin{equation}
+	\label{eq:tsp}
+	\text{Minimize } \sum_{i = 1}^{n} \sum_{j = 1, j \neq i} c_{ij} x_{ij}
+\end{equation}
+Where $n$ is the total number of vertices (POI), $c_{ij}$ refers to the cost of traveling from vertex $i$ to vertex $j$, which in this case is the distance between the two POI, and $x_{ij}$ refers to a binary value that indicates whether an edge directly connecting vertex $i$ to vertex $j$ exists in the solution (1 if it exists, 0 otherwise). And it is constrained to the following conditions:
+\begin{enumerate}
+	\item Every city is entered and exited exactly once.
+	\item The solution does not contain any sub-tours.
+\end{enumerate}
+
+\subsection{Candidate Algorithms for TSP}
+The following metaheuristic algorithms for route optimization were considered for this study. This is due to the nature of metaheuristic algorithms to not guarantee an optimal solution, but rather a near-optimal solution within a reasonable time frame. These algorithm includes:
+
+\begin{enumerate}
+	
+\item \textbf{Genetic Algorithm (GA).} Inspired by evolution and natural selection, the Genetic Algorithm is an optimization technique that works by analyzing potential solutions and generating new ones through the processes of selection, crossover, and mutation. This iterative process continues until a predefined termination requirement is met. GA is widely used across various domains because of its ability to navigate complex search spaces and identify optimal or near-optimal solutions \parencite{Hossain2024}.
+
+\item \textbf{Ant Colony Optimization (ACO).} The Ant Colony Optimization (ACO) is an optimization algorithm that mimics the foraging behavior of ants. It utilizes artificial pheromone trails to guide the search for optimal solutions. Ants in the algorithm uses probabilistic pheromones and heuristic information to address problems. The quality of the solutions determines how the pheromone trails are updated, this mechanism encourages exploration and prevents premature convergence \parencite{Hossain2024}.
+
+\item \textbf{Simulated Annealing (SA).} The Simulated Annealing (SA) algorithm is a metaheuristic algorithm based on the annealing process in metallurgy. It begins with an initial solution and incorporates a mechanism that allows for the occasional acceptance of a ``worse'' solution based on current temperature and more thoroughly explore the solution space. The probability of accepting a worse solution is gradually reduced over time, simulating the cooling process \parencite{Hossain2024}.
+
+\item \textbf{Particle Swarm Optimization (PSO).} The Particle Swarm Optimization (PSO) algorithm is inspired by the social behavior of bird flocks and fish schools. In PSO, the population is made up of numerous particles, each representing a potential solution within the search space. Every particle is characterized by a velocity and a fitness value. Conceptually, PSO is very straightforward, as it relies solely on elementary mathematical operations and does not require any derived information about the optimization function \parencite{Wadi2025}.
+
+\item \textbf{Elephant Herding Optimization (EHO).} The Elephant Herding Optimization (EHO) algorithm is a swarm-based metaheuristic search approach for addressing optimization problems that mimics the real herding behavior of elephants, which involves organizing elephant swarms into smaller clans, each led by a matriarch and consisting of multiple female elephants and their calves, while adult male calves are expelled from the clan \parencite{Wadi2025}.
+
+\item \textbf{Gray Wolf Optimizer (GWO).} The Gray Wolf Optimization (GWO) algorithm is a metaheuristic technique inspired by gray wolves, simulating their leadership and cooperative hunting behaviors to locate optimal solutions. The hierarchical structure of a wolf pack (Alpha, Beta, Delta, and Omega wolves) is shown in the algorithm’s design. Wolves’ positions are updated based on the Alpha’s location and the calculated hunting distance. GWO leverages a balance of exploration and exploitation to discover the best possible solutions \parencite{Hossain2024}. 
+
+\item \textbf{Hovering Scouts and Foraging Flocks Pied Kingfisher Optimizer (HSFFPKO).} HSFFPKO enhances the traditional Pied Kingfisher Optimizer by introducing multiscale search mechanisms to improve optimization performance. By adding Hovering Scouts for fine-grained local adjustments and Foraging Flocks for parallel group-based exploitation, the algorithm maintains better population diversity than its predecessor. These additions allow HSFFPKO to mitigate local optima entrapment and solve complex, high-dimensional problems more efficiently \parencite{DelaCruz2025HSFFPKO}.
+\end{enumerate}
+
+\subsection{TSP Algorithm Selection}
+
+To determine the best algorithm to implement for Lakad, a comparative analysis was conducted on several metaheuristic algorithms used for solving TSP. The analysis focuses on solution quality (accuracy) and runtime speed of each algorithm. The algorithms were tested on selected instances from the TSPLIB library, a standard benchmark for TSP and related problems. Table \ref{tsplib_instace} presents selected instances for benchmarking. 
+
+\begin{table}[H]
+	\centering
+	\singlespacing
+	\caption{TSPLIB Instances for Benchmarking}
+	\label{tsplib_instace} \renewcommand{\arraystretch}{1.2}
+	\begin{tabularx}{\linewidth}{XX >{\centering\arraybackslash}X}
+		\toprule
+		\textbf{TSPLIB instance} & \textbf{Description} & \textbf{Optimal Solution} \\
+		\midrule
+		burma14 & Small instance with 14 cities & 3323\\ 
+		bays29 & Medium instance with 29 cities & 2020\\ 
+		eil51 & Large instance with 51 cities & 426\\ 
+		berlin52 & Large instance with 52 cities & 7542\\
+		\bottomrule
+	\end{tabularx}
+\end{table}
+
+\textbf{Experimental Setup.} The experiments were implemented in Python because of its library support for TSPLIB, and for simplicity of the language. To ensure statistical reliability and mitigate the stochastic nature of heuristic algorithms, each algorithm was executed for 10 independent iterations on each TSPLIB instance. This was based on studies of \textcite{Hossain2024,Wadi2025}, where repeated independent runs are used to account for the stochastic nature of metaheuristics algorithms, as a single run may be differed from other runs.
+
+The results were averaged to get the baseline performance profile. 
+Two primary metrics were defined to evaluate the algorithms:
+
+\begin{enumerate}
+	\item \textbf{Runtime Speed (\( T_{avg} \)).} It measures the average time it takes to find the solution across the 10 iterations and measured in seconds.  The calculation is shown in Equation \ref{eq:runtime}: 
+	\begin{equation}
+		\label{eq:runtime}
+		T_{avg} = \frac{1}{10} \sum_{i=1}^{10} T_i
+	\end{equation}
+	Where $T _{i}$ is the runtime for the $i$-th iteration.
+
+\item \textbf{Solution Quality (\( Q_{avg} \)).} The accuracy of algorithm is measured with average relative error since the optimal solution for each TSPLIB instance is known. This is computed in Equation \ref{eq:quality}
+	\begin{equation}
+		\label{eq:quality}
+		Q_{avg} = \frac{1}{10} \sum_{i=1}^{10} \frac{C_i - C_{opt}}{C_{opt}} \times 100
+	\end{equation}
+	Where $C_i$ is the cost of the solution found in the $i$-th iteration, and $C_{opt}$ is the cost of the known optimal solution for that TSPLIB instance.
+\end{enumerate}
+
+All algorithms were executed under identical testing conditions. The tests were performed on a computer system that has Ryzen 5 3400G CPU and 16 gigabytes of RAM running Arch Linux operating system. The researchers developed the algorithms through Jupyter Notebook development environment and they used Python built-in time module for runtime measurement.
+
+\textbf{Algorithm Ranking.} To select the final algorithm, the trade-off between speed and accuracy was assessed using Simple Additive Weighting (SAW). The researchers chose it because of its simplicity and interpretability. Allowing for a straightforward comparison of the algorithms based on the defined metrics. Since both $T _{avg}$ and $Q_{avg}$ are “cost” criteria, meaning a lower values represent better performance, it is normalized with respect to the maximum (worst) observed value to scale all metrics between 0 and 1. The normalization formula used was shown in equation \ref{eq:norm}:
+\begin{equation}
+	\label{eq:norm}
+	r _{ij} = \frac{x_{ij}}{\max(x_{ij})}
+\end{equation}
+Where $r _{ij}$ is the normalized value of the $j$-th criteria for the $i$-th algorithm, $x_{ij}$ is the original value of the $j$-th criteria for the $i$-th algorithm, and $\max(x_{ij})$ is the maximum value observed for the $j$-th criteria across all algorithms. This normalization ensures that both metrics are on a comparable scale, allowing for a fair assessment of each algorithm’s performance in terms of both speed and accuracy. 
+
+The final score $S _{i}$ for each algorithm $i$ was calculated in equation \ref{eq:saw}: 
+\begin{equation}
+	\label{eq:saw}
+	S _{i} = \sum_{j=1}^{n} w_j \cdot r _{ij}
+\end{equation}
+Where $S _{i}$ is the final score for the $i$-th algorithm, $w_j$ is the weight assigned to the $j$-th criteria, such that $\sum_{j=1}^{n} w_j = 1$, and $r _{ij}$ is the normalized value of the $j$-th criteria for the $i$-th algorithm.
+
+For this study, since the weights can be subjectively assigned, equal weights were assigned to both criteria, i.e., $w _{1} = w _{2} = 0.5$. This gives equal importance of runtime speed and solution quality, the final score is shown in equation \ref{eq:finalscore}:
+\begin{equation}
+	\label{eq:finalscore}
+	S _{i} = 0.5 \cdot r _{i1} + 0.5 \cdot r _{i2}
+\end{equation}
+
+The algorithm with the lowest score $S _{i}$ is considered the best choice for implementation for Lakad. The results of the algorithm selection process are discussed in Chapter 4. 
+
+\subsection{Modeling Itinerary Generation as Orienteering Problem}
+
+Another core optimization problem in the study is itinerary generation, which can be modeled as an orienteering problem (OP). In the context of the study, an itinerary refers to a plan of the user to go to two or more places. An itinerary can be modeled mathematically using graph theory similar to TSP. This would involve setting the vertices of a graph as the places and the edges as the road distance between the connected edges. A big difference of OP from TSP is the fact that it takes the whole graph or all the possible POI and outputs a subgraph instead, where TSP would use the entire graph given. An example is shown in Figure \ref{opgraph} where 5 POI are given as input and only three were used to generate an itinerary.
+
+\begin{figure}[H]
+	\centering
+	\caption{Subgraph result from OP}
+	\label{opgraph}
+	\includegraphics[width=0.8\textwidth]{subgraph.png}
+\end{figure}
+
+The objective of the OP is to maximize the available profit, in the case of the study: travel distance, to generate an itinerary for the user alongside other factors. Mathematically, the OP can be formulated as follows in Equation \ref{eq:op}.
+
+\begin{equation}
+	\label{eq:op}
+	\text{Maximize } Z = \sum_{i = 2}^{n - 1} \sum_{j = 2}^{n}S _{i} x _{ij}  
+\end{equation}
+Where $n$ is the total number of vertices (POI), $S _{i}$ is the score of vertex $i$, which can be a combination of factors such as travel distance, user preferability score, and popularity rating, $x _{ij}$ is a binary variable that indicates whether the edge from vertex $i$ to vertex $j$ is included in the itinerary (1 if included, 0 otherwise), and $Z$ is the total score of the itinerary, which the algorithm aims to maximize. The function is also constrained to the following:
+\begin{enumerate}
+	\item Each vertex must only be visited once.
+	\item The total score must not exceed the given budget.
+	\item The generated path must be connected.
+\end{enumerate}
+
+\subsection{Adaptive Genetic Algorithm with Dynamic Mutation and Crossover Probabilities}
+
+The study also chose to adopt a modified variant of the genetic algorithm developed by \textcite{Yochum2020} called Adaptive Genetic Algorithm with Dynamic Mutation and Crossover Probabilities (AGAM) for the optimization of recommended itineraries defined in terms of TSP. AGAM addresses itinerary planning as a Multi-Objective Optimization Problem, an optimization technique rooting from orienteering problems. As discussed in their work, \textcite{Yochum2020} developed AGAM to generate optimal and personalized travel itineraries by balancing several objectives such as point of interest (POI) rating, and distance of POIs between the next one. Rooting from Genetic Algorithm (GA), AGAM simulates the process of natural evolution and utilizes genetic operators such as selection, crossover, and mutation to iteratively improve the quality of itineraries which, unlike traditional GA that use fixed mutation rates, also employs dynamic adjustments in parameters during the evolutionary process in a way that can maintain population diversity and therefore generate efficient and adaptive solutions. Even though AGAM can also be used for route optimization, the study chose to use it for itinerary generation because of its effectiveness in generating personalized itineraries as shown in the study of \textcite{Yochum2020}.
+
+In this implementation, the population set is defined as $P = \left\{ p _{1},\dots, p _{n} \right\}$, where each individual $p _{i}$ represents a potential itinerary. An itinerary is encoded as a sequence of POIs, $p _{i}= \left\{ q _{1}, q _{2}, \dots, q _{m} \right\}$, where each gene $q _{i}$ corresponds to a specific POI visit. The length of the sequence depends on the number of POIs selected, and it is constrained by a user-defined limit $MAXN$. The total travel distance of the itinerary is constrained by $MAXD$, which ensures that the generated itineraries does not exceed the user’s travel distance budget. 
+
+\textbf{Fitness Function.} The quality of each itinerary is evaluated by the fitness function given in Equation \ref{agamFitness}. Since factors such as popularity, rating, and interest are on different scales, a normalization process is applied to each factor so that its values is between 0 and 1. 
+
+\begin{equation}
+	\label{agamFitness}
+	f(p_i) = w_{1}Ti(p_i) + w_{2}Tn(p_i) + w_{3}Tr(p_i) 
+\end{equation}
+Where $w _{j}$ for $j = 1, 2, 3$, represents the weight assigned to each factor, and it is defined as follows:
+\begin{itemize}
+    
+    \item $Ti(p_i)$ is the sum of all interest values of each POI in the itinerary $p_i$. Each POI contains an interest value which quantifies how interested the user is in that specific POI category. The formula for calculating $Ti(p_i)$ is shown in Equation \ref{Ti},
+    \begin{equation}
+		\label{Ti}
+		Ti ( p _{i} ) = \sum _{q_i \in p_i} I(q_i)
+	\end{equation}
+	where $I(q_i)$ is a binary value that indicates whether the user is interested in the category of POI $q_i$ (1 if interested, 0 otherwise).
+    
+    \item $Tn (p _{i})$ is the total number of POIs in $p _{i}$, which is calculated in Equation \ref{Tn}.
+    \begin{equation}
+        \label{Tn}
+        Tn ( p _{i}) = \frac{N _{op} ( p _{i} )}{NOP}, \quad \text{where } N _{op} ( p _{i} ) \le MAXN 
+    \end{equation}
+    where $N _{op} ( p _{i} )$ is the number of POIs in itinerary $p _{i}$, and $NOP$ is the total number of available POIs.
+    
+    \item $Tr( p _{i} )$ is the total rating of $p_i$ given by Equation \ref{Tr},
+    \begin{equation}
+        \label{Tr}
+        Tr ( p _{i} ) = \frac{\sum_{q_i \in p_i} R(q_i)}{MAXR}
+    \end{equation} 
+    where $R(q_i)$ is the rating of a specific POI $q_i$ in itinerary $p_i$ obtained from Google Maps, and $MAXR$ is the best possible rating of all POIs defined as $MAXR = \text{Number of POIs} * \text{Maximum Rating}$.
+\end{itemize}
+
+\textbf{Adaptive Genetic Operators.} AGAM incorporates dynamic adjustments in mutation and crossover probabilities to balance exploration (searching new solutions) and exploitation (refining existing solutions). These are defined as follows:
+\begin{itemize}
+    \item \textbf{Adaptive Crossover $ ( P _{c} )$.} To preserve high-quality solutions, the crossover probability decreases as the fitness of the parents exceeds the population average $ ( f _{avg} )$. This is given by Equation \ref{crossover},
+    \begin{equation}
+        \label{crossover}
+        PC = \begin{cases}
+            pc_1 - \dfrac{(pc_1 - pc_2)(f' - f_{avg})}{f_{max} - f_{avg}}, & f' \ge f_{avg} \\
+            pc_1, & f' < f_{avg}
+        \end{cases}
+    \end{equation}
+    Here, $pc_1$ and $pc_2$ are the upper and lower bounds for crossover probability, $f_{max}$ is the largest valued fitness score among the set of populations $P$, $f'$ is the larger fitness score of the two parents being crossed, and $f_{avg}$ refers to the average fitness score of the population $P$. 
+
+    \item \textbf{Adaptive Mutation $ ( P _{m} )$.} Similarly, mutation rates are adjusted to prevent destroying optimal solutions. This is defined in Equation \ref{mutation},
+    \begin{equation}
+        \label{mutation}
+        PM = \begin{cases}
+            pm_1 - \dfrac{(pm_1 - pm_2)(f - f_{avg})}{f_{max} - f_{avg}}, & f \ge f_{avg} \\
+            pm_1, & f < f_{avg}
+        \end{cases}
+    \end{equation}
+    where $pm_1$ and $pm_2$  are the bounds for mutation probability, and $f$ is the fitness score of the individual being mutated.
+\end{itemize}
+
+For the parameters of AGAM, the following values were used: $pc_1 = 0.9$, $pc_2 = 0.6$, $pm_1 = 0.1$, and $pm_2 = 0.01$. These values were chosen based on \textcite{Yochum2020} recommendation, which are commonly used in dynamic crossover and mutation probabilities. 
