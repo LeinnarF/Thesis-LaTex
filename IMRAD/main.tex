@@ -1,0 +1,84 @@
+\documentclass[11pt,a4paper]{report}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{souce}
+
+\usepackage{setspace}
+\usepackage{enumitem}
+\usepackage{booktabs,longtable,threeparttable,siunitx,tabularx,makecell}
+\usepackage{xcolor, listings}
+
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\chapter}{\clearpage}{}{}{}
+\makeatother
+
+\usepackage{pdfpages}
+\usepackage{pdflscape,rotating}
+\usepackage{adjustbox}
+
+\usepackage[style=apa, backend=biber]{biblatex}
+\usepackage{csquotes}
+\addbibresource{../reference.bib}
+\usepackage[hidelinks]{hyperref}
+\usepackage{url}
+
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{theorem}{Theorem}[chapter]
+
+\usepackage{float}
+\usepackage{ragged2e}
+\author{
+Franniel Luigi Hilario
+}
+
+
+\begin{document}
+\emergencystretch 3em
+\sloppy
+\onehalfspacing
+
+\begin{titlepage}
+\pagenumbering{gobble}
+\centering % Set the line spacing to 1 for the title page.
+
+\begin{minipage}[c][3\baselineskip][c]{0.9\linewidth}
+\centering\bfseries\large\MakeUppercase{
+	Lakad: A Personalized Mobile Itinerary Generator with Focus in Bulacan Tourism
+}
+\end{minipage}
+
+\vspace{10pt}
+{\centering Declaro, Bryan C., Hilario, Franniel Luigi C,. Magbanua, Brian Gabriel G.,\\ Manansala, Richard M.  }
+
+\vspace{10pt}
+
+{
+Mathematics Department, College of Science, Bulacan State University, Philippines
+}
+
+\vspace{1in}
+\begin{justify}
+\input{../abstract.tex}
+\end{justify}
+\end{titlepage}
+\pagenumbering{arabic}
+
+\chapter*{Introduction}
+hehe
+
+
+\section{Objectives}
+
+
+\chapter*{Preliminaries}
+
+\chapter*{Methods}
+
+
+\chapter*{Analysis and Results}
+
+\chapter*{Conclusion}
+
+\end{document}
