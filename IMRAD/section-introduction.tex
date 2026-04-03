@@ -1,0 +1,76 @@
+\section{Introduction}
+
+In the midst of advancement in technology and sciences, culture remains a vital part of many people’s lives. Tourism, being a significant contributor to preservation of culture and local development, relies heavily on how well travel experiences are delivered. One of the most crucial aspects of this process is itinerary planning, a practice ensuring the maximization of multiple points of interest (POIs) efficiently without the unnecessary inconvenience. The ability to create structured travel plans does not only influence convenience but also impacts tourist satisfaction and chance of returning or recommending the destination to others.
+
+Sustainable and authentic trends in travel experiences align with the Philippines’ Department of Tourism’s (DOT) initiatives to develop unique cultural and natural attractions \parencite{DOT2023}. Despite these efforts, historically active provinces like Bulacan still has some of its tourist destinations neglected, proven by how some culturally relevant sites like Barasoain Church, often attract more visitors than others like the Immaculate Conception Cathedral, with 2.6 times more visitors, despite being in the same municipality \parencite{Canet2025S}. Bulacan’s tourist arrival reports also show that certain municipalities acquire an uneven number of visitors for the first three quarters of the year 2025 based on the data provided by the  Provincial History, Arts, Culture, and Tourism Office (PHACTO). A problem that affects the development of Bulacan’s tourism, resulting in an overlook of economic opportunities for lesser-known municipalities.
+
+These conditions highlight the need for smarter ways to plan trips, systems that can pull together all sorts of information and offer suggestions perfectly tailored to what each person likes. This is especially important as more and more people want to explore and truly experience a destination’s uniqueness, which often demands a level of planning which outdated methods often fail to deliver \parencite{Halder2022}. The Bulacan Provincial Government is actively promoting their attractions through Bulacan’s Pamana Pass, a checklist of certain sites, but it only acts as a guide. Technology can help people utilize it more, and make trips more satisfying ensuring tourism spots grow in a way that benefits everyone.
+
+Creating itineraries under many constraints has become increasingly automated through a mix of both optimization algorithms and content selection processes to resolve the scheduling and relevance aspects of itinerary recommendation \parencite{Jewpanya2025,Liu2024}. However, such systems are often limited to specific regions and bound by the capabilities of the model used or lack of data \parencite{Cui2025,papadakis2024,Yulfihani2024}. Despite the drive to develop systems that simplify the complicated problems of manual itinerary planning, existing travel apps still struggle to effectively recommend itineraries as reports from \textcite{SkiftState2022} highlights that applications may offer destination suggestions but lack the ability to offer suggestions based on user preferences. Their reports also show the demand for a personally curated service, since 30 percent of travelers responded that they are “more likely to use a travel agent now than before the pandemic”. Although there are systems that already cater to this problem, a common weakness they have is overcomplexity \parencite{Postnikova2024}. General-purpose platforms also generally do not align with the Philippines’ strategic imperative to build a deeper, distinct Filipino experience \parencite{SkiftState2022,DOT2023}. Several of these weaknesses point to the need for simple and localized itinerary recommendation systems so that places and destinations with uneven popularity may be seen more, places with uneven tourist allocation such as Bulacan. In this regard, this study adopts an Adaptive Genetic Algorithm with Dynamic Mutation and Crossover Probabilities (AGAM)
+developed by \parencite{Yochum2020} as a recommender algorithm to ensure that itinerary destination suggestions does not merely list POIs, but instead consider user preferences.
+
+Considering that planning a travel itinerary manually not only consists of constraints such as personalization, another problem arises as there exists a challenge for determining the optimal visiting order of the entire trip. This challenge along with selection of POIs still persist despite the advances in recommendation and optimization methods \parencite{papadakis2024, Porras2022, Yulfihani2024}. Cases that encounter such problems often demonstrate that the classic ways of planning itineraries may and often lead to dissatisfaction among travellers. This implies the inherent value that can be found in creating automated systems not only for planning itineraries, but also to make travel more efficient. This optimization problem is known in mathematics as the Traveling Salesman Problem (TSP) \parencite{Wu2020}. Knowing that this challenge is an inherent part of itineraries, this study uses an additional optimization algorithm that can cater to the complexities imposed by TSP. The algorithm will help determine the most efficient route that includes every POI included in a generated itinerary.
+
+These limitations also imply that manual travel planning methods, especially in Bulacan, remain inefficient due to uneven attraction popularity across the province, along with the absence of personalized and optimized routing systems, and the accessible tools to integrate both user preferences and route optimization. All of this points to the need for practical and user-centered tools, in addition to being a localized solution for itinerary recommendation and optimization.
+
+This study developed Lakad to address the identified problems and provide a tourist utility app for exploring destinations in the province of Bulacan. The system was developed to deliver two core features: a personalized itinerary generation, helping tourists better plan their trips according to their specifics, and an optimization algorithm to ensure routes are arranged in the best way possible. By combining the ideas of integrating personalized preference modeling and route optimization, Lakad seeks to provide a simplified and localized solution.
+
+\subsection{Statement of the Problem}
+
+The lack of systems and applications for itinerary generation in Bulacan makes it much harder for tourists to traverse the wonders the province has to offer. As such, the main objective of this study is to develop a mobile personalized itinerary generator for promoting tourist locations in Bulacan as well as providing optimized paths in the itinerary, allowing the tourist to further enjoy their trip. Specifically, this study aims to answer the following questions:
+
+\newpage
+\begin{enumerate}
+    \item Which algorithm performs best in terms of run time and solution quality for solving the Traveling Salesman Problem (TSP) among the following:
+    \begin{enumerate} [label*=\arabic*.]
+        \item Ant Colony Optimization (ACO),
+        \item Genetic Algorithm (GA),
+        \item Simulated Annealing (SA),
+        \item Particle Swarm Optimization (PSO),
+        \item Elephant Herding Optimization (EHO),
+        \item Grey Wolf Optimizer (GWO), and
+        \item Hovering Scouts and Foraging Flocks Pied Kingfisher Optimizer (HSFFPKO)?
+    \end{enumerate}
+    \item How can the proposed system be developed with the following functionalities:
+    \begin{enumerate} [label*=\arabic*.]
+        \item  Tourist Spot Exploration,
+        \item  Personalized Itinerary Generation,
+        \item  Itinerary Optimization,
+        \item  Itinerary Navigation,
+        \item  Itinerary Management, and
+        \item  Admin Management?
+    \end{enumerate}
+    \item How acceptable is the developed system based on the criteria defined in the Technology Acceptance Model?
+    \begin{enumerate} [label*=\arabic*.]
+        \item Perceived usefulness,
+        \item Perceived ease of use,
+        \item Attitude towards using, and
+        \item Behavioral intention?
+    \end{enumerate}
+    \item How well does the developed system meet the ISO/IEC 25010:2023 requirements?
+    \begin{enumerate} [label*=\arabic*.]
+        \item Functional Suitability,
+        \item Performance Efficiency,
+        \item Compatibility,
+        \item Interaction Capability,
+        \item Reliability,
+        \item Security,
+        \item Maintainability,
+        \item Flexibility, and
+        \item Safety?
+    \end{enumerate}
+\end{enumerate}
+
+\subsection{Scope and Limitation of the Study}
+
+This study is focused on the development of Lakad, a mobile application with personalized itinerary generator designed for the province of Bulacan. The study provides a solution to meet the identified gap in manual travel planning and limitations of existing travel applications by providing a localized system which supports tourism development in Bulacan. The application enhances the travel experience of users by providing useful functionalities such as tourist spot exploration, personalized itinerary generation, itinerary optimization, itinerary navigation, and itinerary management. The system uses its integrated features to create an easier, more efficient, and enjoyable travel experience for tourists who want to explore Bulacan.
+
+The tourist destinations that are available in Lakad are only within Bulacan. The application includes Point of Interests (POIs) which consist of natural attractions, historical sites, cultural landmarks, and recreational areas that are provided and verified by Provincial History, Arts, Culture, and Tourism Office (PHACTO). The application also included some Pasalubong Stores and Accommodations in Bulacan, that will be recommended along the itinerary navigation. Restaurants are excluded as POIs because of their large number and potential bias towards popular or bigger establishments. Furthermore, the system can produce 50 POIs for an itinerary due to its API limitation.
+
+The system was developed using the React Native framework which enables developers to create applications that work on multiple platforms. However, the system is only limited to Android Operating System because of resource limitations. To be able to develop in iOS it needed to have access to macOS hardware and an Apple Developer account which was not feasible in this study. 
+
+The System uses Mapbox API to provide mapping and navigation services which enables users to obtain driving, walking, and cycling directions. Public transportation routing is excluded because Mapbox does not provide transit or multi-modal transportation data. Geographic coordinates and location data were obtained from Google Maps and officially validated by PHACTO.
+
+The personalized itinerary generation feature applies Adaptive Genetic Algorithm with Dynamic Mutation and Crossover Probabilities (AGAM) that balance multiple objectives including POI rating from Google maps, user-defined interests, and travel distance constraints. The fitness function uses weighted factors to create personalized recommendations which reflect the user preferences. The system uses the best route optimization algorithm that comes from comparing seven metaheuristic algorithms that are evaluated using standardized TSPLIB instances. The evaluation criteria include solution quality, which uses average relative error measurement and runtime efficiency. The algorithm ranking was performed using the Simple Additive Weighting (SAW) method with assigned equal weights to both evaluation criteria.
+
+The system only generates a single-day itinerary which follows the user-defined parameters such as maximum travel distance and maximum POI count. The current system does not support a multi-day itinerary. Users can stop and resume their itinerary navigation anytime. The  stops can be marked as visited through two methods which include proximity detection and manual confirmation of the user. The system does not integrate external booking services such as accommodation reservations and ticket purchasing. The system’s quality and acceptability was quantitatively evaluated using two standard instruments, Technology Acceptance Model (TAM) and ISO/IEC 25010:2023. The evaluation for the end-users utilized TAM to assess acceptability of Lakad, and it was evaluated by 150 end-users across selected municipalities of Bulacan. In addition, the system was assessed with the ISO/IEC 25010:2023 software quality standards by 22 IT experts, evaluating the system’s functional suitability, performance efficiency, compatibility, interaction capability, reliability, security, maintainability, flexibility, and safety.

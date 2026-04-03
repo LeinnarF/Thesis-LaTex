@@ -18,6 +18,7 @@
 *.pdf
 *.sty
 !Thesis-main.pdf
+!imrad.sty
 Misc/
 .vscode/
 .zed/
