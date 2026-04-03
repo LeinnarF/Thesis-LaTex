@@ -88,7 +88,6 @@ For this study, since the weights can be subjectively assigned, equal weights we
 	S _{i} = 0.5 \cdot r _{i1} + 0.5 \cdot r _{i2}
 \end{equation}
 
-
 Another algorithm that is adopted for this study was the modified variant of the genetic algorithm developed by \textcite{Yochum2020} called Adaptive Genetic Algorithm with Dynamic Mutation and Crossover Probabilities (AGAM) for the personalized itinerary generation. AGAM addresses itinerary planning as a Multi-Objective Optimization Problem, an optimization technique rooting from orienteering problems. As discussed in their work, \textcite{Yochum2020} developed AGAM to generate optimal and personalized travel itineraries by balancing several objectives such as point of interest (POI) rating, and distance of POIs between the next one. Rooting from Genetic Algorithm (GA), AGAM simulates the process of natural evolution and utilizes genetic operators such as selection, crossover, and mutation to iteratively improve the quality of itineraries which, unlike traditional GA that use fixed mutation rates, also employs dynamic adjustments in parameters during the evolutionary process in a way that can maintain population diversity and therefore generate efficient and adaptive solutions. Even though AGAM can also be used for route optimization, the study chose to use it for itinerary generation because of its effectiveness in generating personalized itineraries as shown in the study of \textcite{Yochum2020}.
 
 In this implementation, the population set is defined as $P = \left\{ p _{1},\dots, p _{n} \right\}$, where each individual $p _{i}$ represents a potential itinerary. An itinerary is encoded as a sequence of POIs, $p _{i}= \left\{ q _{1}, q _{2}, \dots, q _{m} \right\}$, where each gene $q _{i}$ corresponds to a specific POI visit. The length of the sequence depends on the number of POIs selected, and it is constrained by a user-defined limit $MAXN$. The total travel distance of the itinerary is constrained by $MAXD$, which ensures that the generated itineraries does not exceed the user’s travel distance budget. 
@@ -162,6 +161,26 @@ The development of the Lakad mobile application uses the AGILE methodology, with
 
 Figure \ref{kanban} shows a graphical representation of a Kanban workflow model.Kanban method is use because of its effective visual process management. It optimize the workflow and allowing the researchers to track the progress of developement. \textcite{Alaidaros2021} highlighted that Kanban operates on the Just In Time principle, meaning tasks are completed and delivered while maximizing efficiency. Kanban’s adaptability allows the team to adjust priorities and reallocate resources as needed. This flexibility is key to maintaining momentum and delivering a high-quality software output \parencite{Risener2022}.
 
+Lakad integrates six major features designed to provide optimized, personalized, and efficient itinerary planning for tourists exploring Bulacan. Each feature combines techniques, verified local data, and user-centric design principles.
+\begin{enumerate}
+	\item \textbf{Tourist Spot Exploration.}
+		A tourist spot search feature allows the users to explore Bulacan’s tourist attractions specifically through an interface where they can search through a catalog of  tourist destinations that was verified by the Provincial History, Arts, Culture, and Tourism Office (PHACTO) of Bulacan. Furthermore, the system displays important and relevant information such as location and short description about the tourist spot.
+
+	\item \textbf{Personalized Itinerary Generation.}
+		The main feature of Lakad is the personalized itinerary generator focusing on the diverse cultural, historical and heritage tourist destinations located across the province of Bulacan. The system developed to adapt to user-specific factors that can affect the personalization aspect of an itinerary. This feature aims to cater the personal preferences that a user has while still promoting the exploration of the rich tourism culture of the region.
+
+	\item \textbf{Itinerary Optimization.}
+		The optimization feature of the system works in line with the personalized itinerary generator by employing the chosen best algorithm for route optimization. The optimization further helps the minimization of travel distance and constraints to visit every possible destination within the generated itinerary.
+
+	\item \textbf{Itinerary Management.}
+		An Itinerary Management feature of the application allows users to manage and organize their itineraries. The users may add, edit, or remove destinations from their itinerary. It also allows the tracking of visited and unvisited locations so that users are informed of the status of their progress in the itinerary. Users are also able to save and reload itineraries for future use.
+
+	\item \textbf{Itinerary Navigation.}
+		This feature assist the user during travel by providing real-time navigation support. Users are able to track their current location and visualize routes similar to Google Maps. It displays direction, travel duration, and distances between tourist spots and supports live GPS tracking to help users follow their itinerary accurately.
+
+	\item \textbf{Admin Management.}
+		The admin management feature allows the admin users to manage the tourist spots shown to the users. Admin users can add, edit, or remove tourist spots from the system, as well as update the information of the tourist spots. Admin users can also recalculate the distance matrix via the OpenRouteService matrix API whenever there are changes in the tourist spots.
+\end{enumerate}
 
 \begin{figure}[H]
 	\centering
@@ -272,4 +291,44 @@ The sample standard deviation was also calculated to get the variability of resp
 \end{equation}
 Where, $s$ is the sample standard deviation, $X_i$ is the composite score for the $i$-th respondent, $\bar{X}$ is the overall mean score for a given construct, and $m$ is the total number of respondents.
 
+The interpretation of the mean scores for both TAM and ISO/IEC 25010:2023 was based on a predefined scale that categorizes the mean scores into descriptive ratings and interpretations. The interpretation tables for both TAM and ISO/IEC 25010:2023 are presented in Table \ref{inter:tam} and Table \ref{inter:iso}, respectively.
+
+\begin{table}[H]
+	\centering
+	\singlespacing
+	\caption{Interpretation of Mean Scores for TAM}
+	\label{inter:tam}
+	\renewcommand{\arraystretch}{1.1}
+	\begin{tabularx}{\linewidth}{p{0.2\textwidth}p{0.25\textwidth}X}
+		\toprule 
+		\textbf{Mean Score} & \textbf{Descriptive Rating} & \textbf{Interpretation} \\
+		\midrule
+		4.21–5.00 & Highly acceptable & The system is highly acceptable and meets user expectations\\
+		3.41–4.20 & Acceptable & The system is generally acceptable and meets user expectations with minor issues \\
+		2.61–3.40 & Fairly acceptable & The system is somewhat acceptable but has room for improvement \\
+		1.81–2.60 & Slightly acceptable & The system is barely acceptable and needs significant improvements \\
+		1.00–1.80 & Not acceptable & The system is not acceptable and requires major redesign \\
+		\bottomrule
+	\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\singlespacing
+	\caption{Interpretation of Mean Scores for ISO/IEC 25010:2023}
+	\label{inter:iso}
+	\renewcommand{\arraystretch}{1.1}
+	\begin{tabularx}{\linewidth}{p{0.2\textwidth}p{0.25\textwidth}X}
+		\toprule 
+		\textbf{Mean Score} & \textbf{Descriptive Rating} & \textbf{Interpretation} \\
+		\midrule
+		4.21–5.00 & Excellent &  The system’s quality is outstanding and exceeds expectations \\
+		3.41–4.20 & Very Good & The system’s quality is above average and meets expectations \\
+		2.61–3.40 & Good & The system’s quality is average and meets basic expectations \\
+		1.81–2.60 & Fair & The system’s quality is below average and needs improvement \\
+		1.00–1.80 & Poor & The system’s quality is poor and requires major redesign \\
+		\bottomrule
+	\end{tabularx}
+\end{table}
 \subsection{Ethical Considerations}
+This study strictly adhered to the ethical guidelines set by the Data Privacy Act of 2012 (R.A. 10173) and the Bulacan State University College of Science Ethical Committee to safeguard participant and institutional rights. Voluntary informed consent was obtained from all participants, who were strictly 18 years or older and retained the right to withdraw their responses at any time. Additionally, formal authorization was secured from government offices like PHACTO to access public tourism datasets. To guarantee confidentiality, all personally identifiable information was anonymized, with physical documents secured in a vault and digital files heavily encrypted. The data collection process maintained strict transparency and academic integrity, ensuring that all records will be properly stored.
