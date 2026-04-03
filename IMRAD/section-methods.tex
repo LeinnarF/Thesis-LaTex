@@ -204,101 +204,10 @@ Table \ref{listtools} presents the list of tools used for the development. Lakad
 
 The target population for this study consists of 150 end-users and 22 IT experts. The end-users consists of tourists who visiting a tourist spot in selected municipalities of Bulacan, namely Baliwag, Bocaue, Bustos, Calumpit, Guiguinto, Malolos, Marilao, Plaridel, Pulilan, and San Rafael. The 150 end-users was then distributed proportionately across the municipalities based on the tourists arival data from then Provincial Historical and Cultural Tourism Office (PHACTO) of Bulacan. For the IT experts, 22 IT experts where deliberately selected based on their professional qualifications and relevant experience. IT consists of but not limited to software engineers, UI/UX designers, Quality Assurance professionals and faculty members from The College of Information and Communications Technology (CICT) at Bulacan State University (BulSU).
 
-\subsubsection{Data Collection}
+Prior to data collection, formal authorizations were secured from local government units. End-user acceptability was measured using an adapted Technology Acceptance Model (TAM) questionnaire utilizing a 5-point Likert scale. To ensure instrument validity, a pilot test was conducted with 20 respondents from the municipality of Pandi (who were excluded from the main study to prevent bias). The pilot test yielded a Cronbach’s alpha of 0.881, confirming strong internal consistency and reliability. 
 
-The data collection process of this study was divided into two parts, one for the end-users (tourists) and another for the IT professionals. Each was evaluated using different instruments to gather relevant data for assessing the system from both user experience and technical quality perspectives. The end-users were evaluated using TAM, while the IT professionals were evaluated using ISO/IEC 25010:2023. The TAM questionnaire for end-users uses 5-point Likert scale to assess the acceptability of Lakad. For the ISO/IEC 25010:2023 evaluation for IT professionals uses 5-point numerical scale. These scales were adopted from existing instruments and were modified to fit the context of this study especially for the TAM questionnaire. 
+Technical software quality was evaluated by the IT professionals using the standardized ISO/IEC 25010:2023 instrument, which utilizes a 5-point numerical performance scale. Data collection for end-users occurred via face-to-face guided surveys at active tourist spots, while expert evaluations were conducted through controlled online or in-person sessions.
 
-The data collection process began after the local government units of the selected municipalities granted their formal authorization to conduct tourist surveys. A pilot testing was conducted after receiving all the required permissions to assess the TAM questionnaire’s reliability and validity. The pilot test involved a group of respondents who shared characteristics with the target study population. The pilot test selected 20 respondents from municipality of Pandi because this group would not participate in the main study to prevent any potential research bias. The research team used Cronbach’s alpha to assess the internal consistency and reliability of the adapted TAM questionnaire based on pilot test results. The computed Cronbach’s alpha coefficient of 0.881 confirmed that all TAM items demonstrated good internal consistency while maintaining reliable performance for user technology acceptance measurement within this research study.
-
-The data collection for end-users was conducted through face-to-face surveys in various tourist spots across the selected municipalities in Bulacan via convenience sampling. The researchers approached tourists along with the informed consent and invited them to participate in the survey, which included a brief introduction to Lakad and its features. After exploring the application they were asked to complete the TAM questionnaire. Additionally, demographic information such as age bracket, travelling frequency, and technological proficiency was collected to analyze potential correlations between these factors and the TAM constructs. 
-
-For the ISO/IEC 25010:2023, a permissions to conduct the survey among IT professionals was requested and obtained from the Information and Communications Technology Office (ICTO) of BulSU and to the dean of CICT. The data collection for IT professionals was conducted through an online survey or in-person sessions, depending on the availability and preference of the respondents. The IT professionals were provided with access to Lakad and were given a brief overview of its features and functionalities. After exploring the application, they were asked to complete the ISO/IEC 25010:2023 evaluation. In addition to the quantitative evaluation, IT professionals were also encouraged to provide qualitative feedback on the system’s strengths and areas for improvement based on their technical expertise.  
-
-\subsubsection{Data Processing and Analysis}
-
-A systematic data processing and analysis was done for this study. The collected data from TAM questionnaires and ISO/IEC 25010:2023 evaluations were analyzed and interpreted according to the results. The TAM questionnaire utilized a five-point Likert-type scale to measure respondents’ perception towards Lakad. The instrument consists of declarative statements that is designed to measure the four TAM constructs. For the ISO/IEC 25010:2023 evaluation instrument used a five-point performance rating scale to evaluate system quality constructs through expert assessment. The encoding for the scales of both instruments are presented in Table \ref{tab:scale_encoding}.
-
-\begin{table}[H]
-	\centering
-	\singlespacing
-	\caption{Encoding of Measurement Scales for TAM and ISO/IEC 25010:2023}
-	\label{tab:scale_encoding}
-	\renewcommand{\arraystretch}{1.2}
-	\begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X}
-		\toprule
-		\textbf{Scale/Code} & \textbf{TAM} & \textbf{ISO/IEC 25010:2023} \\ 
-		\midrule
-		1      & Strongly disagree & Poor       \\
-		2      & Disagree          & Fair       \\
-		3      & Neutral           & Good       \\
-		4      & Agree             & Very good  \\
-		5      & Strongly agree    & Excellent  \\ 
-		\bottomrule
-	\end{tabularx}
-\end{table}
-
-The responses from individual questionnaire items are ordinal in nature, descriptive statistics were utilized to summarize the data without assuming equal intervals between response categories. At the item level, frequency distributions and median values were computed to describe response patterns and determine the central tendency of each item. To obtain construct-level measures, composite scores were computed by averaging responses across items corresponding to each construct. For both TAM and ISO/IEC 25010:2023 instruments, the composite score for the $i$-th respondent was calculated using in Equation \ref{Xi},
-
-\begin{equation}
-	\label{Xi}
-	X_i = \frac{\sum_{j=1}^{n} Y_{ij}}{n}
-\end{equation}
-Where, $X_{i}$ is the composite score for the $i$-th respondent, $Y_{ij}$ is the rating of the $i$-th respondent on the $j$-evaluation item, and $n$ is the total number of item to evaluated for a given construct. 
-
-The overall mean score for each construct was computed by taking the mean of the composite scores of all respondents, this is given by Equation \ref{Xbar},
-
-\begin{equation}
-	\label{Xbar}
-	\bar{X} = \frac{\sum_{i=1}^{m} X_i}{m}
-\end{equation}
-Where, $\bar{X}$ is the overall mean score for a given construct, $X_i$ is the composite score for the $i$-th respondent, and $m$ is the total number of respondents. The mean provided a summary measure of overall user acceptance (for TAM constructs) and overall system quality (for ISO/IEC 25010:2023 constructs). 
-
-The sample standard deviation was also calculated to get the variability of response among the evaluators. A lower standard deviation indicates that the respondents were in strong agreement regarding Lakad’s system acceptance and quality.  The formula for sample standard deviation is given by Equation \ref{S},
-
-\begin{equation}
-	\label{S}
-	s = \sqrt{\frac{\sum_{i=1}^{m} (X_i - \bar{X})^2}{m-1}}
-\end{equation}
-Where, $s$ is the sample standard deviation, $X_i$ is the composite score for the $i$-th respondent, $\bar{X}$ is the overall mean score for a given construct, and $m$ is the total number of respondents.
-
-The interpretation of the mean scores for both TAM and ISO/IEC 25010:2023 was based on a predefined scale that categorizes the mean scores into descriptive ratings and interpretations. The interpretation tables for both TAM and ISO/IEC 25010:2023 are presented in Table \ref{inter:tam} and Table \ref{inter:iso}, respectively.
-
-\begin{table}[H]
-	\centering
-	\singlespacing
-	\caption{Interpretation of Mean Scores for TAM}
-	\label{inter:tam}
-	\renewcommand{\arraystretch}{1.1}
-	\begin{tabularx}{\linewidth}{p{0.2\textwidth}p{0.25\textwidth}X}
-		\toprule 
-		\textbf{Mean Score} & \textbf{Descriptive Rating} & \textbf{Interpretation} \\
-		\midrule
-		4.21–5.00 & Highly acceptable & The system is highly acceptable and meets user expectations\\
-		3.41–4.20 & Acceptable & The system is generally acceptable and meets user expectations with minor issues \\
-		2.61–3.40 & Fairly acceptable & The system is somewhat acceptable but has room for improvement \\
-		1.81–2.60 & Slightly acceptable & The system is barely acceptable and needs significant improvements \\
-		1.00–1.80 & Not acceptable & The system is not acceptable and requires major redesign \\
-		\bottomrule
-	\end{tabularx}
-\end{table}
-
-\begin{table}[H]
-	\centering
-	\singlespacing
-	\caption{Interpretation of Mean Scores for ISO/IEC 25010:2023}
-	\label{inter:iso}
-	\renewcommand{\arraystretch}{1.1}
-	\begin{tabularx}{\linewidth}{p{0.2\textwidth}p{0.25\textwidth}X}
-		\toprule 
-		\textbf{Mean Score} & \textbf{Descriptive Rating} & \textbf{Interpretation} \\
-		\midrule
-		4.21–5.00 & Excellent &  The system’s quality is outstanding and exceeds expectations \\
-		3.41–4.20 & Very Good & The system’s quality is above average and meets expectations \\
-		2.61–3.40 & Good & The system’s quality is average and meets basic expectations \\
-		1.81–2.60 & Fair & The system’s quality is below average and needs improvement \\
-		1.00–1.80 & Poor & The system’s quality is poor and requires major redesign \\
-		\bottomrule
-	\end{tabularx}
-\end{table}
+Data processing and analysis were executed using Python libraries (Pandas, NumPy). Because the questionnaire responses are ordinal, descriptive statistics were utilized to determine central tendencies and variances. Construct-level measures were obtained by computing the mean composite scores and standard deviations for all respondents. For both the TAM and ISO/IEC 25010:2023 instruments, the 5-point rating scales were standardized such that a mean score between 4.21 and 5.00 corresponds to a descriptive interpretation of "Highly Acceptable" (for TAM) or "Excellent" (for ISO/IEC).
 \subsection{Ethical Considerations}
 This study strictly adhered to the ethical guidelines set by the Data Privacy Act of 2012 (R.A. 10173) and the Bulacan State University College of Science Ethical Committee to safeguard participant and institutional rights. Voluntary informed consent was obtained from all participants, who were strictly 18 years or older and retained the right to withdraw their responses at any time. Additionally, formal authorization was secured from government offices like PHACTO to access public tourism datasets. To guarantee confidentiality, all personally identifiable information was anonymized, with physical documents secured in a vault and digital files heavily encrypted. The data collection process maintained strict transparency and academic integrity, ensuring that all records will be properly stored.
