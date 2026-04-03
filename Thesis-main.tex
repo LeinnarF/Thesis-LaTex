@@ -26,46 +26,6 @@
 \usepackage{listings}
 \usepackage{xcolor}
 
-% Kotlin syntax highlighting configuration
-\lstdefinelanguage{Kotlin}{
-  comment=[l]{//},
-  commentstyle={\color{gray!60}\ttfamily},
-  emph={abstract, actual, as, break, by, catch, class, companion, const, constructor, continue, crossinline, data, delegate, do, dynamic, else, enum, expect, external, false, final, finally, for, fun, get, if, import, in, infix, interface, internal, is, it, lateinit, noinline, null, object, open, operator, out, override, package, private, protected, public, reified, return, sealed, set, setparam, super, suspend, tailrec, this, throw, true, try, typealias, typeof, val, var, vararg, when, where, while},
-  emphstyle={\color{blue!70}\bfseries},
-  identifierstyle=\color{black},
-  keywordstyle={\color{blue}\bfseries},
-  ndkeywordstyle={\color{orange}},
-  sensitive=true,
-  stringstyle={\color{red!60}\ttfamily},
-  morestring=[b]",
-  morestring=[s]{"""*}{*"""},
-}
-
-\lstset{
-  language=Kotlin,
-  basicstyle=\ttfamily\footnotesize,
-  breakatwhitespace=false,
-  breaklines=true,
-  captionpos=b,
-  commentstyle=\color{gray!60}\itshape,
-  deletekeywords={...},
-  escapeinside={\%*}{*)},
-  extendedchars=true,
-  firstnumber=1,
-  keywordstyle=\color{blue}\bfseries,
-  morekeywords={*,...},
-  numbers=left,
-  numbersep=8pt,
-  numberstyle=\tiny\color{gray},
-  showspaces=false,
-  showstringspaces=false,
-  showtabs=false,
-  stepnumber=1,
-  stringstyle=\color{red!60},
-  tabsize=4,
-  title=\lstname,
-}
-
 \usepackage[hidelinks]{hyperref}
 
 \title{LAKAD: A Personalized Mobile Itinerary Generator with Focus in Bulacan Tourism}
@@ -110,7 +70,7 @@
 \papertype{Thesis}  %<-papertype can be thesis proposal, or thesis
 
 \csdean{Thelma V. Pagtalunan, PhD}%<-dean of the college
-\ddate{May 2026}
+\ddate{April 2026}
 
 
 % -------------------------------------- START -------------------------------------------------------
@@ -123,40 +83,42 @@
 \renewcommand{\listtablename}{LIST OF TABLES}
 \renewcommand{\listfigurename}{LIST OF FIGURES}
 
-\begin{preliminary}
-	\maketitle
-	\approvalsheet
-	\input{acknowledgment.tex}
-	\input{dedication.tex}
-	\input{abstract.tex}
+% \begin{preliminary}
+% 	\maketitle
+% 	\approvalsheet
+% 	\input{acknowledgment.tex}
+% 	\input{dedication.tex}
+% 	\input{abstract.tex}
+%
+% 	\tableofcontents\cleardoublepage
+%
+% 	\listoftables
+% 		\addcontentsline{toc}{chapter}{LIST OF TABLES}
+% 		\addtocontents{lot}{\noindent\makebox[0.75in][l]{\textbf{Table}}\makebox[\linewidth-0.75in]{\textbf{Title}\hfill\textbf{Page}}\par}
+% 		\cleardoublepage
+%
+% 	\listoffigures
+% 		\addcontentsline{toc}{chapter}{LIST OF FIGURES}
+% 		\addtocontents{lof}{\noindent\makebox[0.75in][l]{\textbf{Figure}}\makebox[\linewidth-0.75in]{\textbf{Title}\hfill\textbf{Page}}\par}
+% 		\cleardoublepage
+%
+%    \setlength{\cftchapindent}{5ex}
+%    \setlength{\cftchapnumwidth}{0.75in-2ex}
+%    \setlength{\cftsecindent}{0.75in}
+%    \renewcommand*{\cftchapfont}{\normalfont}
+%    \renewcommand*{\cftchappagefont}{\normalfont}
+%    \setlength{\cftbeforechapskip}{0pt}
+%
+%    \listofappendix     %<-print the list of appendices page
+%        \addcontentsline{toc}{chapter}{LIST OF APPENDICES}
+%        \addtocontents{apc}{\noindent \textbf{Appendix}\hspace{1ex} \textbf{Title }\hfill\textbf{Page}\par}
+%        \cleardoublepage
+%
+% \end{preliminary}
 
-	\tableofcontents\cleardoublepage
+\setcounter{chapter}{0} 
 
-	\listoftables
-		\addcontentsline{toc}{chapter}{LIST OF TABLES}
-		\addtocontents{lot}{\noindent\makebox[0.75in][l]{\textbf{Table}}\makebox[\linewidth-0.75in]{\textbf{Title}\hfill\textbf{Page}}\par}
-		\cleardoublepage
-
-	\listoffigures
-		\addcontentsline{toc}{chapter}{LIST OF FIGURES}
-		\addtocontents{lof}{\noindent\makebox[0.75in][l]{\textbf{Figure}}\makebox[\linewidth-0.75in]{\textbf{Title}\hfill\textbf{Page}}\par}
-		\cleardoublepage
-
-   \setlength{\cftchapindent}{5ex}
-   \setlength{\cftchapnumwidth}{0.75in-2ex}
-   \setlength{\cftsecindent}{0.75in}
-   \renewcommand*{\cftchapfont}{\normalfont}
-   \renewcommand*{\cftchappagefont}{\normalfont}
-   \setlength{\cftbeforechapskip}{0pt}
-
-   \listofappendix     %<-print the list of appendices page
-       \addcontentsline{toc}{chapter}{LIST OF APPENDICES}
-       \addtocontents{apc}{\noindent \textbf{Appendix}\hspace{1ex} \textbf{Title }\hfill\textbf{Page}\par}
-       \cleardoublepage
-
-\end{preliminary}
-
-\setcounter{chapter}{0} % Chapter Start at x
+\maketitle
 
 \input{main-chapter-1.tex}
 \input{main-chapter-2.tex}
@@ -166,7 +128,7 @@
 
 \printbibliography[heading=bibintoc,title={REFERENCES}]
 
-\input{appendix.tex}
-\input{curriculumvitae.tex}
+% \input{appendix.tex}
+% \input{curriculumvitae.tex}
 
 \end{document}

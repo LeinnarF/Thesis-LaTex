@@ -1,0 +1,79 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{imrad}[2026/04/03 IMRAD Style Package]
+
+% Page setup
+\RequirePackage[margin=1in, a4paper]{geometry}
+\RequirePackage{graphicx}
+\RequirePackage{amsmath, amssymb}
+\RequirePackage{setspace}
+\RequirePackage{titlesec}
+\RequirePackage{booktabs,longtable,threeparttable,siunitx,tabularx,makecell}
+\RequirePackage{float}
+\RequirePackage{indentfirst}
+\RequirePackage{ragged2e}
+\RequirePackage{enumitem}
+
+% References
+\RequirePackage{csquotes}
+\RequirePackage[style=apa, backend=biber]{biblatex}
+\addbibresource{../reference.bib}
+\RequirePackage{url}
+\RequirePackage[hidelinks]{hyperref}
+
+% Font
+\RequirePackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+% Caption setup
+\RequirePackage{caption}
+\captionsetup[table]{
+	font=sf,
+	labelfont=bf,
+	textfont=it, 
+	format=plain,
+	justification=justified,
+	singlelinecheck=false,
+	labelsep=space,skip=12pt
+}
+
+%Figure caption in APA 7
+\captionsetup[figure]{
+	font=sf,
+	labelfont=bf,
+	textfont=it, 
+	format=plain,
+	justification=justified,
+	singlelinecheck=false,
+	labelsep=space,skip=12pt
+}
+\captionsetup[sidewaysfigure]{
+	font=sf,
+	labelfont=bf,
+	textfont=it, 
+	format=plain,
+	justification=justified,
+	singlelinecheck=false,
+	labelsep=space,skip=12pt
+}
+
+% Section formatting - uppercase
+\titleformat{\section}
+  {\normalfont\bfseries}{\thesection}{1em}{\MakeUppercase}
+\titleformat{\subsection}
+  {\normalfont\bfseries}{\thesubsection}{1em}{\MakeUppercase}
+
+% Indentation and spacing
+\setlength{\parindent}{0.5in}	
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=9999
+\hbadness=9999
+
+% Header
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+
+\endinput
