@@ -12,7 +12,7 @@ This section discusses the optimization problems such as route optimization and 
 
 The following metaheuristic algorithms for route optimization were considered for this study: (1) Genetic Algorithm (GA); (2) Ant Colony Optimization (ACO); (3) Simulated Annealing (SA); (4) Particle Swarm Optimization (PSO); (5) Elephant Herding Optimizer (EHO); (6) Gray Wolf Optimizer (GWO); (7) Hovering Scouts and Foraging Flocks Pied Kingfisher Optimizer (HSFFPKO).
 
-To determine the best algorithm to implement for Lakad, a comparative benchmarking was conducted using four standard instances from the TSPLIB library, detailed in Table \ref{tsplib_instace}.
+To determine the best algorithm to implement for \textit{Lakad}, a comparative benchmarking was conducted using four standard instances from the TSPLIB library, detailed in Table \ref{tsplib_instace}.
 
 \begin{table}[H]
 	\centering
@@ -56,7 +56,7 @@ Subsequently, equal weights ($w _{1} = w _{2} = 0.5$) were assigned to both the 
 	S _{i} = \sum_{j=1}^{n} w_j \cdot r _{ij}
 \end{equation}
 
-The algorithm with the lowest score was the selected route optimization algorithm for Lakad.
+The algorithm with the lowest score was the selected route optimization algorithm for \textit{Lakad}.
 
 Another algorithm that is adopted for this study was the modified variant of the genetic algorithm developed by \textcite{Yochum2020} called Adaptive Genetic Algorithm with Dynamic Mutation and Crossover Probabilities (AGAM) for the personalized itinerary generation. AGAM addresses itinerary planning as a Multi-Objective Optimization Problem, an optimization technique rooting from orienteering problems. As discussed in their work, \textcite{Yochum2020} developed AGAM to generate optimal and personalized travel itineraries by balancing several objectives such as point of interest (POI) rating, and distance of POIs between the next one. Rooting from Genetic Algorithm (GA), AGAM simulates the process of natural evolution and utilizes genetic operators such as selection, crossover, and mutation to iteratively improve the quality of itineraries which, unlike traditional GA that use fixed mutation rates, also employs dynamic adjustments in parameters during the evolutionary process in a way that can maintain population diversity and therefore generate efficient and adaptive solutions. Even though AGAM can also be used for route optimization, the study chose to use it for itinerary generation because of its effectiveness in generating personalized itineraries as shown in the study of \textcite{Yochum2020}.
 
@@ -120,7 +120,7 @@ For the parameters of AGAM, the following values were used: $pc_1 = 0.9$, $pc_2 
 
 \subsection{Process of Developing the System}
 
-The development of the Lakad mobile application uses the AGILE methodology, with a specific focus on the Kanban method. This approach integrates all key software development phases. These phase include analysis, planning, design, development, testing, and review, each of the phases contributes to the overall quality and functionality of the final product.
+The development of the \textit{Lakad} mobile application uses the AGILE methodology, with a specific focus on the Kanban method. This approach integrates all key software development phases. These phase include analysis, planning, design, development, testing, and review, each of the phases contributes to the overall quality and functionality of the final product.
 
 \begin{figure}[H]
 	\centering
@@ -131,13 +131,13 @@ The development of the Lakad mobile application uses the AGILE methodology, with
 
 Figure \ref{kanban} shows a graphical representation of a Kanban workflow model.Kanban method is use because of its effective visual process management. It optimize the workflow and allowing the researchers to track the progress of developement. \textcite{Alaidaros2021} highlighted that Kanban operates on the Just In Time principle, meaning tasks are completed and delivered while maximizing efficiency. Kanban’s adaptability allows the team to adjust priorities and reallocate resources as needed. This flexibility is key to maintaining momentum and delivering a high-quality software output \parencite{Risener2022}.
 
-Lakad integrates six major features designed to provide optimized, personalized, and efficient itinerary planning for tourists exploring Bulacan. Each feature combines techniques, verified local data, and user-centric design principles.
+\textit{Lakad} integrates six major features designed to provide optimized, personalized, and efficient itinerary planning for tourists exploring Bulacan. Each feature combines techniques, verified local data, and user-centric design principles.
 \begin{enumerate}
 	\item \textbf{Tourist Spot Exploration.}
 		A tourist spot search feature allows the users to explore Bulacan’s tourist attractions specifically through an interface where they can search through a catalog of  tourist destinations that was verified by the Provincial History, Arts, Culture, and Tourism Office (PHACTO) of Bulacan. Furthermore, the system displays important and relevant information such as location and short description about the tourist spot.
 
 	\item \textbf{Personalized Itinerary Generation.}
-		The main feature of Lakad is the personalized itinerary generator focusing on the diverse cultural, historical and heritage tourist destinations located across the province of Bulacan. The system developed to adapt to user-specific factors that can affect the personalization aspect of an itinerary. This feature aims to cater the personal preferences that a user has while still promoting the exploration of the rich tourism culture of the region.
+		The main feature of \textit{Lakad} is the personalized itinerary generator focusing on the diverse cultural, historical and heritage tourist destinations located across the province of Bulacan. The system developed to adapt to user-specific factors that can affect the personalization aspect of an itinerary. This feature aims to cater the personal preferences that a user has while still promoting the exploration of the rich tourism culture of the region.
 
 	\item \textbf{Itinerary Optimization.}
 		The optimization feature of the system works in line with the personalized itinerary generator by employing the chosen best algorithm for route optimization. The optimization further helps the minimization of travel distance and constraints to visit every possible destination within the generated itinerary.
@@ -159,7 +159,7 @@ Lakad integrates six major features designed to provide optimized, personalized,
 	\includegraphics[width=0.8\textwidth]{SysArch.png}
 \end{figure}
 
-Figure \ref{SysArch} shows the system architecture of Lakad shows how various application components work together to produce optimize travel routes for users. The mobile frontend functions as the system’s primary interface which enables tourists to search for destinations and create itineraries while they organize their travel arrangements. The application frontend is connected to Mapbox API to handle user interactions through which users request map data and location coordinates. The API processes these requests and returns the corresponding responses, which are then displayed on the user interface as maps and travel routes. Supabase enables the application to store user-created itineraries together with additional data in an external database which users can use to view and control their itineraries. The admin users use their dedicated admin GUI which keeps them separate from tourists to handle user-visible location content while they calculate distance matrices using OpenRouteService matrix API.
+Figure \ref{SysArch} shows the system architecture of \textit{Lakad} shows how various application components work together to produce optimize travel routes for users. The mobile frontend functions as the system’s primary interface which enables tourists to search for destinations and create itineraries while they organize their travel arrangements. The application frontend is connected to Mapbox API to handle user interactions through which users request map data and location coordinates. The API processes these requests and returns the corresponding responses, which are then displayed on the user interface as maps and travel routes. Supabase enables the application to store user-created itineraries together with additional data in an external database which users can use to view and control their itineraries. The admin users use their dedicated admin GUI which keeps them separate from tourists to handle user-visible location content while they calculate distance matrices using OpenRouteService matrix API.
 
 \begin{figure}[H]
 	\centering
@@ -198,7 +198,7 @@ Two types of users exist for the whole system which is the tourist and admins as
 	\end{tabularx}
 \end{table}
 
-Table \ref{listtools} presents the list of tools used for the development. Lakad was developed using the React Native main development framework, which uses fast and cost-efficient cross-platform mobile development, allowing a single codebase to function on both iOS and Android devices. The system utilized the JavaScript programming language for implementing the application’s user interface and core functionalities due to its flexibility and compatibility with React Native framework. The main development environment for writing, editing, and debugging the program was Visual Studio Code, which provided lightweight performance and had a large selection of extensions appropriate for React Native development. Git and GitHub was used throughout the development process to maintain organized team work and track software versions.
+Table \ref{listtools} presents the list of tools used for the development. \textit{Lakad} was developed using the React Native main development framework, which uses fast and cost-efficient cross-platform mobile development, allowing a single codebase to function on both iOS and Android devices. The system utilized the JavaScript programming language for implementing the application’s user interface and core functionalities due to its flexibility and compatibility with React Native framework. The main development environment for writing, editing, and debugging the program was Visual Studio Code, which provided lightweight performance and had a large selection of extensions appropriate for React Native development. Git and GitHub was used throughout the development process to maintain organized team work and track software versions.
 
 \subsection{System Evaluation}
 
