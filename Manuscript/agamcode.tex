@@ -1,0 +1,94 @@
+\begin{lstlisting}[language=Kotlin]
+package expo.modules.algorithmmodule
+import kotlin.random.Random
+
+data class InternalPOI(val id: String, val interestValue: Double, val rating: Double)
+data class Itinerary(var pois: MutableList<InternalPOI>, var fitness: Double = 0.0, var totalDistance: Double = 0.0) {
+    fun copy(): Itinerary = Itinerary(pois.toMutableList(), fitness, totalDistance)
+}
+
+class AGAMOptimizer(private val populationSize: Int = 50, private val maxDistance: Double, 
+    private val maxPOIs: Int, private val weights: DoubleArray, 
+    private val jsPois: Map<String, Map<String, Any>>, 
+    private val distanceMap: Map<String, Map<String, Double>>) {
+    private val pc1 = 0.9; private val pc2 = 0.6; private val pm1 = 0.1; private val pm2 = 0.01
+    private val allPOIs: List<InternalPOI> = jsPois.map { (id, data) ->
+        InternalPOI(id, (data["interest"] as? Number)?.toDouble() ?: 0.0,
+            (data["rating"] as? Number)?.toDouble() ?: 0.0)
+    }
+    
+    private fun calculateFitness(it: Itinerary) {
+        if (it.pois.isEmpty()) { it.fitness = 0.0; return }
+        val fInterest = it.pois.sumOf { p -> p.interestValue }
+        val fTotalN = it.pois.size.toDouble() / allPOIs.size
+        val fRating = it.pois.sumOf { p -> p.rating } / (allPOIs.size * 5.0)
+        it.fitness = weights[0] * fInterest + weights[1] * fTotalN + weights[2] * fRating
+    }
+    
+    private fun getDistance(fromId: String, toId: String) = distanceMap[fromId]?.get(toId) ?: 10000.0
+    private fun calculateTotalDistance(pois: List<InternalPOI>): Double {
+        if (pois.size < 2) return 0.0
+        return (0 until pois.size - 1).sumOf { i -> getDistance(pois[i].id, pois[i+1].id) }
+    }
+    
+    fun evolve(generations: Int): Map<String, Any> {
+        var population = List(populationSize) { generateRandomItinerary() }
+        repeat(generations) {
+            population.forEach { calculateFitness(it) }
+            val fMax = population.maxOf { it.fitness }
+            val fAvg = population.map { it.fitness }.average()
+            val nextGen = mutableListOf<Itinerary>()
+            while (nextGen.size < populationSize) {
+                val p1 = population.random(); val p2 = population.random()
+                val fSelMax = maxOf(p1.fitness, p2.fitness)
+                if (Random.nextDouble() < getCrossoverProbability(fSelMax, fAvg, fMax)) {
+                    val (c1, c2) = performCrossover(p1, p2)
+                    listOf(c1, c2).forEach { validateAndRepair(it); nextGen.add(it) }
+                } else {
+                    nextGen.add(p1.copy()); nextGen.add(p2.copy())
+                }
+            }
+            nextGen.forEach { if (Random.nextDouble() < getMutationProbability(it.fitness, fAvg, fMax)) {
+                applyMutation(it); validateAndRepair(it) } }
+            population = nextGen.take(populationSize)
+        }
+        val best = population.maxByOrNull { it.fitness } ?: population[0]
+        return mapOf("poiIds" to best.pois.map { it.id }, "totalDistance" to best.totalDistance, "fitness" to best.fitness)
+    }
+    
+    private fun validateAndRepair(it: Itinerary) {
+        while ((calculateTotalDistance(it.pois) > maxDistance || it.pois.size > maxPOIs) && it.pois.isNotEmpty())
+            it.pois.removeAt(it.pois.size - 1)
+        allPOIs.filter { p -> it.pois.none { c -> c.id == p.id } }.shuffled().forEach { poi ->
+            val tempPois = it.pois.toMutableList().apply { add(poi) }
+            if (calculateTotalDistance(tempPois) <= maxDistance && tempPois.size <= maxPOIs) it.pois.add(poi)
+        }
+        it.totalDistance = calculateTotalDistance(it.pois)
+    }
+    
+    private fun performCrossover(p1: Itinerary, p2: Itinerary): Pair<Itinerary, Itinerary> {
+        if (p1.pois.isEmpty() || p2.pois.isEmpty()) return Pair(p1.copy(), p2.copy())
+        val cp = Random.nextInt(minOf(p1.pois.size, p2.pois.size))
+        val c1Pois = (p1.pois.take(cp) + p2.pois.drop(cp)).distinctBy { it.id }.toMutableList()
+        val c2Pois = (p2.pois.take(cp) + p1.pois.drop(cp)).distinctBy { it.id }.toMutableList()
+        return Pair(Itinerary(c1Pois), Itinerary(c2Pois))
+    }
+    
+    private fun applyMutation(it: Itinerary) {
+        if (it.pois.isNotEmpty()) {
+            val idx = Random.nextInt(it.pois.size); val r = allPOIs.random()
+            if (it.pois.none { p -> p.id == r.id }) it.pois[idx] = r
+        }
+    }
+    
+    private fun generateRandomItinerary(): Itinerary {
+        val it = Itinerary(allPOIs.shuffled().take(Random.nextInt(1, maxPOIs + 1)).toMutableList())
+        validateAndRepair(it); return it
+    }
+    
+    private fun getCrossoverProbability(fSel: Double, fAvg: Double, fMax: Double) =
+        if (fSel >= fAvg && fMax != fAvg) pc1 - ((pc1 - pc2) * (fSel - fAvg)) / (fMax - fAvg) else pc1
+    private fun getMutationProbability(fInd: Double, fAvg: Double, fMax: Double) =
+        if (fInd >= fAvg && fMax != fAvg) pm1 - ((pm1 - pm2) * (fInd - fAvg)) / (fMax - fAvg) else pm1
+}
+\end{lstlisting}

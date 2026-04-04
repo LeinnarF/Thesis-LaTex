@@ -1,0 +1,52 @@
+\chapter{Summary, Conclusions, and Recommendations}
+\thispagestyle{empty}
+
+As Lakad was fully developed and the evaluation process was completed, this chapter presents a summary of the key findings obtained, and conclusions were drawn based on the results of the system evaluation.
+
+\section{Summary of Findings}
+This study developed a mobile application that generates optimized and personalized itineraries for tourists that are exploring Bulacan. The system uses two algorithms, the Adaptive Genetic Algorithm with Dynamic Mutation and Crossover Probabilities (AGAM) for itinerary generation and Simulated Annealing (SA) for optimizing routes. The findings of the study were derived from comparative analysis, development process, and system evaluation using the Technology Acceptance Model and ISO/IEC 25010:2023 standards. From these procedures, the following findings were obtained.
+
+\begin{enumerate}
+	\item Algorithm Selection and Performance (TSP)\\
+	The Adaptive Genetic Algorithm with Dynamic Mutation and Crossover Probabilities (AGAM) was implemented for personalized itinerary generation because it provides better multi-objective optimization results by balancing user preferences together with time and travel distance constraints. For route optimization, the result in conducting comparative analysis showed that Simulated Annealing (SA) was selected because it offers an ideal balance of fast execution and high accuracy solutions for a mobile environment, outperforming six other metaheuristic algorithms.	
+
+	\item Core System Features\\
+	The system enables Tourist Spot Exploration that allows users to explore the map of Bulacan and its tourist destinations that have been validated and approved by the Provincial History, Arts, Culture, and Tourism Office (PHACTO), with complete description, pictures and ratings. Lakad uses this data to generate personalized itineraries based on user selected parameters such as districts, municipalities, their preferred type of landmarks, and maximum travel distance. The Route optimization feature improves efficiency by changing the sequence of stopovers to minimize total travel distance. The Navigation uses Mapbox to deliver real-time GPS navigation which includes driving,walking, and cycling as travel modes while providing users with directions and estimated travel time of the itinerary. The itinerary Management system enables users to manage their travel plans through the ability to organize and edit their itinerary while monitoring their travel progress. The Administrator Management side enables the scalability of the system through the management of user accounts, landmarks information, and the management of user-submitted reviews.
+
+	\item Acceptability and User Experience\\
+	The evaluation in Technology Acceptance Model (TAM) showed a highly favorable acceptance among the tourist participants who found the system both useful and easy to operate, it achieved a grand mean score 4.6719 which was interpreted as Highly Acceptable The findings supported that the users found the application to be an effective tool for searching tourist destinations in Bulacan, with a focus on their willingness to recommend the system to others. Moreover, the evaluative instrument proved its reliability through statistical validation, which demonstrated that the collected feedback accurately reflected the respondents’ positive attitudes and behavioral intentions. 
+	\item Software Quality and Professional Validation\\
+		The Technology field professionals evaluated the system in all software quality assessment criteria and found it to operate outstanding performance levels, achieving a grand mean score of 4.7642. The system achieved high accountability together with the functional performance that completely matched the professional requirements for its intended tasks. While experts noted minor variations in specialized technical areas like interoperability, they established a cohesive  agreement that the system is technically sound,secure, and ready for deployment.
+
+\end{enumerate}
+
+\section{Conclusion}
+Researchers developed a mobile-based system named Lakad which successfully solves both trip planning problems and the inconsistent promotion of tourist spots in Province of Bulacan. The researchers proved that data-driven tools improve tourism accessibility for local areas when using mathematical optimization models together with modern mobile technologies. 
+
+The Traveling Salesman Problem (TSP) algorithms comparison showed that Simulated Annealing (SA) works best for mobile implementation. The mobile environment could use exact methods and complex genetic algorithms to achieve higher precision but their computational demands make them impractical for real-time use. A real-time mobile environment needs fast solutions and SA provides this with high solution quality and fast execution. The Open Source Routing Machine (OSRM) serves as an essential component for the system scalability because it allows the system to execute matrix calculation for personalized itinerary generation without any limitations.
+
+Implementing Adaptive Genetic Algorithm (AGAM) makes the personalized itinerary generation become possible through balancing multiple objectives, such as user interest, ratings, and travel distance. Lakad generates a personalized itinerary that matches the user preferences while taking into consideration their specific constraints.
+
+Finally, Lakad received an excellent rating in system evaluation from both tourist and IT professionals because it functions as a technical system and also as a tool that benefits society. The mobile application serves as a tool for the Provincial History, Arts, Culture, and Tourism Office (PHACTO)  to promote both popular and lesser-known attractions in the Bulacan. The study shows that  Lakad delivers an effective user-focused solution for sustainable tourism development  in Bulacan though its algorithms and localized data integration.
+
+\section{Recommendations}
+
+The following are the recommendations to improve the capabilities and reach of the developed system, Lakad:
+
+\begin{enumerate}
+	\item The system needs more tourist destinations throughout Bulacan, pasalubong centers, and accommodations compared to its current data, and the  upcoming versions can include different types of landmarks. 
+
+	\item In the study, the system implemented Simulated Annealing (SA) as the algorithm to optimize routes, but other researchers can study hybrid metaheuristic algorithms and other algorithms to achieve better results for the Traveling Salesman Problem (TSP).
+
+	\item The system needs to expand its operation to other provinces which will turn Lakad into a complete national tourism tool across the Philippines. The application needs an iOS version to reach more users because the current system is only accessible by the Android users.
+
+	\item The system must develop multi-day tour planning capabilities because the current system only supports single-day tour planning. The system needs to create overnight stay logic so that users can plan their extended vacation stays in Bulacan.
+
+	\item The future version of the system can use real-time traffic data and public transportation APIs to enhance the user experience and travel time estimation capabilities.
+
+	\item The future version of the system can implement interactive exploration features that use Google Maps Street View or Virtual Reality Technology. It enables users to explore a tourist destination or the itinerary route through virtual means while they view all 360 degree perspectives of Bulacan, which allow users to travel with confidence while discovering new destinations.
+
+	% \item The system uses Supabase as its primary database, but it lacks the necessary capabilities to support larger scale database and user management tasks. The system needs to decrease its reliance on external APIs especially on the OSRM and Mapbox which has limited access. The research proposes using a self-hosted server to achieve better scalability and system control while delivering dependable route calculations that operate independently of external services.
+
+	\item The system relies on Supabase as its primary database and OSRM and Mapbox for API, which are both external. The researchers proposes using a self-hosted server to achieve better scalability and system control while delivering dependable route calculations that operates independently of external services.
+\end{enumerate}

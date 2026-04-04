@@ -1,0 +1,479 @@
+\chapter{Presentation, Analysis, and Interpretation of Data}
+\thispagestyle{empty}
+
+The results of the study are presented in this chapter, including a comparative analysis of TSP algorithms, the developed application, and the evaluation of system acceptability and software quality. The findings are interpreted in the context of the research objectives and questions which were presented in Chapter 1.
+
+\section{Route Optimization Algorithms Selection}
+This section shows how the selected metaheuristic algorithms perform when solving the Travelling Salesman Problem (TSP). The burma14, bays29, eil51, and berlin52 instances that are from the TSPLIB library were used to test the algorithms. The study aimed to determine which route optimization algorithm would best serve Lakad by evaluating its ability to minimize travel distance and runtime efficiency. The researchers executed each algorithm 10 times to observe its stochastic nature and record the average results for analysis.
+
+Each algorithm has their specific parameters to ensure fair comparison. The Genetic Algorithm (GA) used a population size of 100 who underwent tournament selection with a tournament size of 5, Order Crossover, and 2-opt mutation at a low mutation rate of 0.01. The algorithm operated for 50 generations while maintaining the top 10\% of solution through elitism. Simulated Annealing (SA) was configured with an initial temperature $T_{start}=1000$, a final temperature $T_{end}=1$, a cooling rate of 0.999, and $n \times 1.5$ iterations per temperature level. Ant Colony Optimization (ACO) deployed 50 ants over 200 epochs, with pheromone factor $\alpha = 1.0$, heuristic information importance $\beta = 5.0$, evaporation rate $\rho = 0.1$, and pheromone deposit factor $q = 100$. Particle Swarm Optimization (PSO) used 30 particles running for 500 iterations, with inertia weight $w = 0.7$, cognitive coefficient $c_1 = 1.4$, social coefficient $c_2 = 1.4$, maximum velocity $v_{max} = 80$, and incorporated 2-opt local search for 40 iterations. The Elephant Herding Optimization (EHO) algorithm utilized a population of 50 elephants divided into 5 clans, running for 500 iterations with clan update and separating operators. Grey Wolf Optimization (GWO) was configured with a pack size of 15 wolves running for 500 iterations, with linearly decreasing parameter $a$ from 2.0 to 0.0, employing random-key encoding to map continuous values to permutations. Lastly, the Hybrid Pied Kingfisher Optimizer used a population of 50 with 15\% scout birds and 8 foraging flock to run 500 iterations of its search within the space bound of [0, 20] for each dimension. The researchers executed the algorithms 30 times for each TSP instance to establish a statistical validity, which resulted in average performance metrics that they used for their analysis. The parameter settings were selected based on preliminary experiments and studied literature recommendations.
+
+\subsection{Analysis of Solution Quality (Accuracy)}
+
+The solution quality of each algorithm is measured by its average relative error (\%) when compared to the optimal solution for each TSP instance.
+
+\begin{table}[H]
+	\centering
+	\singlespacing
+	\caption{Summary of Average Relative Error (\%)}
+	\label{tab:acc} \renewcommand{\arraystretch}{1.2}
+	\begin{tabularx}{\linewidth}{XXXXXX}
+		\toprule
+        \multirow{2}{*}{\textbf{Algorithm}} & \multicolumn{4}{c}{\textbf{TSPLIB Instances}} & \multirow{2}{*}{\textbf{Average}} \\
+        \cmidrule(lr){2-5}
+         & \textbf{burma14} & \textbf{bays29} & \textbf{eil51} & \textbf{berlin52} &  \\
+		\midrule
+        GA & 0.00 & 0.03 & 0.38 & 0.00 & 0.10 \\
+        SA & 0.00 & 0.42 & 2.77 & 3.15 & 1.59 \\
+        ACO & 0.53 & 1.50 &  5.49 &  2.49 & 2.50 \\
+        EHO & 0.00 & 3.71 &  20.47 &  23.36 & 11.27 \\
+        PSO & 0.99 & 12.74 &  36.88 &   43.46 & 23.77 \\
+        HSFFPKO & 1.88 &  20.18 &  127.28 &  95.07 & 61.11 \\
+        GWO & 6.32 & 33.67 & 145.85 & 181.36 & 91.80 \\
+		\bottomrule
+	\end{tabularx}
+\end{table}
+
+Table \ref{tab:acc} summarizes the selected algorithm results showing their effectiveness on four TSPLIB instances and showing their average relative error. The results demonstrate that the Genetic Algorithm (GA) consistently produced the highest solution quality with an average result of 0.10\%. The Simulated Annealing (SA) performed well with average result of 1.59\%, also Ant Colony Optimization (ACO) with average result of 2.50\% The Elephant Herding Optimization (EHO), Particle Swarm Optimization (PSO), Hovering Scouts and Foraging Flocks Pied Kingfisher Optimizer (HSFFPKO), and Grey Wolf Optimizer (GWO) showed significantly higher errors, which proved they produced lower solution quality results for the tested TSP instances. The results of each algorithm show different results across different TSP instances and execution time because of their stochastic nature.
+
+
+\subsection{Analysis of Runtime Efficiency}
+The Lakad experience depends on runtime efficiency for a mobile environment that requires a quick response. Users need instant responses when they’re optimizing their travel itinerary, leaving with no room for latency.
+
+\begin{table}[H]
+	\centering
+	\singlespacing
+	\caption{Summary of Average Runtime Efficiency (seconds)}
+	\label{tab:runtime} \renewcommand{\arraystretch}{1.2}
+	\begin{tabularx}{\linewidth}{XXXXX}
+		\toprule
+        \multirow{2}{*}{\textbf{Algorithm}} & \multicolumn{4}{c}{\textbf{TSPLIB Instances}}  \\
+        \cmidrule(lr){2-5}
+         & \textbf{burma14} & \textbf{bays29} & \textbf{eil51} & \textbf{berlin52} \\
+		\midrule
+        EHO     & 0.17 & 0.27   & 0.44      & 0.45    \\
+        SA      & 0.49 & 1.04   & 1.82      & 1.90    \\
+        GWO     & 0.51 & 1.02   & 1.73      & 1.75    \\
+        HSFFPKO & 1.16 & 1.42   & 1.78      & 1.76    \\
+        PSO     & 3.36 & 4.77   & 6.30      & 6.84    \\
+        ACO     & 2.51 & 9.67   & 28.62     & 29.23   \\
+        GA      & 3.79 & 26.31  & 168.15    & 196.59  \\
+		\bottomrule
+	\end{tabularx}
+\end{table}
+
+Table \ref{tab:runtime} summarizes the average runtime for each algorithm across all four TSPLIB instances. GA delivered the highest solution quality, but as the problem size became larger. The GA runtime increased exponentially, requiring about 196.59 seconds to complete the berlin52 instance. In contrast, EHO maintained it as the fastest method throughout all tests, completing its largest test in under 0.5 seconds. SA and GWO showed short runtimes, while ACO and PCO displayed moderate to high runtimes that increased with larger problem sizes.
+
+\subsection{Algorithm Ranking}
+
+To select the most suitable algorithm for the Lakad, the study utilized Multi-Criteria Decision Analysis (MCDA) to evaluate algorithms based on their solution quality and runtime efficiency through a Simple Additive Weighting (SAW) method. Table \ref{tab:rank} displays the scores and rankings for each individual instance. Both criteria received equal weight \( w_{i} \) which were both equal to 0.5.
+
+\begin{table}[H]
+	\centering
+	\singlespacing
+	\caption{Final SAW Scores and Rankings of TSP Algorithms}
+	\label{tab:rank} \renewcommand{\arraystretch}{1.2}
+	\begin{tabularx}{\linewidth}{XXXXXX}
+		\toprule
+        \multirow{2}{*}{\textbf{Algorithm}} & \multicolumn{4}{c}{\textbf{TSPLIB Instances}} & \multirow{2}{*}{\textbf{Rank}} \\
+        \cmidrule(lr){2-5}
+         & \textbf{burma14} & \textbf{bays29} & \textbf{eil51} & \textbf{berlin52} &  \\
+		\midrule
+        SA      & 0.06  & 0.03  & 0.01  & 0.01 & 1st \\
+        EHO     & 0.02  & 0.06  & 0.07  & 0.07 & 2nd \\
+        ACO     & 0.37  & 0.21  & 0.10  & 0.08 & 3rd \\
+        PSO     & 0.52  & 0.28  & 0.14  & 0.14 & 4th \\
+        HSFFPKO & 0.30  & 0.33  & 0.44  & 0.33 & 5th \\
+        GA      & 0.50  & 0.50  & 0.50  & 0.50 & 6th \\
+        GWO     & 0.56  & 0.51  & 0.51  & 0.50 & 7th \\
+		\bottomrule
+	\end{tabularx}
+\end{table}
+
+The SAW scores in Table \ref{tab:rank} showed that Simulated Annealing (SA) functioned as the best algorithm because it achieved optimal solution with efficient runtime performance. GA achieved the highest accuracy but its increasing runtime with larger problem sizes resulted in a consistently high SAW score which positioned it in 6th place. EHO performed effectively on small instances but its accuracy declined when handling larger cases which made it unsuitable for complex itineraries.
+
+Given the results, the Simulated Annealing (SA) was the selected route optimization for Lakad. It provides a good trade-off between solution quality and runtime efficiency, ensuring that users receive optimized itineraries in a reasonable time frame, enhancing the overall user experience of the Lakad application.
+
+
+\section{The Developed System}
+The developed system, Lakad, was developed as both a place explorer and itinerary planner with route optimization capabilities. It allows tourists to search tourists spots within Bulacan and plan their itineraries by generating one for them and gives out navigation instructions for travel. The Lakad application has five key features, which are described in the following subsections.
+
+\subsection{Tourist Spot Exploration}
+
+\begin{figure}[H]
+    \centering
+    \caption{Tourist Spot Exploration}
+    \begin{subfigure}[H]{0.3\textwidth}
+        \centering
+        \fbox{\includegraphics[width=\textwidth]{dev-system/mainpage.jpg}}
+        \caption{Place Exploration}
+        \label{fig:1a}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[H]{0.3\textwidth}
+        \centering
+        \fbox{\includegraphics[width=\textwidth]{dev-system/searching2.jpg}}
+        \caption{Search Places}
+        \label{fig:1b}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[H]{0.3\textwidth}
+        \centering
+        \fbox{\includegraphics[width=\textwidth]{dev-system/touristspotlist.jpg}}
+        \caption{Place List}
+        \label{fig:1c}
+    \end{subfigure}
+\end{figure}
+
+Lakad allows user to explore tourist spots in Bulacan in an interactive manner. Figure \ref{fig:1a} shows a map which has markers for the respective tourist spots along with their images. As shown in Figure \ref{fig:1b}, a search bar specifically for finding valid tourist spots can be located on the upper side of the screen. The user can also view the list of all tourist spots with their images, categories, locations, and ratings, as shown in Figure \ref{fig:1c}. This feature provides users with a comprehensive overview of the available tourist spots in Bulacan.
+
+\begin{figure}[H]
+    \centering
+    \caption{Tourist Spot Information}
+    \begin{subfigure}[H]{0.3\textwidth}
+        \centering
+        \fbox{\includegraphics[width=\textwidth]{dev-system/information.jpg}}
+        \caption{Place Information}
+        \label{fig:2a}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[H]{0.3\textwidth}
+        \centering
+        \fbox{\includegraphics[width=\textwidth]{dev-system/review.jpg}}
+        \caption{Review and Rating}
+        \label{fig:2b}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[H]{0.3\textwidth}
+        \centering
+        \fbox{\includegraphics[width=\textwidth]{dev-system/review2.jpg}}
+        \caption{Review and Rating}
+        \label{fig:2c}
+    \end{subfigure}
+\end{figure}
+
+The tourist spot markers on the map are interactive, allowing users to click on them to view detailed information about the tourist spot, including its name, category, location, description, and user reviews and ratings as shown in Figure \ref{fig:2a}. Figure \ref{fig:2b} shows a button that allows users to quickly add the tourist spot to their itinerary. And when scrolling down, users can view the reviews and ratings of the tourist spot. This feature provides users with valuable insights from other travelers. Figure \ref{fig:2c} shows a more comprehensive reviews and ratings of the tourist spot by clicking the “See all reviews” button. The “All Reviews” panel shows the comments and ratings of other users, it also allows for the sorting and filtering of the reviews.
+
+\begin{figure}[H]
+    \centering
+    \caption{Reviews and Ratings}
+    \begin{subfigure}[H]{0.3\textwidth}
+        \centering
+        \fbox{\includegraphics[width=\textwidth]{dev-system/makerating.jpg}}
+        \caption{Write Review and Rating}
+        \label{fig:3a}
+    \end{subfigure}
+    \hfil
+    \begin{subfigure}[H]{0.3\textwidth}
+        \centering
+        \fbox{\includegraphics[width=\textwidth]{dev-system/report.png}}
+        \caption{Report Review}
+        \label{fig:3b}
+    \end{subfigure}
+\end{figure}
+
+In accordance with the suggestions obtained through professionals’ evaluation conducted for the system, a user-review feature is added to the application, where users of Lakad can also create their own reviews and ratings for the tourist spots they have visited. Figure \ref{fig:3a} shows how users can review a tourist spot using star rating that ranges from 1 - 5 stars, they can write a review comment, and upload photos of their experience. Additionally, users can report inappropriate reviews to maintain the quality of reviews in the application, as shown in Figure \ref{fig:3b}. This encourages user engagement and helps build a community of travelers sharing their experiences while maintaining a healthy review environment.
+
+\subsection{Personalized Itinerary Generation}
+
+\begin{figure}[H]
+    \centering
+    \caption{Personalized Itinerary Generation}
+    \begin{subfigure}[H]{0.3\textwidth}
+        \centering
+        \fbox{\includegraphics[width=\textwidth]{dev-system/agamgenerate.jpg}}
+        \caption{Generate Itinerary}
+        \label{fig:4a}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[H]{0.3\textwidth}
+        \centering
+        \fbox{\includegraphics[width=\textwidth]{dev-system/selectlocation.jpg}}
+        \caption{Select Location}
+        \label{fig:4b}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[H]{0.3\textwidth}
+        \centering
+        \fbox{\includegraphics[width=\textwidth]{dev-system/selecttype.jpg}}
+        \caption{Select Type}
+        \label{fig:4c}
+    \end{subfigure}
+\end{figure}
+
+One of the core features of Lakad is its ability to generate personalized itineraries for users based on their preferences and selected tourist spots which was adopted in the study of \textcite{Yochum2020}. The Adaptive Genetic Algorithm with Dynamic Mutation and Crossover Probabilities (AGAM) is the one responsible for generating personalized itineraries, and the required parameters are filled by the user, as shown in Figure \ref{fig:4a}. Users can select their preferred tourist spots location which are based on the districts and municipalities of Bulacan, as shown in Figure \ref{fig:4b}. Next, users must select the type of tourist spots they want to visit, which are based on the categories of the tourist spots, as shown in Figure \ref{fig:4c}. The maximum travel distance and the number of tourist spots to visit are also required parameters for itinerary generation. After filling in the required parameters, users can click the “Generate Itinerary” button to receive a personalized itinerary that optimizes their travel route based on their preferences and selected tourist spots.
+
+\begin{figure}[H]
+    \centering
+    \caption{Generated Itinerary}
+    \begin{subfigure}[H]{0.3\textwidth}
+        \centering
+        \fbox{\includegraphics[width=\textwidth]{dev-system/swipecard.jpg}}
+        \caption{Card View}
+        \label{fig:5a}
+    \end{subfigure}
+    \hfil
+    \begin{subfigure}[H]{0.3\textwidth}
+        \centering
+        \fbox{\includegraphics[width=\textwidth]{dev-system/generated.jpg}}
+        \caption{Generated Itinerary}
+        \label{fig:5b}
+    \end{subfigure}
+\end{figure}
+
+Figure \ref{fig:5a} shows what can be seen after the generation of the itinerary, a card-type view of a tourist spot in the itinerary where users can swipe left or right to reject or accept the tourist spot, respectively, this allows for further personalization of the itinerary. If the user accepts the tourist spot, it will remain within the stops contained inside their generated itinerary. This feature was suggested by the professionals during the evaluation of the system. Figure \ref{fig:5b} shows how users can view the generated itinerary. An autogenerated name for the itinerary is provided, but users can edit it to their preference using the button in the upper right corner of the screen, along with an option to archive said itinerary. As per the evaluation of the system, a feature that provides an estimated time to complete the itinerary is shown under the itinerary name, and users can set the stay-duration for each tourist spot in the itinerary by clicking the three dots beside the stop. This feature allows users to have control over their itinerary and make adjustments based on their preferences and distance constraints.
+
+\subsection{Itinerary Optimization}
+
+\begin{figure}[H]
+    \centering
+    \caption{Itinerary Optimization}
+    \label{fig:6}
+    \begin{subfigure}[H]{0.3\textwidth}
+        \centering
+        \fbox{\includegraphics[width=\textwidth]{dev-system/pre-opt.jpg}}
+        \caption{Pre-Optimization Itinerary}
+        \label{fig:6a}
+    \end{subfigure}
+    \hfil
+    \begin{subfigure}[H]{0.3\textwidth}
+        \centering
+        \fbox{\includegraphics[width=\textwidth]{dev-system/post-opt.jpg}}
+        \caption{Post-Optimization Itinerary}
+        \label{fig:6b}
+    \end{subfigure}
+\end{figure}
+
+The initial generated itinerary only considers the maximum travel distance, ensuring that the total distance of the itinerary does not exceed the specified limit. However, it does not optimize the travel route between the selected tourist spots. Hence, Lakad incorporates the Simulated Annealing (SA) algorithm to optimize the travel route of the generated itinerary. Figure \ref{fig:6a} shows the initial arrangement of the tourist spots in the itinerary generated by AGAM. The “Optimize” button can then be clicked to optimize the travel route of the itinerary using SA. Figure \ref{fig:6b} shows the optimized arrangement of the tourist spots in the itinerary after applying SA along with the total kilometers saved. The first tourist spot in the itinerary is based on the shortest distance from the user’s current location, and the subsequent tourist spots are arranged in a way that minimizes the total travel distance. 
+
+There are also instances where the initial generated itinerary is the optimal solution, thus no changes are made to the arrangement of the tourist spots in the itinerary after optimization.
+
+\subsection{Itinerary Management}
+
+\begin{figure}[H]
+    \centering
+    \caption{Itinerary Management}
+    \begin{subfigure}[H]{0.3\textwidth}
+        \centering
+        \fbox{\includegraphics[width=\textwidth]{dev-system/itinerarymain.jpg}}
+        \caption{Itinerary View}
+        \label{fig:7a}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[H]{0.3\textwidth}
+        \centering
+        \fbox{\includegraphics[width=\textwidth]{dev-system/createitinerary.jpg}}
+        \caption{Create Itinerary}
+        \label{fig:7b}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[H]{0.3\textwidth}
+        \centering
+        \fbox{\includegraphics[width=\textwidth]{dev-system/deleteiti.jpg}}
+        \caption{Delete Itinerary}
+        \label{fig:7c}
+    \end{subfigure}
+\end{figure}
+
+Users can see and manage their generated itineraries in the “Itineraries” page, as shown in Figure \ref{fig:7a}. The users can view their existing itineraries, including the details of each itinerary such as the number of tourist spots, total travel distance, date created, current progress, and the name of the itinerary. It also has a button to start or continue the itinerary, which will give navigation instructions to the user to travel to the tourist spots in the itinerary. Clicking the “New” button will prompt the user to create a new itinerary manually or smart generate an itinerary using the AGAM, as shown in Figure \ref{fig:7b}. Swiping left on an existing itinerary will show the delete button, allowing users to delete their itineraries, as shown in Figure \ref{fig:7c}.
+
+\begin{figure}[H]
+   \centering
+    \caption{Manual Itinerary Creation}
+    \label{manual}
+    \fbox{\includegraphics[width=0.3\textwidth]{dev-system/addstop.jpg}}
+\end{figure}
+
+If the user chooses to create a new itinerary manually, they can select the tourist spots they want to visit and search it by name, as shown in Figure \ref{manual}. On the other hand, if the user chooses to smart generate an itinerary, they will be directed to the AGAM itinerary generation page (Figure \ref{fig:4a}) where they can fill in the required parameters and generate a personalized itinerary based on their preferences and selected tourist spots. This feature provides users with flexibility in creating their itineraries, allowing them to either have a personalized itinerary generated for them or create their own itinerary based on their preferences and selected tourist spots.
+
+\subsection{Itinerary Navigation}
+
+\begin{figure}[H]
+    \centering
+    \caption{Itinerary Navigation}
+    \begin{subfigure}[H]{0.3\textwidth}
+        \centering
+        \fbox{\includegraphics[width=\textwidth]{dev-system/navigationdirection.jpg}}
+        \caption{Directions}
+        \label{fig:8a}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[H]{0.3\textwidth}
+        \centering
+        \fbox{\includegraphics[width=\textwidth]{dev-system/navigationarrival.jpg}}
+        \caption{More Information}
+        \label{fig:8b}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[H]{0.3\textwidth}
+        \centering
+        \fbox{\includegraphics[width=\textwidth]{dev-system/navigationmode.jpg}}
+        \caption{Travel Mode}
+        \label{fig:8c}
+    \end{subfigure}
+\end{figure}
+
+Lakad also features navigation of an itinerary by showing the direction to the first unvisited tourist spot in the itinerary. Figure \ref{fig:8a} shows the direction by displaying the route from the user’s current location to the first unvisited tourist spot in the itinerary. It also shows the estimated time of arrival in the tourist spot and the departure time based on the duration set by the user. Scrolling down, users can view more information such as the entire direction to the tourist spot, the next tourist spot in the itinerary, also a button to mark the tourist spot as visited, as shown in Figure \ref{fig:8b}. Users can also change the travel mode for navigation, which includes driving, walking, and bicycling, as shown in Figure \ref{fig:8c}. The user can choose to avoid tolls and turn on the voice navigation. This feature provides users with a convenient way to navigate their itineraries and ensures that they can easily find their way to the tourist spots they want to visit. For a safer traveling especially when driving, the navigate feature of the application integrates text-to-speech which voices the instructions shown in the screen.
+
+Additionally, a stop is also marked as visited when the user is detected to be within a certain proximity of the tourist spot. This feature provides users with a seamless navigation experience, allowing them to focus on enjoying their trip while the application automatically tracks their progress through the itinerary.
+
+\subsection{Admin Management}
+
+This feature of the Lakad application allows the application to be secure, more manageable, and scalable for future additions.
+
+\begin{figure}[H]
+    \centering
+    \caption{Admin Options}
+    \label{admin:option}
+    \fbox{\includegraphics[width=0.3\textwidth]{dev-system/adminmode.jpg}}
+\end{figure}
+
+ The administrator side mainly features the management of the tourist spots that will be shown in the application. Figure \ref{admin:option} shows all the privileges of the administrator such as managing user accounts, managing tourist spots, and managing itineraries.
+
+\begin{figure}[H]
+    \centering
+    \caption{Analytics}
+    \label{admin:dash}
+    \fbox{\includegraphics[width=0.3\textwidth]{dev-system/admindashboard.jpg}}
+\end{figure}
+
+Figure \ref{admin:dash} shows what an administrator can see. It includes the summary and reports of the application in the Analytics page. The summary shows the total number of itineraries, total number of tourist spots, archived tourist spots, and the total kilometers planned in the itineraries. Summary of popular places is also shown along with the least popular places. This feature provides the administrator with insights into the usage of the application and helps them make informed decisions about managing the tourist spots and improving the user experience.
+
+\begin{figure}[H]
+    \centering
+    \caption{Manage Places}
+    \begin{subfigure}[H]{0.3\textwidth}
+        \centering
+        \fbox{\includegraphics[width=\textwidth]{dev-system/adminplaces.jpg}}
+        \caption{Manage Tourist Spot}
+        \label{admin:places}
+    \end{subfigure}
+    \hfil
+    \begin{subfigure}[H]{0.3\textwidth}
+        \centering
+        \fbox{\includegraphics[width=\textwidth]{dev-system/adminadd.jpg}}
+        \caption{Add Tourist Spot}
+        \label{admin:add}
+    \end{subfigure}
+\end{figure}
+
+To keep the application scalable and up-to-date, the administrator can manage the tourist spots in the application by adding new tourist spots, updating existing tourist spots, see Figure \ref{admin:places}. When adding a new tourist spot, the administrator must fill in the required information such as the name, category, location, description, and upload photos of the tourist spot, as shown in Figure \ref{admin:add}. The coordinates of the tourist can either be retrieved manually from Google Maps or other mapping services, or by pinning the location of the tourist spot on the map. This feature allows the administrator to easily manage the tourist spots in the application.
+
+\begin{figure}[H]
+    \centering
+    \caption{Tourist Spot Management}
+    \begin{subfigure}[H]{0.3\textwidth}
+        \centering
+        \fbox{\includegraphics[width=\textwidth]{dev-system/adminupdate.jpg}}
+        \caption{Update Tourist Spot}
+        \label{admin:update}
+    \end{subfigure}
+    \hfil
+    \begin{subfigure}[H]{0.3\textwidth}
+        \centering
+        \fbox{\includegraphics[width=\textwidth]{dev-system/adminanal.jpg}}
+        \caption{Tourist Spot Analytics}
+        \label{admin:anal}
+    \end{subfigure}
+\end{figure}
+
+Existing tourist spots can also be updated by the administrator, as shown in Figure \ref{admin:update}. The administrator can update the information of the tourist spot such as the name, category, location, description, and photos. Additionally, the analytics of the tourist spot can also be viewed, which shows the total number of visits, total number of reviews, average rating, rating distribution, visit trends, and number of itineraries that include the tourist spot, as shown in Figure \ref{admin:anal}. This feature provides the administrator with insights into the performance of each tourist spot.
+
+\begin{figure}[H]
+    \centering
+    \caption{Distance Matrix Management}
+    \label{admin:distance}
+    \fbox{\includegraphics[width=0.3\textwidth]{dev-system/admindistance.jpg}}
+\end{figure}
+One of the features in the Admin mode of Lakad is the distance matrix tab, which stores the travel distances that connect every tourist destination to each other. The distance management tab shows to users through Figure \ref{admin:distance} that they can recompute the distance matrix after adding a new tourist destination to the system. The application achieves lower Open Route Service API usage through this method, which enables the system to expand without incurring expenses from API requests.
+
+\begin{figure}[H]
+    \centering
+    \caption{Review Reports}
+    \begin{subfigure}[H]{0.3\textwidth}
+        \centering
+        \fbox{\includegraphics[width=\textwidth]{dev-system/adminreport.jpg}}
+        \caption{{}}
+        \label{admin:report1}
+    \end{subfigure}
+    \hfil
+    \begin{subfigure}[H]{0.3\textwidth}
+        \centering
+        \fbox{\includegraphics[width=\textwidth]{dev-system/adminreport2.jpg}}
+        \caption{{ }}
+        \label{admin:report2}
+    \end{subfigure}
+\end{figure}
+
+The administrator can also view the reported reviews in the application, as shown in Figure \ref{admin:report1} and Figure \ref{admin:report2}. Users can report inappropriate reviews and the administrator can see all reported reviews to take appropriate actions like deleting a review or dismissing the report of a user. The application uses this feature to maintain the review quality which enables users to trust the reviews and ratings from other users.
+
+\section{System Evaluation}
+
+This section presents evaluation results of Lakad, which evaluates user acceptability of the system together with software quality assessment. The collected data was processed and analyzed in the Jupyter Notebook with the use of Python Libraries such as Pandas, Matplotlib, and NumPy. The results are shown through mean scores which include standard deviations.
+
+\subsection{Evaluation of System Acceptability}
+
+Lakad acceptability was evaluated with a Technology Acceptance Model (TAM) survey that the researcher distributed to 150 tourist participants. The distribution was proportionately done across different tourist destinations in a selected municipality in Bulacan.
+
+\begin{table}[H]
+	\centering
+	\singlespacing
+	\caption{System Acceptability results}
+	\label{tam1}
+	\renewcommand{\arraystretch}{1.2}
+    \begin{tabularx}{\linewidth}{p{0.3\linewidth} >{\centering\arraybackslash}X >{\centering\arraybackslash}X p{0.23\linewidth}}
+		\toprule
+		\textbf{Construct} & \textbf{Mean Score} & \textbf{Standard Deviation} & \textbf{Interpretation}\\
+		\midrule
+        Perceived usefulness        & 4.7053 & 0.3435 & Highly acceptable \\
+        Perceived ease of use       & 4.7067 & 0.4383 & Highly acceptable \\
+        Attitude towards using      & 4.7200 & 0.4015 & Highly acceptable \\
+        Behavioral intention to use & 4.5556 & 0.4740 & Highly acceptable \\
+        \midrule
+         \textbf{Grand TAM Score}           & \textbf{4.6719} & \textbf{0.4189} & \textbf{Highly acceptable} \\
+		\bottomrule
+	\end{tabularx}
+\end{table}
+
+The TAM survey results are presented in Table \ref{tam1} that displays the mean scores and standard deviations for each construct. The constructs achieved high mean scores which were interpreted as highly acceptable results because users found the Lakad to be useful and easy to use while they had a positive attitude towards the application. The application received exceptional marks in all three categories such as perceived usefulness (4.7053), perceived ease of use (4.7067), and attitude towards using (4.7200) suggesting that the application can effectively meet the users’ needs and expectations. The behavioral intention to use scored slightly lower than the other constructs but still achieved a high mean score of 4.5556 which indicates that users will likely continue the application in future.
+
+All constructs resulted in low standard deviations which measure between 0.3435 and 0.4740. The narrow distribution of data points shows a strong consensus among respondents because most users reported similar positive perceptions rather than opposing or different experiences. The lowest variance is perceived usefulness with 0.3435, showing that users almost completely agreed on the application’s usefulness. Users accept the Lakad because it received positive feedback which results in a total TAM score of 4.6719 for the application.
+
+Median scores and frequency distributions for each item in the TAM survey further support this. The Usefulness item (PU5) in Perceived Usefulness construct, most of the respondents answered 5, an indication that they find the system very useful. The system is perceived as easy to operate, learn, and master since most of the respondents rated the Ease of Operation item (PEU5) 5. Users also expressed high satisfaction, enjoyment, and positive feelings towards using the system with the Satisfaction item (ATU3) being rated having the most 5 in the construct. The Behavioral Intention to Use (BI) items show slightly more variance, this explains the results in the lower mean score for this construct in Table \ref{tam1}. The Intention to Use item (BI1) most of the respondents rated it 4, one more than the people rating it 5. This suggests that while many users have a strong intention to use the system, there is also a notable portion that is less certain about their intention to use it. Lastly most of the responses for the Future Use item (BI2) is 5, indicating that many users are likely to continue using the system in the future. This can also connect the responses in BI1, implying that while many users are less certain in using the system in the present, they are still likely to continue using the system in the future. The complete frequency distribution of the TAM survey items was shown in Appendix \ref{app:syseval}.
+
+\subsection{Software Quality Evaluation}
+
+The software quality of the Lakad application was evaluated using a survey based on the ISO/IEC 25010:2023 software quality model. The survey was done by IT experts, Software developers, and selected faculty members in the College of Information and Communications Technology (CICT) of Bulacan State University. The survey was distributed to a total of 22 professionals.
+
+\begin{table}[H]
+	\centering
+	\singlespacing
+	\caption{System Quality results}
+	\label{iso1}
+	\renewcommand{\arraystretch}{1.2}
+    \begin{tabularx}{\linewidth}{p{0.4\linewidth} >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X}
+		\toprule
+		\textbf{Construct} & \textbf{Mean Score} & \textbf{Standard Deviation} & \textbf{Interpretation}\\
+		\midrule
+        Functional Suitability & 4.8636 & 0.2447  & Excellent \\
+        Performance Efficiency & 4.7727 & 0.3902  & Excellent \\
+        Compatibility          & 4.6591 & 0.4973  & Excellent \\
+        Interaction Capability & 4.7614 & 0.2642  & Excellent \\
+        Reliability            & 4.8182 & 0.3634  & Excellent \\
+        Security               & 4.8258 & 0.3190  & Excellent \\
+        Maintainability        & 4.6818 & 0.3187  & Excellent \\
+        Flexibility            & 4.7500 & 0.3086  & Excellent \\
+        Safety                 & 4.7455 & 0.4501  & Excellent \\
+        \midrule
+         \textbf{Grand ISO/IEC 25010:2023 Score}           & \textbf{4.7642} & \textbf{0.3575} & \textbf{Excellent} \\
+		\bottomrule
+	\end{tabularx}
+\end{table}
+
+Table \ref{iso1} summarizes the results of the software quality evaluation based on the ISO/IEC 25010:2023 model. All constructs achieved a high mean score ranging from 4.6591 to 4.8636, all of which were interpreted as excellent. Lakad achieved its highest mean score through its Functional Suitability which received a score of 4.8636. The application provides a stable and secure environment according to its high scores of 4.8258 for Security and 4.8182 for Reliability. The application’s current exclusive use on Android devices results in its lowest score for Compatibility which received a mean score of 4.6591.
+
+The standard deviations offer further insights into the experts’ evaluations, which demonstrate a narrow range from 0.2447 to 0.4973. Functional Sustainability achieved the lowest standard deviation of 0.2447 while showing the highest mean results because all IT professionals nearly agreed about the application’s ability to function according to its core features. Conversely, the compatibility showed the highest standard deviation at 0.4973, showing slightly more variance in experts’ evaluations, likely experts place different importance to cross-platform availability in comparison to their assessment of current Android performance. Overall, the experts’ consensus proved reliable through all categories which showed constant low variance, resulting in a grand ISO/IEC 25010:2023 score of 4.7642
+
+
+To provide a more detailed analysis of the software quality evaluation and to explore deeper understanding of the specific aspects of each construct, the per item median scores and frequency distributions for each item in the survey are also computed which was shown in Appendix \ref{app:syseval}. All the items in the survey reported a median score of 5. The per item frequency distribution of the ISO/IEC 25010:2023 survey reveals the cause of the high mean scores for each construct, and the strengths and weaknesses of Lakad in terms of software quality. Accountability (F), Functional Appropriateness (A), Testability (G), and Faultlessness (E) achieved the highest frequencies of 5 (Excellent), indicating that the app effectively accomplish the task of planning an itinerary while being reliable. On the other hand, Analysability (G), Replaceability (H), Modularity (G), and Interoperability (C) accumulated the lowest frequencies of 5, although most of the response were above average (Very Good). Since Lakad operates exclusively to Android devices, this explains the results in the Interoperability item that the app currently does not work to other devices like iOS. The score in Replaceability suggest that while Lakad shows high Functional suitability score, competing against existing apps like Google Maps and TripAdvisor may be difficult. Since Lakad was developed using React Native, its current implementation enables the system to transition to other platforms straightforward and easily, which might enhance the system’s Interoperability and Replaceability. Overall, the per item frequency distribution provides insights into the specific software quality areas where Lakad achieves success and where there may be opportunities for improvement.
+
