@@ -1,14 +1,10 @@
 \section{Results and Discussion}
 
-This section presents the results of the study, focusing on the development of a mobile itinerary generator and optimizer for tourist destinations in the province of Bulacan. The results follow a comparative analysis between selected algorithms to solve the Traveling Salesman Problem (TSP). It includes the discussion about the developed system alongside the features available with the application. The reliability and quality of the application is also measured under user acceptability, and software quality assessments. The results of the study provides insights into how modern planning methods affect the tourism sector. It enables policy makers to create more suitable methods of promotion and explore which aspect of the sector can be changed to improve the quality of tourism and provide a better experience for the tourists.
+The evaluation of \textit{Lakad} includes the algorithmic benchmarking required for efficient route optimization, followed by the assessment of the system’s user acceptability and technical software quality. These findings demonstrate how integrating mathematical optimization models with localized data can effectively address the uneven promotion of tourist destinations in Bulacan.
 
 \subsection{Route Optimization Algorithm Selection}
-This section shows how the selected metaheuristic algorithms perform when solving TSP. The burma14, bays29, eil51, and berlin52 instances from TSPLIB library were used to test the algorithms. The study aimed to determine which route optimization algorithm would best serve Lakad by evaluating its ability to minimize travel distance and runtime efficiency. The researchers executed each algorithm 10 times to observe its stochastic nature and record the average results for analysis.
 
-Each algorithm has their specific parameters to ensure fair comparison. The researchers executed the algorithms 30 times for each TSP instance to establish a statistical validity, which resulted in average performance metrics that they used for their analysis. The parameter settings were selected based on preliminary experiments and studied literature recommendations.
-
-\subsubsection{Analysis of Solution Quality (Accuracy) and Runtime Efficiency}
-The solution quality of each algorithm is measured by its average relative error (\%) when compared to the optimal solution for each TSP instance. While the runtime efficiency is computed focusing on mobile environment which requires quick response as users need it instantly when optimizing their itinerary.
+The comparative benchmarking of the seven metaheuristic algorithms revealed a distinct trade-off between solution quality (accuracy) and computational efficiency (runtime). Table \ref{tab:acc} presents the average relative error of each algorithm compared to the known optimal solutions of the TSPLIB instances. The Genetic Algorithm (GA) consistently produced the highest solution quality, achieving an exceptional average error of 0.10\%. Simulated Annealing (SA) and Ant Colony Optimization (ACO) also performed competitively, yielding average errors of 1.59\% and 2.50\%, respectively. 
 
 \begin{table}[H]
 	\centering
@@ -32,7 +28,7 @@ The solution quality of each algorithm is measured by its average relative error
 	\end{tabularx}
 \end{table}
 
-Table \ref{tab:acc} summarizes the selected algorithm results showing their effectiveness on four TSPLIB instances followed by their average relative error. The results demonstrate that the Genetic Algorithm (GA) consistently produced the highest solution quality with an average result of 0.10\%. The Simulated Annealing (SA) performed well with average result of 1.59\%, also Ant Colony Optimization (ACO) with average result of 2.50\%. The rest of the algorithms show significantly higher errors, which means they produced lower solution quality results for the tested TSP instances. The results of each algorithm show different results across different TSP instances and execution time because of their stochastic nature.
+However, as demonstrated in Table \ref{tab:runtime}, GA's superior accuracy comes at a severe computational cost. As the problem size increased, GA's runtime scaled exponentially, requiring over 196 seconds to complete the \textit{berlin52} instance. Conversely, the Elephant Herding Optimizer (EHO) maintained the fastest execution (under 0.5 seconds across all tests) but suffered from rapidly degrading accuracy on larger datasets, making it unreliable for complex itinerary optimization. SA and the Gray Wolf Optimizer (GWO) maintained consistently short runtimes across all instances.
 
 \begin{table}[H]
 	\centering
@@ -56,10 +52,7 @@ Table \ref{tab:acc} summarizes the selected algorithm results showing their effe
 	\end{tabularx}
 \end{table}
 
-Table \ref{tab:runtime} summarizes the average runtime for each algorithm across all four TSPLIB instances. GA delivered the highest solution quality, but as the problem size became larger its runtime increased exponentially, requiring about 196.59 seconds to complete the berlin52 instance. In contrast, EHO maintained it as the fastest method throughout all tests, completing its largest test in under 0.5 seconds. SA and GWO showed short runtimes, while ACO and PCO displayed moderate to high runtimes that increased with larger problem sizes.
-
-\subsubsection{Algorithm Selection}
- The final selection of the algorithm that was used is determined by a Multi-Criteria Decision Analysis (MCDA) that evaluated the algorithms based on their solution quality and runtime efficiency through a Simple Additive Weighting (SAW) method.
+To objectively resolve this trade-off, the Simple Additive Weighting (SAW) method was applied, assigning equal weights to both the normalized solution quality and runtime efficiency. As shown in Table \ref{tab:rank}, Simulated Annealing (SA) achieved the premier rank across the majority of instances. GA's prolonged execution times penalized its SAW score heavily, dropping it to 6th place overall, while EHO secured 2nd place due to its speed but lacked the necessary precision for practical routing.
 
 \begin{table}[H]
 	\centering
@@ -82,9 +75,8 @@ Table \ref{tab:runtime} summarizes the average runtime for each algorithm across
 		\bottomrule
 	\end{tabularx}
 \end{table}
-Table \ref{tab:rank} displays the scores and rankings for each individual instance. Both criteria received equal weight \( w_{i} \) which were both equal to 0.5. The SAW scores showed that Simulated Annealing (SA) prevail as the best algorithm since it achieved optimal solution with efficient runtime performance. GA achieved the highest accuracy but its increased runtime with larger problem sizes resulted in a consistently undesirable SAW score which positioned it in 6th place. EHO performed effectively on small instances but its accuracy declined when handling larger cases which made it unsuitable for complex itineraries.
 
-Given the results, the Simulated Annealing (SA) was the selected route optimization for Lakad. It provides a good trade-off between solution quality and runtime efficiency, ensuring that users receive optimized itineraries in a reasonable time frame, enhancing the overall user experience of the Lakad application. The result follow the argument of \textcite{Wadi2025} that swarm-based or heuristic algorithms with fast runtimes are better suited for resource-constrained mobile environments compared to the ones with better quality but slow execution, which also risks critical overuse of resources in mobile phones.
+Consequently, Simulated Annealing (SA) was selected as the designated routing engine for the \textit{Lakad} application. This result aligns with the assertions of \textcite{Wadi2025}, which dictate that heuristic models balancing rapid execution with near-optimal accuracy are vastly superior for resource-constrained mobile environments compared to exact methods or highly complex genetic algorithms that risk critical resource exhaustion. SA ensures that users receive highly optimized travel sequences within a responsive, real-time time frame.
 
 \subsection{The Developed System}
 The developed system, Lakad, was developed as both a place explorer and itinerary planner with route optimization capabilities. The features integrated in the developed system aimed to fill the gaps where previous systems struggled to fill. The developed system also proved capable of contributing to the ongoing efforts of \parencite{DOT2023} to promote a distinct personal experience for tourists.
