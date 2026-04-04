@@ -33,7 +33,7 @@ To determine the best algorithm to implement for \textit{Lakad}, a comparative b
 
 The experiments were implemented in Python to utilize its native TSPLIB support. All algorithms were executed under identical testing conditions on an Arch Linux environment utilizing a Ryzen 5 3400G processor and 16 gigabytes of RAM. To ensure statistical reliability and account for the stochastic nature of metaheuristic algorithms, each algorithm was executed for 10 independent iterations per TSPLIB instance, aligning with the methodological standards established by \textcite{Hossain2024,Wadi2025}.
 
-Algorithm perforamcne was evaluated using two primary metrics derived from the averged iterations:
+Algorithm performance was evaluated using two primary metrics derived from the averaged iterations:
 
 \begin{enumerate}
 	\item \textbf{Runtime Speed (\( T_{avg} \)).} The average execution time required to reach the final solution, measured in seconds. 
@@ -47,7 +47,7 @@ To select the final algorithm, the trade-off between speed and accuracy was asse
 	\label{eq:norm}
 	r _{ij} = \frac{x_{ij}}{\max(x_{ij})}
 \end{equation}
-Where \( r_{ij} \) is the normalized value of the \( j \)-th criteria for the \( i \)-th algorithm, \( x_{ij} \) is the original value, and \( \max{x_{ij}} \) is the maximum value observed for that criteria.
+Where \( r_{ij} \) is the normalized value of the \( j \)-th criteria for the \( i \)-th algorithm, \( x_{ij} \) is the original value, and \( \max{x_{ij}} \) is the maximum value observed for criterion.
 
 Subsequently, equal weights ($w _{1} = w _{2} = 0.5$) were assigned to both the normalized runtime and solution quality to equally prioritize both. The final score \( S_{i} \) for each algorithm was calculated using Equation \ref{eq:saw}:
 
