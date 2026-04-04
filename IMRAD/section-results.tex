@@ -76,7 +76,7 @@ To objectively resolve this trade-off, the Simple Additive Weighting (SAW) metho
 	\end{tabularx}
 \end{table}
 
-Consequently, Simulated Annealing (SA) was selected as the designated routing engine for the \textit{Lakad} application. This result aligns with the assertions of \textcite{Wadi2025}, which dictate that heuristic models balancing rapid execution with near-optimal accuracy are vastly superior for resource-constrained mobile environments compared to exact methods or highly complex genetic algorithms that risk critical resource exhaustion. SA ensures that users receive highly optimized travel sequences within a responsive, real-time time frame.
+Consequently, Simulated Annealing (SA) was selected as the designated routing optimization algorithm for the \textit{Lakad} application. This result aligns with the argument of \textcite{Wadi2025} that heuristic models balancing rapid execution with near-optimal accuracy are much more effective for resource-constrained mobile environments compared to exact methods or highly complex algorithms that risk critical resource exhaustion. SA ensures that users receive highly optimized travel sequences within a responsive, real-time time frame.
 
 \subsection{The Developed System}
 
@@ -107,12 +107,17 @@ Consequently, Simulated Annealing (SA) was selected as the designated routing en
 	\end{subfigure}
 \end{figure} 
 
-As illustrated in Figure \ref{fig:1}, the tourist spot exploration feature serve as the primary interface for discovering tourist spots in Bulacan. \textit{Lakad} ensures that the tourist spots are validated by the PHACTO, providing a reliable and accurate information for users. This interface allows users to filter localized data, evaluate historical significance, and access community-driven metrics such as crowdsourced ratings and reviews. With this feature, users can make informed decisions about which tourist spots to include in their itineraries, while also fostering a sense of community engagement through reviews and ratings.
+As illustrated in Figure \ref{fig:1}, the tourist spot exploration feature serve as the primary interface for discovering tourist spots in Bulacan. \textit{Lakad} ensures that the tourist spots and its data are validated by the PHACTO, to provide reliable and accurate information for users. These interfaces allow users to filter the localized data through search, view its historical significance, and access community-driven metrics such as ratings and reviews. With this feature, users can make informed decisions about which tourist spots to include in their itineraries, while still providing them with a sense of community engagement.
 
 \begin{figure}[H]
 	\centering
 	\caption{Personalized Itinerary Generation}
 	\label{fig:2}
+	\begin{subfigure}[H]{0.2\textwidth}
+		\centering
+		\fbox{\includegraphics[width=\textwidth]{dev-system/preference.jpg}}
+	\end{subfigure}
+	\hspace{0.5cm}
 	\begin{subfigure}[H]{0.2\textwidth}
 		\centering
 		\fbox{\includegraphics[width=\textwidth]{dev-system/createitinerary.jpg}}
@@ -129,7 +134,7 @@ As illustrated in Figure \ref{fig:1}, the tourist spot exploration feature serve
 	\end{subfigure}
 \end{figure}
 
-Figure \ref{fig:2} details the parameter initialization sequence for AGAM itinerary generation. This solves the problem of manual itinerary planning which can be time-consuming and overwhelming for users, especially those who are not familiar with the area. Users define their target municipalities, prefered type of tourist spots, maximum travel distance, and the upper bound for stopovers. These inputs serve as the primary constraints for the AGAM fitness function (discussed in Section 2.2). Upon execution, the system processes these multi-objective parameters to dynamically generate a highly customized POI sequence that maximizes user interest while strictly adhering to the defined travel budget.
+Figure \ref{fig:2} details the parameter initialization for AGAM itinerary generation. This solves the time-consuming problem of manual itinerary planning for users. Users define their categorical preferences, which AGAM will prioritize, when first using the app. Then in the planner page, they can filter municipalities and type of tourist spots and set maximum travel distance and stopovers. These inputs serve as constraints for the AGAM fitness function (discussed in Section 2.2). The system processes these multi-objective parameters to dynamically construct a highly customized POI sequence that maximizes user interest while strictly adhering to the defined constraints.
 
 
 \begin{figure}[H]
@@ -147,11 +152,12 @@ Figure \ref{fig:2} details the parameter initialization sequence for AGAM itiner
 	\end{subfigure}
 \end{figure}
 
-Once AGAM generates the optimal set of destinations, the system address the routing challenge (the Traveling Salesman Problem) via the optimization feature shown in Figure \ref{fig:3}. Utilizing the Simulated Annealing (SA) algorithm, the system evaluates the distance matrix corresponding to the selected POIs. The SA systematically reorders the sequence of destinations to minimize the global travel distance. The interface shows the before and after optimization of the generated itinerary, providing feedback to the user the total distance and estimated time saved through the algorithmic intervention.
+Once AGAM generates the optimal set of destinations, the system address the routing challenge of TSP via the optimization feature shown in Figure \ref{fig:3}. Utilizing the Simulated Annealing (SA) algorithm, the system evaluates the distance matrix corresponding to the selected POIs. The SA reorders the sequence of destinations to minimize the travel distance. The interface shows the before and after optimization of the generated itinerary, providing the user the total distance and estimated time saved through the algorithmic optimization.
 
 \begin{figure}[H]
 	\centering
 	\caption{Itinerary Navigation}
+	\label{itinerary_nav}
 	\begin{subfigure}[H]{0.2\textwidth}
 		\centering
 		\fbox{\includegraphics[width=\textwidth]{dev-system/navigationdirection.jpg}}
@@ -163,7 +169,7 @@ Once AGAM generates the optimal set of destinations, the system address the rout
 	\end{subfigure}
 \end{figure}
 
-The itinerary navigation feature of \textit{Lakad} provides users with a convenient way to navigate through their optimized itinerary. Figure \ref{fig:3} shows the navigation interface, which includes step-by-step directions, estimated arrival times, and the option to switch between different modes of transportation. This feature enhances the user experience by providing real-time guidance and ensuring that users can easily follow their planned routes.
+The itinerary navigation feature of \textit{Lakad} provides users with a convenient way to navigate their itinerary. Figure \ref{itinerary_nav} shows the navigation interface, which provides step-by-step directions, estimated arrival times, and the option to switch between different modes of transportation, enhancing user experience by providing real-time guide and ensuring they can safely and easily follow planned routes.
 
 \begin{figure}[H]
 	\centering
