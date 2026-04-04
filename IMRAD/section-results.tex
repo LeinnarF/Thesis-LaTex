@@ -79,293 +79,124 @@ To objectively resolve this trade-off, the Simple Additive Weighting (SAW) metho
 Consequently, Simulated Annealing (SA) was selected as the designated routing engine for the \textit{Lakad} application. This result aligns with the assertions of \textcite{Wadi2025}, which dictate that heuristic models balancing rapid execution with near-optimal accuracy are vastly superior for resource-constrained mobile environments compared to exact methods or highly complex genetic algorithms that risk critical resource exhaustion. SA ensures that users receive highly optimized travel sequences within a responsive, real-time time frame.
 
 \subsection{The Developed System}
-The developed system, Lakad, was developed as both a place explorer and itinerary planner with route optimization capabilities. The features integrated in the developed system aimed to fill the gaps where previous systems struggled to fill. The developed system also proved capable of contributing to the ongoing efforts of \parencite{DOT2023} to promote a distinct personal experience for tourists.
-With this in mind, Lakad has five key features namely; Tourist Spot Exploration which includes Tourist Spot Information, and Reviews and Ratings; the Personalized Itinerary Generation feature which contains the Generated Itinerary; the Itinerary Optimization which utilizes the selected algorithm for optimization; the Itinerary Management feature that lets users manage itineraries, including an option to create more manually or automatically; and the Itinerary Navigation feature which serve as the guide for traversing given itinerary. Alongside the core features, the application also has an admin mode for a more efficient management of the application's content by the administrators.
+
+\textit{Lakad} was developed as a tourists spot explorer and itinerary planner with route optimization capabilities. It features a dual-interface architecture tailored for both tourists and system administrators. The app successfully bridge the gap between localized tourism data and advanced optimization models.
 
 \begin{figure}[H]
 	\centering
 	\caption{Tourist Spot Exploration}
-	\begin{subfigure}[H]{0.3\textwidth}
+	\label{fig:1}
+	\begin{subfigure}[H]{0.2\textwidth}
 		\centering
 		\fbox{\includegraphics[width=\textwidth]{dev-system/mainpage.jpg}}
-		\caption{Place Exploration}
-		\label{fig:1a}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}[H]{0.3\textwidth}
-		\centering
-		\fbox{\includegraphics[width=\textwidth]{dev-system/searching2.jpg}}
-		\caption{Search Places}
-		\label{fig:1b}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}[H]{0.3\textwidth}
-		\centering
-		\fbox{\includegraphics[width=\textwidth]{dev-system/touristspotlist.jpg}}
-		\caption{Place List}
-		\label{fig:1c}
-	\end{subfigure}
-\end{figure}
-
-Figure \ref{fig:1a} shows a map which has markers for the respective tourist spots along with their images. Figure \ref{fig:1b} shows a search bar for finding valid tourist spots. Figure \ref{fig:1c} lets the user view tourist spots with their images, categories, locations, and ratings in a list view. These features of Lakad provides users with a comprehensive overview to explore available tourist spots in Bulacan in an interactive manner.
-
-\begin{figure}[H]
-	\centering
-	\caption{Tourist Spot Information}
-	\begin{subfigure}[H]{0.3\textwidth}
-		\centering
-		\fbox{\includegraphics[width=\textwidth]{dev-system/information.jpg}}
-		\caption{Place Information}
-		\label{fig:2a}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}[H]{0.3\textwidth}
-		\centering
-		\fbox{\includegraphics[width=\textwidth]{dev-system/review.jpg}}
-		\caption{Review and Rating}
-		\label{fig:2b}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}[H]{0.3\textwidth}
-		\centering
-		\fbox{\includegraphics[width=\textwidth]{dev-system/review2.jpg}}
-		\caption{Review and Rating}
-		\label{fig:2c}
-	\end{subfigure}
-\end{figure}
-
-Clicking the markers allow users to view detailed information about the tourist spot, along with user reviews and ratings as shown in Figure \ref{fig:2a}. Figure \ref{fig:2b} shows a button that allows users to quickly add the tourist spot to their itinerary. Further scrolling provides a section of the reviews and ratings of the tourist spot to provide users with valuable insights from other travelers. Figure \ref{fig:2c} shows a more comprehensive reviews and ratings of the tourist spot by clicking the “See all reviews” button.
-
-\begin{figure}[H]
-	\centering
-	\caption{Reviews and Ratings}
-	\begin{subfigure}[H]{0.3\textwidth}
-		\centering
-		\fbox{\includegraphics[width=\textwidth]{dev-system/makerating.jpg}}
-		\caption{Write Review and Rating}
-		\label{fig:3a}
+		% \caption{Map Exploration}
 	\end{subfigure}
 	\hfil
-	\begin{subfigure}[H]{0.3\textwidth}
+	\begin{subfigure}[H]{0.2\textwidth}
 		\centering
-		\fbox{\includegraphics[width=\textwidth]{dev-system/report.png}}
-		\caption{Report Review}
-		\label{fig:3b}
+		\fbox{\includegraphics[width=\textwidth]{dev-system/searching2.jpg}}
+		% \caption{Search Places}
 	\end{subfigure}
-\end{figure}
-Figure \ref{fig:3a} shows how users can review a tourist spot using star rating that ranges from 1 - 5 stars, they can write a review and upload photos of their experience. Additionally, users can report inappropriate reviews to maintain the quality of reviews in the application, as shown in Figure \ref{fig:3b}. This encourages user engagement and helps build a community of travelers sharing their experiences while maintaining a healthy review environment.
+	\hfil
+	\begin{subfigure}[H]{0.2\textwidth}
+		\centering
+		\fbox{\includegraphics[width=\textwidth]{dev-system/information.jpg}}
+		% \caption{Information}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}[H]{0.2\textwidth}
+		\centering
+		\fbox{\includegraphics[width=\textwidth]{dev-system/review.jpg}}
+		% \caption{Review and Rating}
+	\end{subfigure}
+\end{figure} 
+
+Figure \ref{fig:1} shows the tourist spot exploration feature of \textit{Lakad}, allowing users to explore the map and view relevant information about the place. Users can also see the reviews and rating about the place, they can also add their own review and rating, encouraging user engagement and helping build a community of travelers sharing their experience. Additionally, users can report inappropriate reviews to maintain the quality of reviews in the application.
 
 \begin{figure}[H]
 	\centering
 	\caption{Personalized Itinerary Generation}
-	\begin{subfigure}[H]{0.3\textwidth}
+	\label{fig:2}
+	\begin{subfigure}[H]{0.2\textwidth}
+		\centering
+		\fbox{\includegraphics[width=\textwidth]{dev-system/createitinerary.jpg}}
+	\end{subfigure}
+	\hspace{0.5cm}
+	\begin{subfigure}[H]{0.2\textwidth}
 		\centering
 		\fbox{\includegraphics[width=\textwidth]{dev-system/agamgenerate.jpg}}
-		\caption{Generate Itinerary}
-		\label{fig:4a}
 	\end{subfigure}
-	\hfill
-	\begin{subfigure}[H]{0.3\textwidth}
-		\centering
-		\fbox{\includegraphics[width=\textwidth]{dev-system/selectlocation.jpg}}
-		\caption{Select Location}
-		\label{fig:4b}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}[H]{0.3\textwidth}
-		\centering
-		\fbox{\includegraphics[width=\textwidth]{dev-system/selecttype.jpg}}
-		\caption{Select Type}
-		\label{fig:4c}
-	\end{subfigure}
-\end{figure}
-
-One of the core features of Lakad is its ability to generate personalized itineraries for users based on their preferences and selected tourist spots which was adopted in the study of \textcite{Yochum2020}. The application lets users set required parameters, and then the Adaptive Genetic Algorithm with Dynamic Mutation and Crossover Probabilities (AGAM) generates personalized itineraries based from it as shown in Figure \ref{fig:4a}. Users can select their preferred tourist spots location which are based on the districts and municipalities of Bulacan, as shown in Figure \ref{fig:4b}. Users must also select the category of tourist spots they want to visit as seen in Figure \ref{fig:4c}. The maximum travel distance and the number of tourist spots to visit are also required parameters for itinerary generation. Users can then click the “Generate Itinerary” button to see the generated personalized itinerary based on their preferences.
-
-\begin{figure}[H]
-	\centering
-	\caption{Generated Itinerary}
-	\begin{subfigure}[H]{0.3\textwidth}
-		\centering
-		\fbox{\includegraphics[width=\textwidth]{dev-system/swipecard.jpg}}
-		\caption{Card View}
-		\label{fig:5a}
-	\end{subfigure}
-	\hfil
-	\begin{subfigure}[H]{0.3\textwidth}
+	\hspace{0.5cm}
+	\begin{subfigure}[H]{0.2\textwidth}
 		\centering
 		\fbox{\includegraphics[width=\textwidth]{dev-system/generated.jpg}}
-		\caption{Generated Itinerary}
-		\label{fig:5b}
 	\end{subfigure}
 \end{figure}
 
-Figure \ref{fig:5a} shows a card-type view of a tourist spot in the generated itinerary reject or accept the tourist spot allowing for further personalization of the itinerary. Figure \ref{fig:5b} shows how users view the generated itinerary. It also provides an estimated time to complete the itinerary, and users can set the stay-duration for each tourist spot. This feature allows users to have control over their itinerary and make adjustments based on their preferences and distance constraints.
+Figure \ref{fig:2} shows the flow of creating a personalized itinerary. The users select the location of the tourist and its type, also the maximum distance and number of stopovers which are necessary for AGAM generation. This solves the problem of manual itinerary planning which can be time-consuming and overwhelming for users, especially those who are not familiar with the area. 
 
 \begin{figure}[H]
 	\centering
 	\caption{Itinerary Optimization}
-	\label{fig:6}
-	\begin{subfigure}[H]{0.3\textwidth}
+	\label{fig:3}
+	\begin{subfigure}[H]{0.2\textwidth}
 		\centering
 		\fbox{\includegraphics[width=\textwidth]{dev-system/pre-opt.jpg}}
-		\caption{Pre-Optimization Itinerary}
-		\label{fig:6a}
 	\end{subfigure}
-	\hfil
-	\begin{subfigure}[H]{0.3\textwidth}
+	\hspace{0.5cm}
+	\begin{subfigure}[H]{0.2\textwidth}
 		\centering
 		\fbox{\includegraphics[width=\textwidth]{dev-system/post-opt.jpg}}
-		\caption{Post-Optimization Itinerary}
-		\label{fig:6b}
 	\end{subfigure}
 \end{figure}
 
-Initially, the generated itinerary only considers the maximum travel distance, ensuring that the total distance of the itinerary does not exceed the specified limit. Lakad incorporates the Simulated Annealing (SA) algorithm to optimize the travel route of the generated itinerary. Figure \ref{fig:6a} shows the initial arrangement of the tourist spots generated. The “Optimize” button can then be clicked to optimize the travel route of the itinerary using SA. Figure \ref{fig:6b} shows the new and optimized arrangement of the tourist spots. As shown in Figure \ref{fig:6} the travel distance for the sample itinerary is significantly reduced from 71.326 km to 31.250 km. Additionally, optimization process is done in a reasonable time frame, and the instances where the initial generated itinerary is the optimal solution, no changes are made to the arrangement.
-
-\begin{figure}[H]
-	\centering
-	\caption{Itinerary Management}
-	\begin{subfigure}[H]{0.3\textwidth}
-		\centering
-		\fbox{\includegraphics[width=\textwidth]{dev-system/itinerarymain.jpg}}
-		\caption{Itinerary View}
-		\label{fig:7a}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}[H]{0.3\textwidth}
-		\centering
-		\fbox{\includegraphics[width=\textwidth]{dev-system/createitinerary.jpg}}
-		\caption{Create Itinerary}
-		\label{fig:7b}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}[H]{0.3\textwidth}
-		\centering
-		\fbox{\includegraphics[width=\textwidth]{dev-system/deleteiti.jpg}}
-		\caption{Delete Itinerary}
-		\label{fig:7c}
-	\end{subfigure}
-\end{figure}
-
-Users can see and manage their generated itineraries in the “Itineraries” page, as shown in Figure \ref{fig:7a}. The users can view their existing itineraries, including the details of each itinerary. It also has a button to start or continue the itinerary. Clicking the “New” button will prompt the user to create a new itinerary manually or smart generate an itinerary using the AGAM, as shown in Figure \ref{fig:7b}, users who choose to create itineraries manually can select the tourist spots they want to visit by searching its name. Swiping left on an existing itinerary will show the delete button, allowing users to delete their itineraries, as shown in Figure \ref{fig:7c}.
+The generated itinerary can be optimize to get the most efficient order to travel each tourist spots with Simulated Annealing algorithm. Figure \ref{fig:3} shows the before and after optimization of the generated itinerary. The optimized itinerary provides users with a more efficient route, allowing them to save time and make the most out of their trip.
 
 \begin{figure}[H]
 	\centering
 	\caption{Itinerary Navigation}
-	\begin{subfigure}[H]{0.3\textwidth}
+	\begin{subfigure}[H]{0.2\textwidth}
 		\centering
 		\fbox{\includegraphics[width=\textwidth]{dev-system/navigationdirection.jpg}}
-		\caption{Directions}
-		\label{fig:8a}
 	\end{subfigure}
-	\hfill
-	\begin{subfigure}[H]{0.3\textwidth}
-		\centering
-		\fbox{\includegraphics[width=\textwidth]{dev-system/navigationarrival.jpg}}
-		\caption{More Information}
-		\label{fig:8b}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}[H]{0.3\textwidth}
+	\hspace{0.5cm}
+	\begin{subfigure}[H]{0.2\textwidth}
 		\centering
 		\fbox{\includegraphics[width=\textwidth]{dev-system/navigationmode.jpg}}
-		\caption{Travel Mode}
-		\label{fig:8c}
 	\end{subfigure}
 \end{figure}
 
-Figure \ref{fig:8a} shows the directions for the next stop in the itinerary by displaying the route from the user’s current location to it. It shows the estimated time of arrival and the departure time based on the duration set by the user. A stop is marked as visited when the user is detected within a certain proximity to it, but Figure \ref{fig:8b} shows a button to mark the stop as visited if it can't be marked automatically. Users can also change the travel mode for navigation, which includes driving, walking, and bicycling, as shown in Figure \ref{fig:8c}. The user can choose to avoid tolls and turn on the voice navigation. For a safer traveling especially when driving, the navigate feature of the application integrates text-to-speech which voices the instructions shown in the screen. This features provides users with a seamless navigation experience, allowing them to focus on enjoying their trip while the application automatically tracks their progress through the itinerary.
+The itinerary navigation feature of \textit{Lakad} provides users with a convenient way to navigate through their planned itinerary. Figure \ref{fig:3} shows the navigation interface, which includes step-by-step directions, estimated arrival times, and the option to switch between different modes of transportation. This feature enhances the user experience by providing real-time guidance and ensuring that users can easily follow their planned routes.
 
 \begin{figure}[H]
 	\centering
-	\caption{Admin Options}
-	\label{admin:option}
-	\fbox{\includegraphics[width=0.3\textwidth]{dev-system/adminmode.jpg}}
-\end{figure}
-
-This feature of the Lakad application allows the application to be secure, manageable, and scalable for future additions. It mainly functions as a management page for tourist spots that will be shown in the application. Figure \ref{admin:option} shows all the privileges of the administrator such as managing user accounts, managing tourist spots, and managing itineraries. 
-
-\begin{figure}[H]
-	\centering
-	\caption{Analytics}
-	\begin{subfigure}[H]{0.3\textwidth}
+	\caption{Admin Dashboard and Management}
+	\label{fig:4}
+	\begin{subfigure}[H]{0.2\textwidth}
 		\centering
 		\fbox{\includegraphics[width=\textwidth]{dev-system/admindashboard.jpg}}
-		\caption{Analytics Overview}
-		\label{admin:dash}
 	\end{subfigure}
 	\hfil
-	\begin{subfigure}[H]{0.3\textwidth}
+	\begin{subfigure}[H]{0.2\textwidth}
 		\centering
 		\fbox{\includegraphics[width=\textwidth]{dev-system/adminanal.jpg}}
-		\caption{Tourist Spot Analytics}
-		\label{admin:anal}
 	\end{subfigure}
-\end{figure}
-
-Figure \ref{admin:dash} shows what an administrator can see. It includes the summary and reports of the application in the Analytics page. The summary shows the total number of itineraries, total number of tourist spots, archived tourist spots, and the total kilometers planned in the itineraries. Summary of popular places is also shown along with the least popular places. Figure \ref{admin:anal} shows analytics specific to a tourist spot, it is found in the Places tab when clicking a specific place. It provides administrators with the total number of visits, total number of reviews, average rating, rating distribution, visit trends, and number of itineraries that include it. This features provides the administrator with insights into the usage of the application and helps them make informed decisions about managing the tourist spots and improving the user experience.
-
-\begin{figure}[H]
-	\centering
-	\caption{Manage Places}
-	\begin{subfigure}[H]{0.3\textwidth}
+	\hfil
+	\begin{subfigure}[H]{0.2\textwidth}
 		\centering
 		\fbox{\includegraphics[width=\textwidth]{dev-system/adminplaces.jpg}}
-		\caption{Manage Tourist Spot}
-		\label{admin:places}
 	\end{subfigure}
 	\hfil
-	\begin{subfigure}[H]{0.3\textwidth}
+	\begin{subfigure}[H]{0.2\textwidth}
 		\centering
 		\fbox{\includegraphics[width=\textwidth]{dev-system/adminadd.jpg}}
-		\caption{Add Tourist Spot}
-		\label{admin:add}
-	\end{subfigure}
-	\hfil
-	\begin{subfigure}[H]{0.3\textwidth}
-		\centering
-		\fbox{\includegraphics[width=\textwidth]{dev-system/adminupdate.jpg}}
-		\caption{Update Tourist Spot}
-		\label{admin:update}
 	\end{subfigure}
 \end{figure}
 
-Figure \ref{admin:places} keeps the application scalable by allowing administrators to manage tourist spots, by giving them the ability to add and update information about one. Figures \ref{admin:add} and \ref{admin:update} shows a detailed form when adding or updating a new tourist spot, with parameters for name, category, location, description, coordinates, and photo. The coordinates of the tourist can either be retrieved manually or by pinning the location of the tourist spot on a provided map. This feature allows the administrator to easily manage the tourist spots in the application.
-
-\begin{figure}[H]
-	\centering
-	\caption{Distance Matrix Management}
-	\begin{subfigure}[H]{0.3\textwidth}
-		\centering
-		\label{admin:distance}
-		\fbox{\includegraphics[width=\textwidth]{dev-system/admindistance.jpg}}
-	\end{subfigure}
-\end{figure}
-
-The Admin mode of Lakad also manages the distance database, which stores the matrix containing travel distances connecting every tourist destination to each other. The distance database tab is seen as Figure \ref{admin:distance} where administrators can recompute the distance matrix after adding a new tourist destination to the system. The application achieves lower Open Route Service API usage through this method, enabling the system to expand without incurring unnecessary expenses from API requests.
-
-\begin{figure}[H]
-	\centering
-	\caption{Review Reports}
-	\begin{subfigure}[H]{0.3\textwidth}
-		\centering
-		\fbox{\includegraphics[width=\textwidth]{dev-system/adminreport.jpg}}
-		\caption{{}}
-		\label{admin:report1}
-	\end{subfigure}
-	\hfil
-	\begin{subfigure}[H]{0.3\textwidth}
-		\centering
-		\fbox{\includegraphics[width=\textwidth]{dev-system/adminreport2.jpg}}
-		\caption{{ }}
-		\label{admin:report2}
-	\end{subfigure}
-\end{figure}
-Figure \ref{admin:report1} and Figure \ref{admin:report2} shows the page where administrators can view reported reviews. In this page, users that reported inappropriate reviews allow the administrators to see the review easily and perform appropriate actions like deleting it or dismissing the report. The application uses this feature to maintain the review quality which enables users to trust the reviews and ratings from other users.
+\textit{Lakad} features an admin mode that allows administrators to manage the content of the application and view analytics, as shown in Figure \ref{fig:4}. The admin mode provides a dashboard where administrators can see the summary and reports of the application, including the total number of itineraries, tourist spots, and kilometers planned in the itineraries. Administrators can also manage tourist spots by adding or updating information about them, as well as managing the distance matrix used for route optimization. This ensures maintainability and scalability of \textit{Lakad}, allowing it to adapt to changing tourism trends and user needs while providing a seamless experience for both tourists and administrators.
 
 \subsection{System Evaluation}
-This section presents evaluation results of Lakad in terms of user acceptability and software quality of the system. The acceptability assessment uses end-user responses for constructs found in the Technology Acceptance Model (TAM) while the software quality is evaluated using responses of experts on a survey that is based on the standards set by ISO/IEC 25010:2023. The collected data was processed and analyzed in a Jupyter Notebook with the use of Python Libraries such as Pandas, Matplotlib, and NumPy. The results are shown through mean scores and standard deviations. 
+This section presents evaluation results of \textit{Lakad} in terms of user acceptability and software quality of the system. The acceptability assessment uses end-user responses for constructs found in the Technology Acceptance Model (TAM) while the software quality is evaluated using responses of experts on a survey that is based on the standards set by ISO/IEC 25010:2023. The collected data was processed and analyzed in a Jupyter Notebook with the use of Python Libraries such as Pandas, Matplotlib, and NumPy. The results are shown through mean scores and standard deviations. 
 
 \subsubsection{User Acceptability Evaluation}
 Lakad's acceptability was evaluated using TAM survey results collected from 150 tourist participants. The distribution was proportionately distributed across different tourist destinations in selected municipalities in Bulacan.
