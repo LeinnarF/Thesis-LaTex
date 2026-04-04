@@ -17,9 +17,10 @@
 *.vrb
 *.pdf
 *.sty
-!Thesis-main.pdf
 !imrad.sty
 Misc/
 .vscode/
 .zed/
 %OUTDIR%/
+!Thesis-main.pdf
+!imrad-main.pdf
