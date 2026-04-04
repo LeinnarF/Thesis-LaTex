@@ -89,29 +89,25 @@ Consequently, Simulated Annealing (SA) was selected as the designated routing en
 	\begin{subfigure}[H]{0.2\textwidth}
 		\centering
 		\fbox{\includegraphics[width=\textwidth]{dev-system/mainpage.jpg}}
-		% \caption{Map Exploration}
 	\end{subfigure}
 	\hfil
 	\begin{subfigure}[H]{0.2\textwidth}
 		\centering
 		\fbox{\includegraphics[width=\textwidth]{dev-system/searching2.jpg}}
-		% \caption{Search Places}
 	\end{subfigure}
 	\hfil
 	\begin{subfigure}[H]{0.2\textwidth}
 		\centering
 		\fbox{\includegraphics[width=\textwidth]{dev-system/information.jpg}}
-		% \caption{Information}
 	\end{subfigure}
 	\hfil
 	\begin{subfigure}[H]{0.2\textwidth}
 		\centering
 		\fbox{\includegraphics[width=\textwidth]{dev-system/review.jpg}}
-		% \caption{Review and Rating}
 	\end{subfigure}
 \end{figure} 
 
-Figure \ref{fig:1} shows the tourist spot exploration feature of \textit{Lakad}, allowing users to explore the map and view relevant information about the place. Users can also see the reviews and rating about the place, they can also add their own review and rating, encouraging user engagement and helping build a community of travelers sharing their experience. Additionally, users can report inappropriate reviews to maintain the quality of reviews in the application.
+As illustrated in Figure \ref{fig:1}, the tourist spot exploration feature serve as the primary interface for discovering tourist spots in Bulacan. \textit{Lakad} ensures that the tourist spots are validated by the PHACTO, providing a reliable and accurate information for users. This interface allows users to filter localized data, evaluate historical significance, and access community-driven metrics such as crowdsourced ratings and reviews. With this feature, users can make informed decisions about which tourist spots to include in their itineraries, while also fostering a sense of community engagement through reviews and ratings.
 
 \begin{figure}[H]
 	\centering
@@ -133,7 +129,8 @@ Figure \ref{fig:1} shows the tourist spot exploration feature of \textit{Lakad},
 	\end{subfigure}
 \end{figure}
 
-Figure \ref{fig:2} shows the flow of creating a personalized itinerary. The users select the location of the tourist and its type, also the maximum distance and number of stopovers which are necessary for AGAM generation. This solves the problem of manual itinerary planning which can be time-consuming and overwhelming for users, especially those who are not familiar with the area. 
+Figure \ref{fig:2} details the parameter initialization sequence for AGAM itinerary generation. This solves the problem of manual itinerary planning which can be time-consuming and overwhelming for users, especially those who are not familiar with the area. Users define their target municipalities, prefered type of tourist spots, maximum travel distance, and the upper bound for stopovers. These inputs serve as the primary constraints for the AGAM fitness function (discussed in Section 2.2). Upon execution, the system processes these multi-objective parameters to dynamically generate a highly customized POI sequence that maximizes user interest while strictly adhering to the defined travel budget.
+
 
 \begin{figure}[H]
 	\centering
@@ -150,7 +147,7 @@ Figure \ref{fig:2} shows the flow of creating a personalized itinerary. The user
 	\end{subfigure}
 \end{figure}
 
-The generated itinerary can be optimize to get the most efficient order to travel each tourist spots with Simulated Annealing algorithm. Figure \ref{fig:3} shows the before and after optimization of the generated itinerary. The optimized itinerary provides users with a more efficient route, allowing them to save time and make the most out of their trip.
+Once AGAM generates the optimal set of destinations, the system address the routing challenge (the Traveling Salesman Problem) via the optimization feature shown in Figure \ref{fig:3}. Utilizing the Simulated Annealing (SA) algorithm, the system evaluates the distance matrix corresponding to the selected POIs. The SA systematically reorders the sequence of destinations to minimize the global travel distance. The interface shows the before and after optimization of the generated itinerary, providing feedback to the user the total distance and estimated time saved through the algorithmic intervention.
 
 \begin{figure}[H]
 	\centering
@@ -166,7 +163,7 @@ The generated itinerary can be optimize to get the most efficient order to trave
 	\end{subfigure}
 \end{figure}
 
-The itinerary navigation feature of \textit{Lakad} provides users with a convenient way to navigate through their planned itinerary. Figure \ref{fig:3} shows the navigation interface, which includes step-by-step directions, estimated arrival times, and the option to switch between different modes of transportation. This feature enhances the user experience by providing real-time guidance and ensuring that users can easily follow their planned routes.
+The itinerary navigation feature of \textit{Lakad} provides users with a convenient way to navigate through their optimized itinerary. Figure \ref{fig:3} shows the navigation interface, which includes step-by-step directions, estimated arrival times, and the option to switch between different modes of transportation. This feature enhances the user experience by providing real-time guidance and ensuring that users can easily follow their planned routes.
 
 \begin{figure}[H]
 	\centering
@@ -193,7 +190,9 @@ The itinerary navigation feature of \textit{Lakad} provides users with a conveni
 	\end{subfigure}
 \end{figure}
 
-\textit{Lakad} features an admin mode that allows administrators to manage the content of the application and view analytics, as shown in Figure \ref{fig:4}. The admin mode provides a dashboard where administrators can see the summary and reports of the application, including the total number of itineraries, tourist spots, and kilometers planned in the itineraries. Administrators can also manage tourist spots by adding or updating information about them, as well as managing the distance matrix used for route optimization. This ensures maintainability and scalability of \textit{Lakad}, allowing it to adapt to changing tourism trends and user needs while providing a seamless experience for both tourists and administrators.
+To ensure the long-term maintainability and scalability of \textit{Lakad}, a dedicated administrative interface was developed (Figure \ref{fig:4}). The admin mode provides a dashboard where administrators can see the summary and reports of the application, including the total number of itineraries, tourist spots, and kilometers planned in the itineraries. These analytics offers data-driven insights that can assist LGU policymakers in evaluating tourism distribution.
+
+Furthermore, administrators can also manage tourist spots by adding or updating information about them, as well as managing the distance matrix used for route optimization. This ensures maintainability and scalability of \textit{Lakad}, allowing it to adapt to changing tourism trends and user needs while providing a seamless experience for both tourists and administrators.
 
 \subsection{System Evaluation}
 This section presents evaluation results of \textit{Lakad} in terms of user acceptability and software quality of the system. The acceptability assessment uses end-user responses for constructs found in the Technology Acceptance Model (TAM) while the software quality is evaluated using responses of experts on a survey that is based on the standards set by ISO/IEC 25010:2023. The collected data was processed and analyzed in a Jupyter Notebook with the use of Python Libraries such as Pandas, Matplotlib, and NumPy. The results are shown through mean scores and standard deviations. 
