@@ -68,7 +68,7 @@ The quality of each itinerary is evaluated by the fitness function given in Equa
 	\label{agamFitness}
 	f(p_i) = w_{1}Ti(p_i) + w_{2}Tn(p_i) + w_{3}Tr(p_i) 
 \end{equation}
-Where $w _{j}$ for $j = 1, 2, 3$, represents the weight assigned to each factor, and it is defined as follows:
+Where $w _{j}$ for $j = 1, 2, 3$, represents the weight assigned to each factor, and such factors are defined as follows:
 \begin{itemize}
     
     \item $Ti(p_i)$ is the sum of all interest values of each POI in the itinerary $p_i$. Each POI contains an interest value which quantifies how interested the user is in that specific POI category. The formula for calculating $Ti(p_i)$ is shown in Equation \ref{Ti},
@@ -116,7 +116,7 @@ AGAM incorporates dynamic adjustments in mutation and crossover probabilities to
     where $pm_1$ and $pm_2$  are the bounds for mutation probability, and $f$ is the fitness score of the individual being mutated.
 \end{itemize}
 
-For the parameters of AGAM, the following values were used: $pc_1 = 0.9$, $pc_2 = 0.6$, $pm_1 = 0.1$, and $pm_2 = 0.01$. These values were chosen based on \textcite{Yochum2020} configurations. 
+For the parameters of AGAM, the following values were used: $pc_1 = 0.9$, $pc_2 = 0.6$, $pm_1 = 0.1$, and $pm_2 = 0.01$. These values were chosen based on \textcite{Yochum2020} configurations. While the weights assigned to each factor are all equal to 1.
 
 \subsection{Process of Developing the System}
 
