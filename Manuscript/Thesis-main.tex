@@ -28,6 +28,11 @@
 
 \usepackage[hidelinks]{hyperref}
 
+% Temporary remove left header
+% \usepackage{fancyhdr}
+% \fancyhf{}
+% \fancyhead[R]{\thepage}
+
 \title{LAKAD: A Personalized Mobile Itinerary Generator with Focus in Bulacan Tourism}
 
 \fronttitle{
@@ -83,44 +88,42 @@
 \renewcommand{\listtablename}{LIST OF TABLES}
 \renewcommand{\listfigurename}{LIST OF FIGURES}
 
-% \begin{preliminary}
-% 	\maketitle
-% 	\approvalsheet
-% 	\input{acknowledgment.tex}
-% 	\input{dedication.tex}
-% 	\input{abstract.tex}
-%
-% 	\tableofcontents\cleardoublepage
-%
-% 	\listoftables
-% 		\addcontentsline{toc}{chapter}{LIST OF TABLES}
-% 		\addtocontents{lot}{\noindent\makebox[0.75in][l]{\textbf{Table}}\makebox[\linewidth-0.75in]{\textbf{Title}\hfill\textbf{Page}}\par}
-% 		\cleardoublepage
-%
-% 	\listoffigures
-% 		\addcontentsline{toc}{chapter}{LIST OF FIGURES}
-% 		\addtocontents{lof}{\noindent\makebox[0.75in][l]{\textbf{Figure}}\makebox[\linewidth-0.75in]{\textbf{Title}\hfill\textbf{Page}}\par}
-% 		\cleardoublepage
-%
-%    \setlength{\cftchapindent}{5ex}
-%    \setlength{\cftchapnumwidth}{0.75in-2ex}
-%    \setlength{\cftsecindent}{0.75in}
-%    \renewcommand*{\cftchapfont}{\normalfont}
-%    \renewcommand*{\cftchappagefont}{\normalfont}
-%    \setlength{\cftbeforechapskip}{0pt}
-%
-%    \listofappendix     %<-print the list of appendices page
-%        \addcontentsline{toc}{chapter}{LIST OF APPENDICES}
-%        \addtocontents{apc}{\noindent \textbf{Appendix}\hspace{1ex} \textbf{Title }\hfill\textbf{Page}\par}
-%        \cleardoublepage
-%
-% \end{preliminary}
+\begin{preliminary}
+	\maketitle
+	\approvalsheet
+	\input{acknowledgment.tex}
+	\input{dedication.tex}
+	\input{../abstract.tex}
+
+	\tableofcontents\cleardoublepage
+
+	\listoftables
+		\addcontentsline{toc}{chapter}{LIST OF TABLES}
+		\addtocontents{lot}{\noindent\makebox[0.75in][l]{\textbf{Table}}\makebox[\linewidth-0.75in]{\textbf{Title}\hfill\textbf{Page}}\par}
+		\cleardoublepage
+
+	\listoffigures
+		\addcontentsline{toc}{chapter}{LIST OF FIGURES}
+		\addtocontents{lof}{\noindent\makebox[0.75in][l]{\textbf{Figure}}\makebox[\linewidth-0.75in]{\textbf{Title}\hfill\textbf{Page}}\par}
+		\cleardoublepage
+
+   \setlength{\cftchapindent}{5ex}
+   \setlength{\cftchapnumwidth}{0.75in-2ex}
+   \setlength{\cftsecindent}{0.75in}
+   \renewcommand*{\cftchapfont}{\normalfont}
+   \renewcommand*{\cftchappagefont}{\normalfont}
+   \setlength{\cftbeforechapskip}{0pt}
+
+   \listofappendix     %<-print the list of appendices page
+       \addcontentsline{toc}{chapter}{LIST OF APPENDICES}
+       \addtocontents{apc}{\noindent \textbf{Appendix}\hspace{1ex} \textbf{Title }\hfill\textbf{Page}\par}
+       \cleardoublepage
+
+\end{preliminary}
 
 \setcounter{chapter}{0} 
 
 \maketitle
-
-\input{../abstract.tex}
 
 \input{main-chapter-1.tex}
 \input{main-chapter-2.tex}
@@ -130,7 +133,7 @@
 
 \printbibliography[heading=bibintoc,title={REFERENCES}]
 
-% \input{appendix.tex}
-% \input{curriculumvitae.tex}
+\input{appendix.tex}
+\input{curriculumvitae.tex}
 
 \end{document}
