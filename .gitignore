@@ -16,8 +16,6 @@
 *.snm
 *.vrb
 *.pdf
-*.sty
-!imrad.sty
 Misc/
 .vscode/
 .zed/
