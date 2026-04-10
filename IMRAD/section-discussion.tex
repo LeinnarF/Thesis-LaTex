@@ -1,0 +1,145 @@
+\section{Discussion}
+
+This section interprets the findings presented in the Results in relation
+to the research objectives, existing literature, and the broader
+theoretical and practical implications of the study.
+ 
+% ------------------------------------------------------------
+\subsection{Algorithm Selection for Mobile Route Optimization}
+% ------------------------------------------------------------
+ 
+The benchmarking results reveal a clear and consequential trade-off
+between solution quality and runtime efficiency across the seven tested
+algorithms. While GA achieved the highest accuracy with an average
+relative error of only 0.10\%, its runtime scaled exponentially with
+problem size, reaching 196.59 seconds on the \textit{berlin52} instance making
+it impractical for deployment in a real-time mobile environment where
+users expect immediate feedback upon requesting an optimized route.
+This finding is consistent with the argument of \textcite{Wadi2025} that
+heuristic models offering rapid execution with near-optimal accuracy are
+substantially more effective for resource-constrained environments than
+exact or computationally intensive methods that risk critical resource
+exhaustion.
+ 
+SA’s selection as the route optimization algorithm for \textit{Lakad} is
+well-supported by its performance profile. With an average relative
+error of 1.59\% and a maximum runtime of 1.90 seconds on the largest
+tested instance. This accuracy margin is acceptable for tourism itinerary routing, where the difference between a near-optimal and optimal path represents minor distance variations unlikely to meaningfully affect user experience. EHO ranked 2nd under SAW due to its speed advantage, but its accuracy degraded
+sharply on larger instances, reaching an average error of 11.27\% making it unsuitable for itineraries involving many stops. This highlights that raw speed alone is an insufficient criterion for algorithm selection in applied optimization contexts; the balance between both criteria, as operationalized through SAW, provides a more defensible selection methodology than either criterion in isolation.
+ 
+The standardized TSPLIB benchmarks together with fixed algorithm parameters and 30
+independent test runs per benchmark create a reliable testing method to choose optimization algorithms for
+mobile resource-limited environments. The methodological contribution
+of this research extends beyond \textit{Lakad} because the findings provide
+real-world evidence which helps other applied systems that need to
+perform real-time combinatorial optimization on mobile platforms.
+
+% ------------------------------------------------------------
+\subsection{Interpretation of System Acceptability (TAM)}
+% ------------------------------------------------------------
+ 
+The grand TAM mean score of 4.6719, interpreted as Highly Acceptable,
+indicates that the target user population  found \textit{Lakad} to be both useful and easy to operate.
+The high scores across Perceived Usefulness (4.7053), Perceived Ease of
+Use (4.7067), and Attitude Towards Using (4.7200) suggest that the
+system successfully addressed the core usability requirements identified
+in the problem statement.
+
+These results support the findings of \textcite{Yochum2020}, whose
+development of AGAM demonstrated that multi-objective optimization
+frameworks grounded in user preference modeling produce travel
+recommendations that users find personally relevant and satisfying.
+The high Perceived Usefulness score in particular reflects that users
+recognized the value of receiving a personalized, constraint-aware
+itinerary rather than a generic list of destinations, aligning with the documented demand for curated travel experiences reported by \textcite{SkiftState2022}, who found that 30 percent of travelers expressed increased preference for personalized planning services following the pandemic.
+ 
+The Behavioral Intention to Use construct recorded the lowest mean score
+(4.5556) and the highest standard deviation (0.4740) among all four
+constructs. The item-level analysis provides a plausible explanation:
+the Intention to Use item (BI1) received more 4-point than 5-point
+responses, while the Future Use item (BI2) was predominantly rated 5.
+This divergence suggests that while users are generally willing to
+continue using the system, a subset expressed uncertainty about their
+immediate intention, possibly because the system is currently limited
+to Bulacan and single-day itineraries. This interpretation is further supported by the low standard
+deviation in Perceived Usefulness (0.3435), indicating that uncertainty
+about future use does not stem from doubts about the system’s functional value, but more likely from situational factors external to the application itself.
+ 
+% ------------------------------------------------------------
+\subsection{Interpretation of Software Quality (ISO/IEC 25010:2023)}
+% ------------------------------------------------------------
+ 
+The grand ISO/IEC 25010:2023 score of 4.7642 indicates that Lakad meets
+professional software quality standards across all nine evaluated
+constructs. The highest-scoring construct, Functional Suitability
+(4.8636, $SD = 0.2447$), reflects near-unanimous expert consensus that
+the system fulfills its core purpose. The lowest standard
+deviation in this construct suggests that evaluators were most aligned
+on the application’s capacity to perform its intended tasks, which
+validates the design decision to scope the system narrowly around
+itinerary generation rather than attempting to replicate the full
+feature set of general-purpose travel platforms.
+ 
+Security (4.8258) and Reliability (4.8182) ranked as the second and
+third highest constructs, indicating that the combination of Supabase
+for data management, encrypted storage of user data, and compliance
+with the Data Privacy Act of 2012 (R.A. 10173) produced a system
+that experts regarded as both trustworthy and stable. These scores
+are particularly important for a system handling location data and
+user-generated content, where data integrity and availability are
+essential to user trust.
+ 
+Compatibility received the lowest mean score (4.6591) and the highest
+standard deviation (0.4973), which is directly attributable to the
+system’s current Android-exclusive deployment. The elevated standard
+deviation reflects genuine disagreement among evaluators about the
+significance of this limitation, some experts likely weighted
+cross-platform availability more heavily than others when assessing
+the construct. The item-level analysis confirms this: the
+Interoperability item accumulated the lowest frequency of 5-point
+ratings within the Compatibility construct, while the Android-specific
+performance items scored higher. Since \textit{Lakad} is developed in React Native, it open possibility for cross-platform deployment in the future with the existing codebase.
+ 
+The lower scores on Analysability, Replaceability, and Modularity,
+while still rated above average, warrant attention. The Replaceability
+score suggests that evaluators recognized the competitive challenge
+of positioning \textit{Lakad} against established platforms such as Google Maps
+and TripAdvisor, which offer broader geographic coverage. This is
+an inherent limitation of any localized application and should not
+be interpreted as a functional deficiency, but rather as a market
+positioning challenge that future development should address through
+expanded geographic coverage and feature depth.
+ 
+% ------------------------------------------------------------
+\subsection{Practical and Policy Implications}
+% ------------------------------------------------------------
+ 
+For tourism practitioners and local government units, \textit{Lakad}
+demonstrates that a low-cost, open-source algorithmic approach
+can produce a functional and user-accepted destination promotion
+tool for provinces that are underserved by commercial travel
+platforms. The admin dashboard’s analytics provide PHACTO and local tourism operators with a data-driven basis for identifying which destinations receive
+disproportionately low tourist traffic and adjusting promotional
+strategies accordingly. This directly addresses the uneven
+distribution of visitors across Bulacan’s municipalities
+documented in the study’s problem context.  
+
+The system’s architecture with PHACTO-verified data,
+open routing APIs, and a React Native mobile frontend, presents
+a replicable template that other provincial tourism offices across
+the Philippines could adopt with limited technical overhead.
+The DOT’s National Tourism Development Plan 2023--2028, which
+emphasizes the development of unique, localized travel experiences,
+provides an explicit policy context within which systems like
+\textit{Lakad} are not merely useful tools but strategic instruments
+for sustainable provincial tourism development.
+ 
+% ------------------------------------------------------------
+\subsection{Limitations}
+% ------------------------------------------------------------
+ 
+Several limitations of this study should be acknowledged in
+interpreting its findings. The \textit{Lakad} application has several scope and developmental limitations primarily driven by technical constraints, resource availability, and design choices. Geographically, the app is restricted to destinations within Bulacan and intentionally excludes restaurants from its Points of Interest (POIs) to avoid bias toward popular or larger establishments. The system caps itinerary generation at a maximum of 50 POIs and lacks public transit routing because of constraints within the integrated Mapbox API, which does not provide transit or multi-modal transportation data. Additionally, platform availability is limited exclusively to the Android Operating System, as developing for iOS required macOS hardware and an Apple Developer account that were not feasible for the study. Finally, the application’s functional scope is confined to generating single-day itineraries—lacking support for multi-day travel plans, and it does not integrate external booking services for accommodation reservations or ticket purchasing.
+
+\subsection{Recommendations}
+To further enhance \textit{Lakad}, future development should expand its database to include more destinations, accommodations, and pasalubong centers, while scaling its geographic reach to other provinces and developing an iOS version for wider accessibility. The system’s capabilities should be improved to support multi-day tour planning, integrate real-time traffic data with public transportation APIs, and immersive virtual exploration features. Future researchers should explore hybrid metaheuristic algorithms or different approach to potentially yield a much better routing and optimization. Lastly, migrating the system’s infrastructure to a self-hosted server rather than relying on external database and routing APIs.
