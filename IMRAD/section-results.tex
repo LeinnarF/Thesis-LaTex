@@ -1,0 +1,325 @@
+\section{Results}
+
+This section presents the findings of the study across three areas:
+(1) the comparative benchmarking of seven metaheuristic algorithms for
+Traveling Salesman Problem (TSP) route optimization, (2) the implemented
+system features of \textit{Lakad} as the primary output of the development process,
+and (3) the evaluation results of system acceptability and software quality.
+
+\subsection{Route Optimization Selection}
+
+Seven metaheuristic algorithms were benchmarked against four standard
+TSPLIB instances to determine the most suitable route optimization
+algorithm for deployment in \textit{Lakad}. Performance was measured across two
+criteria: solution quality, expressed as average relative error (\%)
+against known optimal solutions, and runtime efficiency, expressed in
+seconds.
+ 
+% Table~\ref{tab:acc} presents the average relative error of each algorithm across all four TSPLIB instances.
+ 
+\begin{table}[H]
+    \centering
+    \singlespacing
+    \caption{Summary of Average Relative Error (\%)}
+    \label{tab:acc}
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabularx}{\linewidth}{XXXXXX}
+        \toprule
+        \multirow{2}{*}{\textbf{Algorithm}} &
+        \multicolumn{4}{c}{\textbf{TSPLIB Instances}} &
+        \multirow{2}{*}{\textbf{Average}} \\
+        \cmidrule(lr){2-5}
+         & \textbf{burma14} & \textbf{bays29} & \textbf{eil51} &
+           \textbf{berlin52} & \\
+        \midrule
+        GA      & 0.00 & 0.03  & 0.38   & 0.00   & 0.10  \\
+        SA      & 0.00 & 0.42  & 2.77   & 3.15   & 1.59  \\
+        ACO     & 0.53 & 1.50  & 5.49   & 2.49   & 2.50  \\
+        EHO     & 0.00 & 3.71  & 20.47  & 23.36  & 11.27 \\
+        PSO     & 0.99 & 12.74 & 36.88  & 43.46  & 23.77 \\
+        HSFFPKO & 1.88 & 20.18 & 127.28 & 95.07  & 61.11 \\
+        GWO     & 6.32 & 33.67 & 145.85 & 181.36 & 91.80 \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+ 
+As shown in Table~\ref{tab:acc}, the Genetic Algorithm (GA) recorded the
+lowest average relative error across all instances at 0.10\%, indicating
+the highest solution quality among the seven algorithms. Simulated
+Annealing (SA) and Ant Colony Optimization (ACO) followed with average
+errors of 1.59\% and 2.50\%, respectively. The remaining four algorithms
+— EHO (11.27\%), PSO (23.77\%), HSFFPKO (61.11\%), and GWO (91.80\%) —
+produced substantially higher errors, with degradation becoming more
+pronounced on the larger eil51 and berlin52 instances due to their
+stochastic nature.
+ 
+% Table~\ref{tab:runtime} presents the average execution time for each algorithm across all four TSPLIB instances.
+ 
+\begin{table}[H]
+    \centering
+    \singlespacing
+    \caption{Summary of Average Runtime Efficiency (seconds)}
+    \label{tab:runtime}
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabularx}{\linewidth}{XXXXX}
+        \toprule
+        \multirow{2}{*}{\textbf{Algorithm}} &
+        \multicolumn{4}{c}{\textbf{TSPLIB Instances}} \\
+        \cmidrule(lr){2-5}
+         & \textbf{burma14} & \textbf{bays29} & \textbf{eil51} &
+           \textbf{berlin52} \\
+        \midrule
+        EHO     & 0.17 & 0.27  & 0.44   & 0.45   \\
+        SA      & 0.49 & 1.04  & 1.82   & 1.90   \\
+        GWO     & 0.51 & 1.02  & 1.73   & 1.75   \\
+        HSFFPKO & 1.16 & 1.42  & 1.78   & 1.76   \\
+        PSO     & 3.36 & 4.77  & 6.30   & 6.84   \\
+        ACO     & 2.51 & 9.67  & 28.62  & 29.23  \\
+        GA      & 3.79 & 26.31 & 168.15 & 196.59 \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+ 
+Table~\ref{tab:runtime} shows that EHO recorded the fastest runtimes
+across all instances, completing the largest test case (berlin52) in under
+0.5 seconds. SA and GWO maintained consistently short runtimes, each
+completing all instances in under 2 seconds. By contrast, GA's runtime
+scaled exponentially with problem size, requiring 196.59 seconds on the
+berlin52 instance. ACO showed moderate to high runtimes, increasing from
+2.51 seconds on burma14 to 29.23 seconds on berlin52.
+ 
+ 
+To resolve the trade-off between solution quality and runtime, the Simple
+Additive Weighting (SAW) method was applied, assigning equal weights
+($w_1 = w_2 = 0.5$) to both normalized criteria. Table~\ref{tab:rank}
+presents the resulting SAW scores and final rankings.
+ 
+\begin{table}[H]
+    \centering
+    \singlespacing
+    \caption{Final SAW Scores and Rankings of TSP Algorithms}
+    \label{tab:rank}
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabularx}{\linewidth}{XXXXXX}
+        \toprule
+        \multirow{2}{*}{\textbf{Algorithm}} &
+        \multicolumn{4}{c}{\textbf{TSPLIB Instances}} &
+        \multirow{2}{*}{\textbf{Rank}} \\
+        \cmidrule(lr){2-5}
+         & \textbf{burma14} & \textbf{bays29} & \textbf{eil51} &
+           \textbf{berlin52} & \\
+        \midrule
+        SA      & 0.06 & 0.03 & 0.01 & 0.01 & 1st \\
+        EHO     & 0.02 & 0.06 & 0.07 & 0.07 & 2nd \\
+        ACO     & 0.37 & 0.21 & 0.10 & 0.08 & 3rd \\
+        PSO     & 0.52 & 0.28 & 0.14 & 0.14 & 4th \\
+        HSFFPKO & 0.30 & 0.33 & 0.44 & 0.33 & 5th \\
+        GA      & 0.50 & 0.50 & 0.50 & 0.50 & 6th \\
+        GWO     & 0.56 & 0.51 & 0.51 & 0.50 & 7th \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+ 
+As shown in Table~\ref{tab:rank}, Simulated Annealing (SA) achieved the
+lowest SAW scores across all four instances, ranking 1st overall.
+GA, despite its superior accuracy, was penalized by its exponential
+runtime growth, placing 6th. EHO ranked 2nd due to its speed advantage,
+though its accuracy degraded significantly on larger instances.
+Consequently, SA was selected as the route optimization algorithm
+for Lakad.
+
+\subsection{The Developed System}
+
+The Lakad application was successfully implemented with six features
+that collectively address the research objectives of personalized
+itinerary generation, route optimization, and tourist destination
+promotion in Bulacan. All tourist spot data integrated into the system
+was validated and approved by the Provincial History, Arts, Culture,
+and Tourism Office (PHACTO).
+
+\begin{figure}[H]
+	\centering
+	\caption{Tourist Spot Exploration}
+	\label{fig:1}
+	\begin{subfigure}[H]{0.2\textwidth}
+		\centering
+		\fbox{\includegraphics[width=\textwidth]{dev-system/mainpage.jpg}}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}[H]{0.2\textwidth}
+		\centering
+		\fbox{\includegraphics[width=\textwidth]{dev-system/searching2.jpg}}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}[H]{0.2\textwidth}
+		\centering
+		\fbox{\includegraphics[width=\textwidth]{dev-system/information.jpg}}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}[H]{0.2\textwidth}
+		\centering
+		\fbox{\includegraphics[width=\textwidth]{dev-system/review.jpg}}
+	\end{subfigure}
+\end{figure} 
+
+As illustrated in Figure \ref{fig:1}, the tourist spot exploration feature serve as the primary interface for discovering tourist spots in Bulacan. \textit{Lakad} ensures that the tourist spots and its data are validated by the PHACTO, to provide reliable and accurate information for users. These interfaces allow users to filter the localized data through search, view its historical significance, and access community-driven metrics such as ratings and reviews. With this feature, users can make informed decisions about which tourist spots to include in their itineraries, while still providing them with a sense of community engagement.
+
+\begin{figure}[H]
+	\centering
+	\caption{Personalized Itinerary Generation}
+	\label{fig:2}
+	\begin{subfigure}[H]{0.2\textwidth}
+		\centering
+		\fbox{\includegraphics[width=\textwidth]{dev-system/preference.jpg}}
+	\end{subfigure}
+	\hspace{0.5cm}
+	\begin{subfigure}[H]{0.2\textwidth}
+		\centering
+		\fbox{\includegraphics[width=\textwidth]{dev-system/createitinerary.jpg}}
+	\end{subfigure}
+	\hspace{0.5cm}
+	\begin{subfigure}[H]{0.2\textwidth}
+		\centering
+		\fbox{\includegraphics[width=\textwidth]{dev-system/agamgenerate.jpg}}
+	\end{subfigure}
+	\hspace{0.5cm}
+	\begin{subfigure}[H]{0.2\textwidth}
+		\centering
+		\fbox{\includegraphics[width=\textwidth]{dev-system/generated.jpg}}
+	\end{subfigure}
+\end{figure}
+
+Figure \ref{fig:2} presents the parameter initialization for AGAM itinerary generation. This solves the time-consuming problem of manual itinerary planning for users. Users define their categorical preferences, which AGAM will prioritize, when first using the app. Then in the planner page, they can filter municipalities and type of tourist spots and set maximum travel distance and stopovers. 
+
+\begin{figure}[H]
+	\centering
+	\caption{Itinerary Optimization}
+	\label{fig:3}
+	\begin{subfigure}[H]{0.2\textwidth}
+		\centering
+		\fbox{\includegraphics[width=\textwidth]{dev-system/pre-opt.jpg}}
+	\end{subfigure}
+	\hspace{0.5cm}
+	\begin{subfigure}[H]{0.2\textwidth}
+		\centering
+		\fbox{\includegraphics[width=\textwidth]{dev-system/post-opt.jpg}}
+	\end{subfigure}
+\end{figure}
+
+Once AGAM generates the optimal set of destinations, the system address the routing challenge of TSP via the optimization feature shown in Figure \ref{fig:3}. Utilizing the Simulated Annealing (SA) algorithm, the system evaluates the distance matrix corresponding to the selected POIs. The SA reorders the sequence of destinations to minimize the travel distance. The interface shows the before and after optimization of the generated itinerary, providing the user the total distance and estimated time saved through the algorithmic optimization.
+
+\begin{figure}[H]
+	\centering
+	\caption{Itinerary Navigation}
+	\label{itinerary_nav}
+	\begin{subfigure}[H]{0.2\textwidth}
+		\centering
+		\fbox{\includegraphics[width=\textwidth]{dev-system/navigationdirection.jpg}}
+	\end{subfigure}
+	\hspace{0.5cm}
+	\begin{subfigure}[H]{0.2\textwidth}
+		\centering
+		\fbox{\includegraphics[width=\textwidth]{dev-system/navigationmode.jpg}}
+	\end{subfigure}
+\end{figure}
+
+The itinerary navigation feature of \textit{Lakad} provides users with a convenient way to navigate their itinerary. Figure \ref{itinerary_nav} shows the navigation interface, which provides step-by-step directions, estimated arrival times, and the option to switch between different modes of transportation, enhancing user experience by providing real-time guide and ensuring they can safely and easily follow planned routes.
+
+\begin{figure}[H]
+	\centering
+	\caption{Admin Dashboard and Management}
+	\label{fig:4}
+	\begin{subfigure}[H]{0.2\textwidth}
+		\centering
+		\fbox{\includegraphics[width=\textwidth]{dev-system/admindashboard.jpg}}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}[H]{0.2\textwidth}
+		\centering
+		\fbox{\includegraphics[width=\textwidth]{dev-system/adminanal.jpg}}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}[H]{0.2\textwidth}
+		\centering
+		\fbox{\includegraphics[width=\textwidth]{dev-system/adminplaces.jpg}}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}[H]{0.2\textwidth}
+		\centering
+		\fbox{\includegraphics[width=\textwidth]{dev-system/adminadd.jpg}}
+	\end{subfigure}
+\end{figure}
+
+To ensure the long-term maintainability and scalability of \textit{Lakad}, a dedicated administrative interface was developed (Figure \ref{fig:4}). The admin mode provides a dashboard where administrators can see the summary and reports of the application, including the total number of itineraries, tourist spots, and kilometers planned in the itineraries. These analytics offers data-driven insights that can assist local government unit policymakers in evaluating tourism distribution.
+
+\subsection{System Evaluation}
+This section presents evaluation results of \textit{Lakad} in terms of user acceptability and software quality of the system. 
+
+\begin{table}[H]
+	\centering
+	% \singlespacing
+	\caption{System Acceptability results}
+	\label{tam1}
+	\renewcommand{\arraystretch}{1.2}
+	\begin{tabularx}{\linewidth}{p{0.3\linewidth} >{\centering\arraybackslash}X >{\centering\arraybackslash}X p{0.23\linewidth}}
+		\toprule
+		\textbf{Construct} & \textbf{Mean Score} & \textbf{Standard Deviation} & \textbf{Interpretation}\\
+		\midrule
+		Perceived usefulness        & 4.7053 & 0.3435 & Highly acceptable \\
+		Perceived ease of use       & 4.7067 & 0.4383 & Highly acceptable \\
+		Attitude towards using      & 4.7200 & 0.4015 & Highly acceptable \\
+		Behavioral intention to use & 4.5556 & 0.4740 & Highly acceptable \\
+		\midrule
+		\textbf{Grand TAM Score}           & \textbf{4.6719} & \textbf{0.4189} & \textbf{Highly acceptable} \\
+		\bottomrule
+	\end{tabularx}
+\end{table}
+
+In Table \ref{tam1}, all four TAM constructs received mean scores between 4.5556 and 4.7200,
+each falling within the Highly Acceptable range (4.21--5.00). Attitude
+Towards Using recorded the highest mean score (4.7200), followed closely
+by Perceived Ease of Use (4.7067) and Perceived Usefulness (4.7053).
+Behavioral Intention to Use returned the lowest mean score among the
+four constructs at 4.5556, accompanied by the highest standard deviation
+(0.4740). Perceived Usefulness recorded the lowest standard deviation
+(0.3435), indicating the strongest consensus among respondents.
+The grand TAM mean score was 4.6719 ($SD = 0.4189$), interpreted as
+Highly Acceptable.
+
+
+\begin{table}[H]
+	\centering
+	% \singlespacing
+	\caption{System Quality results}
+	\label{iso1}
+	\renewcommand{\arraystretch}{1.2}
+	\begin{tabularx}{\linewidth}{p{0.4\linewidth} >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X}
+		\toprule
+		\textbf{Construct} & \textbf{Mean Score} & \textbf{Standard Deviation} & \textbf{Interpretation}\\
+		\midrule
+		Functional Suitability & 4.8636 & 0.2447  & Excellent \\
+		Performance Efficiency & 4.7727 & 0.3902  & Excellent \\
+		Compatibility          & 4.6591 & 0.4973  & Excellent \\
+		Interaction Capability & 4.7614 & 0.2642  & Excellent \\
+		Reliability            & 4.8182 & 0.3634  & Excellent \\
+		Security               & 4.8258 & 0.3190  & Excellent \\
+		Maintainability        & 4.6818 & 0.3187  & Excellent \\
+		Flexibility            & 4.7500 & 0.3086  & Excellent \\
+		Safety                 & 4.7455 & 0.4501  & Excellent \\
+		\midrule
+		\textbf{Grand ISO/IEC 25010:2023 Score}           & \textbf{4.7642} & \textbf{0.3575} & \textbf{Excellent} \\
+		\bottomrule
+	\end{tabularx}
+\end{table}
+
+Table \ref{iso1} summarizes the results of the software quality evaluation. All nine ISO/IEC 25010:2023 constructs received mean scores between
+4.6591 and 4.8636, each rated Excellent (4.21--5.00). Functional
+Suitability recorded the highest mean (4.8636) and the lowest standard
+deviation (0.2447), indicating near-unanimous agreement among evaluators
+that the system fulfills its intended functionality. Security (4.8258)
+and Reliability (4.8182) were the second and third highest scoring
+constructs. Compatibility received the lowest mean score (4.6591) and
+the highest standard deviation (0.4973), reflecting greater variation in
+expert responses. The grand ISO/IEC 25010:2023 mean score was 4.7642
+($SD = 0.3575$), interpreted as Excellent.
+
